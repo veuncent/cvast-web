@@ -1,0 +1,26 @@
+web:
+  build: .
+  command: 'bash -c ''bundle exec puma -C config/puma.rb'''
+  working_dir: /panopticon
+  volumes:
+    - '.:/panopticon'
+  environment:
+    DATABASE_URL: 'postgres://postgres:@db:5432/postgres'
+  ports:
+    - '3000:3000'
+  links:
+    - db
+shell:
+  build: .
+  command: bash
+  working_dir: /panopticon
+  environment:
+    DATABASE_URL: 'postgres://postgres:@db:5432/postgres'
+  ports:
+    - '3000:3000'
+  links:
+    - db
+  volumes:
+    - '.:/panopticon'
+db:
+  image: postgres
