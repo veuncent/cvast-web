@@ -1,0 +1,14 @@
+====================
+Arches Documentation
+====================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   overview
+   getting-started
+   arches-data
+   rdm
+   arches-web-applications

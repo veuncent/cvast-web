@@ -1,0 +1,9 @@
+sphinx==1.2.2
+fabric
+honcho
+livereload
+webtest
+django-webtest
+sst
+django-nose
+coverage
