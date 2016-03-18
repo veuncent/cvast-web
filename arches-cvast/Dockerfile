@@ -24,13 +24,20 @@ WORKDIR /arches/arches/install
 RUN ./ubuntu_trusty_setup.sh
 
 # Create virtual environment 
-WORKDIR /arches
-RUN python virtualenv/virtualenv.py ENV
+WORKDIR /arches/virtualenv
+RUN python virtualenv.py ENV
 RUN source ENV/bin/activate
 
 # Install the Arches application
 # Reminder: settings.py is set to DEV: extra dependencies
+WORKDIR /arches
 RUN python setup.py build
+
+WORKDIR /arches/virtualenv
+RUN python virtualenv.py ENV
+RUN source ENV/bin/activate
+
+WORKDIR /arches
 RUN python setup.py install
 
 # WORKDIR /arches/arches
@@ -54,7 +61,7 @@ RUN python setup.py install
 
 # ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-EXPOSE 22 8000
+EXPOSE 22 8000 5432
 
 # CMD ["/usr/bin/supervisord"]
 
