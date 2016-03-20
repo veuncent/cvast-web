@@ -1,26 +1,31 @@
 web:
   build: .
-  command: 'bash -c ''bundle exec puma -C config/puma.rb'''
-  working_dir: /panopticon
+  command: "python manage.py runserver 0.0.0.0:8000"
+  working_dir: /arches
   volumes:
-    - '.:/panopticon'
+    - 'arches:/arches'
   environment:
+    HOST: db
+    PORT: 5432
+    USER: docker
+    NAME: arches
     DATABASE_URL: 'postgres://postgres:@db:5432/postgres'
   ports:
     - '3000:3000'
   links:
     - db
-shell:
-  build: .
-  command: bash
-  working_dir: /panopticon
-  environment:
-    DATABASE_URL: 'postgres://postgres:@db:5432/postgres'
-  ports:
-    - '3000:3000'
-  links:
-    - db
-  volumes:
-    - '.:/panopticon'
 db:
-  image: postgres
+  image: kartoza/pg-backup:9.4
+  hostname: pg
+  volumes:
+      - ./pg/postgres_data:/var/lib/postgresql
+      - ./pg/setup_data:/home/setup
+  environment:
+    - DUMPPREFIX=arches
+    # These are all defaults anyway, but setting explicitly in
+    # case we ever want to ever use different credentials
+    - PGUSER=docker
+    - PGPASSWORD=docker
+    - PGPORT=5432
+    - PGHOST=db
+    - PGDATABASE=arches
