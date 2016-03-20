@@ -9,11 +9,11 @@ web:
     PORT: 5432
     USER: docker
     NAME: arches
-    DATABASE_URL: 'postgres://postgres:@db:5432/postgres'
   ports:
-    - '3000:3000'
+    - '8000:8000'
   links:
     - db
+    - elasticsearch
 db:
   image: kartoza/pg-backup:9.4
   hostname: pg
@@ -21,11 +21,10 @@ db:
       - ./pg/postgres_data:/var/lib/postgresql
       - ./pg/setup_data:/home/setup
   environment:
-    - DUMPPREFIX=arches
     # These are all defaults anyway, but setting explicitly in
     # case we ever want to ever use different credentials
     - PGUSER=docker
     - PGPASSWORD=docker
-    - PGPORT=5432
-    - PGHOST=db
     - PGDATABASE=arches
+elasticsearch:
+  image: elasticsearch
