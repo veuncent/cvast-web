@@ -1,5 +1,6 @@
 # our base image, for now, Ubuntu
 FROM ubuntu:14.04
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Setting locale variables for database
 RUN locale-gen en_US.UTF-8
@@ -7,10 +8,12 @@ ENV LC_ALL en_US.UTF-8
 ENV LC_LANG en_US.UTF-8
 ENV LC_LANGUAGE en_US.UTF-8
 
-ADD ubuntu_trusty_setup.sh /ubuntu_trusty_setup.sh
-RUN /ubuntu_trusty_setup.sh
-
 USER root
+COPY ./Resources/ubuntu_trusty_setup.sh /Resources/ubuntu_trusty_setup.sh
+WORKDIR /Resources
+RUN chmod +755 ./ubuntu_trusty_setup.sh
+RUN ./ubuntu_trusty_setup.sh
+
 #once we are done with the install, we clean it all up
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
