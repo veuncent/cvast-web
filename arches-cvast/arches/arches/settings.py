@@ -30,12 +30,12 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'arches',                      # Or path to database file if using sqlite3.
-        'USER': 'postgres',                      # Not used with sqlite3.
-        'PASSWORD': 'postgis',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'arches',
+        'USER': 'docker',
+        'PASSWORD': 'docker',
+        'HOST': 'db',
+        'PORT': '5432',
         'POSTGIS_TEMPLATE': 'template_postgis_20',
     }
 }
@@ -52,7 +52,7 @@ ELASTICSEARCH_HTTP_PORT = 9200 # this should be in increments of 200, eg: 9400, 
 SEARCH_BACKEND = 'arches.app.search.search.SearchEngine'
 # see http://elasticsearch-py.readthedocs.org/en/master/api.html#elasticsearch.Elasticsearch
 ELASTICSEARCH_HOSTS = [
-    {'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}
+    {'host': 'elasticsearch', 'port': ELASTICSEARCH_HTTP_PORT}
 ]
 ELASTICSEARCH_CONNECTION_OPTIONS = {'timeout': 30}
 
@@ -128,7 +128,7 @@ SPARQL_ENDPOINT_PROVIDERS = (
     'arches.app.utils.data_management.sparql_providers.aat_provider.AAT_Provider',
 )
 
-APP_NAME = 'Arches'
+APP_NAME = 'CVAST Arches'
 
 #######################################
 ###  END PACKAGE SPECIFIC SETTINGS  ###
@@ -139,7 +139,7 @@ PACKAGE_ROOT = ROOT_DIR
 PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Matthew Vincent', 'matt@averails.com'),
 )
 MANAGERS = ADMINS
 
