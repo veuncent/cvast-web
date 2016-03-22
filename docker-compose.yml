@@ -1,13 +1,13 @@
 web:
-  build: .
-  command: "python manage.py runserver 0.0.0.0:8000"
+  build: ./arches-cvast/.
+  # command: "python manage.py runserver 0.0.0.0:8000"
   working_dir: /arches
   volumes:
     - 'arches:/arches'
   environment:
     HOST: db
     PORT: 5432
-    USER: docker
+    USER: postgres
     NAME: arches
   ports:
     - '8000:8000'
@@ -15,11 +15,13 @@ web:
     - db
     - elasticsearch
 db:
-  image: kartoza/pg-backup:9.4
+  build: ./arches-db-cvast/.
+  #image: kartoza/pg-backup:9.4
+  #command: "/usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf"
   hostname: pg
-  volumes:
-      - ./pg/postgres_data:/var/lib/postgresql
-      - ./pg/setup_data:/home/setup
+  #volumes:
+      #- ./pg/postgres_data:/var/lib/postgresql
+      #- ./pg/setup_data:/home/setup
   environment:
     # These are all defaults anyway, but setting explicitly in
     # case we ever want to ever use different credentials
