@@ -15,3 +15,5 @@ RUN pip install pyopenssl ndg-httpsclient pyasn1 requests psycopg2 django_nose
 RUN pip install -r arches/install/requirements.txt
 
 EXPOSE 8000
+
+CMD ["python manage.py runserver 0.0.0.0:8000"]
