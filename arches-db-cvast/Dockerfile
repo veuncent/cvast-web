@@ -1,11 +1,11 @@
 # our base image, for now, Ubuntu
 FROM ubuntu:14.04
+
+USER root
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-
-
 # Setting locale variables for database
-USER root
+
 
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
@@ -32,9 +32,11 @@ RUN apt-get install -y docbook-mathml
 RUN apt-get install -y libgdal1-dev
 RUN apt-get install -y postgresql-contrib-9.3
 RUN apt-get install -y postgresql-server-dev-9.3
-RUN apt-get install -y postgresql-client-9.3
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y wget
+RUN apt-get install -y openjdk-7-jdk  
+RUN apt-get install -y python-setuptools
+RUN apt-get install -y python-dev
 
 USER postgres
 RUN /etc/init.d/postgresql start &&\
@@ -47,6 +49,8 @@ RUN echo "*:*:*:docker:docker" >> ~/.pgpass
 RUN chmod 600 ~/.pgpass
 RUN chmod 666 /etc/postgresql/9.3/main/postgresql.conf
 RUN chmod 666 /etc/postgresql/9.3/main/pg_hba.conf
+
+# USER postgres
 RUN echo "standard_conforming_strings = off" >> /etc/postgresql/9.3/main/postgresql.conf
 RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.3/main/postgresql.conf
 RUN echo "#TYPE   DATABASE  USER  CIDR-ADDRESS  METHOD" > /etc/postgresql/9.3/main/pg_hba.conf
@@ -57,6 +61,7 @@ RUN echo "host    all       all   0.0.0.0/0     md5" >> /etc/postgresql/9.3/main
 RUN echo "host all all 127.0.0.1 255.255.255.0 trust" >> /etc/postgresql/9.3/main/pg_hba.conf
 RUN service postgresql restart
 
+# user root
 WORKDIR /tmp
 RUN wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2
 RUN tar xvfj geos-3.4.2.tar.bz2
@@ -78,7 +83,7 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql
 RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
 RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
-USER postgres
+user postgres
 WORKDIR /
 RUN /etc/init.d/postgresql start &&\
 	psql -d postgres -c "CREATE EXTENSION postgis;" &&\
@@ -91,27 +96,24 @@ RUN /etc/init.d/postgresql start &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
-	createdb training -T template_postgis_20
+	createdb training -T template_postgis_20 &&\
 
-USER root
-RUN apt-get install -y openjdk-7-jdk python-setuptools python-dev
-
-USER postgres
-RUN /etc/init.d/postgresql start &&\
+# RUN /etc/init.d/postgresql start &&\
 	createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
 
-USER root
-
 # Cleanup
+USER root
 RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /tmp/*
 
+# RUN service postgresql restart
+
+# USER postgres
 EXPOSE 5432
-
 VOLUME ["/var/lib/postgresql", "/home/setup"]
-
-USER postgres
-CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
+# CMD /etc/init.d/postgresql start
+CMD service postgresql start 
+# CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
 
 
 
