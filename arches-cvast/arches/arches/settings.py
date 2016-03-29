@@ -20,7 +20,7 @@ import os
 import inspect
 # Django settings for Arches project.
 
-MODE = 'PROD' #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
+MODE = 'DEV' #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
@@ -35,7 +35,7 @@ DATABASES = {
         'NAME': 'arches',                      # Or path to database file if using sqlite3.
         'USER': 'postgres',                      # Not used with sqlite3.
         'PASSWORD': 'postgis',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': 'db',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
         'SCHEMAS': 'public,data,ontology,concepts', # syncdb will put the admin tables in the first listed schema,
         'POSTGIS_TEMPLATE': 'template_postgis_20',
