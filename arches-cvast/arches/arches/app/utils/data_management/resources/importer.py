@@ -10,9 +10,9 @@ from django.forms.models import model_to_dict
 from django.core.management.base import BaseCommand, CommandError
 from arches.app.models.entity import Entity
 from arches.app.models.resource import Resource
-from arches.app.models.models import Concept
-from arches.app.models.models import Value
-from arches.app.models.models import ResourceXResource
+from arches.app.models.models import Concepts
+from arches.app.models.models import Values
+from arches.app.models.models import RelatedResource
 from arches.app.models.concept import Concept
 from arches.app.search.search_engine_factory import SearchEngineFactory
 from arches.management.commands import utils
@@ -172,17 +172,17 @@ class ResourceLoader(object):
         end_date = None if relationship['END_DATE'] in ('', 'None') else relationship['END_DATE']
 
         if archesjson == False:
-            relationshiptype_concept = Concept.objects.get(legacyoid = relationship['RELATION_TYPE'])
-            concept_value = Value.objects.filter(concept = relationshiptype_concept.conceptid).filter(valuetype = 'prefLabel')
+            relationshiptype_concept = Concepts.objects.get(legacyoid = relationship['RELATION_TYPE'])
+            concept_value = Values.objects.filter(conceptid = relationshiptype_concept.conceptid).filter(valuetype = 'prefLabel')
             entityid1 = legacyid_to_entityid[relationship['RESOURCEID_FROM']]
             entityid2 = legacyid_to_entityid[relationship['RESOURCEID_TO']]
 
         else:
-            concept_value = Value.objects.filter(valueid = relationship['RELATION_TYPE'])
+            concept_value = Values.objects.filter(valueid = relationship['RELATION_TYPE'])
             entityid1 = relationship['RESOURCEID_FROM']
             entityid2 = relationship['RESOURCEID_TO']
 
-        related_resource_record = ResourceXResource(
+        related_resource_record = RelatedResource(
             entityid1 = entityid1,
             entityid2 = entityid2,
             notes = relationship['NOTES'],

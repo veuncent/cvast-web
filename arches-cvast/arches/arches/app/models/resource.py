@@ -340,9 +340,9 @@ class Resource(Entity):
         for entity in self.flatten():
             if entity.entityid != self.entityid:
                 if entity.businesstablename == 'domains':
-                    value = archesmodels.Value.objects.get(pk=entity.value)
+                    value = archesmodels.Values.objects.get(pk=entity.value)
                     entity_copy = entity.copy()
-                    entity_copy.conceptid = value.concept_id
+                    entity_copy.conceptid = value.conceptid_id
                     document.domains.append(entity_copy)
                 elif entity.businesstablename == 'dates':
                     document.dates.append(entity)
@@ -484,7 +484,8 @@ class Resource(Entity):
                         'label' : {'type' : 'string', 'index' : 'not_analyzed'},
                         'primaryname': {'type' : 'string', 'index' : 'not_analyzed'},
                         'child_entities' : { 
-                            'type' : 'nested',
+                            'type' : 'nested', 
+                            'index' : 'analyzed',
                             'properties' : {
                                 'entityid' : {'type' : 'string', 'index' : 'not_analyzed'},
                                 'parentid' : {'type' : 'string', 'index' : 'not_analyzed'},
@@ -503,7 +504,8 @@ class Resource(Entity):
                             }
                         },
                         'domains' : { 
-                            'type' : 'nested',
+                            'type' : 'nested', 
+                            'index' : 'analyzed',
                             'properties' : {
                                 'entityid' : {'type' : 'string', 'index' : 'not_analyzed'},
                                 'parentid' : {'type' : 'string', 'index' : 'not_analyzed'},
@@ -522,7 +524,8 @@ class Resource(Entity):
                             }
                         },
                         'geometries' : { 
-                            'type' : 'nested',
+                            'type' : 'nested', 
+                            'index' : 'analyzed',
                             'properties' : {
                                 'entityid' : {'type' : 'string', 'index' : 'not_analyzed'},
                                 'parentid' : {'type' : 'string', 'index' : 'not_analyzed'},
@@ -536,7 +539,8 @@ class Resource(Entity):
                             }
                         },
                         'dates' : { 
-                            'type' : 'nested',
+                            'type' : 'nested', 
+                            'index' : 'analyzed',
                             'properties' : {
                                 'entityid' : {'type' : 'string', 'index' : 'not_analyzed'},
                                 'parentid' : {'type' : 'string', 'index' : 'not_analyzed'},

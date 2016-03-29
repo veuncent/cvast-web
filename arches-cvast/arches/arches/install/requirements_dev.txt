@@ -5,5 +5,3 @@ livereload
 webtest
 django-webtest
 sst
-django-nose
-coverage

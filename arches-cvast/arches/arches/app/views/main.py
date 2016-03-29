@@ -16,17 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from django.shortcuts import render, redirect
+from django.template import RequestContext
+from django.shortcuts import render_to_response, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
+from django.conf import settings
+from django.contrib.auth.models import User
 
 def index(request):
-    return render(request, 'index.htm', {
-        'main_script': 'index',
-        'active_page': 'Home',
-    })
+    return render_to_response('index.htm', {
+            'main_script': 'index',
+            'active_page': 'Home',
+        },
+        context_instance=RequestContext(request))
 
 
 @never_cache
@@ -54,12 +58,13 @@ def auth(request):
             # need to redirect to 'auth' so that the user is set to anonymous via the middleware
             return redirect('auth')
         else:
-            return render(request, 'login.htm', {
-                'main_script': 'login',
-                'auth_failed': (auth_attempt_success is not None),
-                'next': next
-            })
+            return render_to_response('login.htm', {
+                    'main_script': 'login',
+                    'auth_failed': (auth_attempt_success is not None),
+                    'next': next
+                },
+                context_instance=RequestContext(request))
 
 
 def search(request):
-    return render(request, 'search.htm')
+    return render_to_response('search.htm', context_instance=RequestContext(request))
