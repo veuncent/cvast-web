@@ -1,7 +1,7 @@
 web:
   build: ./arches-cvast/.
   # image: archesdocker_web:latest
-  command: bash -c "source /arches/virtualenv/ENV/bin/activate && python /arches/manage.py runserver 0.0.0.0:8000" # && python manage.py packages -o setup  
+  command: bash -c "sleep 10 && source /arches/virtualenv/ENV/bin/activate && python /arches/manage.py packages -o setup_db && python /arches/manage.py runserver 0.0.0.0:8000" #python manage.py packages -o migrate
   working_dir: /arches
   volumes:
     - 'arches:/arches'
@@ -18,12 +18,14 @@ web:
 db:
   build: ./arches-db-cvast/.
   #image: kartoza/pg-backup:9.4
-  command: service postgresql start
-  # command: "/usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf"
+  # command: service postgresql start
+  command: bash -c 'su postgres --command "/usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf"'
   # hostname: pg
   # volumes:
-      # - ./pg/postgres_data:/var/lib/postgresql
-      # - ./pg/setup_data:/home/setup
+      # - /c/Users/CVAST/Documents/arches-docker/pg/postgres_data:/var/lib/postgresql/9.3
+      # - /c/Users/CVAST/Documents/arches-docker/pg/main:/var/lib/postgresql/9.3/main
+      # - /c/Users/CVAST/Documents/arches-docker/pg/postgres_data:/var/lib/postgresql
+      # - /c/Users/CVAST/Documents/arches-docker/pg/setup_data:/etc/postgresql/9.3
   ports:
     - '5432:5432'
   environment:

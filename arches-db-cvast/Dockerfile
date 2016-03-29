@@ -101,18 +101,23 @@ RUN /etc/init.d/postgresql start &&\
 # RUN /etc/init.d/postgresql start &&\
 	createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
 
+	
+RUN /etc/init.d/postgresql start &&\
+	psql -d postgres -c "ALTER ROLE docker SUPERUSER;"
 # Cleanup
 USER root
-RUN rm -rf /var/lib/apt/lists/*
+USER root
+# RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /tmp/*
 
+# RUN useradd -r -u 1000 test
 # RUN service postgresql restart
 
 # USER postgres
 EXPOSE 5432
-VOLUME ["/var/lib/postgresql", "/home/setup"]
+# VOLUME ["/var/lib/postgresql", "/home/setup"]
 # CMD /etc/init.d/postgresql start
-CMD service postgresql start 
+# CMD ["service postgresql start"] 
 # CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
 
 

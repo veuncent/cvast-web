@@ -20,30 +20,74 @@ RUN apt-get install -y libffi-dev
 RUN apt-get install -y libpq-dev
 # RUN apt-get install -y postgresql-9.3
 # RUN apt-get install -y postgresql-contrib-9.3
+RUN apt-get install -y postgresql-server-dev-9.3
 RUN apt-get install -y postgresql-client-9.3
 RUN apt-get install -y wget
+
+RUN	easy_install pip
 
 # Install the Arches application
 # Add arches source code to image file system
 COPY arches /arches
 # Create virtual environment
-RUN	easy_install pip
-WORKDIR /arches/virtualenv
-RUN python virtualenv.py ENV &&\
-	source /arches/virtualenv/ENV/bin/activate &&\
-	pip install pyopenssl ndg-httpsclient pyasn1 requests psycopg2 django_nose &&\
-	pip install -r /arches/arches/install/requirements.txt &&\
-	# apt-get install -y wget &&\
-	mkdir /arches/virtualenv/ENV/tmp &&\
-	cd /arches/virtualenv/ENV/tmp &&\
-	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 &&\
-	tar xvfj geos-3.4.2.tar.bz2 &&\
-	cd geos-3.4.2 &&\
-	./configure &&\
-	make &&\
-	make install &&\
-	cd /arches &&\
-	pip install arches
+
+# WORKDIR /arches/virtualenv
+# RUN python virtualenv.py ENV &&\
+	# source /arches/virtualenv/ENV/bin/activate &&\
+
+RUN pip install pyopenssl 
+RUN pip install ndg-httpsclient 
+RUN pip install pyasn1 
+RUN pip install requests 
+# RUN pip install psycopg2 
+# RUN pip install django_nose
+
+COPY arches /arches
+RUN pip install -r /arches/arches/install/requirements.txt
+RUN pip install -r /arches/arches/install/requirements_dev.txt
+	# mkdir /arches/virtualenv/ENV/tmp &&\
+	# cd /arches/virtualenv/ENV/tmp &&\
+# WORKDIR /arches	
+# RUN python setup.py build
+# RUN python setup.py install
+	
+WORKDIR /tmp	
+RUN	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2
+RUN	tar xvfj geos-3.4.2.tar.bz2
+WORKDIR	/tmp/geos-3.4.2
+RUN	./configure
+RUN	make
+RUN	make install
+	
+	
+WORKDIR /tmp
+RUN wget http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz
+RUN tar xfvz postgis-2.1.3.tar.gz
+WORKDIR /tmp/postgis-2.1.3
+RUN ./configure
+RUN make
+RUN make install
+RUN ldconfig
+RUN make comments-install
+RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql
+RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
+RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
+	
+	# cd /arches/virtualenv/ENV/tmp &&\
+	# wget http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz &&\
+	# tar xfvz postgis-2.1.3.tar.gz &&\
+	# cd postgis-2.1.3 &&\
+	# ./configure &&\
+	# make &&\
+	# make install &&\
+	# ldconfig &&\
+	# make comments-install &&\
+	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql &&\
+	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp &&\
+	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql &&\
+	
+WORKDIR	/arches
+RUN	pip install -e .
 	# python setup.py build &&\
 	# python setup.py install
 	# pip install virtualenv==1.11.4 &&\
@@ -87,11 +131,11 @@ RUN python virtualenv.py ENV &&\
 # RUN python setup.py install
 
 
+
 # Cleanup
 USER root
-RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /tmp/*
 
 EXPOSE 8000
 
-CMD ["source /arches/virtualenv/ENV/bin/activate && python /arches/manage.py runserver 0.0.0.0:8000"]
+# CMD ["source /arches/virtualenv/ENV/bin/activate && python /arches/manage.py runserver 0.0.0.0:8000"]

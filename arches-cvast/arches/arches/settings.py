@@ -32,8 +32,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'arches',
-        'USER': 'docker',
-        'PASSWORD': 'docker',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': 'db',
         'PORT': '5432',
         'POSTGIS_TEMPLATE': 'template_postgis_20',
@@ -79,8 +79,8 @@ ETL_USERNAME = 'ETL' # override this setting in your packages settings.py file
 
 LIVERELOAD_PORT = 35729 # usually only used in development, 35729 is default for livereload browser extensions
 
-DEFAULT_MAP_X = 0
-DEFAULT_MAP_Y = 0
+DEFAULT_MAP_X = 110
+DEFAULT_MAP_Y = 500
 DEFAULT_MAP_ZOOM = 0
 MAP_MIN_ZOOM = 0
 MAP_MAX_ZOOM = 19
