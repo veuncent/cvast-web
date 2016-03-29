@@ -6,6 +6,7 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Install dependencies
 RUN apt-get update -y 
+RUN apt-get install -y wget
 RUN apt-get install -y build-essential
 RUN apt-get install -y libxml2-dev
 RUN apt-get install -y libjson0-dev
@@ -20,17 +21,21 @@ RUN apt-get install -y libffi-dev
 RUN apt-get install -y libpq-dev
 # RUN apt-get install -y postgresql-9.3
 # RUN apt-get install -y postgresql-contrib-9.3
-RUN apt-get install -y postgresql-server-dev-9.3
-RUN apt-get install -y postgresql-client-9.3
-RUN apt-get install -y wget
+
+# Needed for postgres-9.4
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+  sudo apt-key add -
+RUN apt-get update -y
+
+RUN apt-get install -y postgresql-server-dev-9.4
+RUN apt-get install -y postgresql-client-9.4
+
 
 RUN	easy_install pip
 
-# Install the Arches application
-# Add arches source code to image file system
-COPY arches /arches
-# Create virtual environment
 
+# Create virtual environment
 # WORKDIR /arches/virtualenv
 # RUN python virtualenv.py ENV &&\
 	# source /arches/virtualenv/ENV/bin/activate &&\
@@ -39,10 +44,12 @@ RUN pip install pyopenssl
 RUN pip install ndg-httpsclient 
 RUN pip install pyasn1 
 RUN pip install requests 
-# RUN pip install psycopg2 
-# RUN pip install django_nose
+RUN pip install psycopg2 
+RUN pip install django_nose
 
+# Add arches source code to image file system
 COPY arches /arches
+
 RUN pip install -r /arches/arches/install/requirements.txt
 RUN pip install -r /arches/arches/install/requirements_dev.txt
 	# mkdir /arches/virtualenv/ENV/tmp &&\
@@ -86,8 +93,10 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp &&\
 	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql &&\
 	
+# Install the Arches application	
 WORKDIR	/arches
 RUN	pip install -e .
+
 	# python setup.py build &&\
 	# python setup.py install
 	# pip install virtualenv==1.11.4 &&\
@@ -130,7 +139,7 @@ RUN	pip install -e .
 # RUN python setup.py build
 # RUN python setup.py install
 
-
+# RUN pip install -U django-pgjsonb
 
 # Cleanup
 USER root

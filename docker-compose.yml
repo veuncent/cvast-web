@@ -1,7 +1,7 @@
 web:
   build: ./arches-cvast/.
   # image: archesdocker_web:latest
-  command: bash -c "sleep 10 && source /arches/virtualenv/ENV/bin/activate && python /arches/manage.py packages -o setup_db && python /arches/manage.py runserver 0.0.0.0:8000" #python manage.py packages -o migrate
+  command: bash -c "sleep 10 && python manage.py migrate && python /arches/manage.py runserver 0.0.0.0:8000" # && source /arches/virtualenv/ENV/bin/activate && python /arches/manage.py packages -o setup_db
   working_dir: /arches
   volumes:
     - 'arches:/arches'
@@ -19,7 +19,7 @@ db:
   build: ./arches-db-cvast/.
   #image: kartoza/pg-backup:9.4
   # command: service postgresql start
-  command: bash -c 'su postgres --command "/usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf"'
+  command: bash -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf"'
   # hostname: pg
   # volumes:
       # - /c/Users/CVAST/Documents/arches-docker/pg/postgres_data:/var/lib/postgresql/9.3
@@ -31,8 +31,8 @@ db:
   environment:
     # These are all defaults anyway, but setting explicitly in
     # case we ever want to ever use different credentials
-    - PGUSER=docker
-    - PGPASSWORD=docker
+    - PGUSER=postgres
+    - PGPASSWORD=postgis
     - PGDATABASE=arches
 elasticsearch:
   image: elasticsearch
