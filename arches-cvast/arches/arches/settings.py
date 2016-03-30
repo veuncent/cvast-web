@@ -22,7 +22,6 @@ import inspect
 
 MODE = 'DEV' #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
 
 #########################################
@@ -37,7 +36,6 @@ DATABASES = {
         'PASSWORD': 'postgis',                  # Not used with sqlite3.
         'HOST': 'db',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
-        'SCHEMAS': 'public,data,ontology,concepts', # syncdb will put the admin tables in the first listed schema,
         'POSTGIS_TEMPLATE': 'template_postgis_20',
     }
 }
@@ -86,7 +84,7 @@ DEFAULT_MAP_Y = 0
 DEFAULT_MAP_ZOOM = 0
 MAP_MIN_ZOOM = 0
 MAP_MAX_ZOOM = 19
-MAP_LAYER_FEATURE_LIMIT = 100000
+MAP_LAYER_FEATURE_LIMIT = 10000
 MAP_EXTENT = ''
 
 RESOURCE_MARKER_ICON_UNICODE = '\uf060'
@@ -130,13 +128,15 @@ SPARQL_ENDPOINT_PROVIDERS = (
     'arches.app.utils.data_management.sparql_providers.aat_provider.AAT_Provider',
 )
 
-APP_NAME = 'Arches v3.0'
+APP_NAME = 'Arches'
 
 #######################################
 ###  END PACKAGE SPECIFIC SETTINGS  ###
 #######################################
 
 ROOT_DIR = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+PACKAGE_ROOT = ROOT_DIR
+PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -164,8 +164,8 @@ USE_TZ = False
 # Default Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 
-# see https://docs.djangoproject.com/en/1.6/topics/i18n/translation/#how-django-discovers-language-preference 
-# to see how LocaleMiddleware tries to determine the user's language preference 
+# see https://docs.djangoproject.com/en/1.6/topics/i18n/translation/#how-django-discovers-language-preference
+# to see how LocaleMiddleware tries to determine the user's language preference
 # (make sure to check your accept headers as they will override the LANGUAGE_CODE setting!)
 # also see get_language_from_request in django.utils.translation.trans_real.py
 # to see how the language code is derived in the actual code
@@ -181,9 +181,9 @@ LOCALE_PATHS = (
 USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT =  os.path.join(ROOT_DIR, 'uploadedfiles')
+MEDIA_ROOT =  os.path.join(ROOT_DIR)
 
-# URL that handles the media served from MEDIA_ROOT, used for managing stored files. 
+# URL that handles the media served from MEDIA_ROOT, used for managing stored files.
 # It must end in a slash if set to a non-empty value.
 MEDIA_URL = '/files/'
 
@@ -221,18 +221,35 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'c7ky-mc6vdnv+avp0r@(a)8y^51ex=25nogq@+q5$fnc*mxwdi'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
-
-TEMPLATE_DIRS = (
-    'arches.app.templates',
-)
-
-# Application definition
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            # insert your TEMPLATE_DIRS here
+            os.path.join(ROOT_DIR, 'app', 'templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+                'arches.app.utils.context_processors.livereload',
+                'arches.app.utils.context_processors.resource_types',
+                'arches.app.utils.context_processors.map_info',
+                'arches.app.utils.context_processors.app_settings',
+            ],
+            'debug': DEBUG
+        },
+    },
+]
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -244,7 +261,8 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'arches',
     'arches.app.models',
-    'arches.management'
+    'arches.management',
+    'django_nose',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -253,6 +271,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'arches.app.utils.set_anonymous_user.SetAnonymousUser',
@@ -261,38 +280,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'arches.urls'
 
 WSGI_APPLICATION = 'arches.wsgi.application'
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(ROOT_DIR, 'app', 'templates'),
-
-    # Adding a reference to error page templates because of issues we were seeing in amazon aws instances
-    # http://stackoverflow.com/questions/13284443/django-template-error-500-html-on-amazon-ec2?rq=1
-    # os.path.join(ROOT_DIR, 'virtualenv/ENV/Lib/site-packages/django/contrib/admin/templates/admin'),
-    # os.path.join(ROOT_DIR, 'virtualenv/ENV/lib/python2.7/site-packages/django/contrib/admin/templates/admin'),
-)
-
-# List of processors used by RequestContext to populate the context.
-# Each one should be a callable that takes the request object as its
-# only parameter and returns a dictionary to add to the context.
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-    'arches.app.utils.context_processors.livereload',
-    'arches.app.utils.context_processors.resource_types',
-    'arches.app.utils.context_processors.map_info',
-    'arches.app.utils.context_processors.app_settings',
-    'arches.app.utils.context_processors.user_can_edit',
-)
-
 
 LOGGING = {
     'version': 1,

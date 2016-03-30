@@ -17,8 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
 from django.conf import settings
-from arches.app.models.resource import Resource
-from arches.app.utils.decorators import deprecated
+from arches import __version__
 
 def livereload(request):
     return {
@@ -49,14 +48,7 @@ def resource_types(request):
 
 def app_settings(request):
     return {
+        'VERSION': __version__,
         'APP_NAME': settings.APP_NAME,
         'GOOGLE_ANALYTICS_TRACKING_ID': settings.GOOGLE_ANALYTICS_TRACKING_ID
-    }
-
-@deprecated
-def user_can_edit(request):
-    # need to implement proper permissions check here...
-    # for now allowing all logged in users to be 'editors'
-    return {
-        'user_can_edit': 'edit' in request.user.user_groups
     }

@@ -20,6 +20,7 @@ import uuid
 import types
 import copy
 import arches.app.models.models as archesmodels
+from django.apps import apps
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import fromstr
 from django.contrib.gis.geos import GEOSGeometry
@@ -81,7 +82,7 @@ class Entity(object):
 
         entity = archesmodels.Entities.objects.get(pk = pk)
         self.entitytypeid = entity.entitytypeid_id
-        self.entityid = entity.pk
+        self.entityid = str(entity.pk)
         self.businesstablename = entity.entitytypeid.businesstablename if entity.entitytypeid.businesstablename else ''
 
         # get the entity value if any
@@ -102,11 +103,11 @@ class Entity(object):
                 
         # get the property that associated parent to child
         if parent is not None:
-            relation = archesmodels.Relations.objects.get(entityiddomain =  parent.entityid, entityidrange = entity.entityid)
+            relation = archesmodels.Relation.objects.get(entityiddomain =  parent.entityid, entityidrange = entity.entityid)
             self.property = relation.ruleid.propertyid_id                
         
         # get the child entities if any
-        child_entities = archesmodels.Relations.objects.filter(entityiddomain = pk)
+        child_entities = archesmodels.Relation.objects.filter(entityiddomain = pk)
         for child_entity in child_entities:       
             self.append_child(Entity().get(child_entity.entityidrange_id, entity))
 
@@ -173,7 +174,7 @@ class Entity(object):
         for child_entity in self.child_entities:
             child = child_entity._save()
             rule = archesmodels.Rules.objects.get(entitytypedomain = entity.entitytypeid, entitytyperange = child.entitytypeid, propertyid = child_entity.property)
-            archesmodels.Relations.objects.get_or_create(entityiddomain = entity, entityidrange = child, ruleid = rule)
+            archesmodels.Relation.objects.get_or_create(entityiddomain = entity, entityidrange = child, ruleid = rule)
 
         return entity
 
@@ -688,7 +689,7 @@ class Entity(object):
 
         try:
             model_identifier = str('models.' + tablename)
-            Model = models.get_model(*model_identifier.split("."))
+            Model = apps.get_model(*model_identifier.split("."))
         except TypeError:
             Model = None
         if Model is None:

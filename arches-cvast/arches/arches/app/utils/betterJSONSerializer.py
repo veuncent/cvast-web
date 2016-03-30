@@ -3,7 +3,9 @@ import decimal
 import types
 import json
 import inspect
+import uuid
 from io import StringIO
+from itertools import chain
 from django.db import models, DEFAULT_DB_ALIAS
 from django.db.models import Model
 from django.db.models.query import QuerySet
@@ -14,6 +16,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
 from django.contrib.gis.geos import GEOSGeometry
 from django.core.files import File
+
 
 class UnableToSerializeError(Exception):
     """ Error for not implemented classes """
@@ -52,6 +55,11 @@ class JSONSerializer(object):
         self.use_natural_keys = options.pop("use_natural_keys", False)
         self.geom_format = options.pop("geom_format", "wkt")
 
+        # prevent raw strings from begin re-encoded
+        # this is especially important when doing bulk operations in elasticsearch
+        if (isinstance(obj, basestring)):
+            return obj
+        
         ret = self.handle_object(obj)
 
         return json.dumps(ret, cls=DjangoJSONEncoder, **options.copy())
@@ -60,6 +68,7 @@ class JSONSerializer(object):
     def handle_object(self, object):
         """ Called to handle everything, looks for the correct handling """
         # print type(object)
+        # print object
         # print inspect.isclass(object)
         # print inspect.ismethod(object)
         # print inspect.isfunction(object)
@@ -77,9 +86,8 @@ class JSONSerializer(object):
               isinstance(object, tuple)):
             return self.handle_list(object)
         elif isinstance(object, Model):
-            #return super(JSONSerializer,self).serialize([object], **self.options.copy())[0]
-            return self.handle_object(model_to_dict(object))
-            return PythonSerializer().serialize([object],**self.options.copy())[0]['fields']
+            return self.handle_model(object)
+            #return PythonSerializer().serialize([object],**self.options.copy())[0]['fields']
         elif isinstance(object, QuerySet):
             #return super(JSONSerializer,self).serialize(object, **self.options.copy())[0]
             ret = []
@@ -102,6 +110,8 @@ class JSONSerializer(object):
             return getattr(object, self.geom_format)
         elif isinstance(object, File):
             return object.name
+        elif isinstance(object, uuid.UUID):
+            return str(object)
         elif hasattr(object, '__dict__'):
             return self.handle_dictionary(object.__dict__)
         else:
@@ -113,7 +123,7 @@ class JSONSerializer(object):
         for key, value in d.iteritems():
             try:
                 #print key + ': ' + str(type(value))
-                obj[key] = self.handle_object(value)
+                obj[str(key)] = self.handle_object(value)
             except(UnableToSerializeMethodTypesError):
                 pass
 
@@ -127,6 +137,53 @@ class JSONSerializer(object):
             arr.append(self.handle_object(item))
 
         return arr
+
+    # a slighty modified version of django.forms.models.model_to_dict
+    def handle_model(self, instance, fields=None, exclude=None):
+        """
+        Returns a dict containing the data in ``instance`` suitable for passing as
+        a Form's ``initial`` keyword argument.
+
+        ``fields`` is an optional list of field names. If provided, only the named
+        fields will be included in the returned dict.
+
+        ``exclude`` is an optional list of field names. If provided, the named
+        fields will be excluded from the returned dict, even if they are listed in
+        the ``fields`` argument.
+        """
+        # avoid a circular import
+        from django.db.models.fields.related import ManyToManyField, ForeignKey
+        opts = instance._meta
+        data = {}
+        #print '='*40
+        for f in chain(opts.concrete_fields, opts.virtual_fields, opts.many_to_many):
+            #print f.name
+            if not getattr(f, 'editable', False):
+                continue
+            if fields and f.name not in fields:
+                continue
+            if exclude and f.name in exclude:
+                continue
+            if isinstance(f, ForeignKey):
+                # Emulate the naming convention used by django when accessing the 
+                # related model's id field
+                data[f.name+'_id'] = f.value_from_object(instance)
+            elif isinstance(f, ManyToManyField):
+                # If the object doesn't have a primary key yet, just use an empty
+                # list for its m2m fields. Calling f.value_from_object will raise
+                # an exception.
+                if instance.pk is None:
+                    data[f.name] = []
+                else:
+                    # MultipleChoiceWidget needs a list of pks, not object instances.
+                    qs = f.value_from_object(instance)
+                    if qs._result_cache is not None:
+                        data[f.name] = [item.pk for item in qs]
+                    else:
+                        data[f.name] = list(qs.values_list('pk', flat=True))
+            else:
+                data[f.name] = f.value_from_object(instance)
+        return data
 
 
 class JSONDeserializer(object):

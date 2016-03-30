@@ -81,7 +81,7 @@ def load_authority_file(cursor, path_to_authority_files, filename, auth_file_to_
     print filename.upper()    
 
     start = time()
-    value_types = models.ValueTypes.objects.all()
+    value_types = models.DValueType.objects.all()
     filepath = os.path.join(path_to_authority_files, filename)
     unicodecsv.field_size_limit(sys.maxint)
     errors = []
@@ -169,13 +169,13 @@ def load_authority_file(cursor, path_to_authority_files, filename, auth_file_to_
                         else:
                             row_valuetype = row[u'VALUETYPE'].strip()
                             if row_valuetype not in value_types.values_list('valuetype', flat=True): 
-                                valuetype = models.ValueTypes()
+                                valuetype = models.DValueType()
                                 valuetype.valuetype = row_valuetype
                                 valuetype.category = 'undefined'
                                 valuetype.namespace = 'arches'
                                 valuetype.save()
                             
-                            value_types = models.ValueTypes.objects.all()
+                            value_types = models.DValueType.objects.all()
                             concept = lookups.get_lookup(legacyoid=row[u'CONCEPTID'])
                             category = value_types.get(valuetype=row_valuetype).category
                             concept.addvalue({'value':row[u'VALUE'], 'type': row[u'VALUETYPE'], 'category': category})
@@ -205,8 +205,8 @@ def load_authority_file(cursor, path_to_authority_files, filename, auth_file_to_
     # insert the concept relations
     for relation in lookups.concept_relationships:
         sql = """
-            INSERT INTO concepts.relations(conceptidfrom, conceptidto, relationtype)
-            VALUES ('%s', '%s', '%s');
+            INSERT INTO relations(relationid, conceptidfrom, conceptidto, relationtype)
+            VALUES (public.uuid_generate_v1mc(), '%s', '%s', '%s');
         """%(relation['source'], relation['target'], relation['type'])
         #print sql
         try:

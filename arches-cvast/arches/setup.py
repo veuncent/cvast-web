@@ -22,7 +22,7 @@ setup(
     version=version,
 
     description='Arches is a new, open-source, web-based, geospatial information system for cultural heritage inventory and management.',
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
     url='http://archesproject.org/',
     author='Farallon Geographics, Inc',
     author_email='dev@fargeo.com',
@@ -48,4 +48,6 @@ setup(
     packages=find_packages(),
     include_package_data = True,
     zip_safe=False,
+
+    test_suite = "tests.run_tests.run_all"
 )
