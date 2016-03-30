@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 from optparse import make_option
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
-from django.utils.importlib import import_module
+from importlib import import_module
 import os
 
 class Command(BaseCommand):

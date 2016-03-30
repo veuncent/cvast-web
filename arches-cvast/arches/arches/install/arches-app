@@ -8,7 +8,7 @@ import imp
 
 from django.core.management.templates import TemplateCommand
 from django.core.management.base import BaseCommand, CommandError
-from django.utils.importlib import import_module
+from importlib import import_module
 from os import path
 from django.core.management.utils import handle_extensions
 import errno

@@ -21,7 +21,7 @@ from django.conf import settings
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator
-from django.utils.importlib import import_module
+from importlib import import_module
 from django.contrib.gis.geos import GEOSGeometry
 from django.db.models import Max, Min
 from arches.app.models import models
