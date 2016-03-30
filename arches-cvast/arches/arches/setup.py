@@ -13,9 +13,9 @@ root_dir = os.path.dirname(here)
 def install():
     if confirm_system_requirements():
 
-        run_virtual_environment()
+        #run_virtual_environment()
 
-        install_dir = os.path.join(site_packages_dir(), 'arches', 'install')
+        install_dir = os.path.join(root_dir, 'arches', 'install')
         django_install_location = os.path.join(site_packages_dir(), 'django')
 
         # INSTALL DJANGO, RAWES, SPHINX AND OTHER DEPENDENCIES
@@ -50,11 +50,12 @@ def install():
             os.system("pip install psycopg2==2.5.4")
 
 def site_packages_dir():
-    if sys.platform == 'win32':
-        return os.path.join(sys.prefix, 'Lib', 'site-packages')
-    else:
-        py_version = 'python%s.%s' % (sys.version_info[0], sys.version_info[1])
-        return os.path.join(sys.prefix, 'lib', py_version, 'site-packages')        
+    return os.path.join('/usr', 'local', 'lib', 'python2.7', 'dist-packages')
+    # if sys.platform == 'win32':
+        # return os.path.join(sys.prefix, 'Lib', 'site-packages')
+    # else:
+        # py_version = 'python%s.%s' % (sys.version_info[0], sys.version_info[1])
+        # return os.path.join(sys.prefix, 'lib', py_version, 'site-packages')        
 
 def confirm_system_requirements():
     # CHECK PYTHON VERSION

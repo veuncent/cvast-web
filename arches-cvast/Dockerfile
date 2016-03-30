@@ -40,6 +40,7 @@ RUN	easy_install pip
 # RUN python virtualenv.py ENV &&\
 	# source /arches/virtualenv/ENV/bin/activate &&\
 
+USER docker
 RUN pip install pyopenssl 
 RUN pip install ndg-httpsclient 
 RUN pip install pyasn1 
@@ -48,10 +49,10 @@ RUN pip install psycopg2
 RUN pip install django_nose
 
 # Add arches source code to image file system
-COPY arches /arches
 
-RUN pip install -r /arches/arches/install/requirements.txt
-RUN pip install -r /arches/arches/install/requirements_dev.txt
+
+# RUN pip install -r /arches/arches/install/requirements.txt
+# RUN pip install -r /arches/arches/install/requirements_dev.txt
 	# mkdir /arches/virtualenv/ENV/tmp &&\
 	# cd /arches/virtualenv/ENV/tmp &&\
 # WORKDIR /arches	
@@ -94,8 +95,17 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql &&\
 	
 # Install the Arches application	
+COPY arches /arches
 WORKDIR	/arches
 RUN	pip install -e .
+# RUN	pip install -e ./arches
+RUN python setup.py build
+RUN python setup.py install
+RUN sudo chown -R postgres:postgres /arches
+RUN chmod -R 777 /arches
+# RUN echo "PACKAGE_NAME = 'arches'" >> /arches/arches/settings.py
+# RUN python manage.py packages -o install
+
 
 	# python setup.py build &&\
 	# python setup.py install
@@ -142,7 +152,7 @@ RUN	pip install -e .
 # RUN pip install -U django-pgjsonb
 
 # Cleanup
-USER root
+# USER root
 RUN rm -rf /tmp/*
 
 EXPOSE 8000
