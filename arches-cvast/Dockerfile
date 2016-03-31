@@ -34,19 +34,18 @@ RUN apt-get install -y postgresql-client-9.4
 
 RUN	easy_install pip
 
-
 # Create virtual environment
 # WORKDIR /arches/virtualenv
 # RUN python virtualenv.py ENV &&\
 	# source /arches/virtualenv/ENV/bin/activate &&\
 
-USER docker
-RUN pip install pyopenssl 
-RUN pip install ndg-httpsclient 
-RUN pip install pyasn1 
-RUN pip install requests 
-RUN pip install psycopg2 
-RUN pip install django_nose
+	#See if we can do without these
+# RUN pip install pyopenssl 
+# RUN pip install ndg-httpsclient 
+# RUN pip install pyasn1 
+# RUN pip install requests 
+# RUN pip install psycopg2 
+# RUN pip install django_nose
 
 # Add arches source code to image file system
 
@@ -101,8 +100,8 @@ RUN	pip install -e .
 # RUN	pip install -e ./arches
 RUN python setup.py build
 RUN python setup.py install
-RUN sudo chown -R postgres:postgres /arches
-RUN chmod -R 777 /arches
+# RUN sudo chown -R postgres:postgres /arches
+# RUN chmod -R 777 /arches
 # RUN echo "PACKAGE_NAME = 'arches'" >> /arches/arches/settings.py
 # RUN python manage.py packages -o install
 

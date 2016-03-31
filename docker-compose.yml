@@ -1,10 +1,16 @@
 web:
   build: ./arches-cvast/.
   # image: archesdocker_web:latest
-  command: bash -c "sleep 10 && python manage.py migrate && python /arches/manage.py runserver 0.0.0.0:8000" # && source /arches/virtualenv/ENV/bin/activate && python /arches/manage.py packages -o setup_db
+  command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
+  # 'su postgres --command'yes n | 
+  # python manage.py migrate 
+  #&& python manage.py syncdb 
+  #&& source /arches/virtualenv/ENV/bin/activate 
+  #&& python /arches/manage.py packages -o setup_db
+  #  && python manage.py packages -o index_database 
   working_dir: /arches
-  volumes:
-    - 'arches:/arches'
+  # volumes:
+    # - 'arches:/arches'
   environment:
     HOST: db
     PORT: 5432
@@ -16,6 +22,7 @@ web:
     - db
     - elasticsearch
 db:
+  restart: always
   build: ./arches-db-cvast/.
   #image: kartoza/pg-backup:9.4
   # command: service postgresql start

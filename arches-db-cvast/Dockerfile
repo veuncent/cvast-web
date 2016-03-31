@@ -111,9 +111,9 @@ RUN /etc/init.d/postgresql start &&\
 
 	createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches &&\
 		
-	python /tmp/install/install_db.py &&\
+	python /tmp/install/install_db.py
 	
-	psql -d postgres -c "ALTER ROLE docker SUPERUSER;"
+	# psql -d postgres -c "ALTER ROLE docker SUPERUSER;"
 
 
 # Cleanup

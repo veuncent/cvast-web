@@ -39,7 +39,7 @@ def run_initial_sql():
     write_to_file(path_to_file, buffer)
     # os.system('psql -d postgres -c %') % buffer
 
-    os.system('psql -d postgres -f %s' % path_to_file)
+    os.system('psql -d arches -f %s' % path_to_file)
 
 
 def write_to_file(fileName, contents, mode='w', encoding='utf-8', **kwargs):
