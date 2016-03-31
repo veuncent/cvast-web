@@ -46,11 +46,12 @@ def install():
             os.system("pip install psycopg2==2.6.1")
 
 def site_packages_dir():
-    if sys.platform == 'win32':
-        return os.path.join(sys.prefix, 'Lib', 'site-packages')
-    else:
-        py_version = 'python%s.%s' % (sys.version_info[0], sys.version_info[1])
-        return os.path.join(sys.prefix, 'lib', py_version, 'site-packages')        
+    return os.path.join('/usr', 'local', 'lib', 'python2.7', 'dist-packages')
+    # if sys.platform == 'win32':
+        # return os.path.join(sys.prefix, 'Lib', 'site-packages')
+    # else:
+        # py_version = 'python%s.%s' % (sys.version_info[0], sys.version_info[1])
+        # return os.path.join(sys.prefix, 'lib', py_version, 'site-packages')        
 
 def confirm_system_requirements():
     # CHECK PYTHON VERSION
