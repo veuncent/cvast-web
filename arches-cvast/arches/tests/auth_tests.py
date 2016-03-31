@@ -23,7 +23,10 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
-from tests.base_test import ArchesTestCase
+import os
+from tests import test_settings
+from django.core import management
+from django.test import SimpleTestCase, TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Group, AnonymousUser
 from django.test.client import RequestFactory, Client
@@ -31,14 +34,26 @@ from arches.app.views.main import auth
 from arches.app.views.concept import rdm
 from arches.app.views.resources import resource_manager
 from django.contrib.sessions.middleware import SessionMiddleware
+
 from arches.app.utils.set_anonymous_user import SetAnonymousUser
 from arches.management.commands.packages import Command as PackageCommand
+from arches.app.search.search_engine_factory import SearchEngineFactory
+from arches.app.utils.data_management.resources.importer import ResourceLoader
+import arches.app.utils.data_management.resources.remover as resource_remover
+from arches.management.commands.package_utils import resource_graphs
+from arches.management.commands.package_utils import authority_files
+from arches.app.models import models
+from arches.app.models.entity import Entity
+from arches.app.models.resource import Resource
+from arches.app.models.concept import Concept
+from arches.app.models.concept import ConceptValue
+from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 
 # these tests can be run from the command line via
 # python manage.py test tests --pattern="*.py" --settings="tests.test_settings"
 
 
-class AuthTests(ArchesTestCase):
+class AuthTests(SimpleTestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.client = Client()

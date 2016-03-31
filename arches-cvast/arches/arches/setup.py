@@ -27,7 +27,11 @@ def install():
         shutil.rmtree(tmpinstalldir, True)
 
         #INSTALLING CUSTOM DJANGO EDITS/PATCHES
+        shutil.copy2(os.path.join(install_dir, 'django_overrides', 'base.py'), os.path.join(django_install_location, 'db', 'backends', 'postgresql_psycopg2'))
+        shutil.copy2(os.path.join(install_dir, 'django_overrides', 'creation.py'), os.path.join(django_install_location, 'db', 'backends', 'postgresql_psycopg2'))
+        shutil.copy2(os.path.join(install_dir, 'django_overrides', 'inspectdb.py'), os.path.join(django_install_location, 'core', 'management', 'commands'))
         shutil.copy2(os.path.join(install_dir, 'django_overrides', 'admin.py'), os.path.join(django_install_location, 'contrib', 'auth'))
+        shutil.copy2(os.path.join(install_dir, 'django_overrides', 'models.py'), os.path.join(django_install_location, 'contrib', 'auth'))
         shutil.copy2(os.path.join(install_dir, 'django_overrides', 'widgets.css'), os.path.join(django_install_location, 'contrib', 'admin', 'static', 'admin', 'css'))
 
         # GET ELASTICSEARCH
@@ -37,13 +41,13 @@ def install():
         if sys.platform == 'win32':
             is_64bit_python = sys.maxsize > 2**32
             if os.path.exists('C:\Program Files (x86)') and is_64bit_python:
-                os.system("easy_install http://www.stickpeople.com/projects/python/win-psycopg/2.6.1/psycopg2-2.6.1.win-amd64-py2.7-pg9.4.4-release.exe")
+                os.system("easy_install http://www.stickpeople.com/projects/python/win-psycopg/2.5.4/psycopg2-2.5.4.win-amd64-py2.7-pg9.3.5-release.exe")
             else:
-                os.system("easy_install http://www.stickpeople.com/projects/python/win-psycopg/2.6.1/psycopg2-2.6.1.win32-py2.7-pg9.4.4-release.exe")
+                os.system("easy_install http://www.stickpeople.com/projects/python/win-psycopg/2.5.4/psycopg2-2.5.4.win32-py2.7-pg9.3.5-release.exe")
         else:
             # Install psycopg2 through pip - Works fine if the correct header files are present
             # See http://goshawknest.wordpress.com/2011/02/16/how-to-install-psycopg2-under-virtualenv/
-            os.system("pip install psycopg2==2.6.1")
+            os.system("pip install psycopg2==2.5.4")
 
 def site_packages_dir():
     return os.path.join('/usr', 'local', 'lib', 'python2.7', 'dist-packages')

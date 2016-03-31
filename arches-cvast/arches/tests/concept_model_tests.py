@@ -1,32 +1,29 @@
-'''
-ARCHES - a program developed to inventory and manage immovable cultural heritage.
-Copyright (C) 2013 J. Paul Getty Trust and World Monuments Fund
+# coding: utf-8
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
-'''
-
+import os
 from tests import test_settings
-from tests.base_test import ArchesTestCase
+from tests import test_setup
+from django.core import management
+from django.test import SimpleTestCase, TestCase
+from arches.app.search.search_engine_factory import SearchEngineFactory
+from arches.app.utils.data_management.resources.importer import ResourceLoader
+import arches.app.utils.data_management.resources.remover as resource_remover
+from arches.management.commands.package_utils import resource_graphs
+from arches.management.commands.package_utils import authority_files
 from arches.app.models import models
+from arches.app.models.entity import Entity
+from arches.app.models.resource import Resource
 from arches.app.models.concept import Concept
 from arches.app.models.concept import ConceptValue
+from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 
 # these tests can be run from the command line via
 # python manage.py test tests --pattern="*.py" --settings="tests.test_settings"
 
+def setUpModule():
+    test_setup.install()
 
-class ConceptModelTests(ArchesTestCase):
+class ConceptModelTests(SimpleTestCase):
 
     def test_create_concept(self):
         """
@@ -60,7 +57,7 @@ class ConceptModelTests(ArchesTestCase):
         self.assertEqual(concept_out.values[0].value, 'updated pref label')
 
         concept_out.delete(delete_self=True)
-        with self.assertRaises(models.Concept.DoesNotExist):
+        with self.assertRaises(models.Concepts.DoesNotExist):
             deleted_concept = Concept().get(id=concept_out.id)
 
 
@@ -219,29 +216,12 @@ class ConceptModelTests(ArchesTestCase):
 
         """
 
-        concept = Concept()
-        concept.values = [
-            ConceptValue({
-                'type': 'prefLabel', 
-                'value': 'bier', 
-                'language': 'nl'
-            }),
-            ConceptValue({
-                'type': 'prefLabel',
-                'category': 'label',
-                'value': 'beer',
-                'language': 'es-SP'
-            }),
-            ConceptValue({
-                'type': 'altLabel',
-                'category': 'label',
-                'value': 'test alt label en-US',
-                'language': 'en-US'
-            })
+        values = [
+            {'type': 'prefLabel', 'value': 'bier', 'language': 'nl'},
+            {'type': 'prefLabel', 'value': 'beer', 'language': 'en'},
         ]
-
-        pl = concept.get_preflabel('fr-BE')
-
+        c = Concept({'values': values})
+        pl = c.get_preflabel('fr-BE')
         self.assertEquals(pl.type,'prefLabel')
-        self.assertEquals(pl.value,'bier' or 'beer')
-        self.assertEquals(pl.language,'nl' or 'es-SP')
+        self.assertEquals(pl.value,'bier')
+        self.assertEquals(pl.language,'nl')

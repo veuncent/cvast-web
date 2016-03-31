@@ -1,4 +1,4 @@
-# Arches [![Build Status](https://travis-ci.org/archesproject/arches.svg?branch=master)](https://travis-ci.org/archesproject/arches) [![Coverage Status](https://coveralls.io/repos/github/archesproject/arches/badge.svg?branch=master)](https://coveralls.io/github/archesproject/arches?branch=master)
+# Arches
 
 A web-based, geospatial information system for cultural heritage inventory and management.
 
@@ -45,8 +45,7 @@ If you have installed the dependencies, you're ready to install Arches.
 
 1. Create the Arches Project folder:
 
-    * Create a folder called 'Projects' (or some other meaningful name) on your system.  
-
+    * Create a folder called 'Projects' (or some other meaningful name) on your system.    
 2.  Install virtualenv:
 
     * Open a command prompt and type:
@@ -81,6 +80,8 @@ If you have installed the dependencies, you're ready to install Arches.
 
             (ENV)$ pip install arches
 
+
+
 That's it, you're done.  You should now have a folder structure that looks like this:
 
     /Projects
@@ -88,7 +89,7 @@ That's it, you're done.  You should now have a folder structure that looks like 
 
 ## Arches Applications
 
-Generally arches applications are installed in a folder directly under the Arches root folder.  You can install as many Arches applications as you like, and they'll all use the same Arches framework and virtual environment.  A typical Arches application installation will therefore look something like this:
+Generally arches applications are installed in a folder directly under the Arches root folder.  You can install as many Arches applications as you like, and they'll all use the same Arches framework and virtual environment.  A typical Arches application installation will therefore look something like this::
 
     /Projects
         /ENV (virtual environment where the Arches framework is installed)
@@ -97,9 +98,3 @@ Generally arches applications are installed in a folder directly under the Arche
 
 **Note:**
     If you want to install an existing Arches application, such as the Heritage Inventory Package (HIP), you should stop here and go to: http://arches-hip.readthedocs.org/en/latest/getting-started/#installation.
-
-## Contributing
-
-Issue reports are encouraged.  [Please read this article](http://polite.technology/reportabug.html) before reporting issues.
-
-Good guidelines on how to contribute can be found [here](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github).

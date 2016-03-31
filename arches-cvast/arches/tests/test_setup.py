@@ -15,9 +15,10 @@ from arches.app.models.resource import Resource
 def install(path_to_source_data_dir=None):
     #truncate_db()
 
+    execute_sql("Truncate ontology.mappings Cascade;")
     execute_sql("Truncate public.auth_permission Cascade;")
 
-    for concept in models.Concept.objects.filter(nodetype='Concept'):
+    for concept in models.Concepts.objects.filter(nodetype='Concept'):
         concept.delete()
 
     
@@ -25,18 +26,18 @@ def install(path_to_source_data_dir=None):
     delete_index(index='term') 
     Resource().prepare_term_index(create=True)
 
-    #load_resource_graphs()
+    load_resource_graphs()
     load_authority_files(path_to_source_data_dir)
     load_map_layers()
 
-    #resource_remover.truncate_resources()
+    resource_remover.truncate_resources()
     delete_index(index='resource')
     delete_index(index='entity')
     delete_index(index='maplayers')
     delete_index(index='resource_relations') 
     create_indexes()   
 
-    #load_resources()
+    load_resources()
 
 def export_data():
     pass

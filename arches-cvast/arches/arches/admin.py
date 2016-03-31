@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from app.models.models import DLanguage
+from app.models.models import Domains, EntityTypes, Classes, UserProfile, DLanguages
 from django.contrib import admin
 
-admin.site.register([DLanguage])
+admin.site.register([UserProfile, DLanguages])

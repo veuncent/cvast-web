@@ -1,4 +1,4 @@
---
+﻿--
 -- PostgreSQL database dump
 --
 
@@ -918,7 +918,7 @@ BEGIN
     THEN
         RETURN 'Failed';
     ELSE
-      INSERT INTO ontology.mapping_steps(mappingstepid, mappingid, ruleid, "order")VALUES(public.uuid_generate_v1mc(), p_mappingid::uuid, v_ruleid, p_order);
+      INSERT INTO ontology.mapping_steps(mappingid, ruleid, "order")VALUES(p_mappingid::uuid, v_ruleid, p_order);
       RETURN ret;    
     END IF;    
 
@@ -1062,7 +1062,7 @@ ALTER TABLE concepts.concepts OWNER TO postgres;
 -- Name: concepts; Type: TABLE; Schema: concepts; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE d_node_types (
+CREATE TABLE d_nodetypes (
     nodetype text NOT NULL,
     namespace text NOT NULL DEFAULT 'arches',
     CONSTRAINT pk_d_nodetypes PRIMARY KEY (nodetype)
@@ -1088,24 +1088,24 @@ ALTER TABLE concepts.d_languages OWNER TO postgres;
 --
 -- TOC entry 225 (class 1259 OID 15704322)
 -- Dependencies: 9
--- Name: d_relation_types; Type: TABLE; Schema: concepts; Owner: postgres; Tablespace:
+-- Name: d_relationtypes; Type: TABLE; Schema: concepts; Owner: postgres; Tablespace: 
 --
 
-CREATE TABLE d_relation_types (
+CREATE TABLE d_relationtypes (
     relationtype text NOT NULL,
 	category text NOT NULL,
 	namespace text NOT NULL DEFAULT 'arches'
 );
 
 
-ALTER TABLE concepts.d_relation_types OWNER TO postgres;
+ALTER TABLE concepts.d_relationtypes OWNER TO postgres;
 
 --
--- Table: concepts.d_value_types
+-- Table: concepts.d_valuetypes
 
--- DROP TABLE concepts.d_value_types;
+-- DROP TABLE concepts.d_valuetypes;
 
-CREATE TABLE concepts.d_value_types
+CREATE TABLE concepts.d_valuetypes
 (
   valuetype text NOT NULL,
   category text,
@@ -1117,7 +1117,7 @@ CREATE TABLE concepts.d_value_types
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE concepts.d_value_types
+ALTER TABLE concepts.d_valuetypes
   OWNER TO postgres;
 
 
@@ -1549,7 +1549,6 @@ ALTER TABLE ontology.classes OWNER TO postgres;
 --
 
 CREATE TABLE mapping_steps (
-    mappingstepid uuid DEFAULT public.uuid_generate_v1mc() NOT NULL,
     mappingid uuid NOT NULL,
     ruleid uuid DEFAULT public.uuid_generate_v1mc() NOT NULL,
     "order" integer NOT NULL
@@ -1717,7 +1716,7 @@ ALTER TABLE ONLY d_languages
 -- Name: pk_d_relationtypes; Type: CONSTRAINT; Schema: concepts; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY d_relation_types
+ALTER TABLE ONLY d_relationtypes
     ADD CONSTRAINT pk_d_relationtypes PRIMARY KEY (relationtype);
 
 
@@ -1854,7 +1853,7 @@ ALTER TABLE ONLY classes
 --
 
 ALTER TABLE ONLY mapping_steps
-    ADD CONSTRAINT pk_mappings_x_rules PRIMARY KEY (mappingstepid);
+    ADD CONSTRAINT pk_mappings_x_rules PRIMARY KEY (mappingid, ruleid, "order");
 
 
 --
@@ -1907,10 +1906,6 @@ ALTER TABLE ONLY mappings
     ADD CONSTRAINT unique_mappings UNIQUE (entitytypeidfrom, entitytypeidto);
 
 
-ALTER TABLE ONLY mapping_steps
-    ADD CONSTRAINT unique_mappingsteps UNIQUE (mappingid, ruleid, "order");
-
-
 SET search_path = data, pg_catalog;
 
 --
@@ -1960,7 +1955,7 @@ SET search_path = concepts, pg_catalog;
 --
 
 ALTER TABLE ONLY concepts
-    ADD CONSTRAINT fk_concepts_x_nodetypes FOREIGN KEY (nodetype) REFERENCES d_node_types(nodetype);
+    ADD CONSTRAINT fk_concepts_x_nodetypes FOREIGN KEY (nodetype) REFERENCES d_nodetypes(nodetype);
 
 --
 -- TOC entry 3434 (class 2606 OID 15704589)
@@ -2009,7 +2004,7 @@ ALTER TABLE ONLY "values"
 --
 
 ALTER TABLE ONLY relations
-    ADD CONSTRAINT fk_relations_x_d_relationtypes FOREIGN KEY (relationtype) REFERENCES d_relation_types(relationtype);
+    ADD CONSTRAINT fk_relations_x_d_relationtypes FOREIGN KEY (relationtype) REFERENCES d_relationtypes(relationtype);
 
 
 --
@@ -2019,7 +2014,7 @@ ALTER TABLE ONLY relations
 --
 
 ALTER TABLE ONLY "values"
-    ADD CONSTRAINT fk_valuetype_d_valuetype FOREIGN KEY (valuetype) REFERENCES d_value_types(valuetype);
+    ADD CONSTRAINT fk_valuetype_d_valuetype FOREIGN KEY (valuetype) REFERENCES d_valuetypes(valuetype);
 
 
 SET search_path = data, pg_catalog;
@@ -2348,7 +2343,6 @@ CREATE INDEX overlaytype_idx ON overlays USING btree (overlayty);
 --
 CREATE TABLE aux.addresses
 (
-  addressid uuid NOT NULL DEFAULT public.uuid_generate_v1mc(),
   addressnum text,
   addressstreet text,
   vintage text,
@@ -2372,12 +2366,6 @@ CREATE INDEX addresses_sidx
   (geometry );
 
 
-
-ALTER TABLE ONLY aux.addresses
-    ADD CONSTRAINT addresses_pkey PRIMARY KEY (addressid);
-
-
-
 -- Index: aux.addresses_sidx
 
   -- Table: aux.parcels
@@ -2386,7 +2374,6 @@ ALTER TABLE ONLY aux.addresses
 
 CREATE TABLE aux.parcels
 (
-  parcelid uuid NOT NULL DEFAULT public.uuid_generate_v1mc(),
   parcelapn text,
   vintage text,
   geometry public.geometry(MultiPolygon,4326)
@@ -2405,11 +2392,6 @@ CREATE INDEX parcels_sidx
   ON aux.parcels
   USING gist
   (geometry );
-
-
-ALTER TABLE ONLY aux.parcels
-    ADD CONSTRAINT parcels_pkey PRIMARY KEY (parcelid);
-
 
 
 CREATE OR REPLACE FUNCTION concepts.concpets_ins()

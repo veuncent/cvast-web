@@ -18,9 +18,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 """This module contains commands for building Arches."""
 
+from optparse import make_option
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
-from django.apps import apps
+from django.utils.importlib import import_module
 import os
 
 class Command(BaseCommand):
@@ -29,9 +30,10 @@ class Command(BaseCommand):
 
     """
     
-    def add_arguments(self, parser):
-        parser.add_argument('-s', '--source', action='store', dest='source', default='',
-            help='A self executing python file.')
+    option_list = BaseCommand.option_list + (
+        make_option('-s', '--source', action='store', dest='source', default='',
+            help='A self executing python file.'),
+    )
 
     def handle(self, *args, **options):
         self.run_patch_file(options['source'])
@@ -44,6 +46,6 @@ class Command(BaseCommand):
         data_source = None if data_source == '' else data_source
         if data_source:
             module_name = os.path.basename(data_source).split('.')[0]
-            apps.import_string('arches.management.patches.%s' % module_name)
+            import_module('arches.management.patches.%s' % module_name)
         else: 
             print 'You need to specify a file with the -s option'
