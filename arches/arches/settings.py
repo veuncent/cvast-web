@@ -25,6 +25,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
 PACKAGE_NAME = 'arches'
+GDAL_LIBRARY_PATH = 'C:/OSGeo4W64/bin/gdal111.dll'
 #########################################
 ###  START PACKAGE SPECIFIC SETTINGS  ###
 #########################################
@@ -34,8 +35,8 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'arches',                      # Or path to database file if using sqlite3.
         'USER': 'postgres',                      # Not used with sqlite3.
-        'PASSWORD': 'postgis',                  # Not used with sqlite3.
-        'HOST': 'db',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PASSWORD': 'postgres',                  # Not used with sqlite3.
+        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
         'SCHEMAS': 'public,data,ontology,concepts', # syncdb will put the admin tables in the first listed schema,
         'POSTGIS_TEMPLATE': 'template_postgis_20',
