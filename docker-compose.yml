@@ -1,5 +1,5 @@
 web:
-  build: ./.
+  build: .
   dockerfile: ./Dockerfile-web
   # image: archesdocker_web:latest
   command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
@@ -24,7 +24,7 @@ web:
     - elasticsearch
 db:
   restart: always
-  build: ./.
+  build: .
   dockerfile: ./Dockerfile-db
   #image: kartoza/pg-backup:9.4
   # command: service postgresql start
@@ -44,7 +44,9 @@ db:
     - PGPASSWORD=postgis
     - PGDATABASE=arches
 elasticsearch:
-  image: elasticsearch
+  # image: elasticsearch
+  build: .
+  dockerfile: ./Dockerfile-elasticsearch
   command: elasticsearch -Des.network.host=0.0.0.0
   ports:
     - "9200:9200"
