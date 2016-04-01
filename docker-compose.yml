@@ -1,5 +1,6 @@
 web:
-  build: ./arches-cvast/.
+  build: ./.
+  dockerfile: ./Dockerfile-web
   # image: archesdocker_web:latest
   command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
   # 'su postgres --command'yes n | 
@@ -23,7 +24,8 @@ web:
     - elasticsearch
 db:
   restart: always
-  build: ./arches-db-cvast/.
+  build: ./.
+  dockerfile: ./Dockerfile-db
   #image: kartoza/pg-backup:9.4
   # command: service postgresql start
   command: bash -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf"'
