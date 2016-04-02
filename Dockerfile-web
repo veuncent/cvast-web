@@ -19,8 +19,6 @@ RUN apt-get install -y python-setuptools
 RUN apt-get install -y python-dev
 RUN apt-get install -y libffi-dev
 RUN apt-get install -y libpq-dev
-# RUN apt-get install -y postgresql-9.3
-# RUN apt-get install -y postgresql-contrib-9.3
 
 # Needed for postgres-9.4
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
@@ -34,11 +32,6 @@ RUN echo "*:*:*:postgres:postgis" >> ~/.pgpass
 
 RUN	easy_install pip
 
-# Create virtual environment
-# WORKDIR /arches/virtualenv
-# RUN python virtualenv.py ENV &&\
-	# source /arches/virtualenv/ENV/bin/activate &&\
-
 	#See if we can do without these
 # RUN pip install pyopenssl 
 # RUN pip install ndg-httpsclient 
@@ -47,17 +40,8 @@ RUN	easy_install pip
 # RUN pip install psycopg2 
 # RUN pip install django_nose
 
-# Add arches source code to image file system
 
-
-# RUN pip install -r /arches/arches/install/requirements.txt
-# RUN pip install -r /arches/arches/install/requirements_dev.txt
-	# mkdir /arches/virtualenv/ENV/tmp &&\
-	# cd /arches/virtualenv/ENV/tmp &&\
-# WORKDIR /arches	
-# RUN python setup.py build
-# RUN python setup.py install
-	
+# Install Geos	
 WORKDIR /tmp	
 RUN	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2
 RUN	tar xvfj geos-3.4.2.tar.bz2
@@ -67,6 +51,7 @@ RUN	make
 RUN	make install
 	
 	
+# Install Postgis
 WORKDIR /tmp
 RUN wget http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz
 RUN tar xfvz postgis-2.1.3.tar.gz
@@ -80,80 +65,18 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql
 RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
 RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 	
-	# cd /arches/virtualenv/ENV/tmp &&\
-	# wget http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz &&\
-	# tar xfvz postgis-2.1.3.tar.gz &&\
-	# cd postgis-2.1.3 &&\
-	# ./configure &&\
-	# make &&\
-	# make install &&\
-	# ldconfig &&\
-	# make comments-install &&\
-	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql &&\
-	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp &&\
-	# ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql &&\
 	
 # Install the Arches application	
 COPY arches /arches
 WORKDIR	/arches
 RUN	pip install -e .
-# RUN	pip install -e ./arches
 RUN python setup.py build
 RUN python setup.py install
-# RUN sudo chown -R postgres:postgres /arches
-# RUN chmod -R 777 /arches
-# RUN echo "PACKAGE_NAME = 'arches'" >> /arches/arches/settings.py
-# RUN python manage.py packages -o install
 
-
-	# python setup.py build &&\
-	# python setup.py install
-	# pip install virtualenv==1.11.4 &&\
-	# cd /arches &&\
-	# virtualenv ENV &&\
-	# source /arches/ENV/bin/activate &&\
-# RUN pip install pyopenssl ndg-httpsclient pyasn1 requests psycopg2 django_nose
-# RUN	pip install -r /arches/arches/install/requirements.txt
-
-	# cd /arches &&\
-# RUN	python manage.py packages -o install
-
-# RUN pip install django --upgrade
-# RUN pip install pyopenssl ndg-httpsclient pyasn1 requests psycopg2 django_nose
-# Install the Arches application
-	# cd /arches &&\ 
-	# python manage.py packages -o install
-	# python setup.py build &&\
-	# python setup.py install
-	# pip install -e ./
-
-# user root
-# WORKDIR /tmp
-# RUN wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2
-# RUN tar xvfj geos-3.4.2.tar.bz2
-# WORKDIR /tmp/geos-3.4.2
-# RUN ./configure
-# RUN make
-# RUN make install
-
-
-# WORKDIR /arches
-# RUN python manage.py packages -o install
-# RUN python manage.py packages -o migrate
-
-# RUN pip install -e ./
-
-	# cd /arches &&\
-# RUN ./buildAndInstall.sh
-# RUN python setup.py build
-# RUN python setup.py install
-
-# RUN pip install -U django-pgjsonb
 
 # Cleanup
 # USER root
 RUN rm -rf /tmp/*
 
 EXPOSE 8000
-
-# CMD ["source /arches/virtualenv/ENV/bin/activate && python /arches/manage.py runserver 0.0.0.0:8000"]
+CMD ["/arches/manage.py runserver 0.0.0.0:8000"]

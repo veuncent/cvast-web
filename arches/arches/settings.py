@@ -25,7 +25,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
 PACKAGE_NAME = 'arches'
-GDAL_LIBRARY_PATH = 'C:/OSGeo4W64/bin/gdal111.dll'
+# GDAL_LIBRARY_PATH = 'C:/OSGeo4W64/bin/gdal111.dll'
 #########################################
 ###  START PACKAGE SPECIFIC SETTINGS  ###
 #########################################

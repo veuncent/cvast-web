@@ -1,14 +1,7 @@
-﻿# import inspect
-import posixpath
+﻿import posixpath
 import os
 import glob
 import codecs
-
-
-# from django.template import Template
-# from django.conf import settings
-# from django.template import Context
-# from arches.management.commands import utils
 
 def run_initial_sql():
     here = os.path.dirname(os.path.abspath(__file__))
@@ -37,7 +30,6 @@ def run_initial_sql():
     buffer += "VACUUM ANALYZE;\n"
 
     write_to_file(path_to_file, buffer)
-    # os.system('psql -d postgres -c %') % buffer
 
     os.system('psql -U postgres -d template_postgis_20 -f %s' % path_to_file)
 

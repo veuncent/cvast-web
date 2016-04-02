@@ -1,10 +1,12 @@
-import subprocess, os
+import subprocess
+import os
 import urllib2
 import zipfile
 import sys
 
 here = os.path.dirname(os.path.abspath(__file__))
-elasticsearch_dir = '/elasticsearch' #os.path.dirname(os.path.join(here, 'elasticsearch'))
+tmp_dir = '/tmp'
+elasticsearch_dir = '/elasticsearch'
 
 def setup_elasticsearch():
 	"""
@@ -21,12 +23,16 @@ def setup_elasticsearch():
 	url = get_elasticsearch_download_url()
 	file_name = url.split('/')[-1]
 
-	download_elasticsearch(os.path.join(elasticsearch_dir))
-	unzip_file(os.path.join(elasticsearch_dir, file_name), elasticsearch_dir)
-
+	download_elasticsearch(tmp_dir)
+	unzip_file(os.path.join(tmp_dir, file_name), tmp_dir)
+	
 	file_name_wo_extention = file_name[:-4]
-	install_location = os.path.join(elasticsearch_dir, file_name_wo_extention)
-	es_config_directory = os.path.join(install_location, 'config')
+	unzip_location = os.path.join(tmp_dir, file_name_wo_extention)
+	# Move to folder without version in name, so we can easilly find it back
+	os.rename(unzip_location, elasticsearch_dir)
+	bin_dir = os.path.join(elasticsearch_dir, 'bin')
+	
+	es_config_directory = os.path.join(elasticsearch_dir, 'config')
 	try:
 		os.rename(os.path.join(es_config_directory, 'elasticsearch.yml'), os.path.join(es_config_directory, 'elasticsearch.yml.orig'))
 	except: pass
@@ -43,34 +49,15 @@ def setup_elasticsearch():
 		f.write('\ndiscovery.zen.ping.unicast.hosts: ["localhost"]')
 		f.write('\ncluster.routing.allocation.disk.threshold_enabled: false')
 
-	# install plugin
+	# install HEAD plugin
 	if sys.platform == 'win32':
-		os.system("call %s --install mobz/elasticsearch-head" % (os.path.join(install_location, 'bin', 'plugin.bat')))
+		os.system("call %s --install mobz/elasticsearch-head" % (os.path.join(bin_dir, 'plugin.bat')))
 	else:
-		os.chdir(os.path.join(install_location, 'bin'))
+		os.chdir(bin_dir)
 		os.system("chmod u+x plugin")
 		os.system("./plugin -install mobz/elasticsearch-head")
 		os.system("chmod u+x elasticsearch")
 
-def start_elasticsearch():
-	"""
-	Starts the Elasticsearch process (blocking)
-	WARNING: this will block all subsequent python calls
-
-	"""
-
-	es_start = os.path.join(elasticsearch_dir, 'bin')
-	
-	# use this instead to start in a non-blocking way
-	if sys.platform == 'win32':
-		import time
-		p = subprocess.Popen(['service.bat', 'install'], cwd=es_start, shell=True)  
-		time.sleep(10)
-		p = subprocess.Popen(['service.bat', 'start'], cwd=es_start, shell=True) 
-	else:
-		p = subprocess.Popen(es_start + '/elasticsearch', cwd=es_start, shell=False)  
-	return p
-	#os.system('honcho start')
 
 def get_elasticsearch_download_url():
     with open("requirements.txt", "r") as f:

@@ -1,14 +1,13 @@
 # our base image, for now, Ubuntu
 FROM ubuntu:14.04
 USER root
-# Replace default command interpreter from sh to bash (needed for 'source' command)
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Install dependencies
 RUN apt-get update -y 
 RUN apt-get install -y python-dev
 RUN apt-get install -y openjdk-7-jdk
 
+# Install Elasticsearch
 COPY install_elasticsearch.py /
 COPY arches/arches/install/requirements.txt /
 WORKDIR /
