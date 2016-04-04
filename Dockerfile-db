@@ -53,7 +53,7 @@ RUN /etc/init.d/postgresql start &&\
 
 USER root
 RUN echo "*:*:*:postgres:postgis" >> ~/.pgpass
-RUN echo "*:*:*:docker:docker" >> ~/.pgpass
+# RUN echo "*:*:*:docker:docker" >> ~/.pgpass
 RUN chmod 600 ~/.pgpass
 RUN chmod 666 /etc/postgresql/9.4/main/postgresql.conf
 RUN chmod 666 /etc/postgresql/9.4/main/pg_hba.conf
@@ -104,7 +104,7 @@ RUN /etc/init.d/postgresql start &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
-	python /tmp/install/install_db_docker.py &&\
+	# python /tmp/install/install_db_docker.py &&\
 	
 	createdb training -T template_postgis_20 &&\
 	
@@ -119,8 +119,8 @@ RUN rm -rf /tmp/*
 EXPOSE 5432
 # VOLUME ["/var/lib/postgresql", "/home/setup"]
 
-USER postgres
-CMD ["/usr/lib/postgresql/9.4/bin/postgres", "-D", "/var/lib/postgresql/9.4/main", "-c", "config_file=/etc/postgresql/9.4/main/postgresql.conf"]
+# USER postgres
+# CMD ["/usr/lib/postgresql/9.4/bin/postgres", "-D", "/var/lib/postgresql/9.4/main", "-c", "config_file=/etc/postgresql/9.4/main/postgresql.conf"]
 
 
 

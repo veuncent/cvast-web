@@ -2,13 +2,14 @@ web:
   build: .
   dockerfile: ./Dockerfile-web
   # image: archesdocker_web:latest
-  command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
-  #python manage.py packages -o index_database && 
+  command: bash -c  "sleep 10 && python manage.py packages -o setup_db && python manage.py runserver 0.0.0.0:8000" 
+  # && python manage.py packages -o setup_elasticsearch
+  # python manage.py packages -o index_database && 
   # 'su postgres --command'yes n | 
   # python manage.py migrate 
-  #&& python manage.py syncdb 
-  #&& source /arches/virtualenv/ENV/bin/activate 
-  #&& python /arches/manage.py packages -o setup_db
+  # && python manage.py syncdb 
+  # && source /arches/virtualenv/ENV/bin/activate 
+  # && python /arches/manage.py packages -o setup_db
   #  && python manage.py packages -o index_database 
   working_dir: /arches
   # volumes:
