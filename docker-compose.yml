@@ -2,7 +2,7 @@ web:
   build: .
   dockerfile: ./Dockerfile-web
   # image: archesdocker_web:latest
-  command: bash -c  "sleep 10 && python manage.py packages -o setup_db && python manage.py runserver 0.0.0.0:8000" 
+  command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
   # && python manage.py packages -o setup_elasticsearch
   # python manage.py packages -o index_database && 
   # 'su postgres --command'yes n | 

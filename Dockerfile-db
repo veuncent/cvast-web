@@ -104,7 +104,7 @@ RUN /etc/init.d/postgresql start &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
-	# python /tmp/install/install_db_docker.py &&\
+	python /tmp/install/install_db_docker.py &&\
 	
 	createdb training -T template_postgis_20 &&\
 	
