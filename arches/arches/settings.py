@@ -83,9 +83,9 @@ ETL_USERNAME = 'ETL' # override this setting in your packages settings.py file
 
 LIVERELOAD_PORT = 35729 # usually only used in development, 35729 is default for livereload browser extensions
 
-DEFAULT_MAP_X = 0
-DEFAULT_MAP_Y = 0
-DEFAULT_MAP_ZOOM = 2
+DEFAULT_MAP_X = -224149.03751366
+DEFAULT_MAP_Y = 6978966.6705368
+DEFAULT_MAP_ZOOM = 3
 MAP_MIN_ZOOM = 0
 MAP_MAX_ZOOM = 19
 MAP_LAYER_FEATURE_LIMIT = 100000
