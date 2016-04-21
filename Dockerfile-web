@@ -74,6 +74,11 @@ RUN	pip install -e .
 RUN python setup.py build
 RUN python setup.py install
 
+RUN pip install arches_hip
+RUN arches-app create cvast_hip_app --app arches_hip
+# RUN python manage.py packages -o install
+# RUN mkdir /arches/arches-hip
+
 
 # Cleanup
 # USER root
