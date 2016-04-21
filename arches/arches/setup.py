@@ -39,16 +39,14 @@ def install():
 
         # INSTALL PSYCOPG2
         if sys.platform == 'win32':
-            is_64bit_python = sys.maxsize > 2 ** 32
+            is_64bit_python = sys.maxsize > 2**32
             if os.path.exists('C:\Program Files (x86)') and is_64bit_python:
                 os.system("easy_install http://www.stickpeople.com/projects/python/win-psycopg/2.5.4/psycopg2-2.5.4.win-amd64-py2.7-pg9.3.5-release.exe")
             else:
                 os.system("easy_install http://www.stickpeople.com/projects/python/win-psycopg/2.5.4/psycopg2-2.5.4.win32-py2.7-pg9.3.5-release.exe")
         else:
-            # Install psycopg2 through pip - Works fine if the correct header
-            # files are present
-            # See
-            # http://goshawknest.wordpress.com/2011/02/16/how-to-install-psycopg2-under-virtualenv/
+            # Install psycopg2 through pip - Works fine if the correct header files are present
+            # See http://goshawknest.wordpress.com/2011/02/16/how-to-install-psycopg2-under-virtualenv/
             os.system("pip install psycopg2==2.5.4")
 
 def site_packages_dir():
@@ -135,7 +133,7 @@ def download_file(url, file_name):
         file_size_dl += len(buffer)
         f.write(buffer)
         status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
-        status = status + chr(8) * (len(status) + 1)
+        status = status + chr(8)*(len(status)+1)
         print status,
 
     f.close()
@@ -215,7 +213,7 @@ def get_changeset(path_to_file=None):
 
     sb = StringIO()
     if not path_to_file:
-        path_to_file = os.path.abspath(os.path.dirname(__file__))
+        path_to_file =os.path.abspath(os.path.dirname(__file__))
     
     ver = ''
     try:
@@ -237,8 +235,7 @@ def get_changeset(path_to_file=None):
         sb.writelines(['\n__BUILD__="%s"' % node])  
         ver = '%s:%s' % (latesttag, node)
         ver = date
-        #write_to_file(os.path.join(path_to_file,'version.py'), sb.getvalue(),
-        #'w')
+        #write_to_file(os.path.join(path_to_file,'version.py'), sb.getvalue(), 'w')
     except:
         try:
             ver = subprocess.check_output(['hg', 'log', '-r', '.', '--template', '{latesttag}:{node|short}'])
@@ -246,8 +243,7 @@ def get_changeset(path_to_file=None):
             ver = subprocess.check_output(['hg', 'log', '-r', '.', '--template', '{date}'])
             sb.writelines(['__VERSION__="%s"' % ver.split(':')[0]])
             sb.writelines(['\n__BUILD__="%s"' % ver.split(':')[1]]) 
-            #write_to_file(os.path.join(path_to_file,'version.py'),
-            #sb.getvalue(), 'w')
+            #write_to_file(os.path.join(path_to_file,'version.py'), sb.getvalue(), 'w')
         except:
             pass
 
