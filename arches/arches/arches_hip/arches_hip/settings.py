@@ -14,7 +14,13 @@ RESOURCE_MODEL = {'default': 'arches_hip.models.resource.Resource'}
 APP_NAME = 'Arches v3.0 - HIP v1.0'
 PACKAGE_VALIDATOR = 'arches_hip.source_data.validation.HIP_Validator'
 
+DEFAULT_MAP_X = -224149.03751366
+DEFAULT_MAP_Y = 6978966.6705368
 DEFAULT_MAP_ZOOM = 3
+MAP_MIN_ZOOM = 0
+MAP_MAX_ZOOM = 19
+MAP_LAYER_FEATURE_LIMIT = 100000
+MAP_EXTENT = ''
 
 def RESOURCE_TYPE_CONFIGS():
     return {
