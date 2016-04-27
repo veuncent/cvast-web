@@ -144,7 +144,7 @@ def unzip_file(file_name, unzip_location):
         myzip.extractall(unzip_location)
 
 def download_elasticsearch(install_dir):
-    url = get_elasticsearch_download_url(install_dir)
+    url = get_elasticsearch_download_url(os.path.join(settings.ROOT_DIR, 'install'))
     file_name = url.split('/')[-1]
     if not os.path.isfile(os.path.join(install_dir, file_name)):
         download_file(url, os.path.join(install_dir, file_name))

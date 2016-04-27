@@ -11,7 +11,7 @@ web:
   # && source /arches/virtualenv/ENV/bin/activate 
   # && python /arches/manage.py packages -o setup_db
   #  && python manage.py packages -o index_database 
-  working_dir: /arches
+  working_dir: /arches/arches/arches_hip/arches_hip_cvast
   # volumes:
     # - 'arches:/arches'
   environment:

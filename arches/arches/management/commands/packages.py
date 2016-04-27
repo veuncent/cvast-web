@@ -133,16 +133,18 @@ class Command(BaseCommand):
         Change these settings in production
 
         """
-
+        tmp_dir = '/tmp'
         install_location = self.get_elasticsearch_install_location(package_name)
-        install_root = os.path.abspath(os.path.join(install_location, '..'))
         url = get_elasticsearch_download_url(os.path.join(settings.ROOT_DIR, 'install'))
         file_name = url.split('/')[-1]
 
-        try:
-            unzip_file(os.path.join(settings.ROOT_DIR, 'install', file_name), install_root)
-        except:
-            download_elasticsearch(os.path.join(settings.ROOT_DIR, 'install'))
+        download_elasticsearch(tmp_dir)
+        unzip_file(os.path.join(tmp_dir, file_name), tmp_dir)
+
+        # Move to folder without version in name, so we can easilly find it back
+        file_name_wo_extention = file_name[:-4]
+        unzip_location = os.path.join(tmp_dir, file_name_wo_extention)
+        os.rename(unzip_location, install_location)
 
         es_config_directory = os.path.join(install_location, 'config')
         try:
@@ -235,12 +237,7 @@ class Command(BaseCommand):
         Get the path to the Elasticsearch install
 
         """
-
-        url = get_elasticsearch_download_url(os.path.join(settings.ROOT_DIR, 'install'))
-        file_name = url.split('/')[-1]
-        file_name_wo_extention = file_name[:-4]
-        package_root = settings.PACKAGE_ROOT
-        return os.path.join(package_root, 'elasticsearch', file_name_wo_extention)
+        return "/elasticsearch"
 
     def create_groups(self):
         """
