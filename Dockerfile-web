@@ -1,8 +1,8 @@
 # our base image, for now, Ubuntu
 FROM ubuntu:14.04
 USER root
-# Replace default command interpreter from sh to bash (needed for 'source' command)
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+# Currently not necessary: Replace default command interpreter from sh to bash (needed for 'source' command)
+# RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Install dependencies
 RUN apt-get update -y 
@@ -74,15 +74,16 @@ RUN	pip install -e .
 RUN python setup.py build
 RUN python setup.py install
 
-RUN pip install arches_hip
-RUN arches-app create cvast_hip_app --app arches_hip
+WORKDIR /arches/arches/arches_hip
+RUN pip install arches-hip -e .
+# RUN python setup.py build
+# RUN python setup.py install
+RUN arches-app create arches_hip_cvast --app arches_hip
 # RUN python manage.py packages -o install
-# RUN mkdir /arches/arches-hip
-
 
 # Cleanup
 # USER root
 RUN rm -rf /tmp/*
 
 EXPOSE 8000
-CMD ["/arches/manage.py runserver 0.0.0.0:8000"]
+# CMD ["/arches/manage.py runserver 0.0.0.0:8000"]

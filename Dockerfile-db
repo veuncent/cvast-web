@@ -2,11 +2,8 @@
 FROM ubuntu:14.04
 
 USER root
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Setting locale variables for database
-
-
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LC_LANG en_US.UTF-8
@@ -89,8 +86,27 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql
 RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
 RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
-COPY arches/arches/db /tmp
+# Install arches and arches hip, so that we can use their install scripts (for graphs, authority documents, etc)
+COPY arches/ /tmp/arches
+# Overwrite arches settings, so we are using localhost for the database server
+COPY install/settings_db_arches.py /tmp/arches/arches/settings.py
+COPY install/settings_db_archeship.py /tmp/arches/arches/arches_hip/arches_hip/settings.py
 
+RUN	easy_install pip
+WORKDIR /tmp/arches
+RUN pip install -e .
+RUN python setup.py build
+RUN python setup.py install
+
+WORKDIR /tmp/arches/arches/arches_hip
+RUN pip install -e .
+# RUN python setup.py build
+# RUN python setup.py install
+# RUN pip install -vvv arches-hip --no-index --find-links /tmp/arches/arches/arches_hip
+
+# copy and install database scripts (sql)
+COPY install/install_db_docker.py /tmp/install/install_db_docker.py
+RUN chmod -R 777 /tmp
 USER postgres
 RUN /etc/init.d/postgresql start &&\
 	psql -d postgres -c "CREATE EXTENSION postgis;" &&\
@@ -104,17 +120,22 @@ RUN /etc/init.d/postgresql start &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
-	python /tmp/install/install_db_docker.py &&\
+	# python /tmp/install/install_db_docker.py &&\
 	
 	createdb training -T template_postgis_20 &&\
 	
 	createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
 
-# Cleanup
-USER root
-# RUN rm -rf /var/lib/apt/lists/*
-RUN rm -rf /tmp/*
 
+# Install arches hip data structure (graphs, authority documents)
+USER root
+COPY install/install_db_archeship.py /tmp/install/install_db_archeship.py
+RUN /etc/init.d/postgresql start &&\
+	# python /tmp/arches/arches/arches_hip/manage.py packages -o install
+	python /tmp/install/install_db_archeship.py
+
+# Cleanup
+RUN rm -rf /tmp/*
 
 EXPOSE 5432
 # VOLUME ["/var/lib/postgresql", "/home/setup"]
