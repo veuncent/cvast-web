@@ -269,7 +269,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(ROOT_DIR, 'app', 'templates'),
-	'/arches-cvast/arches_hip/arches_hip/templates'
+	'/arches-cvast/arches_hip/arches_hip/templates'     # Added by Vincent: arches_hip_cvast needed this, but couldn't find it
 
     # Adding a reference to error page templates because of issues we were seeing in amazon aws instances
     # http://stackoverflow.com/questions/13284443/django-template-error-500-html-on-amazon-ec2?rq=1
