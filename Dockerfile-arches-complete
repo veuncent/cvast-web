@@ -87,17 +87,21 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
 RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
 
+# root project folder
+RUN mkdir /arches-cvast
+
 # Install the Arches application	
-COPY arches /arches
-WORKDIR	/arches
-RUN	pip install -e .
+COPY arches /arches-cvast/arches
+WORKDIR	/arches-cvast/arches
+RUN	pip install --no-index -e .
 RUN python setup.py build
 RUN python setup.py install
 
 
 # Install Arches Hip
-WORKDIR /arches/arches/arches_hip
-RUN pip install arches-hip -e .
+COPY arches_hip /arches-cvast/arches_hip
+WORKDIR /arches-cvast/arches_hip
+RUN pip install --no-index -e .
 # RUN python setup.py build
 # RUN python setup.py install
 
@@ -117,22 +121,24 @@ RUN /etc/init.d/postgresql start &&\
 USER root
 	
 
-# Setup Arches Hip app	
+# Setup Arches Hip app
+WORKDIR /arches-cvast	
 RUN arches-app create arches_hip_cvast --app arches_hip
 
 
 # Install Elasticsearch
-RUN python /arches/arches/arches_hip/arches_hip_cvast/manage.py packages -o setup_elasticsearch
+WORKDIR /arches-cvast/arches_hip_cvast
+RUN python manage.py packages -o setup_elasticsearch
 
-# Run database scripts
+
+# Run database scripts & arches hip resources
 # USER postgres	
 RUN /etc/init.d/postgresql start &&\
-	# elasticsearch -Des.network.host=0.0.0.0 &&\
-	# cat /arches/arches/arches_hip/arches_hip/elasticsearch/elasticsearch-1.4.1/config/elasticsearch.yml &&\
-	python /arches/arches/arches_hip/arches_hip_cvast/manage.py packages -o start_elasticsearch &&\
+	python manage.py packages -o start_elasticsearch &&\
 	# Wait for elasticsearch to start
 	sleep 10 &&\ 
-	python /arches/arches/arches_hip/arches_hip_cvast/manage.py packages -o install
+	python manage.py packages -o install &&\
+	python manage.py packages -o load_concept_scheme -s /arches-cvast/arches_hip/arches_hip/source_data/sample_data/concepts/sample_authority_files
 
 
 # Cleanup

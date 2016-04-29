@@ -10,7 +10,9 @@ RUN apt-get autoremove -y
 
 RUN rm -rf /elasticsearch
 
-COPY ./install/settings_db_arches.py /arches/arches/settings.py
+COPY ./install/settings_web_arches.py /arches-cvast/arches/arches/settings.py
+# COPY ./install/settings_web_arches.py /usr/local/lib/python2.7/dist-packages/arches/settings.py
+COPY ./install/settings_web_archeship.py /arches-cvast/arches_hip_cvast/arches_hip_cvast/settings.py
 
 EXPOSE 8000
 # CMD ["/arches/manage.py runserver 0.0.0.0:8000"]
