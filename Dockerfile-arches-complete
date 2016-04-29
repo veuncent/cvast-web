@@ -122,14 +122,13 @@ USER root
 	
 
 # Setup Arches Hip app
-WORKDIR /arches-cvast	
-RUN arches-app create arches_hip_cvast --app arches_hip
-
+# WORKDIR /arches-cvast	
+# RUN arches-app create arches_hip_cvast --app arches_hip
 
 # Install Elasticsearch
+COPY arches_hip_cvast /arches-cvast/arches_hip_cvast
 WORKDIR /arches-cvast/arches_hip_cvast
 RUN python manage.py packages -o setup_elasticsearch
-
 
 # Run database scripts & arches hip resources
 # USER postgres	
@@ -138,7 +137,7 @@ RUN /etc/init.d/postgresql start &&\
 	# Wait for elasticsearch to start
 	sleep 10 &&\ 
 	python manage.py packages -o install &&\
-	python manage.py packages -o load_concept_scheme -s /arches-cvast/arches_hip/arches_hip/source_data/sample_data/concepts/sample_authority_files
+	python manage.py packages -o load_concept_scheme -s arches_hip_cvast/source_data/concepts/authority_files
 
 
 # Cleanup
