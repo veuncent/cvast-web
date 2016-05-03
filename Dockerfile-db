@@ -5,6 +5,10 @@ USER root
 RUN rm -rf /arches
 RUN rm -rf /elasticsearch
 
+USER postgres	
+RUN /etc/init.d/postgresql start &&\
+	psql -d arches_arches_hip_cvast -c "VACUUM ANALYZE;"
+	
 EXPOSE 5432
 # VOLUME ["/var/lib/postgresql", "/home/setup"]
 

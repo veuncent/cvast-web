@@ -43,7 +43,8 @@ RUN apt-get install -y postgresql-contrib-9.4
 
 USER postgres
 RUN /etc/init.d/postgresql start &&\
-	psql -d postgres -c "ALTER USER postgres with encrypted password 'postgis';"
+	psql -d postgres -c "ALTER USER postgres with encrypted password 'postgis';" &&\
+	psql -d postgres -c "ALTER DATABASE postgres set timezone to 'US/Eastern';"
 
 USER root	
 RUN echo "*:*:*:postgres:postgis" >> ~/.pgpass
@@ -116,8 +117,8 @@ RUN /etc/init.d/postgresql start &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
-	createdb training -T template_postgis_20 &&\
-	createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
+	createdb training -T template_postgis_20
+	# createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
 USER root
 	
 

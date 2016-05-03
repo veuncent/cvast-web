@@ -30,7 +30,8 @@ db:
   dockerfile: ./Dockerfile-db
   #image: kartoza/pg-backup:9.4
   # command: service postgresql start
-  command: bash -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf"'
+  # command: bash -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf"'
+  command: bash -c '/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf'
   # hostname: pg
   # volumes:
       # - /c/Users/CVAST/Documents/arches-docker/pg/postgres_data:/var/lib/postgresql/9.3
@@ -44,7 +45,7 @@ db:
     # case we ever want to ever use different credentials
     - PGUSER=postgres
     - PGPASSWORD=postgis
-    - PGDATABASE=arches
+    - PGDATABASE=arches_arches_hip_cvast
 elasticsearch:
   # image: elasticsearch
   build: .
