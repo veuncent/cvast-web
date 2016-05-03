@@ -9,10 +9,11 @@ DATABASES['default']['NAME'] = 'arches_%s' % (PACKAGE_NAME)
 ROOT_URLCONF = '%s.urls' % (PACKAGE_NAME)
 INSTALLED_APPS = INSTALLED_APPS + (PACKAGE_NAME,)
 STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'media'),) + STATICFILES_DIRS
-TEMPLATE_DIRS = (os.path.join(PACKAGE_ROOT, 'templates'),os.path.join(PACKAGE_ROOT, 'templatetags')) + TEMPLATE_DIRS
+# Path to arches_hip added by Vincent: arches_hip_cvast needed this, but couldn't find it
+TEMPLATE_DIRS = (os.path.join(PACKAGE_ROOT, 'templates'),os.path.join(PACKAGE_ROOT, 'templatetags'),os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates')) + TEMPLATE_DIRS 
 RESOURCE_MODEL = {'default': 'arches_hip.models.resource.Resource'}
 APP_NAME = 'Arches v3.0 - HIP v1.0'
-PACKAGE_VALIDATOR = 'arches_hip.source_data.validation.HIP_Validator'
+PACKAGE_VALIDATOR = 'arches_hip_cvast.source_data.validation.HIP_Validator'
 
 DEFAULT_MAP_X = -224149.03751366
 DEFAULT_MAP_Y = 6978966.6705368
