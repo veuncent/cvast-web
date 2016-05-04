@@ -133,7 +133,7 @@ class Command(BaseCommand):
         Change these settings in production
 
         """
-        tmp_dir = '/tmp'
+        tmp_dir = settings.TMP_DIR
         install_location = self.get_elasticsearch_install_location(package_name)
         url = get_elasticsearch_download_url(os.path.join(settings.ROOT_DIR, 'install'))
         file_name = url.split('/')[-1]
@@ -235,9 +235,8 @@ class Command(BaseCommand):
     def get_elasticsearch_install_location(self, package_name):
         """
         Get the path to the Elasticsearch install
-
         """
-        return "/elasticsearch"
+        return settings.ELASTICSEARCH_INSTALL_DIR
 
     def create_groups(self):
         """

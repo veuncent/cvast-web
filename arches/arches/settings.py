@@ -59,7 +59,7 @@ ELASTICSEARCH_HOSTS = [
 
 ]
 ELASTICSEARCH_CONNECTION_OPTIONS = {'timeout': 30}
-
+ELASTICSEARCH_INSTALL_DIR = '/elasticsearch'
 
 SEARCH_ITEMS_PER_PAGE = 5
 SEARCH_EXPORT_ITEMS_PER_PAGE = 100000
@@ -139,6 +139,7 @@ APP_NAME = 'Arches v3.0'
 #######################################
 
 ROOT_DIR = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+TMP_DIR = '/tmp'
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),

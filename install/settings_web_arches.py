@@ -141,7 +141,7 @@ APP_NAME = 'Arches v3.0'
 ROOT_DIR = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Vincent Meijer', 'vmeijer@usf.edu'),
 )
 MANAGERS = ADMINS
 

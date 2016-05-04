@@ -8,9 +8,15 @@ PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
 DATABASES['default']['NAME'] = 'arches_%s' % (PACKAGE_NAME)
 ROOT_URLCONF = '%s.urls' % (PACKAGE_NAME)
 INSTALLED_APPS = INSTALLED_APPS + (PACKAGE_NAME,)
-STATICFILES_DIRS = (os.path.join(PACKAGE_ROOT, 'media'),) + STATICFILES_DIRS
-# Path to arches_hip added by Vincent: arches_hip_cvast needed this, but couldn't find it
-TEMPLATE_DIRS = (os.path.join(PACKAGE_ROOT, 'templates'),os.path.join(PACKAGE_ROOT, 'templatetags'),os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates')) + TEMPLATE_DIRS 
+STATICFILES_DIRS = (
+	os.path.join(PACKAGE_ROOT, 'media'),
+	os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'media'), # Added by Vincent: arches_hip_cvast needed this, but couldn't find it
+	) + STATICFILES_DIRS
+TEMPLATE_DIRS = (
+	os.path.join(PACKAGE_ROOT, 'templates'),
+	os.path.join(PACKAGE_ROOT, 'templatetags'),
+	os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates'), # Added by Vincent: arches_hip_cvast needed this, but couldn't find it
+	) + TEMPLATE_DIRS 
 RESOURCE_MODEL = {'default': 'arches_hip.models.resource.Resource'}
 APP_NAME = 'Arches v3.0 - HIP v1.0'
 PACKAGE_VALIDATOR = 'arches_hip_cvast.source_data.validation.HIP_Validator'
