@@ -61,10 +61,10 @@ ELASTICSEARCH_HOSTS = [
 ELASTICSEARCH_CONNECTION_OPTIONS = {'timeout': 30}
 ELASTICSEARCH_INSTALL_DIR = '/elasticsearch'
 
-SEARCH_ITEMS_PER_PAGE = 5
+SEARCH_ITEMS_PER_PAGE = 10
 SEARCH_EXPORT_ITEMS_PER_PAGE = 100000
-SEARCH_DROPDOWN_LENGTH = 100
-WORDS_PER_SEARCH_TERM = 10 # set to None for unlimited number of words allowed for search terms
+SEARCH_DROPDOWN_LENGTH = 120
+WORDS_PER_SEARCH_TERM = None # set to None for unlimited number of words allowed for search terms
 
 DISPLAY_NAME_FOR_UNNAMED_ENTITIES = 'Unnamed Resource' # override this setting in your packages settings.py file
 
