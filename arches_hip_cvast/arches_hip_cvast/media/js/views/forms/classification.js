@@ -73,20 +73,14 @@ define(['jquery',
                 el: this.$el.find('#to-date-section')[0],
                 data: currentEditedClassification,
                 dataKey: 'TO_DATE.E49',
-                singleEdit: true,
-                validateBranch: function (nodes) {
-                    return this.validateHasValues(nodes);
-                }
-            }));   
+                singleEdit: true
+            }));
             this.addBranchList(new BranchList({
                 el: this.$el.find('#from-date-section')[0],
                 data: currentEditedClassification,
                 dataKey: 'FROM_DATE.E49',
-                singleEdit: true,
-                validateBranch: function (nodes) {
-                    return this.validateHasValues(nodes);
-                }
-            }));   
+                singleEdit: true
+            }));
 
         },
 
@@ -142,15 +136,22 @@ define(['jquery',
         },
 
         deleteClicked: function(branchlist) {
-            var warningtext = '';
 
             this.deleted_assessment = branchlist;
             this.confirm_delete_modal = this.$el.find('.confirm-delete-modal');
             this.confirm_delete_modal_yes = this.confirm_delete_modal.find('.confirm-delete-yes');
             this.confirm_delete_modal_yes.removeAttr('disabled');
-
-            warningtext = this.confirm_delete_modal.find('.modal-body [name="warning-text"]').text();
-            this.confirm_delete_modal.find('.modal-body [name="warning-text"]').text(warningtext + ' ' + branchlist['HERITAGE_RESOURCE_TYPE.E55'].branch_lists[0].nodes[0].label);           
+            
+            var warningtextElement = this.confirm_delete_modal.find('.modal-body [name="warning-text-body"]');
+            // Set warning text based on which field was filled 
+            var confirmMessageItem = ''
+            if (branchlist['HERITAGE_RESOURCE_TYPE.E55'].branch_lists[0] !== undefined) {
+                confirmMessageItem = branchlist['HERITAGE_RESOURCE_TYPE.E55'].branch_lists[0].nodes[0].label;
+            }
+            else if (branchlist['CULTURAL_PERIOD.E55'].branch_lists[0] !== undefined) {
+                confirmMessageItem = branchlist['CULTURAL_PERIOD.E55'].branch_lists[0].nodes[0].label;
+            }
+            warningtextElement.text(confirmMessageItem);
             this.confirm_delete_modal.modal('show');
         }
 
