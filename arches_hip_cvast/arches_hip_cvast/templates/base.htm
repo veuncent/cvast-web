@@ -5,7 +5,9 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 {% if debug %}
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':{{ livereload_port }}/livereload.js?snipver=1"></' + 'script>')</script>
+<script>
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':{{ livereload_port }}/livereload.js?snipver=1"></' + 'script>')
+</script>
 {% endif %}
 
 <head>
@@ -31,12 +33,12 @@
         <link rel="stylesheet" href="{% static 'plugins/openlayers/ol.css' %}">
         <link rel="stylesheet" href="{% static 'css/arches.css' %}">
         <link rel="stylesheet" href="{% static 'css/package.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main_cvast.css' %}"> 
+        <link rel="stylesheet" href="{% static 'css/arches_cvast.css' %}">
     {% endblock css%}
+</head>
 
-</head> 
-
-<body class="scroll-y"> 
-
+<body class="scroll-y">
     <div class="wrapper">
     	{% block header %}
             {% include 'header.htm' %}
@@ -79,7 +81,8 @@
 
     </div><!--/wrapper-->
 
-	{% block javascript %}
+    {% block javascript %}
+    <script src="{% static 'js/views/forms/config.js' %}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
     {% block pre_require_js %}
     {% endblock pre_require_js %}
@@ -242,7 +245,6 @@
 
       ga('create', '{{GOOGLE_ANALYTICS_TRACKING_ID}}', 'auto');
       ga('send', 'pageview');
-
     </script>
     {% endif %}
 </body>
