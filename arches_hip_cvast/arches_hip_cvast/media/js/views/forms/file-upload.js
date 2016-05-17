@@ -17,13 +17,14 @@ define(['jquery',
             var self = this;
             var filetoupload;
             var dropzoneEl = this.$el.find('.dropzone');
-
+            var allowedFileTypesString = gOptions.allowedFileTypes
+            
             // detect if dropzone is attached, and if not init
             if (!dropzoneEl.hasClass('dz-clickable')) {
                 this.dropzoneInstance = new dropzone(dropzoneEl[0], {
                     url: 'we dont submit via dropzone',
                     maxFiles: 1,
-                    acceptedFiles: 'image/*, application/pdf, text/*, .doc, .docx',
+                    acceptedFiles: allowedFileTypesString,
                     addRemoveLinks: true,
                     autoProcessQueue: false
                 });

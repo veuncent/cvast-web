@@ -20,14 +20,15 @@ define(['jquery',
             var dropzoneEl = this.$el.find('.dropzone'); 
             this.count = undefined;
             this.newfiles = ko.observableArray();  
-
+            var allowedFileTypesString = gOptions.allowedFileTypes
+            
             ko.applyBindings(this.newfiles, this.$el.find('#new-files-section')[0]);  
 
             // detect if dropzone is attached, and if not init
             if (!dropzoneEl.hasClass('dz-clickable')) {
                 this.dropzoneInstance = new dropzone(dropzoneEl[0], {
                     url: arches.urls.concept,
-                    acceptedFiles: 'image/*, application/pdf, text/*, .doc, .docx',
+                    acceptedFiles: allowedFileTypesString,
                     addRemoveLinks: true,
                     autoProcessQueue: false
                 });
