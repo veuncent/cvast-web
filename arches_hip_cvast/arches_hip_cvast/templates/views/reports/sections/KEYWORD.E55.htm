@@ -1,0 +1,19 @@
+{% if 'KEYWORD_E55' in report_info.source.graph %}
+{% load i18n %}
+<div class="row">
+    <div class="col-xs-12">
+        <dl>
+            <dt>
+                <h5 id="" class="arches-report-subsection-title">Keywords (Subjects)</h5>
+            </dt>
+
+                {% for KEYWORD_E55 in report_info.source.graph.KEYWORD_E55 %}
+                    <dd class="arches-report-subsection-item">
+                        {{ KEYWORD_E55.KEYWORD_E55__value }}
+                    </dd>
+                {% endfor %}
+            
+        </dl>
+    </div>
+</div>
+{% endif %}
