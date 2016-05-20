@@ -72,6 +72,7 @@ class Resource(ArchesResource):
                 forms.ConditionForm.get_info(),
                 forms.EvaluationForm.get_info(),
                 forms.DesignationForm.get_info(),
+                forms.RelatedFilesForm.get_info(),
             ]
 
 
@@ -81,6 +82,7 @@ class Resource(ArchesResource):
                 forms.DescriptionForm.get_info(),
                 forms.LocationForm.get_info(),
                 forms.ActivityActionsForm.get_info(),
+                forms.RelatedFilesForm.get_info(),
             ]
      
 
@@ -99,6 +101,7 @@ class Resource(ArchesResource):
                 forms.DescriptionForm.get_info(),
                 forms.LocationForm.get_info(), 
                 forms.PhaseForm.get_info(),
+                forms.RelatedFilesForm.get_info(),
             ]
 
 
