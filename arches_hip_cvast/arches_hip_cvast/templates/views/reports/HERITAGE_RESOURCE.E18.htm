@@ -199,6 +199,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                                         <h5 id="" class="arches-report-subsection-title">{% trans "Settings" %}</h5>
                                                     </dt>
 
+                                                    <dd class="arches-report-subsection-item empty-message" style="display:none;">
+                                                        {% trans "No settings recorded" %}
+                                                    </dd>
+
                                                     {% if 'PLACE_E53' in report_info.source.graph %}
                                                         {% for PLACE_E53 in report_info.source.graph.PLACE_E53 %}
                                                             {% if 'PLACE_SITE_LOCATION_E53' in PLACE_E53 %}
@@ -263,7 +267,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                         {% include "views/reports/sections/COMPONENT.E18.htm" %}
 
                                         <!-- Modifications -->
-                                        {% if 'MODIFICATION_EVENT_E11' in report_info.source.graph %}
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <dl>
@@ -271,18 +274,24 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                                         <h5 id="" class="arches-report-subsection-title">{% trans "Modifications" %}</h5>
                                                     </dt>
 
+                                                    {% if 'MODIFICATION_EVENT_E11' not in report_info.source.graph %}
+                                                        <dd class="arches-report-subsection-item">
+                                                            {% trans "No modifications recorded" %}
+                                                        </dd>
+                                                    {% else %}
                                                         {% for MODIFICATION_EVENT_E11 in report_info.source.graph.MODIFICATION_EVENT_E11 %}
                                                             <dd class="arches-report-subsection-item arches-report-spacer">
                                                                 <span class="arches-report-subsection-item-type">{{ MODIFICATION_EVENT_E11.MODIFICATION_TYPE_E55.0.MODIFICATION_TYPE_E55__value }}:</span>
                                                                 {{ MODIFICATION_EVENT_E11.MODIFICATION_DESCRIPTION_E62.0.MODIFICATION_DESCRIPTION_E62__value }}
                                                             </dd>
                                                         {% endfor %}            
+                                                    {% endif %}
 
                                                 </dl>
 
                                             </div>
                                         </div>
-                                        {% endif %}
+
 
                                     </div>
                                 </div>

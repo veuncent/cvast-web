@@ -6,6 +6,10 @@
                 <h5 id="" class="arches-report-subsection-title">{% trans "Location Description" %}</h5>
             </dt>
 
+            <dd class="arches-report-subsection-item empty-message">
+                {% trans "No descriptions recorded" %}
+            </dd>
+
             {% if 'PLACE_E53' in report_info.source.graph %}
                 {% for PLACE_E53 in report_info.source.graph.PLACE_E53 %}
                     {% if 'PLACE_SITE_LOCATION_E53' in PLACE_E53 %}
