@@ -1,126 +1,128 @@
 conceptid,Value,ValueType,Provider
-PERIOD_UID:100,165,sortorder,EH
+PERIOD_UID:100,165,sortorder,CVAST
 PERIOD_UID:100,1837,minimum date,EH
 PERIOD_UID:100,1901,maximum date,EH
-PERIOD_UID:101,145,sortorder,EH
+PERIOD_UID:101,145,sortorder,CVAST
 PERIOD_UID:101,1558,minimum date,EH
 PERIOD_UID:101,1603,maximum date,EH
-PERIOD_UID:102,155,sortorder,EH
+PERIOD_UID:102,155,sortorder,CVAST
 PERIOD_UID:102,1603,minimum date,EH
 PERIOD_UID:102,1625,maximum date,EH
-PERIOD_UID:103,180,sortorder,EH
+PERIOD_UID:103,180,sortorder,CVAST
 PERIOD_UID:103,1901,minimum date,EH
 PERIOD_UID:103,1932,maximum date,EH
-PERIOD_UID:104,185,sortorder,EH
+PERIOD_UID:104,185,sortorder,CVAST
 PERIOD_UID:104,1967,minimum date,EH
 PERIOD_UID:104,2000,maximum date,EH
-PERIOD_UID:105,187,sortorder,EH
+PERIOD_UID:105,187,sortorder,CVAST
 PERIOD_UID:105,2001,minimum date,EH
 PERIOD_UID:105,2100,maximum date,EH
-PERIOD_UID:106,161,sortorder,EH
+PERIOD_UID:106,161,sortorder,CVAST
 PERIOD_UID:106,1714,minimum date,EH
 PERIOD_UID:106,1830,maximum date,EH
-PERIOD_UID:107,183,sortorder,EH
+PERIOD_UID:107,183,sortorder,CVAST
 PERIOD_UID:107,1933,minimum date,EH
 PERIOD_UID:107,1966,maximum date,EH
-PERIOD_UID:108,182,sortorder,EH
+PERIOD_UID:108,182,sortorder,CVAST
 PERIOD_UID:108,1914,minimum date,EH
 PERIOD_UID:108,1918,maximum date,EH
-PERIOD_UID:109,184,sortorder,EH
+PERIOD_UID:109,184,sortorder,CVAST
 PERIOD_UID:109,1939,minimum date,EH
 PERIOD_UID:109,1945,maximum date,EH
-PERIOD_UID:110,181,sortorder,EH
+PERIOD_UID:110,181,sortorder,CVAST
 PERIOD_UID:110,1902,minimum date,EH
 PERIOD_UID:110,1910,maximum date,EH
-PERIOD_UID:16,135,sortorder,EH
+PERIOD_UID:16,135,sortorder,CVAST
 PERIOD_UID:16,1540,minimum date,EH
 PERIOD_UID:16,1901,maximum date,EH
-PERIOD_UID:24,175,sortorder,EH
+PERIOD_UID:24,175,sortorder,CVAST
 PERIOD_UID:24,1901,minimum date,EH
 PERIOD_UID:24,2000,maximum date,EH
-PERIOD_UID:25,190,sortorder,EH
+PERIOD_UID:25,190,sortorder,CVAST
 PERIOD_UID:26,-500000,minimum date,EH
-PERIOD_UID:26,115,sortorder,EH
+PERIOD_UID:10,114,sortorder,CVAST
+PERIOD_UID:26,115,sortorder,CVAST
 PERIOD_UID:26,410,maximum date,EH
-PERIOD_UID:28,130,sortorder,EH
+PERIOD_UID:11,120,sortorder,CVAST
+PERIOD_UID:28,130,sortorder,CVAST
 PERIOD_UID:28,1066,minimum date,EH
 PERIOD_UID:28,1540,maximum date,EH
 PERIOD_UID:5,-500000,minimum date,EH
 PERIOD_UID:5,-10000,maximum date,EH
-PERIOD_UID:5,5,sortorder,EH
+PERIOD_UID:5,5,sortorder,CVAST
 PERIOD_UID:52,-500000,minimum date,EH
 PERIOD_UID:52,43,maximum date,EH
-PERIOD_UID:52,110,sortorder,EH
-PERIOD_UID:53,170,sortorder,EH
+PERIOD_UID:52,110,sortorder,CVAST
+PERIOD_UID:53,170,sortorder,CVAST
 PERIOD_UID:53,410,minimum date,EH
 PERIOD_UID:53,1540,maximum date,EH
 PERIOD_UID:54,-500000,minimum date,EH
 PERIOD_UID:54,-150000,maximum date,EH
-PERIOD_UID:54,10,sortorder,EH
+PERIOD_UID:54,10,sortorder,CVAST
 PERIOD_UID:55,-150000,minimum date,EH
 PERIOD_UID:55,-40000,maximum date,EH
-PERIOD_UID:55,15,sortorder,EH
+PERIOD_UID:55,15,sortorder,CVAST
 PERIOD_UID:56,-40000,minimum date,EH
 PERIOD_UID:56,-10000,maximum date,EH
-PERIOD_UID:56,20,sortorder,EH
+PERIOD_UID:56,20,sortorder,CVAST
 PERIOD_UID:57,-10000,minimum date,EH
 PERIOD_UID:57,-7000,maximum date,EH
-PERIOD_UID:57,30,sortorder,EH
+PERIOD_UID:57,30,sortorder,CVAST
 PERIOD_UID:58,-7000,minimum date,EH
 PERIOD_UID:58,-4000,maximum date,EH
-PERIOD_UID:58,35,sortorder,EH
+PERIOD_UID:58,35,sortorder,CVAST
 PERIOD_UID:59,-4000,minimum date,EH
 PERIOD_UID:59,-3300,maximum date,EH
-PERIOD_UID:59,50,sortorder,EH
+PERIOD_UID:59,50,sortorder,CVAST
 PERIOD_UID:6,-10000,minimum date,EH
 PERIOD_UID:6,-4000,maximum date,EH
-PERIOD_UID:6,25,sortorder,EH
+PERIOD_UID:6,25,sortorder,CVAST
 PERIOD_UID:60,-3300,minimum date,EH
 PERIOD_UID:60,-2900,maximum date,EH
-PERIOD_UID:60,55,sortorder,EH
+PERIOD_UID:60,55,sortorder,CVAST
 PERIOD_UID:61,-2900,minimum date,EH
 PERIOD_UID:61,-2200,maximum date,EH
-PERIOD_UID:61,60,sortorder,EH
+PERIOD_UID:61,60,sortorder,CVAST
 PERIOD_UID:62,-2600,minimum date,EH
 PERIOD_UID:62,-1600,maximum date,EH
-PERIOD_UID:62,70,sortorder,EH
+PERIOD_UID:62,70,sortorder,CVAST
 PERIOD_UID:63,-1600,minimum date,EH
 PERIOD_UID:63,-1200,maximum date,EH
-PERIOD_UID:63,75,sortorder,EH
+PERIOD_UID:63,75,sortorder,CVAST
 PERIOD_UID:64,-1200,minimum date,EH
 PERIOD_UID:64,-700,maximum date,EH
-PERIOD_UID:64,80,sortorder,EH
+PERIOD_UID:64,80,sortorder,CVAST
 PERIOD_UID:65,-800,minimum date,EH
 PERIOD_UID:65,-300,maximum date,EH
-PERIOD_UID:65,90,sortorder,EH
+PERIOD_UID:65,90,sortorder,CVAST
 PERIOD_UID:66,-300,minimum date,EH
 PERIOD_UID:66,-100,maximum date,EH
-PERIOD_UID:66,95,sortorder,EH
+PERIOD_UID:66,95,sortorder,CVAST
 PERIOD_UID:67,-100,minimum date,EH
 PERIOD_UID:67,43,maximum date,EH
-PERIOD_UID:67,100,sortorder,EH
+PERIOD_UID:67,100,sortorder,CVAST
 PERIOD_UID:7,-4000,minimum date,EH
 PERIOD_UID:7,-2200,maximum date,EH
-PERIOD_UID:7,45,sortorder,EH
+PERIOD_UID:7,45,sortorder,CVAST
 PERIOD_UID:8,-2600,minimum date,EH
 PERIOD_UID:8,-700,maximum date,EH
-PERIOD_UID:8,65,sortorder,EH
+PERIOD_UID:8,65,sortorder,CVAST
 PERIOD_UID:9,-800,minimum date,EH
 PERIOD_UID:9,43,maximum date,EH
-PERIOD_UID:9,85,sortorder,EH
+PERIOD_UID:9,85,sortorder,CVAST
 PERIOD_UID:94,-4000,minimum date,EH
 PERIOD_UID:94,43,maximum date,EH
-PERIOD_UID:94,105,sortorder,EH
+PERIOD_UID:94,105,sortorder,CVAST
 PERIOD_UID:95,-500000,minimum date,EH
 PERIOD_UID:95,-4000,maximum date,EH
-PERIOD_UID:95,40,sortorder,EH
-PERIOD_UID:97,140,sortorder,EH
+PERIOD_UID:95,40,sortorder,CVAST
+PERIOD_UID:97,140,sortorder,CVAST
 PERIOD_UID:97,1485,minimum date,EH
 PERIOD_UID:97,1603,maximum date,EH
-PERIOD_UID:98,150,sortorder,EH
+PERIOD_UID:98,150,sortorder,CVAST
 PERIOD_UID:98,1603,minimum date,EH
 PERIOD_UID:98,1714,maximum date,EH
-PERIOD_UID:99,160,sortorder,EH
+PERIOD_UID:99,160,sortorder,CVAST
 PERIOD_UID:99,1714,minimum date,EH
 PERIOD_UID:99,1837,maximum date,EH
 PERIOD_UID:5,"The Old Stone Age defined by the practice of hunting and gathering and the use of chipped flint tools. This period is usually divided up into the Lower, Middle and Upper Palaeolithic.",scopeNote,EH
