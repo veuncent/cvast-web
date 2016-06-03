@@ -11,5 +11,5 @@ ACTIVITY_TYPE:9,Measured survey,,ACTIVITY_TYPE:1,Index,CVAST
 ACTIVITY_TYPE:10,Topographic survey,,ACTIVITY_TYPE:1,Index,CVAST
 ACTIVITY_TYPE:11,Condition assessment,,ACTIVITY_TYPE:1,Index,CVAST
 ACTIVITY_TYPE:12,Processing,,ACTIVITY_TYPE_AUTHORITY_DOCUMENT.csv,Collector,CVAST
-ACTIVITY_TYPE:13,Photogrammetry processing,,ACTIVITY_TYPE:12,,
-ACTIVITY_TYPE:14,Point cloud registration,,ACTIVITY_TYPE:12,,
+ACTIVITY_TYPE:13,Photogrammetry processing,,ACTIVITY_TYPE:12,Index,CVAST
+ACTIVITY_TYPE:14,Point cloud registration,,ACTIVITY_TYPE:12,Index,CVAST

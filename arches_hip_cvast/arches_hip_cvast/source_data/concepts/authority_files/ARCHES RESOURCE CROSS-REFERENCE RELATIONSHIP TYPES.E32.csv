@@ -12,16 +12,16 @@ RELATIONSHIP_TYPE:10,is referred to in / refers to,,RELATIONSHIP_TYPE:4,Index,CV
 RELATIONSHIP_TYPE:11,is created by / created,,RELATIONSHIP_TYPE:4,Index,CVAST
 RELATIONSHIP_TYPE:12,was occupied by / occupied,,RELATIONSHIP_TYPE:4,Index,CVAST
 RELATIONSHIP_TYPE:13,Historic Resource/District - Historic Resource/District,,ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPES.E32.csv,Collector,CVAST
-RELATIONSHIP_TYPE:14,is a contributor to / has as a contributor,District and Contributor Relationship,RELATIONSHIP_TYPE:11,Index,CVAST
-RELATIONSHIP_TYPE:15,is a non-contributor to / has as a non-contributor,District and Non-Contributor Relationship,RELATIONSHIP_TYPE:11,Index,CVAST
-RELATIONSHIP_TYPE:16,is a potential contributor to / has as a possible contributor,District and Potential Contributor Relationship,RELATIONSHIP_TYPE:11,Index,CVAST
-RELATIONSHIP_TYPE:17,is an altered contributor to / has as a altered contributor,District and Altered Contributor Relationship,RELATIONSHIP_TYPE:11,Index,CVAST
+RELATIONSHIP_TYPE:14,is a contributor to / has as a contributor,District and Contributor Relationship,RELATIONSHIP_TYPE:13,Index,CVAST
+RELATIONSHIP_TYPE:15,is a non-contributor to / has as a non-contributor,District and Non-Contributor Relationship,RELATIONSHIP_TYPE:13,Index,CVAST
+RELATIONSHIP_TYPE:16,is a potential contributor to / has as a possible contributor,District and Potential Contributor Relationship,RELATIONSHIP_TYPE:13,Index,CVAST
+RELATIONSHIP_TYPE:17,is an altered contributor to / has as a altered contributor,District and Altered Contributor Relationship,RELATIONSHIP_TYPE:13,Index,CVAST
 RELATIONSHIP_TYPE:18,Historic Resource/District - Actor,,ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPES.E32.csv,Collector,CVAST
-RELATIONSHIP_TYPE:19,was designed by /designed,Historic Resource/District and Architect Relationship,RELATIONSHIP_TYPE:16,Index,CVAST
-RELATIONSHIP_TYPE:20,was built by / built,Historic Resource/District and Builder Relationship,RELATIONSHIP_TYPE:16,Index,CVAST
-RELATIONSHIP_TYPE:21,was owned by / owned,Historic Resource/District and Original Owner Relationship,RELATIONSHIP_TYPE:16,Index,CVAST
-RELATIONSHIP_TYPE:22,was surveyed by / surveyed,Historic Resource/District and Surveyor Relationship,RELATIONSHIP_TYPE:16,Index,CVAST
-RELATIONSHIP_TYPE:23,was made significant by / contributed to the significance of,Historic Resource/District and Significant Person Relationship,RELATIONSHIP_TYPE:16,Index,CVAST
+RELATIONSHIP_TYPE:19,was designed by /designed,Historic Resource/District and Architect Relationship,RELATIONSHIP_TYPE:18,Index,CVAST
+RELATIONSHIP_TYPE:20,was built by / built,Historic Resource/District and Builder Relationship,RELATIONSHIP_TYPE:18,Index,CVAST
+RELATIONSHIP_TYPE:21,was owned by / owned,Historic Resource/District and Original Owner Relationship,RELATIONSHIP_TYPE:18,Index,CVAST
+RELATIONSHIP_TYPE:22,was surveyed by / surveyed,Historic Resource/District and Surveyor Relationship,RELATIONSHIP_TYPE:18,Index,CVAST
+RELATIONSHIP_TYPE:23,was made significant by / contributed to the significance of,Historic Resource/District and Significant Person Relationship,RELATIONSHIP_TYPE:18,Index,CVAST
 RELATIONSHIP_TYPE:24,Historic Resource/District - Historical Event/Activity,,ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPES.E32.csv,Collector,CVAST
-RELATIONSHIP_TYPE:25,was the location of / took place at,Historic Resource/District and Historical Event/Activity Relationship,RELATIONSHIP_TYPE:22,Index,CVAST
-RELATIONSHIP_TYPE:26,was made significant by / contributed to the significance of,Historic Resource/District and Significant Event Relationship,RELATIONSHIP_TYPE:22,Index,CVAST
+RELATIONSHIP_TYPE:25,was the location of / took place at,Historic Resource/District and Historical Event/Activity Relationship,RELATIONSHIP_TYPE:24,Index,CVAST
+RELATIONSHIP_TYPE:26,was made significant by / contributed to the significance of,Historic Resource/District and Significant Event Relationship,RELATIONSHIP_TYPE:24,Index,CVAST
