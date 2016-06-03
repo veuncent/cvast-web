@@ -1,0 +1,15 @@
+registry:
+  restart: always
+  image: registry:2
+  ports:
+    - 5000:5000
+  environment:
+    REGISTRY_HTTP_TLS_CERTIFICATE: /etc/docker/ssl/domain.crt
+    REGISTRY_HTTP_TLS_KEY: /etc/docker/ssl/domain.key
+    REGISTRY_AUTH: htpasswd
+    REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+  volumes:
+    - /home/cvast/docker-registry/data:/var/lib/registry
+    - /home/cvast/ssl:/etc/docker/ssl
+    - /home/cvast/docker-registry/htpasswd:/auth/htpasswd
