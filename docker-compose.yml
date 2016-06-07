@@ -1,9 +1,12 @@
 web:
-  build: ./arches-cvast/.
-  command: "python manage.py runserver 0.0.0.0:8000"
-  working_dir: /arches
-  volumes:
-    - 'arches:/arches'
+  restart: always
+  # build: .
+  # dockerfile: ./Dockerfile-web
+  image: cvast/cvast-web
+  command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
+  working_dir: /arches-cvast/arches_hip_cvast
+  # volumes:
+    # - 'arches:/arches'
   environment:
     HOST: db
     PORT: 5432
@@ -15,18 +18,33 @@ web:
     - db
     - elasticsearch
 db:
-  build: ./arches-db-cvast/.
-  #image: kartoza/pg-backup:9.4
-  command: "/usr/lib/postgresql/9.3/bin/postgres -D /var/lib/postgresql/9.3/main -c config_file=/etc/postgresql/9.3/main/postgresql.conf"
-  hostname: pg
-  volumes:
-      - ./pg/postgres_data:/var/lib/postgresql
-      - ./pg/setup_data:/home/setup
+  restart: always
+  # build: .
+  # dockerfile: ./Dockerfile-db
+  image: cvast/cvast-db
+  # command: service postgresql start
+  # command: bash -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf"'
+  command: bash -c '/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf'
+  # hostname: pg
+  # volumes:
+      # - /c/Users/CVAST/Documents/arches-docker/pg/postgres_data:/var/lib/postgresql/9.3
+      # - /c/Users/CVAST/Documents/arches-docker/pg/main:/var/lib/postgresql/9.3/main
+      # - /c/Users/CVAST/Documents/arches-docker/pg/postgres_data:/var/lib/postgresql
+      # - /c/Users/CVAST/Documents/arches-docker/pg/setup_data:/etc/postgresql/9.3
+  ports:
+    - '5432:5432'
   environment:
     # These are all defaults anyway, but setting explicitly in
     # case we ever want to ever use different credentials
-    - PGUSER=docker
-    - PGPASSWORD=docker
-    - PGDATABASE=arches
+    - PGUSER=postgres
+    - PGPASSWORD=postgis
+    - PGDATABASE=arches_arches_hip_cvast
 elasticsearch:
-  image: elasticsearch
+  restart: always
+  # build: .
+  # dockerfile: ./Dockerfile-elasticsearch
+  image: cvast/cvast-elasticsearch
+  command: bash -c "/elasticsearch/bin/elasticsearch -Des.network.host=0.0.0.0"
+  ports:
+    - "9200:9200"
+    - "9300:9300"

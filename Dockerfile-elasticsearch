@@ -1,0 +1,12 @@
+# our base image
+FROM cvast/arches-complete
+
+USER root
+RUN rm -rf /arches
+
+RUN apt-get purge -y postgresql-9.4
+RUN apt-get purge -y postgresql-server-dev-9.4
+RUN apt-get purge -y postgresql-contrib-9.4
+RUN apt-get autoremove -y
+
+EXPOSE 9200

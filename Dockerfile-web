@@ -1,0 +1,16 @@
+# our base image
+FROM cvast/arches-complete
+
+USER root
+
+# RUN apt-get purge -y postgresql-9.4
+RUN apt-get purge -y postgresql-server-dev-9.4
+RUN apt-get purge -y postgresql-contrib-9.4
+RUN apt-get autoremove -y 
+
+RUN rm -rf /elasticsearch
+
+COPY ./install/settings_web_arches.py /arches-cvast/arches/arches/settings.py
+
+EXPOSE 8000
+# CMD python manage.py runserver 0.0.0.0:8000

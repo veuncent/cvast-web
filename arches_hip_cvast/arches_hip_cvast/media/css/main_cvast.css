@@ -1,0 +1,17 @@
+/*Brand*/
+.header .navbar-brand { 
+    z-index: 1;
+    top: -10px;
+    position: relative;
+    padding: 0 10px 65px;
+}
+
+.arches-logo-header {
+    max-height: 80px;
+    margin-top: -15px;
+}
+
+.arches-logo-copyright {
+    height: 30px;
+    margin-top: 10px;
+}
