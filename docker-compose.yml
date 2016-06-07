@@ -1,16 +1,9 @@
 web:
-  build: .
-  dockerfile: ./Dockerfile-web
-  # image: archesdocker_web:latest
+  restart: always
+  # build: .
+  # dockerfile: ./Dockerfile-web
+  image: cvast/cvast-web
   command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
-  # && python manage.py packages -o setup_elasticsearch
-  # python manage.py packages -o index_database && 
-  # 'su postgres --command'yes n | 
-  # python manage.py migrate 
-  # && python manage.py syncdb 
-  # && source /arches/virtualenv/ENV/bin/activate 
-  # && python /arches/manage.py packages -o setup_db
-  #  && python manage.py packages -o index_database 
   working_dir: /arches-cvast/arches_hip_cvast
   # volumes:
     # - 'arches:/arches'
@@ -26,9 +19,9 @@ web:
     - elasticsearch
 db:
   restart: always
-  build: .
-  dockerfile: ./Dockerfile-db
-  #image: kartoza/pg-backup:9.4
+  # build: .
+  # dockerfile: ./Dockerfile-db
+  image: cvast/cvast-db
   # command: service postgresql start
   # command: bash -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf"'
   command: bash -c '/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf'
@@ -47,9 +40,10 @@ db:
     - PGPASSWORD=postgis
     - PGDATABASE=arches_arches_hip_cvast
 elasticsearch:
-  # image: elasticsearch
-  build: .
-  dockerfile: ./Dockerfile-elasticsearch
+  restart: always
+  # build: .
+  # dockerfile: ./Dockerfile-elasticsearch
+  image: cvast/cvast-elasticsearch
   command: bash -c "/elasticsearch/bin/elasticsearch -Des.network.host=0.0.0.0"
   ports:
     - "9200:9200"
