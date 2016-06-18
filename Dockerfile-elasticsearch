@@ -2,7 +2,7 @@
 FROM cvast/arches-complete
 
 USER root
-RUN rm -rf /arches
+RUN rm -rf /arches-cvast
 
 RUN apt-get purge -y postgresql-9.4
 RUN apt-get purge -y postgresql-server-dev-9.4
