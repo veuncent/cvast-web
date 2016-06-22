@@ -1,0 +1,7 @@
+crate:
+  #image: cvast-build.eastus.cloudapp.azure.com:5000/jenkins:2
+  dockerfile: .
+  ports:
+  - 8080:8080
+  - 50000:50000
+  restart: always
