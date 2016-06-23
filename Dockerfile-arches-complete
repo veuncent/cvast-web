@@ -138,7 +138,8 @@ RUN /etc/init.d/postgresql start &&\
 	# Wait for elasticsearch to start
 	sleep 10 &&\ 
 	python manage.py packages -o install &&\
-	python manage.py packages -o load_concept_scheme -s arches_hip_cvast/source_data/concepts/authority_files
+	python manage.py packages -o load_concept_scheme -s arches_hip_cvast/source_data/concepts/authority_files &&\
+	/etc/init.d/postgresql stop
 
 
 # Cleanup

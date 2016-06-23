@@ -2,7 +2,7 @@
 FROM cvast/arches-complete
 
 USER root
-RUN rm -rf /arches
+RUN rm -rf /arches-cvast
 RUN rm -rf /elasticsearch
 
 USER postgres	

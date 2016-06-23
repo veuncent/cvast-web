@@ -36,7 +36,7 @@ DATABASES = {
         'NAME': 'arches',                      # Or path to database file if using sqlite3.
         'USER': 'postgres',                      # Not used with sqlite3.
         'PASSWORD': 'postgis',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': 'db',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '5432',                      # Set to empty string for default. Not used with sqlite3.
         'SCHEMAS': 'public,data,ontology,concepts', # syncdb will put the admin tables in the first listed schema,
         'POSTGIS_TEMPLATE': 'template_postgis_20',
@@ -55,7 +55,7 @@ ELASTICSEARCH_HTTP_PORT = 9200 # this should be in increments of 200, eg: 9400, 
 SEARCH_BACKEND = 'arches.app.search.search.SearchEngine'
 # see http://elasticsearch-py.readthedocs.org/en/master/api.html#elasticsearch.Elasticsearch
 ELASTICSEARCH_HOSTS = [
-    {'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}
+    {'host': 'elasticsearch', 'port': ELASTICSEARCH_HTTP_PORT}
 
 ]
 ELASTICSEARCH_CONNECTION_OPTIONS = {'timeout': 30}
