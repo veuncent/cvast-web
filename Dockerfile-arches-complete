@@ -117,8 +117,9 @@ RUN /etc/init.d/postgresql start &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
-	createdb training -T template_postgis_20
+	createdb training -T template_postgis_20 &&\
 	# createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
+	/etc/init.d/postgresql stop
 USER root
 	
 
