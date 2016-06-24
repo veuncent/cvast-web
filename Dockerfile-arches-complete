@@ -110,6 +110,7 @@ RUN pip install --no-index -e .
 # Setup databases
 USER postgres	
 RUN /etc/init.d/postgresql start &&\
+	sleep 5
 	psql -d postgres -c "CREATE EXTENSION postgis;" &&\
 	createdb -E UTF8 -T template0 --locale=en_US.utf8 template_postgis_20 &&\
 	psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis_20'" &&\
@@ -119,7 +120,6 @@ RUN /etc/init.d/postgresql start &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
 	createdb training -T template_postgis_20 &&\
 	# createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
-	/etc/init.d/postgresql stop
 USER root
 	
 
