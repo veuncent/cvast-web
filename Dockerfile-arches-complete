@@ -110,7 +110,7 @@ RUN pip install --no-index -e .
 # Setup databases
 USER postgres	
 RUN /etc/init.d/postgresql start &&\
-	sleep 5 &&\
+	sleep 15 &&\
 	psql -d postgres -c "CREATE EXTENSION postgis;" &&\
 	createdb -E UTF8 -T template0 --locale=en_US.utf8 template_postgis_20 &&\
 	psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis_20'" &&\
