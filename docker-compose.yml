@@ -5,8 +5,8 @@ web:
   # image: cvast/cvast-web
   command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
   working_dir: /arches-cvast/arches_hip_cvast
-  volumes:
-  - /c/Users/CVAST/Documents/arches-docker/:/arches-cvast
+  # volumes:
+  # - /c/Users/CVAST/Documents/arches-docker/:/arches-cvast
   environment:
     HOST: db
     PORT: 5432
