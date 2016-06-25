@@ -151,8 +151,6 @@ RUN rm -rf /tmp/*
 EXPOSE 8000
 EXPOSE 5432
 
-COPY ./install/init_env.sh /arches/init_env.sh
-CMD sh -c '/arches/init_env.sh'
 # CMD sh -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf" &&\
 	# /arches/arches/arches_hip/arches_hip/elasticsearch/elasticsearch-1.4.1/bin/elasticsearch &&\
 	# sleep 10 && python /arches/arches/arches_hip/arches_hip_cvast/manage.py runserver 0.0.0.0:8000'
