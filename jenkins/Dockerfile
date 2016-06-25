@@ -1,4 +1,4 @@
-FROM cvast-build.eastus.cloudapp.azure.com:5000/jenkins:2
+FROM jenkins
 
 USER root
 

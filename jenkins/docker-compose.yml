@@ -1,14 +1,15 @@
-crate:
-  #image: cvast-build.eastus.cloudapp.azure.com:5000/jenkins:2
+cvast-jenkins:
+  image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-jenkins:3
   restart: always
-  build: .
-  dockerfile: .
+  #build: .
+  #dockerfile: .
   ports:
   - 8080:8080
   - 50000:50000
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock
   - /usr/bin/docker:/usr/bin/docker
+  - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
   - /lib/x86_64-linux-gnu/libapparmor.so.1:/lib/x86_64-linux-gnu/libapparmor.so.1
   - /lib/x86_64-linux-gnu/libdevmapper.so.1.02.1:/lib/x86_64-linux-gnu/libdevmapper.so.1.02.1
 
