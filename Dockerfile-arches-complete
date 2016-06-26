@@ -49,6 +49,12 @@ RUN /etc/init.d/postgresql start &&\
 
 USER root	
 RUN echo "*:*:*:postgres:postgis" >> ~/.pgpass
+RUN chown -R postgres:postgres /var/lib/postgresql
+RUN chown -R postgres:postgres /var/log/postgresql
+RUN chown -R postgres:postgres /etc/postgresql
+RUN chown root:root ~/.pgpass
+RUN chown root:root /etc/postgresql/9.4/main/postgresql.conf
+RUN chown root:root /etc/postgresql/9.4/main/pg_hba.conf
 RUN chmod 600 ~/.pgpass
 RUN chmod 666 /etc/postgresql/9.4/main/postgresql.conf
 RUN chmod 666 /etc/postgresql/9.4/main/pg_hba.conf
