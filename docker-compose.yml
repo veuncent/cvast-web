@@ -22,14 +22,11 @@ db:
   build: .
   dockerfile: ./Dockerfile-db
   # image: cvast/cvast-db
-  # command: service postgresql start
-  # command: bash -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf"'
   command: bash -c '/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf'
-  # hostname: pg
   volumes:
-      - /volumes/arches-docker-database/lib:/var/lib/postgresql
-      - /volumes/arches-docker-database/log:/var/log/postgresql
-      - /volumes/arches-docker-database/etc:/etc/postgresql
+      - postgres-data:/var/lib/postgresql
+      - postgres-log:/var/log/postgresql
+      - postgres-config:/etc/postgresql
   ports:
     - '5432:5432'
   environment:
