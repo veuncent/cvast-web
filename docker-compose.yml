@@ -26,10 +26,10 @@ db:
   # command: bash -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf"'
   command: bash -c '/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf'
   # hostname: pg
-  # volumes:
-      # - /c/Users/CVAST/Documents/arches-docker-database/lib:/var/lib/postgresql
-      # - /c/Users/CVAST/Documents/arches-docker-database/log:/var/log/postgresql
-      # - /c/Users/CVAST/Documents/arches-docker-database/etc:/etc/postgresql
+  volumes:
+      - /volumes/arches-docker-database/lib:/var/lib/postgresql
+      - /volumes/arches-docker-database/log:/var/log/postgresql
+      - /volumes/arches-docker-database/etc:/etc/postgresql
   ports:
     - '5432:5432'
   environment:
