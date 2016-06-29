@@ -10,3 +10,4 @@ RUN apt-get purge -y postgresql-contrib-9.4
 RUN apt-get autoremove -y
 
 EXPOSE 9200
+CMD /elasticsearch/bin/elasticsearch -Des.network.host=0.0.0.0
