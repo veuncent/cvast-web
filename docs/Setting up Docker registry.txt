@@ -4,7 +4,7 @@ from: https://coderwall.com/p/dtwc1q/insecure-and-self-signed-private-docker-reg
 -----------------------------------------
 
 First create a key and certificate:
-	root@registry:~# mkdir certs
+	root@registry:~# mkdir /certs
 	root@registry:~# openssl req \
 	  -newkey rsa:4096 -nodes -sha256 \
 	  -keyout certs/domain.key \
@@ -15,9 +15,16 @@ For 'Common Name (e.g. server FQDN or YOUR name)', use our domain name (e.g. cva
 
 Set up basic auth on our registry host:
 
-	root@registry:~# mkdir auth
+	root@registry:~# mkdir /auth
 	root@registry:~# docker run --entrypoint htpasswd registry:2 -Bnb <username> <password> > auth/htpasswd
 
+Include this in your docker-compose.yml: 
+  environment:
+    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+    REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    REGISTRY_AUTH: htpasswd
+    REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
 
 Run the registry container (from the docker-registry folder):
 	docker-compose up
@@ -36,8 +43,8 @@ To connect to the registry:
 	$docker login cvast-build.eastus.cloudapp.azure.com:5000
 	WARNING: login credentials saved in ~/.docker/config.json
 	Login Succeeded
-	$docker tag local/arches-complete cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
-	$docker push cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
+	$docker tag local/arches-complete cvast-build.eastus.cloudapp.azure.com:5000/arches-complete:master
+	$docker push cvast-build.eastus.cloudapp.azure.com:5000/arches-complete:master
 
 -----------------------------------------
 
@@ -77,6 +84,9 @@ Put this in bootlocal.sh:
 	/bin/cat ${SRC_CERT_FILE} >> ${CAFILE}
 	done
 
+	
+After that, restart boot2docker: 
+docker-machine.exe restart
 
 -------------------------------------
 
