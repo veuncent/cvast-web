@@ -127,8 +127,8 @@ RUN /etc/init.d/postgresql start &&\
 	createdb training -T template_postgis_20 &&\
 	/etc/init.d/postgresql stop
 	# createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
-USER root
-	
+
+USER root	
 
 # Setup Arches Hip app
 # WORKDIR /arches-cvast	
@@ -140,7 +140,6 @@ WORKDIR /arches-cvast/arches_hip_cvast
 RUN python manage.py packages -o setup_elasticsearch
 
 # Run database scripts & arches hip resources
-# USER postgres	
 RUN /etc/init.d/postgresql start &&\
 	python manage.py packages -o start_elasticsearch &&\
 	# Wait for elasticsearch to start
@@ -151,12 +150,5 @@ RUN /etc/init.d/postgresql start &&\
 
 
 # Cleanup
-# USER root
 RUN rm -rf /tmp/*
 
-EXPOSE 8000
-EXPOSE 5432
-
-# CMD sh -c 'su postgres --command "/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf" &&\
-	# /arches/arches/arches_hip/arches_hip/elasticsearch/elasticsearch-1.4.1/bin/elasticsearch &&\
-	# sleep 10 && python /arches/arches/arches_hip/arches_hip_cvast/manage.py runserver 0.0.0.0:8000'
