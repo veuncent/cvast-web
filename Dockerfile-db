@@ -12,6 +12,4 @@ RUN /etc/init.d/postgresql start &&\
 EXPOSE 5432
 
 # Add VOLUMEs to allow backup of config, logs and databases
-VOLUME /etc/postgresql
-VOLUME /var/log/postgresql
-VOLUME /var/lib/postgresql
+VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
