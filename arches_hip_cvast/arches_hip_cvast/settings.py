@@ -1,11 +1,37 @@
 import os
 import inspect
-from arches.settings import *
+from arches_hip.settings import *
 from django.utils.translation import ugettext as _
+
+def get_env_variable(var_name):
+    msg = "Set the %s environment variable"
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = msg % var_name
+        raise ImproperlyConfigured(error_msg)
+
 
 PACKAGE_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
-DATABASES['default']['NAME'] = 'arches_%s' % (PACKAGE_NAME)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis', 
+        'NAME': 'arches_%s' % (PACKAGE_NAME),
+        'USER': get_env_variable('PG_USER'),    
+        'PASSWORD': get_env_variable('PG_PASSWORD'), 
+        'HOST': get_env_variable('PG_HOST'),          
+        'PORT': get_env_variable('PG_PORT'),        
+        'SCHEMAS': 'public,data,ontology,concepts',
+        'POSTGIS_TEMPLATE': 'template_postgis_20',
+    }
+}
+
+ELASTICSEARCH_HOSTS = [
+    {'host': get_env_variable('ES_HOST'), 'port': ELASTICSEARCH_HTTP_PORT}
+
+]
+
 ROOT_URLCONF = '%s.urls' % (PACKAGE_NAME)
 INSTALLED_APPS = INSTALLED_APPS + (PACKAGE_NAME,)
 STATICFILES_DIRS = (
@@ -18,7 +44,7 @@ TEMPLATE_DIRS = (
 		os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates'), # Added by Vincent: arches_hip_cvast needed this, but couldn't find it
 	) + TEMPLATE_DIRS 
 RESOURCE_MODEL = {'default': 'arches_hip.models.resource.Resource'}
-APP_NAME = 'Arches v3.0 - HIP v1.0'
+APP_NAME = 'USF CVAST'
 PACKAGE_VALIDATOR = 'arches_hip_cvast.source_data.validation.HIP_Validator'
 
 DEFAULT_MAP_X = -224149.03751366
@@ -197,7 +223,7 @@ LOGGING = {
 
 
 DATE_PARSING_FORMAT = ['%B %d, %Y', '%Y-%m-%d', '%Y-%m-%d %H:%M:%S']
-
+		
 try:
     from settings_local import *
 except ImportError:
