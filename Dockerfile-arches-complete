@@ -47,6 +47,7 @@ ENV PG_HOME=/var/lib/postgresql
 ENV PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
 ENV PG_LOGDIR=/var/log/postgresql
 ENV PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
+ENV ES_HOST=localhost
 	
 # Manage postgres credentials and settings	
 USER postgres
