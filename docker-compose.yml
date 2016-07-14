@@ -2,16 +2,16 @@ web:
   restart: always
   build: .
   dockerfile: ./Dockerfile-web
-  # image: cvast/cvast-web
   command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
   working_dir: /arches-cvast/arches_hip_cvast
   # volumes:
   # - /c/Users/CVAST/Documents/arches-docker/:/arches-cvast
   environment:
-    HOST: db
-    PORT: 5432
-    USER: postgres
-    NAME: arches
+    - PG_USER=postgres
+    - PG_PASSWORD=postgis
+    - PG_HOST=db
+    - PG_PORT=5432
+    - ES_HOST=elasticsearch
   ports:
     - '8000:8000'
   links:
@@ -21,8 +21,6 @@ db:
   restart: always
   build: .
   dockerfile: ./Dockerfile-db
-  # image: cvast/cvast-db
-  # command: bash -c '/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf'
   volumes:
       - postgres-data:/postgres-data
       - postgres-log:/var/log/postgresql
@@ -30,15 +28,12 @@ db:
   ports:
     - '5432:5432'
   environment:
-    # These are all defaults anyway, but setting explicitly in
-    # case we ever want to use different credentials
     - PG_USER=postgres
     - PG_PASSWORD=postgis
 elasticsearch:
   restart: always
   build: .
   dockerfile: ./Dockerfile-elasticsearch
-  # image: cvast/cvast-elasticsearch
   command: bash -c "/elasticsearch/bin/elasticsearch -Des.network.host=0.0.0.0"
   ports:
     - "9200:9200"
