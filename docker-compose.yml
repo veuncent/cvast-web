@@ -22,9 +22,9 @@ db:
   build: .
   dockerfile: ./Dockerfile-db
   # image: cvast/cvast-db
-  command: bash -c '/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf'
+  # command: bash -c '/usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf'
   volumes:
-      - postgres-data:/var/lib/postgresql
+      - postgres-data:/postgres-data
       - postgres-log:/var/log/postgresql
       - postgres-config:/etc/postgresql
   ports:
@@ -32,9 +32,8 @@ db:
   environment:
     # These are all defaults anyway, but setting explicitly in
     # case we ever want to use different credentials
-    - PGUSER=postgres
-    - PGPASSWORD=postgis
-    - PGDATABASE=arches_arches_hip_cvast
+    - PG_USER=postgres
+    - PG_PASSWORD=postgis
 elasticsearch:
   restart: always
   build: .
