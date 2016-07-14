@@ -1,0 +1,74 @@
+{
+    "containerDefinitions": [
+        {
+            "volumesFrom": [],
+            "memory": 300,
+            "extraHosts": null,
+            "dnsServers": null,
+            "disableNetworking": null,
+            "dnsSearchDomains": null,
+            "portMappings": [
+                {
+                    "hostPort": 5432,
+                    "containerPort": 5432,
+                    "protocol": "tcp"
+                }
+            ],
+            "hostname": null,
+            "essential": true,
+            "entryPoint": [],
+            "mountPoints": [
+                {
+                    "containerPath": "/var/lib/postgresql",
+                    "sourceVolume": "postgresData",
+                    "readOnly": false
+                },
+				{
+                    "containerPath": "/var/log/postgresql",
+                    "sourceVolume": "postgresData",
+                    "readOnly": false
+                },
+				{
+                    "containerPath": "/etc/postgresql",
+                    "sourceVolume": "postgresData",
+                    "readOnly": false
+                }
+            ],
+            "name": "cvast-arches-db-container-test",
+            "ulimits": null,
+            "dockerSecurityOptions": null,
+            "environment": [],
+            "links": [],
+            "workingDirectory": null,
+            "readonlyRootFilesystem": null,
+            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-db:master",
+            "command": [],
+            "user": null,
+            "dockerLabels": null,
+            "logConfiguration": null,
+            "cpu": 10,
+            "privileged": null
+        }
+    ],
+	"volumes": [
+    {
+      "host": {
+        "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-data"
+      },
+      "name": "postgresData"
+    },
+	{
+      "host": {
+        "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-config"
+      },
+      "name": "postgresConfig"
+    },
+    {
+      "host": {
+        "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-log"
+      },
+      "name": "postgresLog"
+    }
+  ],
+    "family": "cvast-arches-db-task-test"
+}

@@ -1,0 +1,57 @@
+{
+    "containerDefinitions": [
+        {
+            "volumesFrom": [],
+            "memory": 300,
+            "extraHosts": null,
+            "dnsServers": null,
+            "disableNetworking": null,
+            "dnsSearchDomains": null,
+            "portMappings": [
+                {
+                    "hostPort": 8000,
+                    "containerPort": 8000,
+                    "protocol": "tcp"
+                },
+                {
+                    "hostPort": 80,
+                    "containerPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "hostname": null,
+            "essential": true,
+            "entryPoint": [],
+            "mountPoints": [
+                {
+                    "containerPath": "/arches-cvast/arches/arches/settings_local.py",
+                    "sourceVolume": "localSettings",
+                    "readOnly": false
+                }
+            ],
+            "name": "cvast-arches-web-container-test",
+            "ulimits": null,
+            "dockerSecurityOptions": null,
+            "environment": [],
+            "links": null,
+            "workingDirectory": null,
+            "readonlyRootFilesystem": false,
+            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-web:jenkins",
+            "command": null,
+            "user": null,
+            "dockerLabels": null,
+            "logConfiguration": null,
+            "cpu": 256,
+            "privileged": null
+        }
+    ],
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/settings_local.py"
+            },
+            "name": "localSettings"
+        }
+    ],
+    "family": "cvast-arches-web-task-test"
+}
