@@ -11,15 +11,6 @@ ENV LC_ALL en_US.UTF-8
 ENV LC_LANG en_US.UTF-8
 ENV LC_LANGUAGE en_US.UTF-8
 
-# Setting environment variables
-ENV PG_VERSION=9.4 \
-    PG_USER=postgres \
-	PG_PASSWORD=postgis \
-    PG_HOME=/var/lib/postgresql \
-	PG_DATADIR=${PG_HOME}/${PG_VERSION}/main \
-	PG_LOGDIR=/var/log/postgresql \
-	PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
-	
 # Install dependencies
 RUN apt-get update -y 
 RUN apt-get install -y wget
@@ -37,7 +28,6 @@ RUN apt-get install -y libffi-dev
 RUN apt-get install -y libpq-dev
 RUN	easy_install pip
 
-
 # Needed for postgres-9.4
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
@@ -49,6 +39,16 @@ RUN apt-get install -y postgresql-9.4
 RUN apt-get install -y postgresql-server-dev-9.4
 RUN apt-get install -y postgresql-contrib-9.4
 
+# Setting environment variables
+ENV PG_VERSION=9.4
+ENV PG_USER=postgres
+ENV PG_PASSWORD=postgis
+ENV PG_HOME=/var/lib/postgresql
+ENV PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
+ENV PG_LOGDIR=/var/log/postgresql
+ENV PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
+	
+# Manage postgres credentials and settings	
 USER postgres
 RUN /etc/init.d/postgresql start &&\
 	psql -d ${PG_USER} -c "ALTER USER ${PG_USER} with encrypted password '${PG_PASSWORD}';" &&\
