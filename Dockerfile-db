@@ -2,21 +2,30 @@
 FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 
 USER root
+
+# Path for volumes mounted to host
+ENV DATA_VOLUME=/postgres-data
+
+# Remove obsolete folders
 RUN rm -rf /arches-cvast
 RUN rm -rf /elasticsearch
 
+# Cleanup database
 USER postgres	
 RUN /etc/init.d/postgresql start &&\
 	psql -d arches_arches_hip_cvast -c "VACUUM ANALYZE;"
+USER root
 
-	
+# Expose ports	
 EXPOSE 5432
 
 # Add VOLUMEs to allow backup of config, logs and databases
-VOLUME  ["/var/log/postgresql", "/var/lib/postgresql"]
+VOLUME  ["/var/log/postgresql", "${DATA_VOLUME}"]
 
 # Entrypoint to change ownership of postgres folders (for volume mounts)
-COPY install/db_entrypoint.sh /install/entrypoint
-ENTRYPOINT /install/entrypoint.sh
+COPY install/db_entrypoint.sh /install/entrypoint.sh
+RUN chmod -R 777 /install/
 
-CMD /usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf
+CMD /install/entrypoint.sh && start-stop-daemon --start --chuid ${PG_USER}:${PG_USER} --exec /usr/lib/postgresql/9.4/bin/postgres -- -D ${DATA_VOLUME} -c config_file=/etc/postgresql/9.4/main/postgresql.conf
+
+#/usr/lib/postgresql/9.4/bin/postgres -D /postgres-data -c config_file=/etc/postgresql/9.4/main/postgresql.conf
