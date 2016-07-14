@@ -12,7 +12,5 @@ RUN apt-get autoremove -y
 
 RUN rm -rf /elasticsearch
 
-# COPY ./install/settings_web_arches.py /arches-cvast/arches/arches/settings.py
-
 EXPOSE 8000
 CMD python manage.py runserver 0.0.0.0:8000
