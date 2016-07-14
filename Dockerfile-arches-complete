@@ -41,6 +41,7 @@ RUN apt-get install -y postgresql-contrib-9.4
 
 # Setting environment variables
 ENV PG_VERSION=9.4
+ENV PG_HOST=localhost
 ENV PG_USER=postgres
 ENV PG_PASSWORD=postgis
 ENV PG_HOME=/var/lib/postgresql
