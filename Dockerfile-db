@@ -8,10 +8,15 @@ RUN rm -rf /elasticsearch
 USER postgres	
 RUN /etc/init.d/postgresql start &&\
 	psql -d arches_arches_hip_cvast -c "VACUUM ANALYZE;"
+
 	
 EXPOSE 5432
 
 # Add VOLUMEs to allow backup of config, logs and databases
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
+
+# Entrypoint to change ownership of postgres folders (for volume mounts)
+COPY install/db_entrypoint.sh /install/entrypoint
+ENTRYPOINT /install/entrypoint.sh
 
 CMD /usr/lib/postgresql/9.4/bin/postgres -D /var/lib/postgresql/9.4/main -c config_file=/etc/postgresql/9.4/main/postgresql.conf

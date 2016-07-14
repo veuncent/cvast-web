@@ -11,7 +11,15 @@ ENV LC_ALL en_US.UTF-8
 ENV LC_LANG en_US.UTF-8
 ENV LC_LANGUAGE en_US.UTF-8
 
-
+# Setting environment variables
+ENV PG_VERSION=9.4 \
+    PG_USER=postgres \
+	PG_PASSWORD=postgis \
+    PG_HOME=/var/lib/postgresql \
+	PG_DATADIR=${PG_HOME}/${PG_VERSION}/main \
+	PG_LOGDIR=/var/log/postgresql \
+	PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
+	
 # Install dependencies
 RUN apt-get update -y 
 RUN apt-get install -y wget
@@ -43,31 +51,30 @@ RUN apt-get install -y postgresql-contrib-9.4
 
 USER postgres
 RUN /etc/init.d/postgresql start &&\
-	psql -d postgres -c "ALTER USER postgres with encrypted password 'postgis';" &&\
-	psql -d postgres -c "ALTER DATABASE postgres set timezone to 'US/Eastern';" &&\
+	psql -d ${PG_USER} -c "ALTER USER ${PG_USER} with encrypted password '${PG_PASSWORD}';" &&\
+	psql -d ${PG_USER} -c "ALTER DATABASE postgres set timezone to 'US/Eastern';" &&\
 	/etc/init.d/postgresql stop
 
-USER root	
-RUN echo "*:*:*:postgres:postgis" >> ~/.pgpass
-RUN chown -R postgres:postgres /var/lib/postgresql
-RUN chown -R postgres:postgres /var/log/postgresql
+USER root
+RUN echo "*:*:*:${PG_USER}:${PG_PASSWORD}" >> ~/.pgpass
+RUN chown -R postgres:postgres ${PG_HOME}
+RUN chown -R postgres:postgres ${PG_LOGDIR}
 RUN chown -R postgres:postgres /etc/postgresql
 RUN chown root:root ~/.pgpass
-RUN chown root:root /etc/postgresql/9.4/main/postgresql.conf
-RUN chown root:root /etc/postgresql/9.4/main/pg_hba.conf
+RUN chown root:root ${PG_CONFIGDIR}/postgresql.conf
+RUN chown root:root ${PG_CONFIGDIR}/pg_hba.conf
 RUN chmod 600 ~/.pgpass
-RUN chmod 666 /etc/postgresql/9.4/main/postgresql.conf
-RUN chmod 666 /etc/postgresql/9.4/main/pg_hba.conf
+RUN chmod 666 ${PG_CONFIGDIR}/postgresql.conf
+RUN chmod 666 ${PG_CONFIGDIR}/pg_hba.conf
 
-RUN echo "standard_conforming_strings = off" >> /etc/postgresql/9.4/main/postgresql.conf
-RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.4/main/postgresql.conf
-RUN echo "#TYPE   DATABASE  USER  CIDR-ADDRESS  METHOD" > /etc/postgresql/9.4/main/pg_hba.conf
-RUN echo "local   all       all                 trust" >> /etc/postgresql/9.4/main/pg_hba.conf
-RUN echo "host    all       all   127.0.0.1/32  trust" >> /etc/postgresql/9.4/main/pg_hba.conf
-RUN echo "host    all       all   ::1/128       trust" >> /etc/postgresql/9.4/main/pg_hba.conf
-RUN echo "host    all       all   0.0.0.0/0     md5" >> /etc/postgresql/9.4/main/pg_hba.conf
-RUN echo "host all all 127.0.0.1 255.255.255.0 trust" >> /etc/postgresql/9.4/main/pg_hba.conf
-#RUN service postgresql restart
+RUN echo "standard_conforming_strings = off" >> ${PG_CONFIGDIR}/postgresql.conf
+RUN echo "listen_addresses = '*'" >> ${PG_CONFIGDIR}/postgresql.conf
+RUN echo "#TYPE   DATABASE  USER  CIDR-ADDRESS  METHOD" > ${PG_CONFIGDIR}/pg_hba.conf
+RUN echo "local   all       all                 trust" >> ${PG_CONFIGDIR}/pg_hba.conf
+RUN echo "host    all       all   127.0.0.1/32  trust" >> ${PG_CONFIGDIR}/pg_hba.conf
+RUN echo "host    all       all   ::1/128       trust" >> ${PG_CONFIGDIR}/pg_hba.conf
+RUN echo "host    all       all   0.0.0.0/0     md5" >> ${PG_CONFIGDIR}/pg_hba.conf
+RUN echo "host all all 127.0.0.1 255.255.255.0 trust" >> ${PG_CONFIGDIR}/pg_hba.conf
 
 
 # Install Geos	
@@ -95,7 +102,7 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
 RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
 
-# root project folder
+# Root project folder
 RUN mkdir /arches-cvast
 
 # Install the Arches application	
