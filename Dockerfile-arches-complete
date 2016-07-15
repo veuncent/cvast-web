@@ -30,8 +30,7 @@ RUN	easy_install pip
 
 # Needed for postgres-9.4
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
-  sudo apt-key add -
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 RUN apt-get update -y
 
 # Install postgres
@@ -41,28 +40,30 @@ RUN apt-get install -y postgresql-contrib-9.4
 
 # Setting default environment variables
 ENV PG_VERSION=9.4
+ENV PG_DBNAME=cvast_arches
 ENV PG_HOST=localhost
 ENV PG_PORT=5432
 ENV PG_USER=postgres
 ENV PG_PASSWORD=postgis
 ENV PG_HOME=/var/lib/postgresql
 ENV PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
+ENV PG_BINDIR=/etc/init.d
 ENV PG_LOGDIR=/var/log/postgresql
 ENV PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
 ENV ES_HOST=localhost
 	
 # Manage postgres credentials and settings	
 USER postgres
-RUN /etc/init.d/postgresql start &&\
+RUN ${PG_BINDIR}/postgresql start &&\
 	psql -d ${PG_USER} -c "ALTER USER ${PG_USER} with encrypted password '${PG_PASSWORD}';" &&\
 	psql -d ${PG_USER} -c "ALTER DATABASE postgres set timezone to 'US/Eastern';" &&\
-	/etc/init.d/postgresql stop
+	${PG_BINDIR}/postgresql stop
 
 USER root
 RUN echo "*:*:*:${PG_USER}:${PG_PASSWORD}" >> ~/.pgpass
 RUN chown -R postgres:postgres ${PG_HOME}
 RUN chown -R postgres:postgres ${PG_LOGDIR}
-RUN chown -R postgres:postgres /etc/postgresql
+RUN chown -R postgres:postgres ${PG_CONFIGDIR}
 RUN chown root:root ~/.pgpass
 RUN chown root:root ${PG_CONFIGDIR}/postgresql.conf
 RUN chown root:root ${PG_CONFIGDIR}/pg_hba.conf
@@ -126,18 +127,14 @@ RUN pip install --no-index -e .
 
 # Setup databases
 USER postgres	
-RUN /etc/init.d/postgresql start &&\
-	psql -d postgres -c "CREATE EXTENSION postgis;" &&\
+RUN ${PG_BINDIR}/postgresql start &&\
 	createdb -E UTF8 -T template0 --locale=en_US.utf8 template_postgis_20 &&\
 	psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis_20'" &&\
 	psql -d template_postgis_20 -c "CREATE EXTENSION postgis;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
-	createdb training -T template_postgis_20 &&\
-	/etc/init.d/postgresql stop
-	# createdb -E UTF8 -T template_postgis_20 --locale=en_US.utf8 arches
-
+	${PG_BINDIR}/postgresql stop
 USER root	
 
 # Setup Arches Hip app
@@ -150,13 +147,13 @@ WORKDIR /arches-cvast/arches_hip_cvast
 RUN python manage.py packages -o setup_elasticsearch
 
 # Run database scripts & arches hip resources
-RUN /etc/init.d/postgresql start &&\
+RUN ${PG_BINDIR}/postgresql start &&\
 	python manage.py packages -o start_elasticsearch &&\
 	# Wait for elasticsearch to start
 	sleep 10 &&\ 
 	python manage.py packages -o install &&\
 	python manage.py packages -o load_concept_scheme -s arches_hip_cvast/source_data/concepts/authority_files &&\
-	/etc/init.d/postgresql stop
+	${PG_BINDIR}/postgresql stop
 
 
 # Cleanup
