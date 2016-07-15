@@ -2,6 +2,7 @@ import os
 import inspect
 from arches_hip.settings import *
 from django.utils.translation import ugettext as _
+from django.core.exceptions import ImproperlyConfigured
 
 def get_env_variable(var_name):
     msg = "Set the %s environment variable"
@@ -17,7 +18,7 @@ PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis', 
-        'NAME': 'arches_%s' % (PACKAGE_NAME),
+        'NAME': get_env_variable('PG_DBNAME'),
         'USER': get_env_variable('PG_USER'),    
         'PASSWORD': get_env_variable('PG_PASSWORD'), 
         'HOST': get_env_variable('PG_HOST'),          
