@@ -34,7 +34,6 @@ elasticsearch:
   restart: always
   build: .
   dockerfile: ./Dockerfile-elasticsearch
-  command: bash -c "/elasticsearch/bin/elasticsearch -Des.network.host=0.0.0.0"
   ports:
     - "9200:9200"
     - "9300:9300"

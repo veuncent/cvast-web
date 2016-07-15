@@ -9,5 +9,11 @@ RUN apt-get purge -y postgresql-server-dev-9.4
 RUN apt-get purge -y postgresql-contrib-9.4
 RUN apt-get autoremove -y
 
+COPY ./install/elasticsearch.yml /tmp/elasticsearch.yml
+
+ENV DATA_VOLUME=/elasticsearch-data
+ENV CONFIG_VOLUME=/elasticsearch-config
+ENV LOG_VOLUME=/elasticsearch-log
+
 EXPOSE 9200
-CMD /elasticsearch/bin/elasticsearch -Des.network.host=0.0.0.0
+CMD ./install/es_entrypoint.sh && /elasticsearch/bin/elasticsearch -Des.config=${CONFIG_VOLUME}/elasticsearch.yml
