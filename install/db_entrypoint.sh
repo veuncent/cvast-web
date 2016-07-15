@@ -18,6 +18,7 @@ init_datadir() {
 		fi	
 	else
 		echo "!!! Data volume does not exist !!!"
+	fi
 }
 
 init_logdir() {
