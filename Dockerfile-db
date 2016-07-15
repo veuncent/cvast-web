@@ -7,6 +7,7 @@ USER root
 ENV DATA_VOLUME=/postgres-data
 ENV CONFIG_VOLUME=/postgres-config
 ENV LOG_VOLUME=${PG_LOGDIR}
+ENV INSTALL_DIR=/install
 
 # Remove obsolete folders
 RUN rm -rf /arches-cvast
@@ -20,15 +21,11 @@ RUN ${PG_BINDIR}/postgresql start &&\
 USER root
 
 WORKDIR /
-
-# Expose ports	
 EXPOSE 5432
-
-# Add VOLUMEs to allow backup of config, logs and databases
 VOLUME  ["/var/log/postgresql", "${DATA_VOLUME}", "${CONFIG_VOLUME}"]
 
-# Entrypoint to change ownership of postgres folders (for volume mounts)
-COPY install/db_entrypoint.sh /install/entrypoint.sh
-RUN chmod -R 777 /install/
+# Entrypoint to setup volume mounts
+COPY install/db_entrypoint.sh ${INSTALL_DIR}/entrypoint.sh
+RUN chmod -R 700 ${INSTALL_DIR}
 
-CMD /install/entrypoint.sh && start-stop-daemon --start --chuid ${PG_USER}:${PG_USER} --exec /usr/lib/postgresql/9.4/bin/postgres -- -D ${DATA_VOLUME} -c config_file=${CONFIG_VOLUME}/postgresql.conf
+CMD ${INSTALL_DIR}/entrypoint.sh && start-stop-daemon --start --chuid ${PG_USER}:${PG_USER} --exec /usr/lib/postgresql/9.4/bin/postgres -- -D ${DATA_VOLUME} -c config_file=${CONFIG_VOLUME}/postgresql.conf

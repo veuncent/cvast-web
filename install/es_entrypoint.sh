@@ -6,9 +6,11 @@ init_configdir() {
 			echo "Host folder not empty. Skipping copy..."
 		else
 			echo "Copying elasticsearch.yml to ${CONFIG_VOLUME}, preserving permissions"
-			cp -p /tmp/elasticsearch.yml ${CONFIG_VOLUME}/elasticsearch.yml
+			cp -p ${INSTALL_DIR}/elasticsearch.yml ${CONFIG_VOLUME}/elasticsearch.yml
 		fi	
 	else
 		echo "!!! Data volume does not exist !!!"
 	fi
 }
+
+init_configdir
