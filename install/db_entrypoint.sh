@@ -2,12 +2,15 @@
 init_datadir() {
 	echo "Initializing data dir..."
 	if [[ -d ${DATA_VOLUME} ]]; then
-		if [ "$(ls -A ${DATA_VOLUME} 2>/dev/null)" ]; then
-			echo "Host folder not empty. Skipping copy..."
-		else
-			echo "Copying ${PG_DATADIR} to ${DATA_VOLUME}"
-			cp -R ${PG_DATADIR}/* ${DATA_VOLUME}			
-		fi	
+		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
+		if [[ ${IS_CLEAN_ENV} == true ]]; then
+			if [ "$(ls -A ${DATA_VOLUME} 2>/dev/null)" ]; then
+				echo "Host folder not empty. Skipping copy..."
+			else
+				echo "Copying ${PG_DATADIR} to ${DATA_VOLUME}"
+				cp -R ${PG_DATADIR}/* ${DATA_VOLUME}			
+			fi	
+		fi
 		
 		echo "Changing permissions of all files in ${DATA_VOLUME} to 0600"
 		find ${DATA_VOLUME} -type f -exec chmod 0600 {} \;
@@ -18,24 +21,22 @@ init_datadir() {
 
 	else
 		echo "!!! Data volume does not exist !!!"
+		exit 1
 	fi
 }
 
 init_configdir() {
 	echo "Initializing config dir..."
 	if [[ -d ${CONFIG_VOLUME} ]]; then
-		if [ "$(ls -A ${CONFIG_VOLUME} 2>/dev/null)" ]; then
-			echo "Host folder not empty. Skipping copy..."
-		else
-			echo "Copying ${PG_CONFIGDIR} to ${CONFIG_VOLUME}"
-			cp -R ${PG_CONFIGDIR}/* ${CONFIG_VOLUME}
-		fi	
-		
-		echo "Changing permissions of all files in ${DATA_VOLUME} to 0600"
-		find ${DATA_VOLUME} -type f -exec chmod 0600 {} \;
-		
-		echo "Changing permissions of all folders in ${DATA_VOLUME} to 0700"
-		find ${DATA_VOLUME} -type d -exec chmod 0700 {} \;
+		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
+		if [[ ${IS_CLEAN_ENV} == true ]]; then
+			if [ "$(ls -A ${CONFIG_VOLUME} 2>/dev/null)" ]; then
+				echo "Host folder not empty. Skipping copy..."
+			else
+				echo "Copying ${PG_CONFIGDIR} to ${CONFIG_VOLUME}"
+				cp -R ${PG_CONFIGDIR}/* ${CONFIG_VOLUME}
+			fi	
+		fi
 		
 		echo "Setting ownership and permissions on ${CONFIG_VOLUME}"
 		chown -R postgres:postgres ${CONFIG_VOLUME}
@@ -44,7 +45,8 @@ init_configdir() {
 		chmod 666 ${CONFIG_VOLUME}/postgresql.conf
 		chmod 666 ${CONFIG_VOLUME}/pg_hba.conf
 	else
-		echo "!!! Data volume does not exist !!!"
+		echo "!!! Config volume does not exist !!!"
+		exit 1
 	fi
 }
 
@@ -57,6 +59,7 @@ init_logdir() {
 		chown -R root:postgres ${LOG_VOLUME}
 	else
 		echo "!!! Log volume does not exist !!!"
+		exit 1
 	fi
 }
 
@@ -68,6 +71,16 @@ set_password() {
 	${PG_BINDIR}/postgresql stop
 }
 
+check_env_variables(){
+	if [[ -z ${PG_PASSWORD} ]]; then
+        echo "ERROR! Please specify a password for postgres in PG_PASSWORD. Exiting..."
+        exit 1
+	fi
+}
+
+check_env_variables
 init_datadir
 init_configdir
 init_logdir
+
+set_password

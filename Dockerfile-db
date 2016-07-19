@@ -8,6 +8,7 @@ ENV DATA_VOLUME=/postgres-data
 ENV CONFIG_VOLUME=/postgres-config
 ENV LOG_VOLUME=${PG_LOGDIR}
 ENV INSTALL_DIR=/install
+ENV IS_CLEAN_ENV=false
 
 # Remove obsolete folders
 RUN rm -rf /arches-cvast
