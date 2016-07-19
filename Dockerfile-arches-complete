@@ -54,19 +54,15 @@ ENV ES_HOST=localhost
 # Manage postgres credentials and settings	
 USER postgres
 RUN ${PG_BINDIR}/postgresql start &&\
-	psql -d ${PG_USER} -c "ALTER USER ${PG_USER} with encrypted password '${PG_PASSWORD}';" &&\
 	psql -d postgres -c "ALTER DATABASE postgres set timezone to 'US/Eastern';" &&\
 	${PG_BINDIR}/postgresql stop
 
 USER root
-RUN echo "*:*:*:${PG_USER}:${PG_PASSWORD}" >> ~/.pgpass
 RUN chown -R postgres:postgres ${PG_HOME}
 RUN chown -R postgres:postgres ${PG_LOGDIR}
 RUN chown -R postgres:postgres ${PG_CONFIGDIR}
-RUN chown root:root ~/.pgpass
 RUN chown root:root ${PG_CONFIGDIR}/postgresql.conf
 RUN chown root:root ${PG_CONFIGDIR}/pg_hba.conf
-RUN chmod 600 ~/.pgpass
 RUN chmod 666 ${PG_CONFIGDIR}/postgresql.conf
 RUN chmod 666 ${PG_CONFIGDIR}/pg_hba.conf
 
