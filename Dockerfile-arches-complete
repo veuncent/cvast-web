@@ -43,7 +43,6 @@ ENV PG_VERSION=9.4
 ENV PG_DBNAME=cvast_arches
 ENV PG_HOST=localhost
 ENV PG_PORT=5432
-ENV PG_USER=postgres
 ENV PG_PASSWORD=postgis
 ENV PG_HOME=/var/lib/postgresql
 ENV PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
@@ -56,7 +55,7 @@ ENV ES_HOST=localhost
 USER postgres
 RUN ${PG_BINDIR}/postgresql start &&\
 	psql -d ${PG_USER} -c "ALTER USER ${PG_USER} with encrypted password '${PG_PASSWORD}';" &&\
-	psql -d ${PG_USER} -c "ALTER DATABASE postgres set timezone to 'US/Eastern';" &&\
+	psql -d postgres -c "ALTER DATABASE postgres set timezone to 'US/Eastern';" &&\
 	${PG_BINDIR}/postgresql stop
 
 USER root

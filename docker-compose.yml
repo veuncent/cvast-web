@@ -4,16 +4,17 @@ web:
   dockerfile: ./Dockerfile-web
   command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
   working_dir: /arches-cvast/arches_hip_cvast
-  # volumes:
-  # - /c/Users/CVAST/Documents/arches-docker/:/arches-cvast
+  volumes:
+  - web-uploaded-files:/arches-cvast/arches/arches/uploadedfiles
+  - /c/Users/CVAST/Documents/arches-docker/:/arches-cvast
   environment:
-    - PG_USER=postgres
-    - PG_PASSWORD=postgis
+    - PG_PASSWORD=TestCVAST
     - PG_HOST=db
     - PG_PORT=5432
     - ES_HOST=elasticsearch
   ports:
     - '8000:8000'
+    - '8001:8001'
   links:
     - db
     - elasticsearch
