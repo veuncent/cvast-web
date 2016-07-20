@@ -30,7 +30,8 @@ db:
   ports:
     - '5432:5432'
   environment:
-    - PG_PASSWORD=postgis
+    - PG_PASSWORD=TestCVAST
+    - IS_CLEAN_ENV=true
 elasticsearch:
   restart: always
   build: .
