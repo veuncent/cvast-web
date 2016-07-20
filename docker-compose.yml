@@ -7,7 +7,7 @@ web:
   volumes:
   - web-uploaded-files:/arches-cvast/arches/arches/uploadedfiles
   - web-log:/arches-cvast/arches_hip_cvast/arches_hip_cvast/logs
-  - /c/Users/CVAST/Documents/arches-docker/:/arches-cvast
+  # - /c/Users/CVAST/Documents/arches-docker/:/arches-cvast
   environment:
     - PG_PASSWORD=TestCVAST
     - PG_HOST=db
