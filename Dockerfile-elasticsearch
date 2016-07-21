@@ -2,6 +2,7 @@
 FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 
 USER root
+WORKDIR /
 RUN rm -rf /arches-cvast
 
 RUN apt-get purge -y postgresql-9.4
@@ -18,6 +19,5 @@ COPY ./install/elasticsearch.yml ${INSTALL_DIR}/elasticsearch.yml
 COPY ./install/es_entrypoint.sh ${INSTALL_DIR}/es_entrypoint.sh
 RUN chmod -R 700 ${INSTALL_DIR}
 
-WORKDIR /
 EXPOSE 9200
 CMD ${INSTALL_DIR}/es_entrypoint.sh && /elasticsearch/bin/elasticsearch -Des.config=${CONFIG_VOLUME}/elasticsearch.yml

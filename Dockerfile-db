@@ -27,5 +27,5 @@ COPY install/db_entrypoint.sh ${INSTALL_DIR}/db_entrypoint.sh
 RUN chmod -R 700 ${INSTALL_DIR}
 
 EXPOSE 5432
-VOLUME  ["/var/log/postgresql", "${DATA_VOLUME}", "${CONFIG_VOLUME}"]
+VOLUME  ["${PG_LOGDIR}", "${DATA_VOLUME}", "${CONFIG_VOLUME}"]
 CMD ${INSTALL_DIR}/db_entrypoint.sh && start-stop-daemon --start --chuid postgres:postgres --exec /usr/lib/postgresql/9.4/bin/postgres -- -D ${DATA_VOLUME} -c config_file=${CONFIG_VOLUME}/postgresql.conf

@@ -4,12 +4,15 @@ init_datadir() {
 	if [[ -d ${DATA_VOLUME} ]]; then
 		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
 		if [[ ${IS_CLEAN_ENV} == true ]]; then
+			echo "Clean environment. Copying to mounted volume..."
 			if [ "$(ls -A ${DATA_VOLUME} 2>/dev/null)" ]; then
 				echo "Host folder not empty. Skipping copy..."
 			else
 				echo "Copying ${PG_DATADIR} to ${DATA_VOLUME}"
 				cp -R ${PG_DATADIR}/* ${DATA_VOLUME}			
-			fi	
+			fi
+		else
+			echo "Existing environment, not copying anything to mounted volume..."
 		fi
 		
 		echo "Changing permissions of all files in ${DATA_VOLUME} to 0600"
@@ -30,12 +33,15 @@ init_configdir() {
 	if [[ -d ${CONFIG_VOLUME} ]]; then
 		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
 		if [[ ${IS_CLEAN_ENV} == true ]]; then
+			echo "Clean environment. Copying to mounted volume..."
 			if [ "$(ls -A ${CONFIG_VOLUME} 2>/dev/null)" ]; then
 				echo "Host folder not empty. Skipping copy..."
 			else
 				echo "Copying ${PG_CONFIGDIR} to ${CONFIG_VOLUME}"
 				cp -R ${PG_CONFIGDIR}/* ${CONFIG_VOLUME}
-			fi	
+			fi
+		else
+			echo "Existing environment, not copying anything to mounted volume..."			
 		fi
 		
 		echo "Setting ownership and permissions on ${CONFIG_VOLUME}"
