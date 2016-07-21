@@ -1,6 +1,6 @@
 #!/bin/bash
 init_datadir() {
-	echo "Initializing data dir..."
+	echo "Initializing Postgres data dir..."
 	if [[ -d ${DATA_VOLUME} ]]; then
 		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
 		if [[ ${IS_CLEAN_ENV} == true ]]; then
@@ -29,7 +29,7 @@ init_datadir() {
 }
 
 init_configdir() {
-	echo "Initializing config dir..."
+	echo "Initializing Postgres config dir..."
 	if [[ -d ${CONFIG_VOLUME} ]]; then
 		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
 		if [[ ${IS_CLEAN_ENV} == true ]]; then
@@ -57,7 +57,7 @@ init_configdir() {
 }
 
 init_logdir() {
-	echo "Initializing log dir..."
+	echo "Initializing Postgres log dir..."
 	if [[ -d ${LOG_VOLUME} ]]; then
 		echo "Changing permissions of all files and folders in ${LOG_VOLUME} to 1775"
 		chmod -R 1775 ${LOG_VOLUME}
@@ -84,9 +84,10 @@ check_env_variables(){
 	fi
 }
 
+echo "*** Initializing Postgresql ***"
+
 check_env_variables
 init_datadir
 init_configdir
 init_logdir
-
 set_password
