@@ -10,6 +10,7 @@ RUN apt-get purge -y postgresql-server-dev-9.4
 RUN apt-get purge -y postgresql-contrib-9.4
 RUN apt-get autoremove -y
 
+ENV ES_DATADIR=/var/lib/elasticsearch/data
 ENV DATA_VOLUME=/elasticsearch-data
 ENV CONFIG_VOLUME=/elasticsearch-config
 ENV LOG_VOLUME=/elasticsearch-log
