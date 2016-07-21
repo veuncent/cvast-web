@@ -1,5 +1,6 @@
 #!/bin/bash
 docker rm $(docker ps -q -f status=exited)
+# docker rm $(docker ps -a | grep "Created" | awk '{print $1}')
 
 docker rmi $(docker images -q -f dangling=true)
 
