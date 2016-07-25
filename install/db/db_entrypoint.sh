@@ -40,9 +40,8 @@ init_configdir() {
 	set_postgresql_param "data_directory" "${PG_DATA_VOLUME}"
   
 	if [[ -d ${PG_CONFIG_VOLUME} ]]; then
-				echo "Copying and overwriting ${PG_CONFIGFILE} to ${PG_CONFIGFILE_VOLUME}"
-				cp -f ${PG_CONFIGFILE} ${PG_CONFIGFILE_VOLUME}
-			fi
+		echo "Copying and overwriting ${PG_CONFIGFILE} to ${PG_CONFIGFILE_VOLUME}"
+		cp -f ${PG_CONFIGFILE} ${PG_CONFIGFILE_VOLUME}
 		
 		echo "Setting ownership and permissions on ${PG_CONFIG_VOLUME}"
 		chown -R postgres:postgres ${PG_CONFIG_VOLUME}
