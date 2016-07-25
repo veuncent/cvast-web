@@ -26,7 +26,7 @@ db:
   volumes:
       - postgres-data:/postgres-data
       - postgres-log:/var/log/postgresql
-      - postgres-config:/postgres-config/postgresql.conf
+      - postgres-config/postgresql.conf:/postgres-config/postgresql.conf
   ports:
     - '5432:5432'
   environment:
