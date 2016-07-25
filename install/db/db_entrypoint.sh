@@ -14,11 +14,6 @@ init_datadir() {
 		else
 			echo "Existing environment, not copying anything to mounted volume..."
 		fi
-		
-		echo "Setting data folder to ${PG_DATA_VOLUME}"
-		${PG_BINARY} start &&\
-		psql -U postgres -d postgres -c "ALTER USER postgres with encrypted password '${PG_PASSWORD}';" &&\
-		${PG_BINARY} stop
 	
 		echo "Changing permissions of all files in ${PG_DATA_VOLUME} to 0600"
 		find ${PG_DATA_VOLUME} -type f -exec chmod 0600 {} \;
