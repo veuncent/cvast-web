@@ -28,5 +28,5 @@ COPY install/db/db_entrypoint.sh ${INSTALL_DIR}/db_entrypoint.sh
 RUN chmod -R 700 ${INSTALL_DIR}
 
 EXPOSE 5432
-VOLUME  ["${PG_LOG_VOLUME}", "${PG_DATA_VOLUME}", "${PG_CONFIGFILE_VOLUME}"]
+VOLUME  ["${PG_LOG_VOLUME}", "${PG_DATA_VOLUME}", "${PG_CONFIG_VOLUME}"]
 CMD ${INSTALL_DIR}/db_entrypoint.sh && start-stop-daemon --start --chuid postgres:postgres --exec /usr/lib/postgresql/9.4/bin/postgres -- -c config_file=${PG_CONFIGFILE_VOLUME} -D ${PG_DATA_VOLUME} 
