@@ -46,34 +46,30 @@ ENV PG_PORT=5432
 ENV PG_PASSWORD=postgis
 ENV PG_HOME=/var/lib/postgresql
 ENV PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
-ENV PG_BINDIR=/etc/init.d
+ENV PG_BINARY=/etc/init.d/postgresql
 ENV PG_LOGDIR=/var/log/postgresql
 ENV PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
+ENV PG_CONFIGFILE=${PG_CONFIGDIR}/postgresql.conf
+ENV PG_HBA_CONFIGFILE=${PG_CONFIGDIR}/pg_hba.conf
 ENV ES_HOST=localhost
 	
 # Manage postgres credentials and settings	
+COPY ./install/db/postgresql.conf ${PG_CONFIGFILE}
+COPY ./install/db/pg_hba.conf ${PG_HBA_CONFIGFILE}
+
 USER postgres
-RUN ${PG_BINDIR}/postgresql start &&\
+RUN ${PG_BINARY} start &&\
 	psql -d postgres -c "ALTER DATABASE postgres set timezone to 'US/Eastern';" &&\
-	${PG_BINDIR}/postgresql stop
+	${PG_BINARY} stop
 
 USER root
 RUN chown -R postgres:postgres ${PG_HOME}
 RUN chown -R postgres:postgres ${PG_LOGDIR}
 RUN chown -R postgres:postgres ${PG_CONFIGDIR}
-RUN chown root:root ${PG_CONFIGDIR}/postgresql.conf
-RUN chown root:root ${PG_CONFIGDIR}/pg_hba.conf
-RUN chmod 666 ${PG_CONFIGDIR}/postgresql.conf
-RUN chmod 666 ${PG_CONFIGDIR}/pg_hba.conf
-
-RUN echo "standard_conforming_strings = off" >> ${PG_CONFIGDIR}/postgresql.conf
-RUN echo "listen_addresses = '*'" >> ${PG_CONFIGDIR}/postgresql.conf
-RUN echo "#TYPE   DATABASE  USER  CIDR-ADDRESS  METHOD" > ${PG_CONFIGDIR}/pg_hba.conf
-RUN echo "local   all       all                 trust" >> ${PG_CONFIGDIR}/pg_hba.conf
-RUN echo "host    all       all   127.0.0.1/32  trust" >> ${PG_CONFIGDIR}/pg_hba.conf
-RUN echo "host    all       all   ::1/128       trust" >> ${PG_CONFIGDIR}/pg_hba.conf
-RUN echo "host    all       all   0.0.0.0/0     md5" >> ${PG_CONFIGDIR}/pg_hba.conf
-RUN echo "host all all 127.0.0.1 255.255.255.0 trust" >> ${PG_CONFIGDIR}/pg_hba.conf
+RUN chown root:root ${PG_CONFIGFILE}
+RUN chown root:root ${PG_HBA_CONFIGFILE}
+RUN chmod 666 ${PG_CONFIGFILE}
+RUN chmod 666 ${PG_HBA_CONFIGFILE}
 
 
 # Install Geos	
@@ -122,14 +118,14 @@ RUN pip install --no-index -e .
 
 # Setup databases
 USER postgres	
-RUN ${PG_BINDIR}/postgresql start &&\
+RUN ${PG_BINARY} start &&\
 	createdb -E UTF8 -T template0 --locale=en_US.utf8 template_postgis_20 &&\
 	psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis_20'" &&\
 	psql -d template_postgis_20 -c "CREATE EXTENSION postgis;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
 	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
-	${PG_BINDIR}/postgresql stop
+	${PG_BINARY} stop
 USER root	
 
 # Setup Arches Hip app
@@ -142,13 +138,13 @@ WORKDIR /arches-cvast/arches_hip_cvast
 RUN python manage.py packages -o setup_elasticsearch
 
 # Run database scripts & arches hip resources
-RUN ${PG_BINDIR}/postgresql start &&\
+RUN ${PG_BINARY} start &&\
 	python manage.py packages -o start_elasticsearch &&\
 	# Wait for elasticsearch to start
 	sleep 10 &&\ 
 	python manage.py packages -o install &&\
 	python manage.py packages -o load_concept_scheme -s arches_hip_cvast/source_data/concepts/authority_files &&\
-	${PG_BINDIR}/postgresql stop
+	${PG_BINARY} stop
 
 
 # Cleanup
