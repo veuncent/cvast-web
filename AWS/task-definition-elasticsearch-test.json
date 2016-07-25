@@ -1,0 +1,59 @@
+{
+    "containerDefinitions": [
+        {
+            "memory": 600,
+            "portMappings": [
+                {
+                    "hostPort": 9200,
+                    "containerPort": 9200,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "mountPoints": [
+                {
+                    "containerPath": "/elasticsearch-data",
+                    "sourceVolume": "elasticsearchData"
+                },
+                {
+                    "containerPath": "/elasticsearch-log",
+                    "sourceVolume": "elasticsearchLog"
+                },
+                {
+                    "containerPath": "/elasticsearch-config",
+                    "sourceVolume": "elasticsearchConfig"
+                }
+            ],
+            "name": "cvast-arches-elasticsearch-container-test",
+            "environment": [
+                {
+                    "name": "IS_CLEAN_ENV",
+                    "value": "false"
+                }
+            ],
+            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-elasticsearch:%BUILD_NUMBER%",
+            "cpu": 256
+        }
+    ],
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/elasticsearch-data"
+            },
+            "name": "elasticsearchData"
+        },
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/elasticsearch-log"
+            },
+            "name": "elasticsearchLog"
+        },
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/elasticsearch-config"
+            },
+            "name": "elasticsearchConfig"
+        }
+    ],
+    "family": "cvast-arches-elasticsearch-task-test"
+}

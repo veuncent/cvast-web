@@ -1,12 +1,7 @@
 {
     "containerDefinitions": [
         {
-            "volumesFrom": [],
-            "memory": 300,
-            "extraHosts": null,
-            "dnsServers": null,
-            "disableNetworking": null,
-            "dnsSearchDomains": null,
+            "memory": 600,
             "portMappings": [
                 {
                     "hostPort": 5432,
@@ -14,61 +9,55 @@
                     "protocol": "tcp"
                 }
             ],
-            "hostname": null,
             "essential": true,
-            "entryPoint": [],
             "mountPoints": [
                 {
-                    "containerPath": "/var/lib/postgresql",
-                    "sourceVolume": "postgresData",
-                    "readOnly": false
+                    "containerPath": "/postgres-data",
+                    "sourceVolume": "postgresData"
                 },
-				{
+                {
                     "containerPath": "/var/log/postgresql",
-                    "sourceVolume": "postgresData",
-                    "readOnly": false
+                    "sourceVolume": "postgresLog"
                 },
-				{
-                    "containerPath": "/etc/postgresql",
-                    "sourceVolume": "postgresData",
-                    "readOnly": false
+                {
+                    "containerPath": "/postgres-config",
+                    "sourceVolume": "postgresConfig"
                 }
             ],
             "name": "cvast-arches-db-container-test",
-            "ulimits": null,
-            "dockerSecurityOptions": null,
-            "environment": [],
-            "links": [],
-            "workingDirectory": null,
-            "readonlyRootFilesystem": null,
-            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-db:master",
-            "command": [],
-            "user": null,
-            "dockerLabels": null,
-            "logConfiguration": null,
-            "cpu": 10,
-            "privileged": null
+            "environment": [
+                {
+                    "name": "PG_PASSWORD",
+                    "value": "TestCVAST"
+                },
+                {
+                    "name": "IS_CLEAN_ENV",
+                    "value": "false"
+                }
+            ],
+            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-db:%BUILD_NUMBER%",
+            "cpu": 256
         }
     ],
-	"volumes": [
-    {
-      "host": {
-        "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-data"
-      },
-      "name": "postgresData"
-    },
-	{
-      "host": {
-        "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-config"
-      },
-      "name": "postgresConfig"
-    },
-    {
-      "host": {
-        "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-log"
-      },
-      "name": "postgresLog"
-    }
-  ],
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-data/"
+            },
+            "name": "postgresData"
+        },
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-log"
+            },
+            "name": "postgresLog"
+        },
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-config"
+            },
+            "name": "postgresConfig"
+        }
+    ],
     "family": "cvast-arches-db-task-test"
 }

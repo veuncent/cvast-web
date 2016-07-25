@@ -1,56 +1,61 @@
 {
     "containerDefinitions": [
         {
-            "volumesFrom": [],
-            "memory": 300,
-            "extraHosts": null,
-            "dnsServers": null,
-            "disableNetworking": null,
-            "dnsSearchDomains": null,
+            "memory": 400,
             "portMappings": [
                 {
                     "hostPort": 8000,
                     "containerPort": 8000,
                     "protocol": "tcp"
-                },
-                {
-                    "hostPort": 80,
-                    "containerPort": 8000,
-                    "protocol": "tcp"
                 }
             ],
-            "hostname": null,
             "essential": true,
-            "entryPoint": [],
             "mountPoints": [
                 {
-                    "containerPath": "/arches-cvast/arches/arches/settings_local.py",
-                    "sourceVolume": "localSettings",
-                    "readOnly": false
+                    "containerPath": "/arches-cvast/arches/arches/uploadedfiles",
+                    "sourceVolume": "uploadedFiles"
+                },
+                {
+                    "containerPath": "/arches-cvast/arches_hip_cvast/arches_hip_cvast/logs",
+                    "sourceVolume": "webLog"
                 }
             ],
             "name": "cvast-arches-web-container-test",
-            "ulimits": null,
-            "dockerSecurityOptions": null,
-            "environment": [],
-            "links": null,
-            "workingDirectory": null,
+            "environment": [
+                {
+                    "name": "PG_PASSWORD",
+                    "value": "TestCVAST"
+                },
+                {
+                    "name": "PG_PORT",
+                    "value": "5432"
+                },
+                {
+                    "name": "ES_HOST",
+                    "value": "cvast-arches-elastics-loadb-test-1322734012.us-east-1.elb.amazonaws.com"
+                },
+                {
+                    "name": "PG_HOST",
+                    "value": "cvast-arches-db-loadb-test-2101097501.us-east-1.elb.amazonaws.com"
+                }
+            ],
             "readonlyRootFilesystem": false,
-            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-web:jenkins",
-            "command": null,
-            "user": null,
-            "dockerLabels": null,
-            "logConfiguration": null,
-            "cpu": 256,
-            "privileged": null
+            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-web:%BUILD_NUMBER%",
+            "cpu": 256
         }
     ],
     "volumes": [
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/settings_local.py"
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/web-uploaded-files"
             },
-            "name": "localSettings"
+            "name": "uploadedFiles"
+        },
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/environments/test/web-log"
+            },
+            "name": "webLog"
         }
     ],
     "family": "cvast-arches-web-task-test"
