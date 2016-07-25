@@ -16,8 +16,8 @@ ENV CONFIG_VOLUME=/elasticsearch-config
 ENV LOG_VOLUME=/elasticsearch-log
 ENV INSTALL_DIR=/install
 
-COPY ./install/elasticsearch.yml ${INSTALL_DIR}/elasticsearch.yml
-COPY ./install/es_entrypoint.sh ${INSTALL_DIR}/es_entrypoint.sh
+COPY ./install/elasticsearch/elasticsearch.yml ${INSTALL_DIR}/elasticsearch.yml
+COPY ./install/elasticsearch/es_entrypoint.sh ${INSTALL_DIR}/es_entrypoint.sh
 RUN chmod -R 700 ${INSTALL_DIR}
 
 VOLUME ["${DATA_VOLUME}, ${CONFIG_VOLUME}, ${LOG_VOLUME}"]

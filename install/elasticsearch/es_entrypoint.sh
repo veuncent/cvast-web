@@ -45,6 +45,6 @@ init_configdir() {
 }
 
 echo "*** Initializing Elasticsearch ***"
-
+ 
 init_datadir
 init_configdir

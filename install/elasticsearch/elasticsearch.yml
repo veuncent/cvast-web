@@ -1,0 +1,18 @@
+path:
+  logs: /elasticsearch-log
+  data: /elasticsearch-data
+   
+  
+  
+  
+# ----------------- FOR TESTING ONLY -----------------
+# - THESE SETTINGS SHOULD BE REVIEWED FOR PRODUCTION -
+node.max_local_storage_nodes: 1
+index.number_of_shards: 1
+index.number_of_replicas: 0
+http.port: 9200
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: ["localhost"]  
+
+# One thing to be wary of, with the default ES config (unless that has been changed by now), the nodes have a tendency to go and look for each other. I remember when my ES instance started syncing with a colleagues (without us realising). Easiest way to prevent that is to give your cluster a dedicated name (cluster.name in the config). 
+# cluster.name: 
