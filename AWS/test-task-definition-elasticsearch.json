@@ -24,7 +24,7 @@
                     "sourceVolume": "elasticsearchConfig"
                 }
             ],
-            "name": "cvast-arches-elasticsearch-container-test",
+            "name": "test-cvast-arches-elasticsearch-container",
             "environment": [
                 {
                     "name": "IS_CLEAN_ENV",
@@ -38,22 +38,22 @@
     "volumes": [
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/elasticsearch-data"
+                "sourcePath": "/mnt/persist/cvast-arches/elasticsearch-data"
             },
             "name": "elasticsearchData"
         },
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/elasticsearch-log"
+                "sourcePath": "/mnt/persist/cvast-arches/elasticsearch-log"
             },
             "name": "elasticsearchLog"
         },
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/elasticsearch-config"
+                "sourcePath": "/mnt/persist/cvast-arches/elasticsearch-config"
             },
             "name": "elasticsearchConfig"
         }
     ],
-    "family": "cvast-arches-elasticsearch-task-test"
+    "family": "test-cvast-arches-elasticsearch-task"
 }

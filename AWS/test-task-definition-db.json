@@ -24,7 +24,7 @@
                     "sourceVolume": "postgresConfig"
                 }
             ],
-            "name": "cvast-arches-db-container-test",
+            "name": "test-cvast-arches-db-container",
             "environment": [
                 {
                     "name": "PG_PASSWORD",
@@ -42,22 +42,22 @@
     "volumes": [
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-data/"
+                "sourcePath": "/mnt/persist/cvast-arches/postgres-data/"
             },
             "name": "postgresData"
         },
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-log"
+                "sourcePath": "/mnt/persist/cvast-arches/postgres-log"
             },
             "name": "postgresLog"
         },
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/postgres-config"
+                "sourcePath": "/mnt/persist/cvast-arches/postgres-config"
             },
             "name": "postgresConfig"
         }
     ],
-    "family": "cvast-arches-db-task-test"
+    "family": "test-cvast-arches-db-task"
 }

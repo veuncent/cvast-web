@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE_OPTIONS="db|web|elasticsearch"
-ENVIRONMENT_OPTIONS="test"
+ENVIRONMENT_OPTIONS="test|acc"
 HELP_TEXT="
 Arguments:
 -c or --commit: GIT commit number
@@ -22,14 +22,12 @@ create_task_definition() {
 	# Create tmp folder if it doesn't exist
 	[ -d ${TMP_FOLDER} ] || mkdir ${TMP_FOLDER}
 	# Create a new task definition for this build
-	# sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ./task-definition-${DOCKER_IMAGE}-${ENVIRONMENT}.json > ${TMP_FOLDER}/task-definition-${DOCKER_IMAGE}-${ENVIRONMENT}_${BUILD_NUMBER}.json
-	sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ./task-definition-${DOCKER_IMAGE}-${ENVIRONMENT}.json > ${TMP_FOLDER}/task-definition-${DOCKER_IMAGE}-${ENVIRONMENT}_${BUILD_NUMBER}.json
-
+	sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ./${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}.json > ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
 }
 
 register_task_definition_in_AWS(){
-	echo "Registering ${TMP_FOLDER}/task-definition-${DOCKER_IMAGE}-${ENVIRONMENT}_${BUILD_NUMBER}.json on AWS"
-	aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/task-definition-${DOCKER_IMAGE}-${ENVIRONMENT}_${BUILD_NUMBER}.json
+	echo "Registering ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json on AWS"
+	aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
 }
 
 update_AWS_service_with_task_revision(){
@@ -39,8 +37,8 @@ update_AWS_service_with_task_revision(){
 }
 
 cleanup() {
-	echo "Removing ${TMP_FOLDER}/task-definition-${DOCKER_IMAGE}-${ENVIRONMENT}_${BUILD_NUMBER}.json"
-	rm ${TMP_FOLDER}/task-definition-${DOCKER_IMAGE}-${ENVIRONMENT}_${BUILD_NUMBER}.json
+	echo "Removing ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json"
+	rm ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
 }
 
 ### Enter here (parameter check) ###
@@ -103,9 +101,9 @@ eval "case ${ENVIRONMENT} in
 esac"
 
 
-TASK_FAMILY=cvast-arches-${DOCKER_IMAGE}-task-${ENVIRONMENT}
-CLUSTER_NAME=cvast-arches-cluster-${ENVIRONMENT}
-SERVICE_NAME=cvast-arches-${DOCKER_IMAGE}-service-${ENVIRONMENT}
+TASK_FAMILY=${ENVIRONMENT}-cvast-arches-${DOCKER_IMAGE}-task
+CLUSTER_NAME=${ENVIRONMENT}-cvast-arches-cluster
+SERVICE_NAME=${ENVIRONMENT}-cvast-arches-${DOCKER_IMAGE}-service
 
 create_task_definition
 register_task_definition_in_AWS

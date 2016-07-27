@@ -20,7 +20,7 @@
                     "sourceVolume": "webLog"
                 }
             ],
-            "name": "cvast-arches-web-container-test",
+            "name": "test-cvast-arches-web-container",
             "environment": [
                 {
                     "name": "PG_PASSWORD",
@@ -32,11 +32,11 @@
                 },
                 {
                     "name": "ES_HOST",
-                    "value": "cvast-arches-elastics-loadb-test-1322734012.us-east-1.elb.amazonaws.com"
+                    "value": "internal-test-cvast-arches-elastics-loadb-714914838.us-east-1.elb.amazonaws.com"
                 },
                 {
                     "name": "PG_HOST",
-                    "value": "cvast-arches-db-loadb-test-2101097501.us-east-1.elb.amazonaws.com"
+                    "value": "internal-test-cvast-arches-db-loadb-400084165.us-east-1.elb.amazonaws.com"
                 }
             ],
             "readonlyRootFilesystem": false,
@@ -47,16 +47,16 @@
     "volumes": [
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/web-uploaded-files"
+                "sourcePath": "/mnt/persist/cvast-arches/web-uploaded-files"
             },
             "name": "uploadedFiles"
         },
         {
             "host": {
-                "sourcePath": "/mnt/persist/cvast-arches/environments/test/web-log"
+                "sourcePath": "/mnt/persist/cvast-arches/web-log"
             },
             "name": "webLog"
         }
     ],
-    "family": "cvast-arches-web-task-test"
+    "family": "test-cvast-arches-web-task"
 }
