@@ -11,7 +11,8 @@ Arguments:
 "
 
 TMP_FOLDER=./tmp
-
+# Get current folder, so that we can run this script from anywhere
+SCRIPT_FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 
 display_help() {
@@ -21,8 +22,8 @@ display_help() {
 create_task_definition() {
 	# Create tmp folder if it doesn't exist
 	[ -d ${TMP_FOLDER} ] || mkdir ${TMP_FOLDER}
-	# Create a new task definition for this build
-	sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ./${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}.json > ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
+	# Create a new task definition file for this build
+	sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${SCRIPT_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}.json > ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
 }
 
 register_task_definition_in_AWS(){
