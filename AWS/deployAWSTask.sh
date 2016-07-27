@@ -28,13 +28,13 @@ create_task_definition() {
 
 register_task_definition_in_AWS(){
 	echo "Registering ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json on AWS"
-	aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
+	sudo aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
 }
 
 update_AWS_service_with_task_revision(){
-	TASK_REVISION=`aws ecs describe-task-definition --task-definition ${TASK_FAMILY} | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
+	TASK_REVISION=`sudo aws ecs describe-task-definition --task-definition ${TASK_FAMILY} | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
 	echo "Updating task ${TASK_FAMILY} on AWS service ${SERVICE_NAME} with task revision ${TASK_REVISION}"
-	aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION}
+	sudo aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION}
 }
 
 cleanup() {
