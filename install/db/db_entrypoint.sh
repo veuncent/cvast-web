@@ -33,13 +33,15 @@ init_configdir() {
 	
 	echo "Setting postgres parameter 'data_directory' to ${PG_DATA_VOLUME}"
 	set_postgresql_param "data_directory" "${PG_DATA_VOLUME}"
-  
+	
+	set_password
+	
 	if [[ -d ${PG_CONFIG_VOLUME} ]]; then
 		echo "Copying and overwriting ${PG_CONFIGFILE} to ${PG_CONFIGFILE_VOLUME}"
 		cp -f ${PG_CONFIGFILE} ${PG_CONFIGFILE_VOLUME}
 		echo "Removing ${PG_CONFIGFILE}"
 		rm -rf ${PG_CONFIGFILE}
-		
+			
 		echo "Setting ownership and permissions on ${PG_CONFIGDIR}"
 		chown -R postgres:postgres ${PG_CONFIGDIR}
         chown root:root ${PG_CONFIGDIR}/pg_hba.conf
@@ -85,35 +87,23 @@ check_env_variables() {
 ### internal functions ###
 
 exec_as_postgres() {
-	echo "7"
 	sudo -HEu postgres "$@"
-	echo "8"
 }
 
 set_postgresql_param() {
 	local key=${1}
 	local value=${2}
 	local verbosity=${3:-verbose}
-	echo "1"
 	if [[ -n ${value} ]]; then
-		echo "2"
 		local current=$(exec_as_postgres sed -n -e "s/^\(${key} = '\)\([^ ']*\)\(.*\)$/\2/p" ${PG_CONFIGFILE})
-		echo "3"
-		echo "current"
 		if [[ "${current}" != "${value}" ]]; then
-			echo "4"
 			if [[ ${verbosity} == verbose ]]; then
-				echo "5"
 				echo "‣ Setting ${PG_CONFIGFILE} parameter: ${key} = '${value}'"
 			fi
-			echo "6"
 			value="$(echo "${value}" | sed 's|[&]|\\&|g')"
-			echo value
 			exec_as_postgres sed -i "s|^[#]*[ ]*${key} = .*|${key} = '${value}'|" ${PG_CONFIGFILE}
-			echo "9"
 		fi
 	fi
-	echo "10"
 }
 
 
@@ -124,6 +114,4 @@ check_env_variables
 init_datadir
 init_configdir
 init_logdir
-set_password
-
-echo "*** Done initializing Postgresql ***"
+# set_password
