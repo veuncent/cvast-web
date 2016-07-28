@@ -12,6 +12,8 @@ RUN apt-get autoremove -y
 
 RUN rm -rf /elasticsearch
 
+ENV DJANGO_PASSWORD=admin
+
 VOLUME ["/arches-cvast/arches/arches/uploadedfiles", "/arches-cvast/arches_hip_cvast/arches_hip_cvast/logs"]
 EXPOSE 8000
-CMD python -u manage.py runserver 0.0.0.0:8000
+CMD python -u manage.py setPassword && python -u manage.py runserver 0.0.0.0:8000

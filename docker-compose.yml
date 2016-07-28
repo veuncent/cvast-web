@@ -2,7 +2,7 @@ web:
   restart: always
   build: .
   dockerfile: ./Dockerfile-web
-  command: bash -c  "sleep 10 && python manage.py runserver 0.0.0.0:8000" 
+  command: bash -c  "sleep 10 && python -u manage.py setPassword && python -u manage.py runserver 0.0.0.0:8000" 
   working_dir: /arches-cvast/arches_hip_cvast
   volumes:
   - web-uploaded-files:/arches-cvast/arches/arches/uploadedfiles
@@ -13,6 +13,7 @@ web:
     - PG_HOST=db
     - PG_PORT=5432
     - ES_HOST=elasticsearch
+    - DJANGO_PASSWORD=TestAdminCVAST
   ports:
     - '8000:8000'
     - '8001:8001'
