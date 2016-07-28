@@ -12,21 +12,21 @@ ENV LC_LANG en_US.UTF-8
 ENV LC_LANGUAGE en_US.UTF-8
 
 # Install dependencies
-RUN apt-get update -y 
-RUN apt-get install -y wget
-RUN apt-get install -y build-essential
-RUN apt-get install -y libxml2-dev
-RUN apt-get install -y libjson0-dev
-RUN apt-get install -y libproj-dev
-RUN apt-get install -y xsltproc docbook-xsl
-RUN apt-get install -y docbook-mathml
-RUN apt-get install -y libgdal1-dev
-RUN apt-get install -y openjdk-7-jdk
-RUN apt-get install -y python-setuptools
-RUN apt-get install -y python-dev
-RUN apt-get install -y libffi-dev
-RUN apt-get install -y libpq-dev
-RUN	easy_install pip
+RUN apt-get update -y &&\
+	apt-get install -y wget &&\
+	apt-get install -y build-essential &&\
+	apt-get install -y libxml2-dev &&\
+	apt-get install -y libjson0-dev &&\
+	apt-get install -y libproj-dev &&\
+	apt-get install -y xsltproc docbook-xsl &&\
+	apt-get install -y docbook-mathml &&\
+	apt-get install -y libgdal1-dev &&\
+	apt-get install -y openjdk-7-jdk &&\
+	apt-get install -y python-setuptools &&\
+	apt-get install -y python-dev &&\
+	apt-get install -y libffi-dev &&\
+	apt-get install -y libpq-dev &&\
+	easy_install pip
 
 # Needed for postgres-9.4
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list

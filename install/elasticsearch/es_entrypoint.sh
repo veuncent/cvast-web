@@ -7,7 +7,7 @@ init_datadir() {
 	if [[ -d ${DATA_VOLUME} ]]; then
 		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
 		if [[ ${IS_CLEAN_ENV} == true ]]; then
-			echo "Clean environment. Copying to mounted volume..."
+			echo "Clean environment. Copying data to mounted volume..."
 			if [ "$(ls -A ${DATA_VOLUME} 2>/dev/null)" ]; then
 				echo "Host folder not empty. Skipping copy..."
 			else
@@ -28,7 +28,7 @@ init_configdir() {
 	if [[ -d ${CONFIG_VOLUME} ]]; then
 		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
 		if [[ ${IS_CLEAN_ENV} == true ]]; then
-			echo "Clean environment. Copying to mounted volume..."
+			echo "Clean environment. Copying config to mounted volume..."
 			if [ "$(ls -A ${CONFIG_VOLUME} 2>/dev/null)" ]; then
 				echo "Host folder not empty. Skipping copy..."
 			else

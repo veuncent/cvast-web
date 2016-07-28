@@ -31,7 +31,6 @@ init_datadir() {
 init_configdir() {
 	echo "Initializing Postgres config dir..."
 	
-	echo "Setting postgres parameter 'data_directory' to ${PG_DATA_VOLUME}"
 	set_postgresql_param "data_directory" "${PG_DATA_VOLUME}"
 	
 	set_password
@@ -98,7 +97,7 @@ set_postgresql_param() {
 		local current=$(exec_as_postgres sed -n -e "s/^\(${key} = '\)\([^ ']*\)\(.*\)$/\2/p" ${PG_CONFIGFILE})
 		if [[ "${current}" != "${value}" ]]; then
 			if [[ ${verbosity} == verbose ]]; then
-				echo "‣ Setting ${PG_CONFIGFILE} parameter: ${key} = '${value}'"
+				echo "Setting ${PG_CONFIGFILE} parameter: ${key} = '${value}'"
 			fi
 			value="$(echo "${value}" | sed 's|[&]|\\&|g')"
 			exec_as_postgres sed -i "s|^[#]*[ ]*${key} = .*|${key} = '${value}'|" ${PG_CONFIGFILE}
@@ -107,11 +106,12 @@ set_postgresql_param() {
 }
 
 
+
 ### Starting point ### 
+
 echo "*** Initializing Postgresql ***"
 
 check_env_variables
 init_datadir
 init_configdir
 init_logdir
-# set_password
