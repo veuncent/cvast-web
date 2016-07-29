@@ -2,6 +2,7 @@ import os
 import sys
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
+from django import db
 
 def get_env_variable(var_name):
     msg = "!!! ERROR! Please specify the %s environment variable. Exiting... !!!"
@@ -21,3 +22,4 @@ class Command(BaseCommand):
         user.set_password(password)
         user.save()
         self.stdout.write('Admin password set.')
+        db.close_connection()
