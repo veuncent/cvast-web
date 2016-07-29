@@ -21,7 +21,6 @@ init_datadir() {
 		find ${PG_DATA_VOLUME} -type d -exec chmod 0700 {} \;
 		echo "Changing ownership of ${PG_DATA_VOLUME} to postgres"
 		chown -R postgres:postgres ${PG_DATA_VOLUME}
-
 	else
 		echo "!!! Data volume does not exist !!!"
 		exit 1
@@ -30,24 +29,18 @@ init_datadir() {
 
 init_configdir() {
 	echo "Initializing Postgres config dir..."
-	
-	set_postgresql_param "data_directory" "${PG_DATA_VOLUME}"
-	
-	set_password
-	
 	if [[ -d ${PG_CONFIG_VOLUME} ]]; then
-		echo "Copying and overwriting ${PG_CONFIGFILE} to ${PG_CONFIGFILE_VOLUME}"
+		echo "Copying and overwriting ${PG_CONFIGDIR} to ${PG_CONFIGFILE_VOLUME}"
 		cp -f ${PG_CONFIGFILE} ${PG_CONFIGFILE_VOLUME}
 		echo "Removing ${PG_CONFIGFILE}"
-		rm -rf ${PG_CONFIGFILE}
+		rm -f ${PG_CONFIGFILE}
 			
 		echo "Setting ownership and permissions on ${PG_CONFIGDIR}"
-		chown -R postgres:postgres ${PG_CONFIGDIR}
-        chown root:root ${PG_CONFIGDIR}/pg_hba.conf
-		chmod 666 ${PG_CONFIGDIR}/pg_hba.conf
-		
+		chown -R postgres:postgres ${PG_CONFIG_VOLUME}
 		chown root:root ${PG_CONFIGFILE_VOLUME}
+        # chown root:root ${PG_CONFIG_VOLUME}/pg_hba.conf
 		chmod 666 ${PG_CONFIGFILE_VOLUME}
+		# chmod 666 ${PG_CONFIG_VOLUME}/pg_hba.conf
 	else
 		echo "!!! Config volume does not exist !!!"
 		exit 1
@@ -67,12 +60,11 @@ init_logdir() {
 	fi
 }
 
-
 set_password() {
 	echo "Setting database password for user postgres"
-	${PG_BINARY} start &&\
+	start_postgres_internally &&\
 	psql -U postgres -d postgres -c "ALTER USER postgres with encrypted password '${PG_PASSWORD}';" &&\
-	${PG_BINARY} stop
+	stop_postgres
 }
 
 check_env_variables() {
@@ -81,9 +73,6 @@ check_env_variables() {
         exit 1
 	fi
 }
-
-
-### internal functions ###
 
 exec_as_postgres() {
 	sudo -HEu postgres "$@"
@@ -94,18 +83,37 @@ set_postgresql_param() {
 	local value=${2}
 	local verbosity=${3:-verbose}
 	if [[ -n ${value} ]]; then
-		local current=$(exec_as_postgres sed -n -e "s/^\(${key} = '\)\([^ ']*\)\(.*\)$/\2/p" ${PG_CONFIGFILE})
+		local current=$(exec_as_postgres sed -n -e "s/^\(${key} = '\)\([^ ']*\)\(.*\)$/\2/p" ${PG_CONFIGFILE_VOLUME})
 		if [[ "${current}" != "${value}" ]]; then
 			if [[ ${verbosity} == verbose ]]; then
-				echo "Setting ${PG_CONFIGFILE} parameter: ${key} = '${value}'"
+				echo "Setting ${PG_CONFIGFILE_VOLUME} parameter: ${key} = '${value}'"
 			fi
 			value="$(echo "${value}" | sed 's|[&]|\\&|g')"
-			exec_as_postgres sed -i "s|^[#]*[ ]*${key} = .*|${key} = '${value}'|" ${PG_CONFIGFILE}
+			exec_as_postgres sed -i "s|^[#]*[ ]*${key} = .*|${key} = '${value}'|" ${PG_CONFIGFILE_VOLUME}
 		fi
 	fi
 }
 
+start_postgres() {
+	echo "*** Starting PostgreSQL ${PG_VERSION}... ***"
+	exec start-stop-daemon --start --chuid postgres:postgres \
+		--exec ${PG_BINDIR}/postgres -- \
+			-D ${PG_CONFIG_VOLUME}
+}
 
+start_postgres_internally() {
+	# start postgres server internally for initialization
+	rm -rf ${PG_DATA_VOLUME}/postmaster.pid
+	set_postgresql_param "listen_addresses" "127.0.0.1" quiet
+	exec_as_postgres ${PG_BINDIR}/pg_ctl -D ${PG_CONFIG_VOLUME} -w start
+}
+
+stop_postgres() {
+	# stop the postgres server
+	exec_as_postgres ${PG_BINDIR}/pg_ctl -D ${PG_CONFIG_VOLUME} -w stop
+	# listen on all interfaces
+	set_postgresql_param "listen_addresses" "*" quiet
+}
 
 ### Starting point ### 
 
@@ -115,3 +123,7 @@ check_env_variables
 init_datadir
 init_configdir
 init_logdir
+set_postgresql_param "data_directory" "${PG_DATA_VOLUME}"
+set_password
+
+start_postgres

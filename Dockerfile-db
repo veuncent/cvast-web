@@ -11,6 +11,7 @@ ENV PG_CONFIGFILE_VOLUME=${PG_CONFIG_VOLUME}/postgresql.conf
 ENV PG_LOG_VOLUME=${PG_LOGDIR}
 ENV INSTALL_DIR=/install
 ENV IS_CLEAN_ENV=false
+ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin
 
 # Remove obsolete folders
 RUN rm -rf /arches-cvast
@@ -29,4 +30,4 @@ RUN chmod -R 700 ${INSTALL_DIR}
 
 EXPOSE 5432
 VOLUME  ["${PG_LOG_VOLUME}", "${PG_DATA_VOLUME}", "${PG_CONFIG_VOLUME}"]
-CMD ${INSTALL_DIR}/db_entrypoint.sh && exec start-stop-daemon --start --chuid postgres:postgres --exec /usr/lib/postgresql/9.4/bin/postgres -- -c config_file=${PG_CONFIGFILE_VOLUME} -D ${PG_DATA_VOLUME} 
+CMD ${INSTALL_DIR}/db_entrypoint.sh

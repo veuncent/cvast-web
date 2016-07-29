@@ -2,7 +2,7 @@ web:
   restart: always
   build: .
   dockerfile: ./Dockerfile-web
-  command: bash -c  "sleep 10 && python -u manage.py setPassword && python -u manage.py runserver 0.0.0.0:8000" 
+  command: bash -c  "sleep 15 && python -u manage.py setPassword && python -u manage.py runserver 0.0.0.0:8000" 
   working_dir: /arches-cvast/arches_hip_cvast
   volumes:
   - web-uploaded-files:/arches-cvast/arches/arches/uploadedfiles
@@ -32,7 +32,7 @@ db:
     - '5432:5432'
   environment:
     - PG_PASSWORD=TestCVAST
-    - IS_CLEAN_ENV=false
+    - IS_CLEAN_ENV=true
 elasticsearch:
   restart: always
   build: .
@@ -45,4 +45,4 @@ elasticsearch:
     - "9200:9200"
     - "9300:9300"
   environment:
-    - IS_CLEAN_ENV=false
+    - IS_CLEAN_ENV=true
