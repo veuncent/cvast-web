@@ -28,10 +28,10 @@
             "environment": [
                 {
                     "name": "IS_CLEAN_ENV",
-                    "value": "false"
+                    "value": "true"
                 }
             ],
-            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-elasticsearch:%BUILD_NUMBER%",
+            "image": "<Docker registry URL>:5000/cvast-elasticsearch:%BUILD_NUMBER%",
             "cpu": 256
         }
     ],
@@ -55,5 +55,5 @@
             "name": "elasticsearchConfig"
         }
     ],
-    "family": "test-cvast-arches-elasticsearch-task"
+    "family": "<environment name>-cvast-arches-elasticsearch-task"
 }

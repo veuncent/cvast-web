@@ -1,18 +1,14 @@
 #!/bin/bash
 
-IMAGE_OPTIONS="db|web|elasticsearch"
+APP_OPTIONS="db|web|elasticsearch"
 ENVIRONMENT_OPTIONS="test|acc"
 HELP_TEXT="
 Arguments:
 -c or --commit: GIT commit number
--i or --image: Docker image to be deployed (options: ${IMAGE_OPTIONS})
+-a or --app: CVAST app to be deployed (options: ${APP_OPTIONS})
 -e or --environment: The AWS environment to deploy on (options: ${ENVIRONMENT_OPTIONS})
 -h or --help: Display help text
 "
-
-TMP_FOLDER=./tmp
-# Get current folder, so that we can run this script from anywhere
-SCRIPT_FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 
 display_help() {
@@ -20,15 +16,17 @@ display_help() {
 }
 
 create_task_definition() {
-	# Create tmp folder if it doesn't exist
-	[ -d ${TMP_FOLDER} ] || mkdir ${TMP_FOLDER}
-	# Create a new task definition file for this build
-	sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ${SCRIPT_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}.json > ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
+	LATEST_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition ${TASK_FAMILY})
+	# NEW_CONTAINER_DEFINITION=$(echo $LATEST_TASK_DEFINITION | jq '.taskDefinition.containerDefinitions' | jq '.[0].image='\"${DOCKER_IMAGE}\")
+	echo $LATEST_TASK_DEFINITION \
+		| jq '{containerDefinitions: [.taskDefinition.containerDefinitions[]], volumes: .taskDefinition.volumes}' \
+		| jq '.containerDefinitions[0].image='\"${DOCKER_IMAGE}\" \
+		> ${TMP_FOLDER}/tmp.json
 }
 
 register_task_definition_in_AWS(){
-	echo "Registering ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json on AWS"
-	sudo aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
+	echo "Registering task definition for ${DOCKER_IMAGE} on AWS"
+	sudo aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/tmp.json
 }
 
 update_AWS_service_with_task_revision(){
@@ -37,10 +35,8 @@ update_AWS_service_with_task_revision(){
 	sudo aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION}
 }
 
-cleanup() {
-	echo "Removing ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json"
-	rm ${TMP_FOLDER}/${ENVIRONMENT}-task-definition-${DOCKER_IMAGE}_${BUILD_NUMBER}.json
-}
+
+
 
 ### Enter here (parameter check) ###
 
@@ -58,8 +54,8 @@ do
 			BUILD_NUMBER="$2"
 			shift # next argument
 		;;
-		-i|--image)
-			DOCKER_IMAGE="$2"
+		-a|--app)
+			CVAST_APP="$2"
 			shift # next argument
 		;;
 		-e|--environment)
@@ -79,12 +75,12 @@ do
 	shift # next argument or value
 done
 
-eval "case ${DOCKER_IMAGE} in
-	${IMAGE_OPTIONS})
-		echo "Deploying image: ${DOCKER_IMAGE}"
+eval "case ${CVAST_APP} in
+	${APP_OPTIONS})
+		echo "Deploying image: ${CVAST_APP}"
 		;;
 	*)			# Any other input-json
-		echo "Invalid Docker image option: ${DOCKER_IMAGE}"
+		echo "Invalid Docker image option: ${CVAST_APP}"
 		display_help
 		exit 1
 		;;
@@ -101,15 +97,23 @@ eval "case ${ENVIRONMENT} in
 		;;
 esac"
 
+if [ -z ${BUILD_NUMBER} ] || [ -z ${CVAST_APP} ] || [ -z ${ENVIRONMENT} ] ; then
+        echo "ERROR! Not all parameters were specified. Exiting..."
+		display_help
+        exit 1
+	fi
 
-TASK_FAMILY=${ENVIRONMENT}-cvast-arches-${DOCKER_IMAGE}-task
+### Env variables
+TASK_FAMILY=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-task
 CLUSTER_NAME=${ENVIRONMENT}-cvast-arches-cluster
-SERVICE_NAME=${ENVIRONMENT}-cvast-arches-${DOCKER_IMAGE}-service
+SERVICE_NAME=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-service
+DOCKER_IMAGE=cvast-build.eastus.cloudapp.azure.com:5000/cvast-${CVAST_APP}:${BUILD_NUMBER}
+TMP_FOLDER=./tmp
 
+### Do things
+[ -d ${TMP_FOLDER} ] || mkdir ${TMP_FOLDER}		# Create tmp folder if it doesn't exist
 create_task_definition
 register_task_definition_in_AWS
 update_AWS_service_with_task_revision
-cleanup
-
-
+echo "Done."
 

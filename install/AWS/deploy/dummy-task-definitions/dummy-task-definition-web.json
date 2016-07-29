@@ -24,7 +24,7 @@
             "environment": [
                 {
                     "name": "PG_PASSWORD",
-                    "value": "TestCVAST"
+                    "value": "<password>"
                 },
                 {
                     "name": "PG_PORT",
@@ -32,15 +32,19 @@
                 },
                 {
                     "name": "ES_HOST",
-                    "value": "internal-test-cvast-arches-elastics-loadb-714914838.us-east-1.elb.amazonaws.com"
+                    "value": "<host url>"
                 },
                 {
                     "name": "PG_HOST",
-                    "value": "internal-test-cvast-arches-db-loadb-400084165.us-east-1.elb.amazonaws.com"
+                    "value": "<host url>"
+                },
+                {
+                    "name": "DJANGO_PASSWORD",
+                    "value": "<password>"
                 }
             ],
             "readonlyRootFilesystem": false,
-            "image": "cvast-build.eastus.cloudapp.azure.com:5000/cvast-web:%BUILD_NUMBER%",
+            "image": "<Docker registry URL>:5000/cvast-web:%BUILD_NUMBER%",
             "cpu": 256
         }
     ],
@@ -58,5 +62,5 @@
             "name": "webLog"
         }
     ],
-    "family": "test-cvast-arches-web-task"
+    "family": "<environment name>-cvast-arches-web-task"
 }
