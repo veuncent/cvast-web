@@ -17,9 +17,8 @@ display_help() {
 
 create_task_definition() {
 	LATEST_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition ${TASK_FAMILY})
-	# NEW_CONTAINER_DEFINITION=$(echo $LATEST_TASK_DEFINITION | jq '.taskDefinition.containerDefinitions' | jq '.[0].image='\"${DOCKER_IMAGE}\")
 	echo $LATEST_TASK_DEFINITION \
-		| jq '{containerDefinitions: [.taskDefinition.containerDefinitions[]], volumes: .taskDefinition.volumes}' \
+		| jq '{containerDefinitions: .taskDefinition.containerDefinitions, volumes: .taskDefinition.volumes}' \
 		| jq '.containerDefinitions[0].image='\"${DOCKER_IMAGE}\" \
 		> ${TMP_FOLDER}/tmp.json
 }
