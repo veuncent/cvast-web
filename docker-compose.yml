@@ -32,7 +32,7 @@ db:
     - '5432:5432'
   environment:
     - PG_PASSWORD=TestCVAST
-    - IS_CLEAN_ENV=true
+    - IS_CLEAN_ENV=false
 elasticsearch:
   restart: always
   build: .
@@ -45,4 +45,4 @@ elasticsearch:
     - "9200:9200"
     - "9300:9300"
   environment:
-    - IS_CLEAN_ENV=true
+    - IS_CLEAN_ENV=false
