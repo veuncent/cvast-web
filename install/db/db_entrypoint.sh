@@ -102,15 +102,15 @@ start_postgres() {
 }
 
 start_postgres_internally() {
-	# start postgres server internally for initialization
+	echo "Starting postgres server for internal configuration..."
 	rm -rf ${PG_DATA_VOLUME}/postmaster.pid
 	set_postgresql_param "listen_addresses" "127.0.0.1" quiet
-	exec_as_postgres ${PG_BINDIR}/pg_ctl -D ${PG_CONFIG_VOLUME} -w start > /dev/null
+	exec_as_postgres ${PG_BINDIR}/pg_ctl -D ${PG_CONFIG_VOLUME} -w start
 }
 
 stop_postgres() {
-	# stop the postgres server
-	exec_as_postgres ${PG_BINDIR}/pg_ctl -D ${PG_CONFIG_VOLUME} -w stop > /dev/null
+	echo "Stopping postgres server after internal configuration..."
+	exec_as_postgres ${PG_BINDIR}/pg_ctl -D ${PG_CONFIG_VOLUME} -w stop
 	# listen on all interfaces
 	set_postgresql_param "listen_addresses" "*" quiet
 }
