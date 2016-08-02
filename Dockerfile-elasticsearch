@@ -5,7 +5,7 @@ USER root
 WORKDIR /
 
 # Clean up obsolete files
-RUN rm -rf /arches-cvast
+RUN rm -rf /cvast_web
 RUN apt-get purge -y postgresql-9.4
 RUN apt-get purge -y postgresql-server-dev-9.4
 RUN apt-get purge -y postgresql-contrib-9.4

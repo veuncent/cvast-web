@@ -98,19 +98,19 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
 
 # Root project folder
-RUN mkdir /arches-cvast
+RUN mkdir /cvast_web
 
 # Install the Arches application	
-COPY arches /arches-cvast/arches
-WORKDIR	/arches-cvast/arches
+COPY arches /cvast_web/arches
+WORKDIR	/cvast_web/arches
 RUN	pip install --no-index -e .
 RUN python setup.py build
 RUN python setup.py install
 
 
 # Install Arches Hip
-COPY arches_hip /arches-cvast/arches_hip
-WORKDIR /arches-cvast/arches_hip
+COPY arches_hip /cvast_web/arches_hip
+WORKDIR /cvast_web/arches_hip
 RUN pip install --no-index -e .
 # RUN python setup.py build
 # RUN python setup.py install
@@ -129,12 +129,12 @@ RUN ${PG_BINARY} start &&\
 USER root	
 
 # Setup Arches Hip app
-# WORKDIR /arches-cvast	
-# RUN arches-app create arches_hip_cvast --app arches_hip
+# WORKDIR /cvast_web	
+# RUN arches-app create cvast_arches --app arches_hip
 
 # Install Elasticsearch
-COPY arches_hip_cvast /arches-cvast/arches_hip_cvast
-WORKDIR /arches-cvast/arches_hip_cvast
+COPY cvast_arches /cvast_web/cvast_arches
+WORKDIR /cvast_web/cvast_arches
 RUN python manage.py packages -o setup_elasticsearch
 
 # Run database scripts & arches hip resources
@@ -143,7 +143,7 @@ RUN ${PG_BINARY} start &&\
 	# Wait for elasticsearch to start
 	sleep 10 &&\ 
 	python manage.py packages -o install &&\
-	python manage.py packages -o load_concept_scheme -s arches_hip_cvast/source_data/concepts/authority_files &&\
+	python manage.py packages -o load_concept_scheme -s cvast_arches/source_data/concepts/authority_files &&\
 	${PG_BINARY} stop
 
 

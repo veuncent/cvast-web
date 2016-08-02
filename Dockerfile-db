@@ -14,7 +14,7 @@ ENV IS_CLEAN_ENV=false
 ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin
 
 # Remove obsolete folders
-RUN rm -rf /arches-cvast
+RUN rm -rf /cvast_web
 RUN rm -rf /elasticsearch
 
 # Cleanup database

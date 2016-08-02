@@ -14,6 +14,6 @@ RUN rm -rf /elasticsearch
 
 ENV DJANGO_PASSWORD=admin
 
-VOLUME ["/arches-cvast/arches/arches/uploadedfiles", "/arches-cvast/arches_hip_cvast/arches_hip_cvast/logs"]
+VOLUME ["/cvast_web/arches/arches/uploadedfiles", "/cvast_web/cvast_arches/cvast_arches/logs"]
 EXPOSE 8000
 CMD python -u manage.py setPassword && python -u manage.py runserver 0.0.0.0:8000

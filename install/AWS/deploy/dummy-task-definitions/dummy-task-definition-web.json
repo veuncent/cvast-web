@@ -12,11 +12,11 @@
             "essential": true,
             "mountPoints": [
                 {
-                    "containerPath": "/arches-cvast/arches/arches/uploadedfiles",
+                    "containerPath": "/cvast_web/arches/arches/uploadedfiles",
                     "sourceVolume": "uploadedFiles"
                 },
                 {
-                    "containerPath": "/arches-cvast/arches_hip_cvast/arches_hip_cvast/logs",
+                    "containerPath": "/cvast_web/cvast_arches/cvast_arches/logs",
                     "sourceVolume": "webLog"
                 }
             ],
