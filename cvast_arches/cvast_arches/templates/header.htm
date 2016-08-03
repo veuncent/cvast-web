@@ -20,7 +20,8 @@
                 <li><a href="javascript:void(0);" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="{% trans 'Documentation coming soon.' %}">{% trans "Help" %}</a></li>
                 <li class="topbar-devider"></li>
                 <li>
-                    <a id="auth-link" href="{% url 'auth' %}?next={{ request.get_full_path }}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% if user.username == 'anonymous' %}{% trans "Login" %}{% else %}{% trans "Welcome" %} {{ user.username }} - {% trans "Logout" %}{% endif %}</a>
+                    <a id="auth-link" href="{% url 'auth' %}?next={{ request.get_full_path }}{% if user.username != 'anonymous' %}&logout=true{% endif %}">
+                        {% if user.username == 'anonymous' %}{% trans "Login" %}{% else %}{% trans "Welcome" %} {{ user.username }} - {% trans "Logout" %}{% endif %}</a>
                 </li>
 
             </ul>
@@ -74,7 +75,7 @@
 
                     <!-- About Us -->
                     <li class="{% if active_page = 'Map' %}active{% endif %}">
-                        <a href="{% url 'map' %}">
+                        <a href="{% url 'about_us' %}">
                             {% trans "About Us" %}
                         </a>
                     </li>
@@ -113,7 +114,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <div class="input-group" id="simple-search">
-                                            <span class="input-group-addon"><i class="fa fa-search text-muted"></i></span>                                            {% include "views/simple-search.htm" %}
+                                            <span class="input-group-addon"><i class="fa fa-search text-muted"></i></span>
+                                            {% include "views/simple-search.htm" %}
                                         </div>
                                     </div>
                                 </div>
