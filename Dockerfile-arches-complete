@@ -128,10 +128,6 @@ RUN ${PG_BINARY} start &&\
 	${PG_BINARY} stop
 USER root	
 
-# Setup Arches Hip app
-# WORKDIR /cvast_web	
-# RUN arches-app create cvast_arches --app arches_hip
-
 # Install Elasticsearch
 COPY cvast_arches /cvast_web/cvast_arches
 WORKDIR /cvast_web/cvast_arches
