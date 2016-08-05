@@ -1,32 +1,16 @@
-<!--
-ARCHES - a program developed to inventory and manage immovable cultural heritage.
-Copyright (C) 2013 J. Paul Getty Trust and World Monuments Fund
+{% extends "about_us/about-us-base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
--->
-{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block css %} {{ block.super }}
-<link rel="stylesheet" href="{% static 'css/about_us.css' %}"> {% endblock css %} {% block content %}
 <!--=== Content Part ===-->
 <div class="block-description">
-    <div class="container content padding-top-20">
 
+    <div class="container content padding-top-20">
         <!--Title Box-->
+        <h1 class="arches-breadcrumb-title about-us-page-title">{% trans "People" %}</h1>
 
         <!-- Profile box Herb -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/hmasch.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/hmasch.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -65,7 +49,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Davide -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/Tanasi.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/Tanasi.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -83,12 +67,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         of Global Studies of Arcadia University and founding partner and Member of the Board of Trustees
                         of the Sicily Center for International Education of Siracusa, Sicily (SCIE), an Italian third-party
                         study abroad provider for American universities. Since 2014 he is Section Editor for Archaeological
-                        Science for the international scientific journal <i>Open Archaeology</i> (Walter De Gruyter publisher)
-                        and he is also founding co-editor of the book series <i>The Heritage of Western Greece</i> (Parnassos
-                        Press). He has consistently published in high-impact peer-reviewed journals and worked with international
-                        publishers as editor/author for miscellaneous monographs. He also co-produced, as scriptwriter, scientific
-                        consultant and assistant director, documentaries in 3D computer animation, among which the multi-awarded
-                        movies about Greek Siracusa (Siracusa 3D Reborn) and Roman Pompeii (Pompei 3D. A Buried Story).
+                        Science for the international scientific journal
+                        <i>Open Archaeology</i> (Walter De Gruyter publisher) and he is also founding co-editor of the book
+                        series <i>The Heritage of Western Greece</i> (Parnassos Press). He has consistently published in
+                        high-impact peer-reviewed journals and worked with international publishers as editor/author for
+                        miscellaneous monographs. He also co-produced, as scriptwriter, scientific consultant and assistant
+                        director, documentaries in 3D computer animation, among which the multi-awarded movies about Greek
+                        Siracusa (Siracusa 3D Reborn) and Roman Pompeii (Pompei 3D. A Buried Story).
                     </p>
                     <p>Full list of publications can be found <a class="txt-color-blue" href="https://usf.academia.edu/DavideTanasi"
                             target="_blank">here</a>.</p>
@@ -101,7 +86,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Jen -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/jen_bright.png' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/jen_bright.png' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -147,7 +132,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Rachel -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/rachel_opitz.png' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/rachel_opitz.png' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -208,7 +193,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Ryan -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/ryan_carney.png' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/ryan_carney.png' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -240,24 +225,24 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                             methods </li>
                         <li>Developing a new analytical framework for evolutionary comparisons of anatomy and motion</li>
                         <li>Reconstructing ancient motion, through a synthesis of the above three approaches and animation software
-                            </li>
+                        </li>
                         <li>Reconstructing original coloration in the fossil record, to reveal evolutionary insights</li>
                         <li>Developing new advanced materials through biomimicry</li>
                         <li>Integrating research into educational tools, open-source software, and outreach</li>
                         <li>Exploring the research/educational potential of next-generation platforms (virtual reality, interactive
                             holograms).
                         </li>
-                        </ul>
+                    </ul>
 
-                        <p>Lindgren J, Sjövall P, Carney RM, Uvdal P, Gren JA, Dyke G, Schultz BP, Shawkey MD, Barnes KR, Polcyn
-                            MJ. 2014. Skin pigmentation provides evidence of convergent melanism in extinct marine reptiles.
-                            Nature 506(7489):484–8. doi:10.1038/nature12899.</p>
-                        <p>Carney RM, Vinther J, Shawkey MD, D’Alba L, Ackermann J. 2012. New evidence on the colour and nature
-                            of the isolated Archaeopteryx feather. Nature Communications 3:637 doi: 10.1038/ncomms1642.
-                        </p>
-                        <p>Carney RM, Ahearn SC, McConchie A, Glaser C, Jean C, Barker C, Park B, Padgett K, Parker E, Aquino
-                            E, Kramer V. 2011. Early warning system for West Nile virus risk areas, California, USA. Emerging
-                            Infectious Diseases 17(8): 1445-54.</p>
+                    <p>Lindgren J, Sjövall P, Carney RM, Uvdal P, Gren JA, Dyke G, Schultz BP, Shawkey MD, Barnes KR, Polcyn
+                        MJ. 2014. Skin pigmentation provides evidence of convergent melanism in extinct marine reptiles.
+                        Nature 506(7489):484–8. doi:10.1038/nature12899.</p>
+                    <p>Carney RM, Vinther J, Shawkey MD, D’Alba L, Ackermann J. 2012. New evidence on the colour and nature
+                        of the isolated Archaeopteryx feather. Nature Communications 3:637 doi: 10.1038/ncomms1642.
+                    </p>
+                    <p>Carney RM, Ahearn SC, McConchie A, Glaser C, Jean C, Barker C, Park B, Padgett K, Parker E, Aquino E,
+                        Kramer V. 2011. Early warning system for West Nile virus risk areas, California, USA. Emerging Infectious
+                        Diseases 17(8): 1445-54.</p>
                 </div>
             </div>
         </div>
@@ -266,7 +251,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Matt -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/mvincent_bio_square.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/mvincent_bio_square.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -297,7 +282,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Jeff -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/jeff_duvernay.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/jeff_duvernay.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -322,7 +307,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Steve -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/steven1.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/steven1.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -344,7 +329,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Bart -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/bart_mcleod.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/bart_mcleod.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -364,7 +349,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Myriam -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/myriam_van_walsum.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/myriam_van_walsum.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -384,7 +369,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Vincent -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/vincent_meijer.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/vincent_meijer.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -404,7 +389,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- Profile box Garrett -->
         <div class="row about-us-profile-box servive-block-default">
             <div class="col-sm-4 about-us-profile-image-container">
-                <img class='about-us-profile-image' src="{% static 'img/about_us/garrett_speed.jpg' %}" </img>
+                <img class='about-us-profile-image' src="{% static 'img/about_us/people/garrett_speed.jpg' %}" </img>
             </div>
             <div class="col-sm-8">
                 <div class='about-us-profile-body'>
@@ -425,6 +410,5 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
     </div>
 </div>
-
 <!-- End Content Part -->
 {% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "about_us/about-us-base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description">
+    <div class="container content padding-top-20">
+
+        <h1 class="arches-breadcrumb-title about-us-page-title">{% trans "Technology" %}</h1>
+
+        <!-- Technology box Faro Focus3D -->
+        <div class="row about-us-profile-box servive-block-default">
+            <div class="col-sm-6 about-us-profile-image-container">
+                <img class='about-us-profile-image' src="{% static 'img/about_us/technology/faro330.jpg' %}" </img>
+            </div>
+            <div class="col-sm-6">
+                <div class='about-us-profile-body'>
+                    <h2 class="txt-color-blue">FARO Focus3D x130 and x330</h2>
+                    <p>The FARO Focus3D is a high-speed, phase-shift 3D laser scanner that captures detailed 3D point cloud
+                        datasets of objects and environments. The Focus3D is capable of collecting point data at a range
+                        of up to 330 meters and up to 976, 000 points per second.
+                    </p>
+                    <a href="http://www.faro.com/en-us/products/3d-surveying/faro-focus3d/overview" target="_blank">
+                        <p class="txt-color-blue">Manufacturer website</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End technology box Faro Focus3D-->
+
+        <!-- Technology box FARO Freestyle -->
+        <div class="row about-us-profile-box servive-block-default">
+            <div class="col-sm-6 about-us-profile-image-container">
+                <img class='about-us-profile-image' src="{% static 'img/about_us/technology/faro_freestyle.jpg' %}" </img>
+            </div>
+            <div class="col-sm-6">
+                <div class='about-us-profile-body'>
+                    <h2 class="txt-color-blue">FARO Freestyle</h2>
+                    <p>The FARO Freestyle3D is a handheld 3D scanner that uses structured light and infrared camera technology
+                        to document objects and environments in 3D and color. The Freestyle is designed to collect data at
+                        close-range, and these data can be easily combined in the native software with 3D point cloud data
+                        collected with the FARO Focus3D.
+                    </p>
+                    <a href="http://www.faro.com/en-us/products/3d-documentation/faro-freestyle-sup-3d-sup-scanner/overview" target="_blank">
+                        <p class="txt-color-blue">Manufacturer website</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End technology box FARO Freestyle -->
+
+    </div>
+</div>
+
+<!-- End Content Part -->
+{% endblock content %}

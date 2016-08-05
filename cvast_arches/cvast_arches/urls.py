@@ -22,6 +22,8 @@ from django.conf.urls import patterns, url, include
 uuid_regex = '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 
 urlpatterns = patterns('',
-    url(r'^about-us.htm', 'cvast_arches.views.about_us.about_us', name='about_us'),
+    url(r'^people.htm', 'cvast_arches.views.about_us.people', name='people'),
+    url(r'^technology.htm', 'cvast_arches.views.about_us.technology', name='technology'),
+    url(r'^partners.htm', 'cvast_arches.views.about_us.partners', name='partners'),
     url(r'', include(arches_hip_urls))
 )
