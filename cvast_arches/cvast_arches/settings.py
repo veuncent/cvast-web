@@ -198,6 +198,13 @@ BUSISNESS_DATA_FILES = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+MEDIA_ROOT =  os.path.join(PACKAGE_ROOT, 'uploadedfiles')
+
+# URL that handles the media served from MEDIA_ROOT, used for managing stored files.
+# It must end in a slash if set to a non-empty value.
+MEDIA_URL = '/files/'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
