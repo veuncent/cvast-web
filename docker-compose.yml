@@ -5,7 +5,7 @@ web:
   command: bash -c  "sleep 15 && python -u manage.py setPassword && python -u manage.py runserver 0.0.0.0:8000" 
   working_dir: /cvast_web/cvast_arches
   volumes:
-  - web-uploaded-files:/cvast_web/arches/arches/uploadedfiles
+  - web-uploaded-files:/cvast_web/cvast_arches/cvast_arches/uploadedfiles
   - web-log:/cvast_web/cvast_arches/cvast_arches/logs
   # - /c/Users/CVAST/Documents/arches-docker/:/cvast_web
   environment:
