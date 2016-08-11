@@ -1,6 +1,12 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 
+def mission(request):
+    return render_to_response('about_us/mission.htm', {
+        # 'main_script': 'index',
+        'active_page': 'About_us',
+    },
+        context_instance=RequestContext(request))
 
 def people(request):
     return render_to_response('about_us/people.htm', {

@@ -15,3 +15,17 @@
     height: 30px;
     margin-top: 10px;
 }
+
+.background-image {
+    /*width: 100vw;*/
+    background-size: cover;
+    height: 90vh;
+}
+
+blockquote p {
+    font-weight: bold;
+}
+
+blockquote footer {
+    text-align: right;
+}
