@@ -15,7 +15,8 @@ RUN apt-get autoremove -y
 # Install plugin specific for Elasticsearch 1.4 (see https://github.com/elastic/elasticsearch-cloud-aws)
 RUN /elasticsearch/bin/plugin -i elasticsearch/elasticsearch-cloud-aws/2.4.2
 
-RUN apt-get install -y curl
+RUN apt-get update -y &&\
+	apt-get install -y curl
 
 RUN useradd elasticsearch
 
