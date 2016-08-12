@@ -19,7 +19,8 @@
 .background-image {
     /*width: 100vw;*/
     background-size: cover;
-    height: 90vh;
+    /*height: 90vh;*/
+    height: 650px;
 }
 
 blockquote p {
