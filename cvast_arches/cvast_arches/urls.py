@@ -26,5 +26,6 @@ urlpatterns = patterns('',
     url(r'^people.htm', 'cvast_arches.views.about_us.people', name='people'),
     url(r'^technology.htm', 'cvast_arches.views.about_us.technology', name='technology'),
     url(r'^partners.htm', 'cvast_arches.views.about_us.partners', name='partners'),
+    url(r'^loaderio-cb219f4f97bd62cb751a2e5bfca5f0a3\.txt', 'cvast_arches.views.load_test.load_test', name='load_test'),
     url(r'', include(arches_hip_urls))
 )
