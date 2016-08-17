@@ -1,27 +1,17 @@
 {% load i18n %}
 <div class="row">
     <div class="col-xs-12">
-        <dl>
+        <dl class="report-item-list">
             <dt>
                 <h5 id="" class="arches-report-subsection-title">{% trans "Features" %}</h5>
             </dt>
 
-            {% if 'PRODUCTION_E12' not in report_info.source.graph %}
-                <dd class="arches-report-subsection-item">
-                    {% trans "No components recorded" %}
-                </dd>
-            {% else %}
-
+            {% if 'PRODUCTION_E12' in report_info.source.graph %}
                 {% for PRODUCTION_E12 in report_info.source.graph.PRODUCTION_E12 %}
-                    {% if 'COMPONENT_E18' not in PRODUCTION_E12 %}
-                        <dd class="arches-report-subsection-item">
-                            {% trans "No components recorded" %}
-                        </dd>
-                    {% else %}
-
+                    
+                    {% if 'COMPONENT_E18' in PRODUCTION_E12 %}
                         {% for COMPONENT_E18 in PRODUCTION_E12.COMPONENT_E18 %}
-                            <dd class="arches-report-subsection-item">
-
+                            <dd class="arches-report-subsection-item report-list-item">
                                 <span class="arches-report-subsection-item-type">
                                     {% trans "Component" %}:
                                 </span>
