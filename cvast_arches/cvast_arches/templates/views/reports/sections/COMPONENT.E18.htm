@@ -1,12 +1,13 @@
 {% load i18n %}
-<div class="row">
-    <div class="col-xs-12">
-        <dl class="report-item-list">
-            <dt>
-                <h5 id="" class="arches-report-subsection-title">{% trans "Features" %}</h5>
-            </dt>
 
-            {% if 'PRODUCTION_E12' in report_info.source.graph %}
+{% if 'PRODUCTION_E12' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title">{% trans "Features" %}</h5>
+                </dt>
+
                 {% for PRODUCTION_E12 in report_info.source.graph.PRODUCTION_E12 %}
                     
                     {% if 'COMPONENT_E18' in PRODUCTION_E12 %}
@@ -60,8 +61,7 @@
 
                 {% endfor %} 
 
-            {% endif %}   
-
-        </dl>
+            </dl>
+        </div>
     </div>
-</div>
+{% endif %}

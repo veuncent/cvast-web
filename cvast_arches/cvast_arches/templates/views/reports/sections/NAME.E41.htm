@@ -1,12 +1,13 @@
 {% load i18n %}
-<div class="row">
-     <div class="col-xs-12">
-        <dl class="report-item-list">
-            <dt>
-                <h5 id="" class="arches-report-subsection-title">{% trans "Names" %}</h5>
-            </dt>
 
-            {% if 'NAME_E41' in report_info.source.graph %}
+{% if 'NAME_E41' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title">{% trans "Names" %}</h5>
+                </dt>
+
                 {% for NAME_E41 in report_info.source.graph.NAME_E41 %}
                     <dd class="arches-report-subsection-item report-list-item">
                         {{ NAME_E41.NAME_E41__value }}
@@ -16,8 +17,8 @@
                         {% endif %}
                     </dd>
                 {% endfor %}            
-            {% endif %}
 
-        </dl>
+            </dl>
+        </div>
     </div>
-</div>
+{% endif %}

@@ -1,12 +1,13 @@
 {% load i18n %}
-<div class="row">
-    <div class="col-xs-12">
-        <dl class="report-item-list">
-            <dt>
-                <h5 id="" class="arches-report-subsection-title">{% trans "Important Dates" %}</h5>
-            </dt>
 
-            {% if 'BEGINNING_OF_EXISTENCE_E63' in report_info.source.graph or 'END_OF_EXISTENCE_E64' in report_info.source.graph %}
+{% if 'BEGINNING_OF_EXISTENCE_E63' in report_info.source.graph or 'END_OF_EXISTENCE_E64' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title">{% trans "Important Dates" %}</h5>
+                </dt>
+
                 <dd class="arches-report-subsection-item report-list-item">
                 {% for BEGINNING_OF_EXISTENCE_E63 in report_info.source.graph.BEGINNING_OF_EXISTENCE_E63 %}
                     {% for BEGINNING_OF_EXISTENCE_TIME___SPAN_E52 in BEGINNING_OF_EXISTENCE_E63.BEGINNING_OF_EXISTENCE_TIME___SPAN_E52 %}
@@ -32,8 +33,8 @@
                     {% endfor %}  
                 {% endfor %}  
                 </dd>            
-            {% endif %}
 
-        </dl>
+            </dl>
+        </div>
     </div>
-</div>
+{% endif %}

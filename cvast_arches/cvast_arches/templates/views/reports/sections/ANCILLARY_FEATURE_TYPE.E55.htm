@@ -1,17 +1,18 @@
 {% load i18n %}
-<div class="row">
-    <div class="col-xs-12">
-        <dl class="report-item-list">
-            <dt>
-                <h5 id="" class="arches-report-subsection-title">{% trans "Related Features" %}</h5>
-            </dt>
 
-            {% if 'PRODUCTION_E12' in report_info.source.graph %}
+{% if 'PRODUCTION_E12' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title">{% trans "Related Features" %}</h5>
+                </dt>
+
                 {% for PRODUCTION_E12 in report_info.source.graph.PRODUCTION_E12 %}
                     
                     {% if PHASE_TYPE_ASSIGNMENT_E17 in PLACE_E53 %}
                         {% for PHASE_TYPE_ASSIGNMENT_E17 in PRODUCTION_E12.PHASE_TYPE_ASSIGNMENT_E17 %}
-                           
+                        
                             {% if 'ANCILLARY_FEATURE_TYPE_E55' in PHASE_TYPE_ASSIGNMENT_E17 %}
                                 {% for ANCILLARY_FEATURE_TYPE_E55 in PHASE_TYPE_ASSIGNMENT_E17.ANCILLARY_FEATURE_TYPE_E55 %}
                                     <dd class="arches-report-subsection-item report-list-item">{{ANCILLARY_FEATURE_TYPE_E55.ANCILLARY_FEATURE_TYPE_E55__value}}</dd>
@@ -20,8 +21,8 @@
                         {% endfor %}                      
                     {% endif %}
                 {% endfor %}              
-            {% endif %}
 
-        </dl>
+            </dl>
+        </div>
     </div>
-</div>
+{% endif %}

@@ -1,12 +1,13 @@
 {% load i18n %}
-<div class="row">
-    <div class="col-xs-12">
-        <dl class="report-item-list">
-            <dt>
-                <h5 id="" class="arches-report-subsection-title">{% trans "Parcels" %}</h5>
-            </dt>
 
-            {% if 'PLACE_E53' in report_info.source.graph %}
+{% if 'PLACE_E53' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title">{% trans "Parcels" %}</h5>
+                </dt>
+
                 {% for PLACE_E53 in report_info.source.graph.PLACE_E53 %}
                     {% if 'PLACE_CADASTRAL_REFERENCE_E53' in PLACE_E53 %}
                         {% for PLACE_CADASTRAL_REFERENCE_E53 in PLACE_E53.PLACE_CADASTRAL_REFERENCE_E53 %}
@@ -22,8 +23,8 @@
                         {% endfor %}                    
                     {% endif %}
                 {% endfor %}            
-            {% endif %}
-            
-        </dl>
+                
+            </dl>
+        </div>
     </div>
-</div>
+{% endif %}

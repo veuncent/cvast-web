@@ -1,12 +1,13 @@
 {% load i18n %}
-<div class="row">
-    <div class="col-xs-12">
-        <dl class="report-item-list">
-            <dt>
-                <h5 id="" class="arches-report-subsection-title">{% trans "Administrative Areas" %}</h5>
-            </dt>
 
-            {% if 'PLACE_E53' in report_info.source.graph %}
+{% if 'PLACE_E53' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title">{% trans "Administrative Areas" %}</h5>
+                </dt>
+
                 {% for PLACE_E53 in report_info.source.graph.PLACE_E53 %}
                     {% if 'ADMINISTRATIVE_SUBDIVISION_E48' in PLACE_E53 %}
                         {% for ADMINISTRATIVE_SUBDIVISION_E48 in PLACE_E53.ADMINISTRATIVE_SUBDIVISION_E48 %}
@@ -19,8 +20,8 @@
                         {% endfor %}                      
                     {% endif %}
                 {% endfor %}             
-            {% endif %}
 
-        </dl>
+            </dl>
+        </div>
     </div>
-</div>
+{% endif %}

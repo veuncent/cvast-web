@@ -1,9 +1,10 @@
 {% load i18n %}
-<div class="row">
-    <div class="col-xs-12">
-        <dl class="report-item-list">
 
-            {% if 'DESCRIPTION_E62' in report_info.source.graph %}
+{% if 'DESCRIPTION_E62' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+
                 {% for DESCRIPTION_E62 in report_info.source.graph.DESCRIPTION_E62 %}
                     <dt>
                         <h5 id="" class="arches-report-subsection-title">{{DESCRIPTION_E62.DESCRIPTION_TYPE_E55__value}}</h5>
@@ -18,8 +19,8 @@
 
                     </dd>
                 {% endfor %}            
-            {% endif %}
 
-        </dl>
+            </dl>
+        </div>
     </div>
-</div>
+{% endif %}
