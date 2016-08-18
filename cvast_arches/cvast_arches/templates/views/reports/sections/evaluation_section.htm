@@ -53,18 +53,14 @@
                                         <!-- Evaluation Criteria -->
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <dl>
+                                                <dl class="report-item-list">
                                                     <dt>
                                                         <h5 id="" class="arches-report-subsection-title">{% trans "Context/Theme" %}</h5>
                                                     </dt>
 
-                                                    {% if 'EVALUATION_CRITERIA_TYPE_E55' not in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
-                                                        <dd class="arches-report-subsection-item">
-                                                            {% trans "No criteria recorded" %}
-                                                        </dd>
-                                                    {% else %}
+                                                    {% if 'EVALUATION_CRITERIA_TYPE_E55' in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
                                                         {% for EVALUATION_CRITERIA_TYPE_E55 in EVALUATION_CRITERIA_ASSIGNMENT_E13.EVALUATION_CRITERIA_TYPE_E55 %}
-                                                            <dd class="arches-report-subsection-item arches-report-list-spacer">
+                                                            <dd class="arches-report-subsection-item report-list-item arches-report-list-spacer">
                                                                 {{EVALUATION_CRITERIA_TYPE_E55.EVALUATION_CRITERIA_TYPE_E55__value|linebreaksbr}}
                                                             </dd>
                                                         {% endfor %}  
@@ -77,18 +73,14 @@
                                         <!-- Eligibility Standards -->
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <dl>
+                                                <dl class="report-item-list">
                                                     <dt>
                                                         <h5 id="" class="arches-report-subsection-title">{% trans "Eligibility Standards" %}</h5>
                                                     </dt>
 
-                                                    {% if 'ELIGIBILITY_REQUIREMENT_TYPE_E55' not in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
-                                                        <dd class="arches-report-subsection-item">
-                                                            {% trans "No standards recorded" %}
-                                                        </dd>
-                                                    {% else %}
+                                                    {% if 'ELIGIBILITY_REQUIREMENT_TYPE_E55' in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
                                                         {% for ELIGIBILITY_REQUIREMENT_TYPE_E55 in EVALUATION_CRITERIA_ASSIGNMENT_E13.ELIGIBILITY_REQUIREMENT_TYPE_E55 %}
-                                                            <dd class="arches-report-subsection-item arches-report-list-spacer">{{ELIGIBILITY_REQUIREMENT_TYPE_E55.ELIGIBILITY_REQUIREMENT_TYPE_E55__value}}</dd>
+                                                            <dd class="arches-report-subsection-item report-list-item arches-report-list-spacer">{{ELIGIBILITY_REQUIREMENT_TYPE_E55.ELIGIBILITY_REQUIREMENT_TYPE_E55__value}}</dd>
                                                         {% endfor %}  
                                                     {% endif %}
 
@@ -99,18 +91,14 @@
                                         <!-- Integrity Standards -->
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <dl>
+                                                <dl class="report-item-list">
                                                     <dt>
                                                         <h5 id="" class="arches-report-subsection-title">{% trans "Integrity Standards" %}</h5>
                                                     </dt>
 
-                                                    {% if 'INTEGRITY_TYPE_E55' not in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
-                                                        <dd class="arches-report-subsection-item">
-                                                            {% trans "No standards recorded" %}
-                                                        </dd>
-                                                    {% else %}
+                                                    {% if 'INTEGRITY_TYPE_E55' in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
                                                         {% for INTEGRITY_TYPE_E55 in EVALUATION_CRITERIA_ASSIGNMENT_E13.INTEGRITY_TYPE_E55 %}
-                                                            <dd class="arches-report-subsection-item arches-report-list-spacer">{{INTEGRITY_TYPE_E55.INTEGRITY_TYPE_E55__value}}</dd>
+                                                            <dd class="arches-report-subsection-item report-list-item arches-report-list-spacer">{{INTEGRITY_TYPE_E55.INTEGRITY_TYPE_E55__value}}</dd>
                                                         {% endfor %}  
                                                     {% endif %}
 
@@ -121,18 +109,14 @@
                                         <!-- Status Codes -->
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <dl>
+                                                <dl class="report-item-list">
                                                     <dt>
                                                         <h5 id="" class="arches-report-subsection-title">{% trans "Status Codes" %}</h5>
                                                     </dt>
 
-                                                    {% if 'STATUS_E55' not in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
-                                                        <dd class="arches-report-subsection-item">
-                                                            {% trans "No codes recorded" %}
-                                                        </dd>
-                                                    {% else %}
+                                                    {% if 'STATUS_E55' in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
                                                         {% for STATUS_E55 in EVALUATION_CRITERIA_ASSIGNMENT_E13.STATUS_E55 %}
-                                                            <dd class="arches-report-subsection-item">{{STATUS_E55.STATUS_E55__value}}</dd>
+                                                            <dd class="arches-report-subsection-item report-list-item">{{STATUS_E55.STATUS_E55__value}}</dd>
                                                         {% endfor %}  
                                                     {% endif %}
 
@@ -143,20 +127,15 @@
                                         <!-- Reason Statement -->
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <dl>
+                                                <dl class="report-item-list">
                                                     <dt>
                                                         <h5 id="" class="arches-report-subsection-title">{% trans "Significance Statement" %}</h5>
                                                     </dt>
 
-                                                    {% if 'REASONS_E62' not in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
-                                                        <dd class="arches-report-subsection-item">
-                                                            {% trans "No statement recorded" %}
-                                                        </dd>
-                                                    {% else %}
+                                                    {% if 'REASONS_E62' in EVALUATION_CRITERIA_ASSIGNMENT_E13 %}
                                                         {% for REASONS_E62 in EVALUATION_CRITERIA_ASSIGNMENT_E13.REASONS_E62 %}
-                                                            <dd class="arches-report-subsection-item">{{ REASONS_E62.REASONS_E62__value |safe }}</dd>
+                                                            <dd class="arches-report-subsection-item report-list-item">{{ REASONS_E62.REASONS_E62__value |safe }}</dd>
                                                         {% endfor %}  
-
                                                     {% endif %}
 
                                                 </dl>
