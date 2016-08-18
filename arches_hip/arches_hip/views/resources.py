@@ -160,12 +160,18 @@ def report(request, resourceid):
             entitytypeidkey = '%s_%s' % (entitytypeidkey, information_resource_type)
         related_resource_dict[entitytypeidkey].append(related_resource)
 
+    # To hide Related Resource block in report page if no related resources present
+    no_related_resources = False
+    if all(len(value) == 0 for value in related_resource_dict.values()):
+        no_related_resources = True
+
     return render_to_response('resource-report.htm', {
             'geometry': JSONSerializer().serialize(report_info['source']['geometry']),
             'resourceid': resourceid,
             'report_template': 'views/reports/' + report_info['type'] + '.htm',
             'report_info': report_info,
             'related_resource_dict': related_resource_dict,
+            'no_related_resources': no_related_resources,
             'main_script': 'resource-report',
             'active_page': 'ResourceReport'
         },
