@@ -272,25 +272,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                                     <!-- Links for Image Gallery Supply Image in the href, thumbnails in the img tags -->
                                                     {% for FILE_PATH_E62 in report_info.source.graph.FILE_PATH_E62 %}
 
-                                                        {% if 'THUMBNAIL_E62' in report_info.source.graph %}
-
-                                                            <dd class="arches-report-subsection-item">
-                                                                <div id="" style="margin-top: 5px;">
-                                                                    <img src="{{MEDIA_URL}}{{FILE_PATH_E62.FILE_PATH_E62__label}}" alt="" class="" style="width: 100%; margin-bottom: 30px; border: solid 1px #555;" onerror="this.src='{{STATIC_URL}}img/photo_missing.png';">
-                                                                </div>
-                                                            </dd>
-
-                                                        {% else %}
-
-                                                            <dd class="arches-report-subsection-item">
-                                                                <div id="" style="margin-top: 5px;">
-                                                                    <a href="{{MEDIA_URL}}{{FILE_PATH_E62.FILE_PATH_E62__label}}" title="{% trans "View document" %}">
-                                                                        <i class="fa fa-file-text-o"></i> {% trans "Link to document" %}
+                                                        <dd class="arches-report-subsection-item">
+                                                            <div id="" style="margin-top: 5px;">
+                                                                {% if 'THUMBNAIL_E62' in report_info.source.graph %}
+                                                                    <a href="{{MEDIA_URL}}{{FILE_PATH_E62.FILE_PATH_E62__label}}">
+                                                                        <img src="{{MEDIA_URL}}{{FILE_PATH_E62.FILE_PATH_E62__label}}" alt="" class="" 
+                                                                            style="width: 100%; margin-bottom: 30px; border: solid 1px #555;" 
+                                                                            onerror="this.src='{{STATIC_URL}}img/photo_missing.png';">
                                                                     </a>
-                                                                </div>
-                                                            </dd>
+                                                                {% endif %}
 
-                                                        {% endif %}
+                                                                <a href="{{MEDIA_URL}}{{FILE_PATH_E62.FILE_PATH_E62__label}}" title="{% trans "View file" %}">
+                                                                    <i class="fa fa-eye">&nbsp;</i>{% trans "View" %}
+                                                                </a>
+                                                                &nbsp;
+
+                                                                <a download="{{FILE_PATH_E62__label}}" href="{{MEDIA_URL}}{{FILE_PATH_E62.FILE_PATH_E62__label}}" 
+                                                                    title="{% trans "Download file" %}">
+                                                                    <i class="fa fa-file-text-o">&nbsp;</i>{% trans "Download" %}
+                                                                </a>
+
+                                                            </div>
+                                                        </dd>
 
                                                         {% empty %}
                                                             <dd class="arches-report-subsection-item">
