@@ -93,7 +93,7 @@ require([
                     }
                     // Otherwise hide the whole block
                     else {
-                        $(contentsection).closest('.resource-block').hide();
+                        $(contentsection).closest('.resource-row').hide();
                     }
                 }
             })

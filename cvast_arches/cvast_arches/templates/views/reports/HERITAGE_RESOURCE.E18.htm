@@ -126,10 +126,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                     <!-- Resource Summary Info -->
                     <div class="col-xs-12">
-                        <div class="right-inner arches-box-grey-border">
+                        <div class="right-inner arches-box-grey-border ">
 
                             <!-- Resource Summary Info -->
-                            <div class="resource-block">
+                            <div class="resource-row">
                                 <div class="row">
 
                                     <!-- Section sub-header -->
@@ -171,73 +171,75 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         
                             <!-- Location -->
                             {% if 'PLACE_E53' in report_info.source.graph %}
-                                <div class="row">
+                                <div class="resource-row">
+                                    <div class="row">
 
-                                    <!-- Section sub-header -->
-                                    <div class="col-sm-4">
-                                        <h3 class="arches-report-subsection">{% trans "Location Information" %}</h3>
-                                    </div>
-                                    <!-- End Section sub-header -->
-
-                                    <!-- Section Content -->
-                                    <div class="col-sm-8">
-
-                                        <!-- Spacer -->
-                                        <div class="arches-report-spacer hidden-xs"></div>
-
-                                        <div class="arches-report-subsection-content">
-
-                                            <!-- Addresses -->
-                                            {% include 'views/reports/sections/PLACE_ADDRESS.E45.htm' %}
-
-                                            <!-- Location Description -->
-                                            {% include 'views/reports/sections/DESCRIPTION_OF_LOCATION.E62.htm' %}
-
-                                            <!-- Settings -->
-                                            
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <dl class="report-item-list">
-                                                        <dt>
-                                                            <h5 id="" class="arches-report-subsection-title">{% trans "Settings" %}</h5>
-                                                        </dt>
-                                                        {% for PLACE_E53 in report_info.source.graph.PLACE_E53 %} 
-                                                            {% if 'PLACE_SITE_LOCATION_E53' in PLACE_E53 %} 
-                                                                {% for PLACE_SITE_LOCATION_E53 in PLACE_E53.PLACE_SITE_LOCATION_E53 %} 
-                                                                    {% if 'SETTING_TYPE_E55' in PLACE_SITE_LOCATION_E53 %} 
-                                                                        {% for SETTING_TYPE_E55 in PLACE_SITE_LOCATION_E53.SETTING_TYPE_E55 %} 
-                                                                            {% if SETTING_TYPE_E55.SETTING_TYPE_E55__value != '' %}
-                                                                                <dd class="arches-report-subsection-item report-list-item">
-                                                                                    {{SETTING_TYPE_E55.SETTING_TYPE_E55__value}}
-                                                                                </dd>
-                                                                            {% endif %} 
-                                                                        {% endfor %} 
-                                                                    {% endif %} 
-                                                                {% endfor %} 
-                                                            {% endif %} 
-                                                        {% endfor %} 
-                                                    </dl>
-                                                </div>
-                                            </div>
-                                            
-
-                                            <!-- Admin Ares -->
-                                            {% include 'views/reports/sections/ADMINISTRATIVE_SUBDIVISION.E48.htm' %}
-
-                                            <!-- Parcels -->
-                                            {% include 'views/reports/sections/PLACE_APPELLATION_CADASTRAL_REFERENCE.E44.htm' %}
-
+                                        <!-- Section sub-header -->
+                                        <div class="col-sm-4">
+                                            <h3 class="arches-report-subsection">{% trans "Location Information" %}</h3>
                                         </div>
-                                    </div>
-                                    <!-- End Section Content-->
+                                        <!-- End Section sub-header -->
 
+                                        <!-- Section Content -->
+                                        <div class="col-sm-8">
+
+                                            <!-- Spacer -->
+                                            <div class="arches-report-spacer hidden-xs"></div>
+
+                                            <div class="arches-report-subsection-content">
+
+                                                <!-- Addresses -->
+                                                {% include 'views/reports/sections/PLACE_ADDRESS.E45.htm' %}
+
+                                                <!-- Location Description -->
+                                                {% include 'views/reports/sections/DESCRIPTION_OF_LOCATION.E62.htm' %}
+
+                                                <!-- Settings -->
+                                                
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <dl class="report-item-list">
+                                                            <dt>
+                                                                <h5 id="" class="arches-report-subsection-title">{% trans "Settings" %}</h5>
+                                                            </dt>
+                                                            {% for PLACE_E53 in report_info.source.graph.PLACE_E53 %} 
+                                                                {% if 'PLACE_SITE_LOCATION_E53' in PLACE_E53 %} 
+                                                                    {% for PLACE_SITE_LOCATION_E53 in PLACE_E53.PLACE_SITE_LOCATION_E53 %} 
+                                                                        {% if 'SETTING_TYPE_E55' in PLACE_SITE_LOCATION_E53 %} 
+                                                                            {% for SETTING_TYPE_E55 in PLACE_SITE_LOCATION_E53.SETTING_TYPE_E55 %} 
+                                                                                {% if SETTING_TYPE_E55.SETTING_TYPE_E55__value != '' %}
+                                                                                    <dd class="arches-report-subsection-item report-list-item">
+                                                                                        {{SETTING_TYPE_E55.SETTING_TYPE_E55__value}}
+                                                                                    </dd>
+                                                                                {% endif %} 
+                                                                            {% endfor %} 
+                                                                        {% endif %} 
+                                                                    {% endfor %} 
+                                                                {% endif %} 
+                                                            {% endfor %} 
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                                
+
+                                                <!-- Admin Ares -->
+                                                {% include 'views/reports/sections/ADMINISTRATIVE_SUBDIVISION.E48.htm' %}
+
+                                                <!-- Parcels -->
+                                                {% include 'views/reports/sections/PLACE_APPELLATION_CADASTRAL_REFERENCE.E44.htm' %}
+
+                                            </div>
+                                        </div>
+                                        <!-- End Section Content-->
+
+                                    </div>
+                                    <!-- End Location Section -->
+                                    <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
                                 </div>
-                                <!-- End Location Section -->
-                                <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
                             {% endif %}
 
                             <!-- Classification -->
-                            <div class="resource-block">
+                            <div class="resource-row">
                                 <div class="row">
 
                                     <!-- Section sub-header -->
@@ -297,33 +299,35 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                             <!-- Descriptions -->
                             {% if 'DESCRIPTION_E62' in report_info.source.graph %}
-                                <div class="row">
+                                <div class="resource-row">
+                                    <div class="row">
 
-                                    <!-- Section sub-header -->
-                                    <div class="col-sm-4">
-                                        <h3 class="arches-report-subsection">{% trans "Resource Descriptions" %}</h3>
-                                    </div>
-                                    <!-- End Section sub-header -->
-
-                                    <!-- Section Content -->
-                                    <div class="col-sm-8">
-
-                                        <!-- Spacer -->
-                                        <div class="arches-report-spacer hidden-xs"></div>
-
-                                        <div class="arches-report-subsection-content">
-
-                                            <!-- Descriptions -->
-                                            {% include 'views/reports/sections/DESCRIPTION.E62.htm' %}
-
+                                        <!-- Section sub-header -->
+                                        <div class="col-sm-4">
+                                            <h3 class="arches-report-subsection">{% trans "Resource Descriptions" %}</h3>
                                         </div>
+                                        <!-- End Section sub-header -->
+
+                                        <!-- Section Content -->
+                                        <div class="col-sm-8">
+
+                                            <!-- Spacer -->
+                                            <div class="arches-report-spacer hidden-xs"></div>
+
+                                            <div class="arches-report-subsection-content">
+
+                                                <!-- Descriptions -->
+                                                {% include 'views/reports/sections/DESCRIPTION.E62.htm' %}
+
+                                            </div>
+                                        </div>
+                                        <!-- End Section Content-->
+
                                     </div>
-                                    <!-- End Section Content-->
+                                    <!-- End Descriptions Section -->
 
+                                    <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
                                 </div>
-                                <!-- End Descriptions Section -->
-
-                                <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
                             {% endif %}
 
 
@@ -332,33 +336,35 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                             <!-- Measurements -->
                             {% if 'MEASUREMENT_TYPE_E55' in report_info.source.graph %}
-                                <div class="row">
+                                <div class="resource-row">
+                                    <div class="row">
 
-                                    <!-- Section sub-header -->
-                                    <div class="col-sm-4">
-                                        <h3 class="arches-report-subsection">{% trans "Measurements" %}</h3>
-                                    </div>
-                                    <!-- End Section sub-header -->
-
-                                    <!-- Section Content -->
-                                    <div class="col-sm-8">
-
-                                        <!-- Spacer -->
-                                        <div class="arches-report-spacer hidden-xs"></div>
-
-                                        <div class="arches-report-subsection-content">
-
-                                            <!-- Measurements -->
-                                            {% include 'views/reports/sections/MEASUREMENT_TYPE.E55.htm' %}
-
+                                        <!-- Section sub-header -->
+                                        <div class="col-sm-4">
+                                            <h3 class="arches-report-subsection">{% trans "Measurements" %}</h3>
                                         </div>
+                                        <!-- End Section sub-header -->
+
+                                        <!-- Section Content -->
+                                        <div class="col-sm-8">
+
+                                            <!-- Spacer -->
+                                            <div class="arches-report-spacer hidden-xs"></div>
+
+                                            <div class="arches-report-subsection-content">
+
+                                                <!-- Measurements -->
+                                                {% include 'views/reports/sections/MEASUREMENT_TYPE.E55.htm' %}
+
+                                            </div>
+                                        </div>
+                                        <!-- End Section Content-->
+
                                     </div>
-                                    <!-- End Section Content-->
+                                    <!-- End Measuerments Section -->
 
+                                    <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
                                 </div>
-                                <!-- End Measuerments Section -->
-
-                                <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
                             {% endif %}
 
 
@@ -367,33 +373,35 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                             <!-- External System References -->
                             {% if 'EXTERNAL_RESOURCE_E1' in report_info.source.graph %}
-                                <div class="row">
+                                <div class="resource-row">
+                                    <div class="row">
 
-                                    <!-- Section sub-header -->
-                                    <div class="col-sm-4">
-                                        <h3 class="arches-report-subsection">{% trans "External System References" %}</h3>
-                                    </div>
-                                    <!-- End Section sub-header -->
-
-                                    <!-- Section Content -->
-                                    <div class="col-sm-8">
-
-                                        <!-- Spacer -->
-                                        <div class="arches-report-spacer hidden-xs"></div>
-
-                                        <div class="arches-report-subsection-content">
-
-                                            <!-- Moficiations -->
-                                            {% include 'views/reports/sections/EXTERNAL_XREF.E42.htm' %}
-
+                                        <!-- Section sub-header -->
+                                        <div class="col-sm-4">
+                                            <h3 class="arches-report-subsection">{% trans "External System References" %}</h3>
                                         </div>
-                                    </div>
-                                    <!-- End Section Content-->
+                                        <!-- End Section sub-header -->
 
+                                        <!-- Section Content -->
+                                        <div class="col-sm-8">
+
+                                            <!-- Spacer -->
+                                            <div class="arches-report-spacer hidden-xs"></div>
+
+                                            <div class="arches-report-subsection-content">
+
+                                                <!-- Moficiations -->
+                                                {% include 'views/reports/sections/EXTERNAL_XREF.E42.htm' %}
+
+                                            </div>
+                                        </div>
+                                        <!-- End Section Content-->
+
+                                    </div>
+                                    <!-- End Descriptions Section -->
                                 </div>
-                                <!-- End Descriptions Section -->
                             {% endif %}
-                            
+
                         </div>
                     </div>
                     <!-- End Project Information -->
