@@ -65,7 +65,6 @@ require([
                 });
                
             }else{
-                $('.block-description').css('marginTop', '-40px');
                 $('#map-container').hide();
             }
 
