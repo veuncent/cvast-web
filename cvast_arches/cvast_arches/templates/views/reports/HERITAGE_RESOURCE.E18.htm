@@ -170,7 +170,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                         
                             <!-- Location -->
-                            <div class="resource-block">
+                            {% if 'PLACE_E53' in report_info.source.graph %}
                                 <div class="row">
 
                                     <!-- Section sub-header -->
@@ -201,23 +201,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                                         <dt>
                                                             <h5 id="" class="arches-report-subsection-title">{% trans "Settings" %}</h5>
                                                         </dt>
-                                                        {% if 'PLACE_E53' in report_info.source.graph %}
-                                                            {% for PLACE_E53 in report_info.source.graph.PLACE_E53 %} 
-                                                                {% if 'PLACE_SITE_LOCATION_E53' in PLACE_E53 %} 
-                                                                    {% for PLACE_SITE_LOCATION_E53 in PLACE_E53.PLACE_SITE_LOCATION_E53 %} 
-                                                                        {% if 'SETTING_TYPE_E55' in PLACE_SITE_LOCATION_E53 %} 
-                                                                            {% for SETTING_TYPE_E55 in PLACE_SITE_LOCATION_E53.SETTING_TYPE_E55 %} 
-                                                                                {% if SETTING_TYPE_E55.SETTING_TYPE_E55__value != '' %}
-                                                                                    <dd class="arches-report-subsection-item report-list-item">
-                                                                                        {{SETTING_TYPE_E55.SETTING_TYPE_E55__value}}
-                                                                                    </dd>
-                                                                                {% endif %} 
-                                                                            {% endfor %} 
-                                                                        {% endif %} 
-                                                                    {% endfor %} 
-                                                                {% endif %} 
-                                                            {% endfor %} 
-                                                        {% endif %}
+                                                        {% for PLACE_E53 in report_info.source.graph.PLACE_E53 %} 
+                                                            {% if 'PLACE_SITE_LOCATION_E53' in PLACE_E53 %} 
+                                                                {% for PLACE_SITE_LOCATION_E53 in PLACE_E53.PLACE_SITE_LOCATION_E53 %} 
+                                                                    {% if 'SETTING_TYPE_E55' in PLACE_SITE_LOCATION_E53 %} 
+                                                                        {% for SETTING_TYPE_E55 in PLACE_SITE_LOCATION_E53.SETTING_TYPE_E55 %} 
+                                                                            {% if SETTING_TYPE_E55.SETTING_TYPE_E55__value != '' %}
+                                                                                <dd class="arches-report-subsection-item report-list-item">
+                                                                                    {{SETTING_TYPE_E55.SETTING_TYPE_E55__value}}
+                                                                                </dd>
+                                                                            {% endif %} 
+                                                                        {% endfor %} 
+                                                                    {% endif %} 
+                                                                {% endfor %} 
+                                                            {% endif %} 
+                                                        {% endfor %} 
                                                     </dl>
                                                 </div>
                                             </div>
@@ -235,9 +233,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                                 </div>
                                 <!-- End Location Section -->
-
                                 <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
-                            </div>
+                            {% endif %}
 
                             <!-- Classification -->
                             <div class="resource-block">
@@ -264,26 +261,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                             {% include "views/reports/sections/COMPONENT.E18.htm" %}
 
                                             <!-- Modifications -->
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <dl class="report-item-list">
-                                                        <dt>
-                                                            <h5 id="" class="arches-report-subsection-title">{% trans "Modifications" %}</h5>
-                                                        </dt>
+                                            {% if 'MODIFICATION_EVENT_E11' in report_info.source.graph %}
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <dl class="report-item-list">
+                                                            <dt>
+                                                                <h5 id="" class="arches-report-subsection-title">{% trans "Modifications" %}</h5>
+                                                            </dt>
 
-                                                        {% if 'MODIFICATION_EVENT_E11' in report_info.source.graph %}
-                                                            {% for MODIFICATION_EVENT_E11 in report_info.source.graph.MODIFICATION_EVENT_E11 %}
-                                                                <dd class="arches-report-subsection-item report-list-item arches-report-spacer">
-                                                                    <span class="arches-report-subsection-item-type">{{ MODIFICATION_EVENT_E11.MODIFICATION_TYPE_E55.0.MODIFICATION_TYPE_E55__value }}:</span>                                                        
-                                                                    {{ MODIFICATION_EVENT_E11.MODIFICATION_DESCRIPTION_E62.0.MODIFICATION_DESCRIPTION_E62__value }}
-                                                                </dd>
-                                                            {% endfor %} 
-                                                        {% endif %}
+                                                                {% for MODIFICATION_EVENT_E11 in report_info.source.graph.MODIFICATION_EVENT_E11 %}
+                                                                    <dd class="arches-report-subsection-item report-list-item arches-report-spacer">
+                                                                        <span class="arches-report-subsection-item-type">{{ MODIFICATION_EVENT_E11.MODIFICATION_TYPE_E55.0.MODIFICATION_TYPE_E55__value }}:</span>                                                        
+                                                                        {{ MODIFICATION_EVENT_E11.MODIFICATION_DESCRIPTION_E62.0.MODIFICATION_DESCRIPTION_E62__value }}
+                                                                    </dd>
+                                                                {% endfor %} 
 
-                                                    </dl>
+                                                        </dl>
 
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <!-- End Section Content-->
@@ -299,7 +296,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
                             <!-- Descriptions -->
-                            <div class="resource-block">
+                            {% if 'DESCRIPTION_E62' in report_info.source.graph %}
                                 <div class="row">
 
                                     <!-- Section sub-header -->
@@ -327,14 +324,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                 <!-- End Descriptions Section -->
 
                                 <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
-                            </div>
+                            {% endif %}
 
 
                             
 
 
                             <!-- Measurements -->
-                            <div class="resource-block">
+                            {% if 'MEASUREMENT_TYPE_E55' in report_info.source.graph %}
                                 <div class="row">
 
                                     <!-- Section sub-header -->
@@ -362,14 +359,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                 <!-- End Measuerments Section -->
 
                                 <hr class="devider margin-top-10" style="margin-bottom: 5px;"></hr>
-                            </div>
+                            {% endif %}
 
 
                             
 
 
                             <!-- External System References -->
-                            <div class="resource-block">
+                            {% if 'EXTERNAL_RESOURCE_E1' in report_info.source.graph %}
                                 <div class="row">
 
                                     <!-- Section sub-header -->
@@ -395,7 +392,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                                 </div>
                                 <!-- End Descriptions Section -->
-                            </div>
+                            {% endif %}
+                            
                         </div>
                     </div>
                     <!-- End Project Information -->
