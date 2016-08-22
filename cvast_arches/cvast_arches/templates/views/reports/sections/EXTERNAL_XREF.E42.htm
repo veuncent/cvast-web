@@ -12,7 +12,11 @@
                     {% for EXTERNAL_XREF_E42 in EXTERNAL_RESOURCE_E1.EXTERNAL_XREF_E42 %}
                         <dd class="arches-report-subsection-item report-list-item">
                             <span class="arches-report-subsection-item-type">{{ EXTERNAL_XREF_E42.EXTERNAL_XREF_TYPE_E55__value }}:</span>
-                            {{ EXTERNAL_XREF_E42.EXTERNAL_XREF_E42__value }}
+                            {% if EXTERNAL_XREF_E42.EXTERNAL_XREF_TYPE_E55__value == "URL" %}
+                                <a href="{{ EXTERNAL_XREF_E42.EXTERNAL_XREF_E42__value }}" target="_blank">{{ EXTERNAL_XREF_E42.EXTERNAL_XREF_E42__value }}</a>
+                            {% else %}
+                                {{ EXTERNAL_XREF_E42.EXTERNAL_XREF_E42__value }}
+                            {% endif %}
                         </dd>
                     {% endfor %}
                 {% endfor %}            
