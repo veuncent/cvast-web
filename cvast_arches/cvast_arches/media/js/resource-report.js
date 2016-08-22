@@ -86,15 +86,14 @@ require([
 
             // Hide whole resource (sub)block when no data is present
             _.each($('.arches-report-subsection-content'), function(contentsection) {
-                if($(contentsection).find('.row:visible').length === 0) {
-                    // If the subblock is part of a for loop, only hide the empty ones
-                    if($(contentsection).closest('.resource-subblock').length !== 0) {
-                        $(contentsection).closest('.resource-subblock').hide();
-                    }
-                    // Otherwise hide the whole block
-                    else {
-                        $(contentsection).closest('.resource-row').hide();
-                    }
+                if ($(contentsection).find('.row:visible').length === 0) {
+                    $(contentsection).closest('.resource-row').hide();
+                }
+            })
+
+            _.each($('.resource-block'), function(resourceblock) {
+                if ($(resourceblock).find('.resource-row:visible').length > 0) {
+                    $(resourceblock).find('.resource-row:visible').last().find('.devider').hide();
                 }
             })
         },
