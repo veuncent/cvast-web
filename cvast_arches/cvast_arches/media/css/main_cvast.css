@@ -1,4 +1,5 @@
-/*Brand*/
+@import url(app_cvast.css);
+
 .header .navbar-brand { 
     z-index: 1;
     top: -10px;
