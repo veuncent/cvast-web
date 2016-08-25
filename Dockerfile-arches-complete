@@ -1,8 +1,27 @@
-# our base image, for now, Ubuntu
 FROM ubuntu:14.04
 USER root
-# Currently not necessary: Replace default command interpreter from sh to bash (needed for 'source' command)
-# RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+# Setting default environment variables
+ENV PG_VERSION=9.4
+############### Edit postgres database name if desired:
+ENV PG_DBNAME=cvast_arches
+ENV PG_HOST=localhost
+ENV PG_PORT=5432
+ENV PG_PASSWORD=postgis
+ENV PG_HOME=/var/lib/postgresql
+ENV PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
+ENV PG_BINARY=/etc/init.d/postgresql
+ENV PG_LOGDIR=/var/log/postgresql
+ENV PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
+ENV PG_CONFIGFILE=${PG_CONFIGDIR}/postgresql.conf
+ENV PG_HBA_CONFIGFILE=${PG_CONFIGDIR}/pg_hba.conf
+
+ENV ES_HOST=localhost
+
+############### Edit this if desired (Name of root folder in Docker container):
+ENV WEB_ROOT=cvast_web
+############### Edit this if you want to start with a clean custom Arches app (Name of your Django/Arches custom app, e.g. my_hip_app):
+ENV WEB_APP_NAME=cvast_arches
 
 
 # Setting locale variables for database
@@ -38,21 +57,8 @@ RUN apt-get install -y postgresql-9.4
 RUN apt-get install -y postgresql-server-dev-9.4
 RUN apt-get install -y postgresql-contrib-9.4
 
-# Setting default environment variables
-ENV PG_VERSION=9.4
-ENV PG_DBNAME=cvast_arches
-ENV PG_HOST=localhost
-ENV PG_PORT=5432
-ENV PG_PASSWORD=postgis
-ENV PG_HOME=/var/lib/postgresql
-ENV PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
-ENV PG_BINARY=/etc/init.d/postgresql
-ENV PG_LOGDIR=/var/log/postgresql
-ENV PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
-ENV PG_CONFIGFILE=${PG_CONFIGDIR}/postgresql.conf
-ENV PG_HBA_CONFIGFILE=${PG_CONFIGDIR}/pg_hba.conf
-ENV ES_HOST=localhost
-	
+
+
 # Manage postgres credentials and settings	
 COPY ./install/db/postgresql.conf ${PG_CONFIGFILE}
 COPY ./install/db/pg_hba.conf ${PG_HBA_CONFIGFILE}
@@ -98,22 +104,24 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
 
 # Root project folder
-RUN mkdir /cvast_web
+RUN mkdir /${WEB_ROOT}
 
 # Install the Arches application	
-COPY arches /cvast_web/arches
-WORKDIR	/cvast_web/arches
+COPY arches /${WEB_ROOT}/arches
+WORKDIR	/${WEB_ROOT}/arches
 RUN	pip install --no-index -e .
+# Seemed necessary, received errors without this
 RUN python setup.py build
-RUN python setup.py install
+# Seemed necessary, received errors without this	
+RUN python setup.py install							
 
 
 # Install Arches Hip
-COPY arches_hip /cvast_web/arches_hip
-WORKDIR /cvast_web/arches_hip
+COPY arches_hip /${WEB_ROOT}/arches_hip
+WORKDIR /${WEB_ROOT}/arches_hip
 RUN pip install --no-index -e .
-# RUN python setup.py build
-# RUN python setup.py install
+# RUN python setup.py build							# Apparently not necessary
+# RUN python setup.py install						# Apparently not necessary
 
 
 # Setup databases
@@ -128,9 +136,14 @@ RUN ${PG_BINARY} start &&\
 	${PG_BINARY} stop
 USER root	
 
+# Setup custom app based on Arches Hip
+############### Uncomment this if you want to start with a clean custom Arches app. Then comment out again after first run:
+# WORKDIR /${WEB_ROOT}
+# RUN arches-app create ${WEB_APP_NAME} --app arches_hip
+
 # Install Elasticsearch
-COPY cvast_arches /cvast_web/cvast_arches
-WORKDIR /cvast_web/cvast_arches
+COPY ${WEB_APP_NAME} /${WEB_ROOT}/${WEB_APP_NAME}
+WORKDIR /${WEB_ROOT}/${WEB_APP_NAME}
 RUN python manage.py packages -o setup_elasticsearch
 
 # Run database scripts & arches hip resources
@@ -139,7 +152,7 @@ RUN ${PG_BINARY} start &&\
 	# Wait for elasticsearch to start
 	sleep 10 &&\ 
 	python manage.py packages -o install &&\
-	python manage.py packages -o load_concept_scheme -s cvast_arches/source_data/concepts/authority_files &&\
+	python manage.py packages -o load_concept_scheme -s ${WEB_APP_NAME}/source_data/concepts/authority_files &&\
 	${PG_BINARY} stop
 
 

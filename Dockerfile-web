@@ -1,4 +1,3 @@
-# our base image
 FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 
 USER root
@@ -14,7 +13,16 @@ RUN rm -rf /elasticsearch
 
 ENV DJANGO_PASSWORD=admin
 
-VOLUME ["/cvast_web/arches/arches/uploadedfiles/files", "/cvast_web/cvast_arches/cvast_arches/logs"]
+
+ENV IS_CLEAN_ENV=false
+ENV INSTALL_DIR=/install
+
+# Entrypoint to setup volume mounts
+COPY install/web/web_entrypoint.sh ${INSTALL_DIR}/web_entrypoint.sh
+RUN chmod -R 700 ${INSTALL_DIR}
+
+VOLUME ["/${WEB_ROOT}/${WEB_APP_NAME}/${WEB_APP_NAME}/uploadedfiles/files", "/${WEB_ROOT}/${WEB_APP_NAME}/${WEB_APP_NAME}/logs"]
 EXPOSE 8000
-WORKDIR /cvast_web/cvast_arches
-CMD python -u manage.py setPassword && python -u manage.py runserver 0.0.0.0:8000
+WORKDIR /${WEB_ROOT}/${WEB_APP_NAME}
+
+CMD ${INSTALL_DIR}/web_entrypoint.sh

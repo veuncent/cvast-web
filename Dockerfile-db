@@ -1,4 +1,3 @@
-# our base image
 FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 
 USER root
@@ -14,7 +13,7 @@ ENV IS_CLEAN_ENV=false
 ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin
 
 # Remove obsolete folders
-RUN rm -rf /cvast_web
+RUN rm -rf /${WEB_ROOT}
 RUN rm -rf /elasticsearch
 
 # Cleanup database
@@ -30,4 +29,5 @@ RUN chmod -R 700 ${INSTALL_DIR}
 
 EXPOSE 5432
 VOLUME  ["${PG_LOG_VOLUME}", "${PG_DATA_VOLUME}", "${PG_CONFIG_VOLUME}"]
+
 CMD ${INSTALL_DIR}/db_entrypoint.sh

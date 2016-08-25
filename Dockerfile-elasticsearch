@@ -1,11 +1,10 @@
-# our base image
 FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 
 USER root
 WORKDIR /
 
 # Clean up obsolete files
-RUN rm -rf /cvast_web
+RUN rm -rf /${WEB_ROOT}
 RUN apt-get purge -y postgresql-9.4
 RUN apt-get purge -y postgresql-server-dev-9.4
 RUN apt-get purge -y postgresql-contrib-9.4
