@@ -1,0 +1,32 @@
+web:
+  restart: always
+  build: .
+  dockerfile: ./Dockerfile-web
+  command: bash -c  "./web_entrypoint.sh"
+  working_dir: /install
+  volumes:
+  - /c/Users/CVAST/Documents/arches-docker/cvast_arches/cvast_arches/uploadedfiles/files:/cvast_web/cvast_arches/cvast_arches/uploadedfiles/files
+  - web-log:/cvast_web/cvast_arches/cvast_arches/logs
+  - /c/Users/CVAST/Documents/arches-docker/:/cvast_web
+  environment:
+    - PG_PASSWORD=TestCVAST
+    - PG_HOST=db
+    - PG_PORT=5432
+    - ES_HOST=elasticsearch
+    - DJANGO_PASSWORD=TestAdminCVAST
+    - IS_CLEAN_ENV=true
+  ports:
+    - '8000:8000'
+    - '8001:8001'
+	
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "80:80"
+  volumes:
+    - /www/static
+  volumes_from:
+    - web
+  links:
+    - web:web
