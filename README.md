@@ -1,1 +1,132 @@
-# Experimental Docker Build for the CVAST implementation of Arches
+Docker build for the CVAST implementation of Arches
+===================================================
+
+This repository lets you run Arches ([http://archesproject.org/](Link URL)) in a Docker container, alongside containers for Elasticsearch and Postgresql.  
+
+To get started with Docker: [https://www.docker.com/](Link URL)  
+
+**Note**: if you run Docker on **Windows or Mac**, your Arches app will not run on localhost:8000, but on a different IP address. To find out this ip address, open Docker and type: 
+
+```
+#!shell
+
+docker-machine ip
+```
+
+
+Config
+------
+
+- In the file 'Dockerfile-arches-complete':  
+	* Optionally you can change the variables marked with ############### to your own requirements  
+
+- In the file 'docker-compose.yml':  
+	* If you run this in your development environment, don't forget to change to mount folder path to your workspace folder  
+		* e.g.: - /c/Users/<your Windows user>/Documents/<your repo workspace>/:/<root of your project>  
+	* Remove this line if you run this in a non-development environment.  
+	* Change the passwords of environment variables PG_PASSWORD and DJANGO_PASSWORD to the passwords you want to set.  
+
+	
+**Advanced:**  
+
+- The cvast_arches app contains a few (minor) changes to Arches Hip. You can continue to build on this app if desired. If you want to start with a clean Arches custom app:  
+	* Delete the cvast_arches folder in the root of this repository  
+	* In the file 'docker-arches-complete':  
+		* Change the environment variable WEB_APP_NAME into the name of your new app  
+		* Uncomment these lines (141 and 142):  
+			#WORKDIR /${WEB_ROOT}  
+			#RUN arches-app create ${WEB_APP_NAME} --app arches_hip  
+		Comment these lines out again after first run, as you only need to do this once.
+
+- If you want to run clusters of the same containers (e.g. multiple web containers, perhaps on different host machines), the mount points should be on a folder accessible by all containers, e.g. a shared (network) drive.
+	* This is currently not possible with the elasticsearch and db containers, these require some extra configuration. Coming soon...
+	
+- If you create your own custom app on top of this, you might want to add the uploadedfiles/files path to the .dockerignore file in the root of this repository. This in order to keep these files from taking up space in your Docker image.
+
+
+
+Build
+-----
+
+From the repository root directory : 
+(The first one takes a long time, probably > 15 minutes)
+
+	./buildBaseImage.sh
+	docker-compose build
+
+	
+	
+Run
+---
+(Because files are moved around and deleted on container startup, we need to force docker-compose not to reuse containers:)
+
+	docker-compose.exe up --force-recreate
+
+After the first successful deployment, your host volumes have been initialized for data persistence. 
+**For subsequent deployments you should change the environment variable IS_CLEAN_ENV for web, db and elasticsearch to 'false' in docker-compose.yml.**
+
+
+
+Housekeeping
+------------
+To clean up unused images and containers run from the repository root directory: 
+	
+	./cleanup.sh
+
+
+Persistence
+-----------
+The data of all containers is kept (persisted) in volumes as specified in docker-compose.yml.  
+
+Basically, a 'Named Volume' (or 'relative path') creates a folder on the host machine under /var/lib/docker/volumes.
+A volume with an absolute path (like the one that mounts the repository workspace onto the web folder ('/cvast_web') in the container) is stored on that specified absolute path.  
+
+Most important difference: a volume with absolute path is mounted over the folder in the container, hiding everything that was in that container folder. In case of the Named Volume the data present in the container is not hidden.
+Read more:  
+https://docs.docker.com/engine/tutorials/dockervolumes/  
+And specifically: https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-host-directory-as-a-data-volume    	
+
+Known Issues
+------------
+
+- EOL Windows/Unix:
+	* Error: When running the containers, certain .sh files are not found, e.g.:  
+    elasticsearch_1  |←[0m /bin/sh: 1: /install/es_entrypoint.sh: not found  
+	* Cause: Line endings (EOL) are in Windows format  
+	* Fix: In Notepad ++ --> Edit --> EOL Conversion --> UNIX/OSX Format --> Save file  
+
+Roadmap
+-------
+Among other things: 
+ 
+- Add NginX container to be paired with the Django container to serve as entrypoint for the web.  
+- Make Postgres work in a cluster. Need the right settings for the nodes to communicate with each other.  
+- Make Elasticsearch work in cluster. Ibid.
+
+
+
+
+
+AWS
+===
+Configure AWS
+-------------
+CVAST Arches requires an AWS ECS cluster to be set up.
+The deployment script in ./AWS/deploy/deployAWSTask.sh assumes the following resource names:
+- CLUSTER_NAME=${ENVIRONMENT}-cvast-arches-cluster
+	e.g. prod-cvast-arches-cluster
+- SERVICE_NAME=${ENVIRONMENT}-cvast-arches-${DOCKER_IMAGE}-service
+	e.g. acc-cvast-arches-elasticsearch-service
+- TASK_FAMILY=${ENVIRONMENT}-cvast-arches-${DOCKER_IMAGE}-task
+	e.g. test-cvast-arches-web-task
+
+
+
+Deploy to AWS
+------
+
+Copy the files from ./AWS/deploy/dummy-task-definitions to ./AWS/deploy/task-definitions
+Change the file prefixes from 'dummy-' to 'your-environment-name-'
+Change the endpoints and variable values between <> to your specific values
+
+After the first successful deployment, your host volumes have been initialized for data persistence. For subsequent deployments you should change the environment variable IS_CLEAN_ENV for db and elasticsearch to 'false'.
