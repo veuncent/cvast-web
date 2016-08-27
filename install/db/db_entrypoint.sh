@@ -3,7 +3,7 @@ init_datadir() {
 	echo "Initializing Postgres data dir..."
 	if [[ -d ${PG_DATA_VOLUME} ]]; then
 		# Do only if told explicitly: copies files into the persistence filesystem. (Use with caution)
-		if [[ ${IS_CLEAN_ENV} == true ]]; then
+		if [[ ${IS_CLEAN_ENV} == True ]]; then
 			echo "Clean environment. Copying to mounted volume..."
 			if [ "$(ls -A ${PG_DATA_VOLUME} 2>/dev/null)" ]; then
 				echo "Host folder not empty. Skipping copy..."

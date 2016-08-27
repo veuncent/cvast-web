@@ -1,6 +1,6 @@
 #!/bin/bash
 set_password() {
-	if [[ ${IS_CLEAN_ENV} == true ]]; then
+	if [[ ${IS_CLEAN_ENV} == True ]]; then
 		echo "Clean environment. Setting Django password..."
 		cd /${WEB_ROOT}/${WEB_APP_NAME}
 		python -u manage.py setPassword

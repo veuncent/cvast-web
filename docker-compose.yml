@@ -16,7 +16,9 @@ web:
     - PG_PORT=5432
     - ES_HOST=elasticsearch
     - DJANGO_PASSWORD=TestAdminCVAST
-    - IS_CLEAN_ENV=true
+    - DJANGO_MODE=Dev
+    - DJANGO_DEBUG=True
+    - IS_CLEAN_ENV=False
   ports:
     - '8000:8000'
     - '8001:8001'
@@ -35,7 +37,7 @@ db:
     - '5432:5432'
   environment:
     - PG_PASSWORD=TestCVAST
-    - IS_CLEAN_ENV=false
+    - IS_CLEAN_ENV=False
 elasticsearch:
   restart: always
   build: .
@@ -48,7 +50,7 @@ elasticsearch:
     - "9200:9200"
     - "9300:9300"
   environment:
-    - IS_CLEAN_ENV=false
+    - IS_CLEAN_ENV=False
     
 nginx:
   restart: always
