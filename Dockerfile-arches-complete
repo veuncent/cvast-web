@@ -19,7 +19,7 @@ ENV PG_HBA_CONFIGFILE=${PG_CONFIGDIR}/pg_hba.conf
 ENV ES_HOST=localhost
 
 ############### Edit this if desired (Name of root folder in Docker container):
-ENV WEB_ROOT=cvast_web
+ENV WEB_ROOT=/cvast_web
 ############### Edit this if you want to start with a clean custom Arches app (Name of your Django/Arches custom app, e.g. my_hip_app):
 ENV WEB_APP_NAME=cvast_arches
 
@@ -106,11 +106,11 @@ RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
 
 # Root project folder
-RUN mkdir /${WEB_ROOT}
+RUN mkdir ${WEB_ROOT}
 
 # Install the Arches application	
-COPY arches /${WEB_ROOT}/arches
-WORKDIR	/${WEB_ROOT}/arches
+COPY arches ${WEB_ROOT}/arches
+WORKDIR	${WEB_ROOT}/arches
 RUN	pip install --no-index -e .
 # Seemed necessary, received errors without this
 RUN python setup.py build
@@ -119,8 +119,8 @@ RUN python setup.py install
 
 
 # Install Arches Hip
-COPY arches_hip /${WEB_ROOT}/arches_hip
-WORKDIR /${WEB_ROOT}/arches_hip
+COPY arches_hip ${WEB_ROOT}/arches_hip
+WORKDIR ${WEB_ROOT}/arches_hip
 RUN pip install --no-index -e .
 # RUN python setup.py build							# Apparently not necessary
 # RUN python setup.py install						# Apparently not necessary
@@ -144,8 +144,8 @@ USER root
 # RUN arches-app create ${WEB_APP_NAME} --app arches_hip
 
 # Install Elasticsearch
-COPY ${WEB_APP_NAME} /${WEB_ROOT}/${WEB_APP_NAME}
-WORKDIR /${WEB_ROOT}/${WEB_APP_NAME}
+COPY ${WEB_APP_NAME} ${WEB_ROOT}/${WEB_APP_NAME}
+WORKDIR ${WEB_ROOT}/${WEB_APP_NAME}
 RUN python manage.py packages -o setup_elasticsearch
 
 # Run database scripts & arches hip resources
