@@ -16,7 +16,7 @@ web:
     - PG_PORT=5432
     - ES_HOST=elasticsearch
     - DJANGO_PASSWORD=TestAdminCVAST
-    - DJANGO_MODE=Dev
+    - DJANGO_MODE=DEV
     - DJANGO_DEBUG=True
     - IS_CLEAN_ENV=False
   ports:
