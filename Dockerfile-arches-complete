@@ -47,6 +47,7 @@ RUN apt-get update -y &&\
 	apt-get install -y python-dev &&\
 	apt-get install -y libffi-dev &&\
 	apt-get install -y libpq-dev &&\
+	apt-get install -y dos2unix &&\
 	easy_install pip
 
 # Needed for postgres-9.4

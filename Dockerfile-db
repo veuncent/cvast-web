@@ -26,6 +26,7 @@ USER root
 # Entrypoint to setup volume mounts
 COPY install/db/db_entrypoint.sh ${INSTALL_DIR}/db_entrypoint.sh
 RUN chmod -R 700 ${INSTALL_DIR}
+RUN dos2unix ${INSTALL_DIR}/*
 
 EXPOSE 5432
 VOLUME  ["${PG_LOG_VOLUME}", "${PG_DATA_VOLUME}", "${PG_CONFIG_VOLUME}"]
