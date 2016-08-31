@@ -41,7 +41,7 @@ push_to_registry(){
 deploy_image() {
 	# See if old image exists.
 	if [[ $(sudo docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$PREVIOUS_BUILD 2> /dev/null) ]]; then
-		local OLD_IMAGE=`docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$PREVIOUS_BUILD`
+		local OLD_IMAGE=`sudo docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$PREVIOUS_BUILD`
 	fi
 	
 	local NEW_IMAGE=`sudo docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$BUILD_NUMBER`
