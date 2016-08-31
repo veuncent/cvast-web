@@ -58,8 +58,8 @@ Installation (client side, Windows)
 (Replace <your domain name> for used domain name)
 
 To trust the registry certificate on your Docker client, do:
-	$ DOMAIN_NAME=<your domain name>:5000
 	$ docker-machine ssh default
+	$ DOMAIN_NAME=<your domain name>:5000
 	$ sudo mkdir -p /etc/docker/certs.d/$DOMAIN_NAME
 	$ sudo vi /etc/docker/certs.d/$DOMAIN_NAME/ca.crt     
 	--> then copy certificate text in there
