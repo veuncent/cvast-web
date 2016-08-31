@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_OPTIONS="db|web|elasticsearch"
+APP_OPTIONS="db|web|elasticsearch|nginx"
 ENVIRONMENT_OPTIONS="test|acc"
 HELP_TEXT="
 Arguments:
@@ -11,16 +11,24 @@ Arguments:
 "
 
 
+### Functions
 display_help() {
 	echo ${HELP_TEXT}
 }
 
 create_task_definition() {
 	LATEST_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition ${TASK_FAMILY})
+		 
 	echo $LATEST_TASK_DEFINITION \
-		| jq '{containerDefinitions: .taskDefinition.containerDefinitions, volumes: .taskDefinition.volumes}' \
-		| jq '.containerDefinitions[0].image='\"${DOCKER_IMAGE}\" \
-		> ${TMP_FOLDER}/tmp.json
+		| jq --arg docker_image "${DOCKER_IMAGE}" \
+			--arg container_name "${CONTAINER_NAME}" \
+			'{containerDefinitions: .taskDefinition.containerDefinitions, volumes: .taskDefinition.volumes}
+			| .containerDefinitions=(.containerDefinitions
+				| map(if (.name == $container_name)
+					then .image=$docker_image
+					else .
+				end)
+			)' > ${TMP_FOLDER}/tmp.json
 }
 
 register_task_definition_in_AWS(){
@@ -28,6 +36,7 @@ register_task_definition_in_AWS(){
 	sudo aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/tmp.json
 }
 
+# Update the AWS ECS service to use the new task definition
 update_AWS_service_with_task_revision(){
 	TASK_REVISION=`sudo aws ecs describe-task-definition --task-definition ${TASK_FAMILY} | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
 	echo "Updating task ${TASK_FAMILY} on AWS service ${SERVICE_NAME} with task revision ${TASK_REVISION}"
@@ -103,10 +112,15 @@ if [ -z ${BUILD_NUMBER} ] || [ -z ${CVAST_APP} ] || [ -z ${ENVIRONMENT} ] ; then
 	fi
 
 ### Env variables
-TASK_FAMILY=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-task
-CLUSTER_NAME=${ENVIRONMENT}-cvast-arches-cluster
-SERVICE_NAME=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-service
 DOCKER_IMAGE=cvast-build.eastus.cloudapp.azure.com:5000/cvast-${CVAST_APP}:${BUILD_NUMBER}
+CONTAINER_NAME=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-container
+# Nginx is part of the web task and service
+if [[ ${CVAST_APP} == 'nginx' ]]; then
+	CVAST_APP='web'
+fi
+TASK_FAMILY=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-task
+SERVICE_NAME=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-service
+CLUSTER_NAME=${ENVIRONMENT}-cvast-arches-cluster
 TMP_FOLDER=./tmp
 
 ### Do things
