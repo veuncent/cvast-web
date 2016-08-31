@@ -1,3 +1,4 @@
+# Docker image to deploy other images to AWS
 FROM ubuntu:14.04
 
 RUN apt-get update -y
@@ -10,4 +11,4 @@ RUN apt-get install -y jq
 
 COPY ./deployAWSTask.sh /cvast-arches-deploy/deployAWSTask.sh
 
-ENTRYPOINT ["/cvast-arches-deploy/deployAWSTask.sh"]
+CMD ["/cvast-arches-deploy/deployAWSTask.sh"]
