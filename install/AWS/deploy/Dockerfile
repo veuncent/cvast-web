@@ -1,14 +1,17 @@
 # Docker image to deploy other images to AWS
 FROM ubuntu:14.04
 
-RUN apt-get update -y
-RUN apt-get install -y python-dev
-RUN apt-get install -y curl
+RUN apt-get update -y  &&\
+	apt-get install -y python-dev \
+		curl \
+		jq \
+		dos2unix
+	
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
 RUN pip install awscli
-RUN apt-get install -y jq
 
 COPY ./deployAWSTask.sh /cvast-arches-deploy/deployAWSTask.sh
+RUN dos2unix /cvast-arches-deploy/*
 
-CMD ["/cvast-arches-deploy/deployAWSTask.sh"]
+ENTRYPOINT ["/cvast-arches-deploy/deployAWSTask.sh"]

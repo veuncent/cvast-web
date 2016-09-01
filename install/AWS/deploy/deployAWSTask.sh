@@ -8,16 +8,27 @@ Arguments:
 -a or --app: CVAST app to be deployed (options: ${APP_OPTIONS})
 -e or --environment: The AWS environment to deploy on (options: ${ENVIRONMENT_OPTIONS})
 -h or --help: Display help text
+
+This Docker image requires the following environment variables in order to run:
+--env AWS_ACCESS_KEY_ID
+--env AWS_SECRET_ACCESS_KEY
+--env AWS_DEFAULT_REGION
 "
 
 
+
 ### Functions
+# configure_aws() {
+	# sudo aws configure | 
+# }
+
 display_help() {
 	echo ${HELP_TEXT}
 }
 
 create_task_definition() {
-	LATEST_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition ${TASK_FAMILY})
+echo "Creating new AWS ECS task definition..."
+	LATEST_TASK_DEFINITION=$(aws ecs describe-task-definition --region ${AWS_DEFAULT_REGION} --task-definition ${TASK_FAMILY})
 		 
 	echo $LATEST_TASK_DEFINITION \
 		| jq --arg docker_image "${DOCKER_IMAGE}" \
@@ -32,21 +43,36 @@ create_task_definition() {
 }
 
 register_task_definition_in_AWS(){
-	echo "Registering task definition for ${DOCKER_IMAGE} on AWS"
-	sudo aws ecs register-task-definition --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/tmp.json
+	echo "Registering new task definition for ${DOCKER_IMAGE} on AWS..."
+	aws ecs register-task-definition --region ${AWS_DEFAULT_REGION} --family ${TASK_FAMILY} --cli-input-json file://${TMP_FOLDER}/tmp.json
 }
 
 # Update the AWS ECS service to use the new task definition
 update_AWS_service_with_task_revision(){
-	TASK_REVISION=`sudo aws ecs describe-task-definition --task-definition ${TASK_FAMILY} | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
-	echo "Updating task ${TASK_FAMILY} on AWS service ${SERVICE_NAME} with task revision ${TASK_REVISION}"
-	sudo aws ecs update-service --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION}
+	TASK_REVISION=$(aws ecs describe-task-definition --region ${AWS_DEFAULT_REGION} --task-definition ${TASK_FAMILY} | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//')
+	echo "Updating task ${TASK_FAMILY} on AWS service ${SERVICE_NAME} with task revision ${TASK_REVISION}..."
+	aws ecs update-service --region ${AWS_DEFAULT_REGION} --cluster ${CLUSTER_NAME} --service ${SERVICE_NAME} --task-definition ${TASK_FAMILY}:${TASK_REVISION}
 }
 
 
 
-
 ### Enter here (parameter check) ###
+
+# Global variables (parsed through Docker run command)
+if [[ -z ${AWS_ACCESS_KEY_ID} ]]; then
+	echo "Environment variable AWS_ACCESS_KEY_ID not specified, exiting..."
+	exit 1
+fi
+
+if [[ -z ${AWS_SECRET_ACCESS_KEY} ]]; then
+	echo "Environment variable AWS_SECRET_ACCESS_KEY not specified, exiting..."
+	exit 1
+fi
+
+if [[ -z ${AWS_DEFAULT_REGION} ]]; then
+	echo "Environment variable AWS_DEFAULT_REGION not specified, exiting..."
+	exit 1
+fi
 
 # Use -gt 1 to consume two arguments per pass in the loop (e.g. each
 # argument has a corresponding value to go with it).
@@ -87,7 +113,8 @@ eval "case ${CVAST_APP} in
 	${APP_OPTIONS})
 		echo "Deploying image: ${CVAST_APP}"
 		;;
-	*)			# Any other input-json
+	*)			
+		# Any other input
 		echo "Invalid Docker image option: ${CVAST_APP}"
 		display_help
 		exit 1
@@ -98,7 +125,8 @@ eval "case ${ENVIRONMENT} in
 	${ENVIRONMENT_OPTIONS})
 		echo "Deploying on environment: ${ENVIRONMENT}"
 		;;
-	*)			# Any other input-json
+	*)			
+		# Any other input
 		echo "Invalid environment option: ${ENVIRONMENT}"
 		display_help
 		exit 1
@@ -109,7 +137,7 @@ if [ -z ${BUILD_NUMBER} ] || [ -z ${CVAST_APP} ] || [ -z ${ENVIRONMENT} ] ; then
         echo "ERROR! Not all parameters were specified. Exiting..."
 		display_help
         exit 1
-	fi
+fi
 
 ### Env variables
 DOCKER_IMAGE=cvast-build.eastus.cloudapp.azure.com:5000/cvast-${CVAST_APP}:${BUILD_NUMBER}

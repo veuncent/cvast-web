@@ -2,18 +2,115 @@
 
 
 
-### Global variables
+### Global variables and Help
 
+APP_OPTIONS="db|web|elasticsearch|nginx"
+DEFAULT_APPS_DEPLOYED="web|nginx"
+ENVIRONMENT_OPTIONS="test|acc"
+
+HELP_TEXT="
+Arguments:
+-a or --app: Optional: CVAST app to be deployed, multiple allowed within quotes \"\" (options: ${APP_OPTIONS}). If --app not specified, these apps are deployed: ${DEFAULT_APPS_DEPLOYED}
+-e or --environment: The AWS environment to deploy on (options: ${ENVIRONMENT_OPTIONS})
+-i or --access_key_id: The AWS Access Key ID of your AWS account
+-k or --secret_access_key: The AWS Secret Access Key of your AWS account
+-h or --help: Display help text
+"
+
+AWS_DEFAULT_REGION=us-east-1
 PREVIOUS_BUILD=`expr $BUILD_NUMBER - 1`
 OLD_IMAGE_BUILD=`expr $BUILD_NUMBER - 7` # For cleaning up old junk
 
-# Forced deployment possible through script parameters:
+
+
+### Script parameters 
+
+# Use -gt 1 to consume two arguments per pass in the loop (e.g. each
+# argument has a corresponding value to go with it).
+# Use -gt 0 to consume one or more arguments per pass in the loop (e.g.
+# some arguments don't have a corresponding value to go with it, such as --help ).
+
 while [[ $# -gt 0 ]]
 do
-	DEPLOY_THESE_APPS=("$DEPLOY_THESE_APPS" "$1")
-	shift
+	key="$1"
+
+	case ${key} in
+		-a|--app)
+			DEPLOY_THESE_APPS="$2"
+			shift # next argument
+		;;
+		-e|--environment)
+			ENVIRONMENT="$2"
+			shift # next argument
+		;;
+		-i|--access_key_id)
+			AWS_ACCESS_KEY_ID="$2"
+			shift # next argument
+		;;
+		-k|--secret_access_key)
+			AWS_SECRET_ACCESS_KEY="$2"
+			shift # next argument
+		;;
+		-h|--help)
+			display_help
+			exit 0
+		;;
+		*)
+			echo "Unknown option: ${key}"
+			display_help
+			exit 1
+		;;
+	esac
+	shift # next argument or value
 done
 
+if [[ ! -z ${DEPLOY_THESE_APPS} ]]; then
+	eval "case ${DEPLOY_THESE_APPS} in
+		${APP_OPTIONS})
+			echo "Deploying apps: ${DEPLOY_THESE_APPS}"
+			;;
+		*)			
+			# Any other input
+			echo "Invalid option: -a|--app ${DEPLOY_THESE_APPS}"
+			display_help
+			exit 1
+			;;
+	esac"
+fi
+
+if [[ -z ${ENVIRONMENT} ]] ; then
+        echo "ERROR! -e|--environment parameter not specified. Exiting..."
+		display_help
+        exit 1
+fi
+
+eval "case ${ENVIRONMENT} in
+	${ENVIRONMENT_OPTIONS})
+		echo "Deploying on environment: ${ENVIRONMENT}"
+		;;
+	*)			
+		# Any other input
+		echo "Invalid option: -e|--environment ${ENVIRONMENT}"
+		display_help
+		exit 1
+		;;
+esac"
+
+if [[ -z ${AWS_ACCESS_KEY_ID} ]] ; then
+        echo "ERROR! -i|--access_key_id parameter not specified. Exiting..."
+		display_help
+        exit 1
+fi
+
+if [[ -z ${AWS_SECRET_ACCESS_KEY} ]] ; then
+        echo "ERROR! -k|--secret_access_key parameter not specified. Exiting..."
+		display_help
+        exit 1
+fi
+
+
+
+	
 ####Functions####################################################################################################################
 
 
@@ -75,6 +172,12 @@ prepare_deploy_image() {
 deploy_image() {
 	echo "Deploying to AWS:  $APP_NAME:$BUILD_NUMBER"
 	sudo docker run cvast-build.eastus.cloudapp.azure.com:5000/cvast-arches-deploy -c $BUILD_NUMBER -e test -a $APP_NAME
+	sudo docker run \
+		--env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+		--env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+		--env AWS_DEFAULT_REGION=$(AWS_DEFAULT_REGION) \
+		cvast-build.eastus.cloudapp.azure.com:5000/cvast-arches-deploy \
+		-c $BUILD_NUMBER -e ${ENVIRONMENT} -a $APP_NAME
 }
 
 
@@ -89,6 +192,9 @@ array_contains_element() {
 
 #################################################################################################################################
 
+
+
+# Actual execution
 
 	
 ### Build all images
