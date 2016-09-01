@@ -64,7 +64,7 @@ prepare_deploy_image() {
 			deploy_image $APP_NAME
 		fi
 	# Else, deploy only if there are no older images or if older image is different. Efficiency!
-	elif [[ -z $OLD_IMAGE ]] || [[ "$OLD_IMAGE" != "$NEW_IMAGE" ]] || ; then
+	elif [[ -z $OLD_IMAGE ]] || [[ "$OLD_IMAGE" != "$NEW_IMAGE" ]] ; then
 		deploy_image $APP_NAME
 	fi
 }
