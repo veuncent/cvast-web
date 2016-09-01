@@ -6,6 +6,7 @@
 
 PREVIOUS_BUILD=`expr $BUILD_NUMBER - 1`
 OLD_IMAGE_BUILD=`expr $BUILD_NUMBER - 7` # For cleaning up old junk
+FORCE_DEPLOY=$1
 
 
 
@@ -50,7 +51,7 @@ deploy_image() {
 	local NEW_IMAGE=`sudo docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$BUILD_NUMBER`
 	
 	# Deploy only if there are no older images or if older image is different. Efficiency!
-	if [[ -z $OLD_IMAGE ]] || [[ "$OLD_IMAGE" != "$NEW_IMAGE" ]]; then
+	if [[ -z $OLD_IMAGE ]] || [[ "$OLD_IMAGE" != "$NEW_IMAGE" ]] || [[ "$FORCE_DEPLOY" == True ]]; then
 		echo "Deploying to AWS:  $1:$BUILD_NUMBER"
 		sudo docker run cvast-build.eastus.cloudapp.azure.com:5000/cvast-arches-deploy -c $BUILD_NUMBER -e test -a $1
 	fi
