@@ -4,7 +4,7 @@
 
 ### Global variables and Help
 
-APP_OPTIONS="db|web|elasticsearch|nginx"
+APP_OPTIONS=("db" "web" "elasticsearch" "nginx")
 DEFAULT_APPS_DEPLOYED="web|nginx"
 ENVIRONMENT_OPTIONS="test|acc"
 
@@ -65,17 +65,13 @@ do
 done
 
 if [[ ! -z ${DEPLOY_THESE_APPS} ]]; then
-	eval "case ${DEPLOY_THESE_APPS} in
-		${APP_OPTIONS})
-			echo "Deploying apps: ${DEPLOY_THESE_APPS}"
-			;;
-		*)			
-			# Any other input
+	for app in "${DEPLOY_THESE_APPS[@]}"; do
+		if [[ ! array_contains_element $app ${APP_OPTIONS} ]]; then
 			echo "Invalid option: -a|--app ${DEPLOY_THESE_APPS}"
 			display_help
 			exit 1
-			;;
-	esac"
+		fi
+	done 
 fi
 
 if [[ -z ${ENVIRONMENT} ]] ; then
@@ -86,11 +82,11 @@ fi
 
 eval "case ${ENVIRONMENT} in
 	${ENVIRONMENT_OPTIONS})
-		echo "Deploying on environment: ${ENVIRONMENT}"
+		echo \"Deploying on environment: ${ENVIRONMENT}\"
 		;;
 	*)			
 		# Any other input
-		echo "Invalid option: -e|--environment ${ENVIRONMENT}"
+		echo \"Invalid option: -e|--environment ${ENVIRONMENT}\"
 		display_help
 		exit 1
 		;;
@@ -161,7 +157,7 @@ prepare_deploy_image() {
 			deploy_image $APP_NAME
 		fi
 	# Else, deploy only if there are no older images or if older image is different. Efficiency!
-	elif [[ -z $OLD_IMAGE ]] || [[ "$OLD_IMAGE" != "$NEW_IMAGE" ]] ; then
+	elif [[ array_contains_element $APP_NAME $DEFAULT_APPS_DEPLOYED ]] && ([[ -z $OLD_IMAGE ]] || [[ "$OLD_IMAGE" != "$NEW_IMAGE" ]]) ; then
 		deploy_image $APP_NAME
 	fi
 }
