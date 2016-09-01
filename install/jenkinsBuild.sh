@@ -15,6 +15,7 @@ OLD_IMAGE_BUILD=`expr $BUILD_NUMBER - 7` # For cleaning up old junk
 # Parameters: 
 # $1 = app (web, db, elasticsearch, nginx)
 build_image() {
+	echo "Building Docker image:  $1:$BUILD_NUMBER"
 	sudo docker build -f Dockerfile-$1 -t cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$BUILD_NUMBER .
 }
 
@@ -24,6 +25,7 @@ build_image() {
 # Cleanup old images, keep latest 7
 cleanup_old_image() {
 	if [[ $(sudo docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$OLD_IMAGE_BUILD 2> /dev/null ) ]]; then
+		echo "Removing old image:  $1:$OLD_IMAGE_BUILD"
 		sudo docker rmi cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$OLD_IMAGE_BUILD
 	fi
 }
@@ -31,7 +33,8 @@ cleanup_old_image() {
 
 # Parameters: 
 # $1 = app (web, db, elasticsearch, nginx)
-push_to_registry(){
+push_to_registry() {
+	echo "Pushing to private Docker registry:  $1:$BUILD_NUMBER "
 	sudo docker push cvast-build.eastus.cloudapp.azure.com:5000/cvast-$1:$BUILD_NUMBER
 }
 
@@ -48,6 +51,7 @@ deploy_image() {
 	
 	# Deploy only if there are no older images or if older image is different. Efficiency!
 	if [[ -z $OLD_IMAGE ]] || [[ "$OLD_IMAGE" != "$NEW_IMAGE" ]]; then
+		echo "Deploying to AWS:  $1:$BUILD_NUMBER"
 		sudo docker run cvast-build.eastus.cloudapp.azure.com:5000/cvast-arches-deploy -c $BUILD_NUMBER -e test -a $1
 	fi
 }
@@ -75,6 +79,7 @@ cleanup_old_image nginx
 
 
 ### Run all containers (unit tests to be added)
+echo "Starting all Docker containers..."
 sudo docker-compose up --force-recreate &
 sleep 5 && echo "5"
 sleep 5 && echo "10"
@@ -82,6 +87,7 @@ sleep 5 && echo "15"
 sleep 5 && echo "20"
 sleep 5 && echo "25"
 sleep 5 && echo "30"
+echo "Stopping all Docker containers..."
 sudo docker-compose down
 
 
