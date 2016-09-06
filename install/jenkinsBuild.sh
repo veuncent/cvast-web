@@ -11,15 +11,14 @@ ENVIRONMENT_OPTIONS="test|acc"
 HELP_TEXT="
 Arguments:  
 -a or --app: Optional: CVAST app to be deployed, multiple allowed within quotes "" (options: ${APP_OPTIONS}). If --app not specified, these apps are deployed: ${DEFAULT_APPS_DEPLOYED}  
--e or --environment: The AWS environment to deploy on (options: ${ENVIRONMENT_OPTIONS})  
+-e or --environment: The AWS environment to deploy on (options: ${ENVIRONMENT_OPTIONS})
+-c or --commit: The build / commit number to tag the images with (e.g. the \$BUILD_NUMBER variable in Jenkins)
 -i or --access_key_id: The AWS Access Key ID of your AWS account  
 -k or --secret_access_key: The AWS Secret Access Key of your AWS account  
 -h or --help: Display help text  
 "
 
 AWS_DEFAULT_REGION=us-east-1
-PREVIOUS_BUILD=`expr $BUILD_NUMBER - 1`
-OLD_IMAGE_BUILD=`expr $BUILD_NUMBER - 7` # For cleaning up old junk
 
 
 
@@ -133,6 +132,10 @@ do
 			ENVIRONMENT="$2"
 			shift # next argument
 		;;
+		-c|--commit)
+			BUILD_NUMBER="$2"
+			shift # next argument
+		;;
 		-i|--access_key_id)
 			AWS_ACCESS_KEY_ID="$2"
 			shift # next argument
@@ -173,9 +176,9 @@ fi
 
 
 if [[ -z ${ENVIRONMENT} ]] ; then
-        echo "ERROR! -e|--environment parameter not specified. Exiting..."
-		display_help
-        exit 1
+	echo "ERROR! -e|--environment parameter not specified. Exiting..."
+	display_help
+	exit 1
 fi
 
 eval "case ${ENVIRONMENT} in
@@ -190,16 +193,26 @@ eval "case ${ENVIRONMENT} in
 		;;
 esac"
 
+if [[ -z ${BUILD_NUMBER} ]] ; then
+	echo "ERROR! -c|--commit parameter not specified. Exiting..."
+	display_help
+	exit 1
+else
+	PREVIOUS_BUILD=`expr $BUILD_NUMBER - 1`
+	OLD_IMAGE_BUILD=`expr $BUILD_NUMBER - 7` # For cleaning up old junk
+fi
+
+
 if [[ -z ${AWS_ACCESS_KEY_ID} ]] ; then
-        echo "ERROR! -i|--access_key_id parameter not specified. Exiting..."
-		display_help
-        exit 1
+	echo "ERROR! -i|--access_key_id parameter not specified. Exiting..."
+	display_help
+	exit 1
 fi
 
 if [[ -z ${AWS_SECRET_ACCESS_KEY} ]] ; then
-        echo "ERROR! -k|--secret_access_key parameter not specified. Exiting..."
-		display_help
-        exit 1
+	echo "ERROR! -k|--secret_access_key parameter not specified. Exiting..."
+	display_help
+	exit 1
 fi
 
 
