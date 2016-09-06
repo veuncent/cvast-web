@@ -1,8 +1,8 @@
 cvast-jenkins:
-  image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-jenkins:3
+  # image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-jenkins:3
   restart: always
-  #build: .
-  #dockerfile: .
+  build: .
+  dockerfile: ./Dockerfile
   ports:
   - 8080:8080
   - 50000:50000
