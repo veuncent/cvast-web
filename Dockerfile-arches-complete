@@ -161,5 +161,3 @@ RUN ${PG_BINARY} start &&\
 
 # Cleanup
 RUN rm -rf /tmp/*
-# Remove package list to free up space
-RUN rm -rf /var/lib/apt/lists/*

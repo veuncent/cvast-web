@@ -16,6 +16,9 @@ ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin
 RUN rm -rf /${WEB_ROOT}
 RUN rm -rf /elasticsearch
 
+# Remove package list to free up space
+RUN rm -rf /var/lib/apt/lists/*
+
 # Cleanup database
 USER postgres	
 RUN ${PG_BINARY} start &&\
@@ -30,5 +33,4 @@ RUN dos2unix ${INSTALL_DIR}/*
 
 EXPOSE 5432
 VOLUME  ["${PG_LOG_VOLUME}", "${PG_DATA_VOLUME}", "${PG_CONFIG_VOLUME}"]
-
 CMD ${INSTALL_DIR}/db_entrypoint.sh

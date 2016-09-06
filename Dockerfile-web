@@ -2,14 +2,16 @@ FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 
 USER root
 
+# Remove obsolete folders and packages
 RUN apt-get purge -y --auto-remove postgis
 RUN apt-get purge -y postgresql-9.4
 RUN apt-get purge -y postgresql-server-dev-9.4
 RUN apt-get purge -y postgresql-contrib-9.4
-
 RUN apt-get autoremove -y 
-
 RUN rm -rf /elasticsearch
+
+# Remove package list to free up space
+RUN rm -rf /var/lib/apt/lists/*
 
 ENV DJANGO_PASSWORD=admin
 
@@ -25,5 +27,4 @@ RUN dos2unix ${INSTALL_DIR}/*
 VOLUME ["${WEB_ROOT}/${WEB_APP_NAME}/${WEB_APP_NAME}/uploadedfiles/files", "${WEB_ROOT}/${WEB_APP_NAME}/${WEB_APP_NAME}/logs"]
 EXPOSE 8000
 WORKDIR ${WEB_ROOT}/${WEB_APP_NAME}
-
 CMD ${INSTALL_DIR}/web_entrypoint.sh

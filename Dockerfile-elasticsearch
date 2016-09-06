@@ -3,6 +3,9 @@ FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 USER root
 WORKDIR /
 
+RUN apt-get update -y &&\
+	apt-get install -y curl
+
 # Clean up obsolete files
 RUN rm -rf /${WEB_ROOT}
 RUN apt-get purge -y postgresql-9.4
@@ -10,12 +13,11 @@ RUN apt-get purge -y postgresql-server-dev-9.4
 RUN apt-get purge -y postgresql-contrib-9.4
 RUN apt-get autoremove -y
 
+# Remove package list to free up space
+RUN rm -rf /var/lib/apt/lists/*
 
 # Install plugin specific for Elasticsearch 1.4 (see https://github.com/elastic/elasticsearch-cloud-aws)
 RUN /elasticsearch/bin/plugin -i elasticsearch/elasticsearch-cloud-aws/2.4.2
-
-RUN apt-get update -y &&\
-	apt-get install -y curl
 
 RUN useradd elasticsearch
 
@@ -30,8 +32,7 @@ COPY ./install/elasticsearch/es_entrypoint.sh ${INSTALL_DIR}/es_entrypoint.sh
 RUN chmod -R 700 ${INSTALL_DIR}
 RUN dos2unix ${INSTALL_DIR}/*
 
-# Remove package list to free up space
-RUN rm -rf /var/lib/apt/lists/*
+
 
 VOLUME ["${DATA_VOLUME}, ${CONFIG_VOLUME}, ${LOG_VOLUME}"]
 EXPOSE 9200
