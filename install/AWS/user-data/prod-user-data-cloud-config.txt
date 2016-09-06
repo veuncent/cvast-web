@@ -15,6 +15,12 @@ users:
             - docker
         ssh-authorized-keys:
             - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAgM1rPEFPnKJiSFeNoOxeuhb4J4XL7ePRzypFN64aj8QPT0vDVppMc/qrkwUPoafFEoouzbgeTZR4blOMetGc9wAnpFSnBSrVcM9eV3JpxSJSqSy4waKh028lS1MdSZwiSQDr014Lk09gMSBeMkzazMNgKj8GGo0WDglpjaBeNp3teTJI6pobKbG/dvw4fiTFQyjkdtovlUWu+xypCejFBiyXVU1YHedY1pUMCqaVzkS51g1L/i7p6hCV8fWcFhOurD7pWs9Leww7byStgc4MFyS2IzF8agCWm6fblg9BWnlLv3BXCeSSWg+f5TexydMA0kcGBSlGQ1j/P4h/Rr4vAHxw3+slMPWxza26ki4+8pAAG2b4OFLpI7mF/qIzXzp4yI5G2TNj9Oz2cQnee40DG/ZF4aQfeepxnlBV765e6kPUjcHwStWO43XU5fa7ljuHsvTvInL5YECRxas0GglyOAiGLdfA4I5ALzvl8Ost1Y4c/A/uodZ3GQ2GnNnoPNprsNg9NUPeX2Y0/3vRO1WIauM+HfJmiD0hFjbYSk9XLiz/ZucmoV5sYv75UjSmpFYk+wUsP35P9LBT7qJVOC/eUMBIhl87eSl/QiAn4T8vHGenBcKi/2a9PufZOM6y7KD0EwNAjjmW8wqPq3kMzylk3krp+dyNMKg7jPbhKD0zUFs=
+    -
+        name: usfit
+        passwd: "$6$rounds=4096$jPC7qhp8n$/8nlWOTt9LC1a7zwdxeJTx64lMgEHm2W1FBXgTR6eCCCiGzOHq0SFf0KaNZWj4aIRWXGWni/JfbsDgJQZaQas1"
+        groups:
+            - sudo
+            - docker
 
 write-files:
     -
