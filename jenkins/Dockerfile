@@ -6,10 +6,12 @@ RUN apt-get update -y
 
 # Give jenkins sudo rights
 RUN apt-get install -y sudo \
-RUN rm -rf /var/lib/apt/lists/*
+	lxc
+	
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
-RUN apt-get install -y lxc
+# Remove package list to free up space
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN sudo python get-pip.py

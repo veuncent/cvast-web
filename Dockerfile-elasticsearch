@@ -30,6 +30,9 @@ COPY ./install/elasticsearch/es_entrypoint.sh ${INSTALL_DIR}/es_entrypoint.sh
 RUN chmod -R 700 ${INSTALL_DIR}
 RUN dos2unix ${INSTALL_DIR}/*
 
+# Remove package list to free up space
+RUN rm -rf /var/lib/apt/lists/*
+
 VOLUME ["${DATA_VOLUME}, ${CONFIG_VOLUME}, ${LOG_VOLUME}"]
 EXPOSE 9200
 ENTRYPOINT ${INSTALL_DIR}/es_entrypoint.sh -Des.config=${CONFIG_VOLUME}/elasticsearch.yml
