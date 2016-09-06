@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+set -e
 
 ### Global variables and Help
 
@@ -82,11 +82,12 @@ prepare_deploy_image() {
 # parameters: 
 # $1 = app (web, db, elasticsearch, nginx)
 deploy_image() {
+	local APP_NAME=$1
 	echo "Deploying to AWS:  $APP_NAME:$BUILD_NUMBER"
 	docker run \
 		--env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
 		--env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
-		--env AWS_DEFAULT_REGION=$(AWS_DEFAULT_REGION) \
+		--env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} \
 		cvast-build.eastus.cloudapp.azure.com:5000/cvast-arches-deploy \
 		-c $BUILD_NUMBER -e ${ENVIRONMENT} -a $APP_NAME
 }
@@ -161,7 +162,7 @@ if [[ ! -z ${DEPLOY_THESE_APPS} ]]; then
 	for app in "${DEPLOY_THESE_APPS[@]}"; do
 		eval "case ${app} in
 			${APP_OPTIONS})
-				echo \"Processing image: ${app}\"
+				echo \"Image set for deployment: ${app}\"
 				;;
 			*)			
 				# Any other input
