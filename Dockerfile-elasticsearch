@@ -6,13 +6,14 @@ WORKDIR /
 RUN apt-get update -y &&\
 	apt-get install -y curl
 
-# Clean up obsolete files
-RUN rm -rf /${WEB_ROOT}
-RUN rm -rf /usr/share/postgresql
-RUN apt-get purge -y postgresql-9.4
-RUN apt-get purge -y postgresql-server-dev-9.4
-RUN apt-get purge -y postgresql-contrib-9.4
+# Clean up obsolete folders and packages
+RUN apt-get purge -y --auto-remove postgis
+RUN apt-get purge -y --auto-remove postgresql-9.4
+RUN apt-get purge -y --auto-remove postgresql-server-dev-9.4
+RUN apt-get purge -y --auto-remove postgresql-contrib-9.4
 RUN apt-get autoremove -y
+RUN rm -rf /usr/share/postgresql
+RUN rm -rf /${WEB_ROOT}
 
 # Remove package list to free up space
 RUN rm -rf /var/lib/apt/lists/*
