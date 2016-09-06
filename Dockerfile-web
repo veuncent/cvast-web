@@ -3,6 +3,7 @@ FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 USER root
 
 # Remove obsolete folders and packages
+RUN rm -rf /usr/share/postgresql
 RUN apt-get purge -y --auto-remove postgis
 RUN apt-get purge -y postgresql-9.4
 RUN apt-get purge -y postgresql-server-dev-9.4
