@@ -32,13 +32,13 @@ class Main(SSTTestCase):
         super(Main, self).setUp()
         self.user = User.objects.create_user('test', 'test@archesproject.org', 'password')
         self.user.save()
-        cmd = [sys.executable,settings.PACKAGE_ROOT + '/../manage.py','runserver','8001','--settings=settings_tests']
+        cmd = [sys.executable,settings.PACKAGE_ROOT + '/../manage.py','runserver','8000','--settings=settings_tests']
         self.pid = subprocess.Popen(cmd, preexec_fn=os.setpgrp, stdout=open(os.devnull, 'wb'), stderr=subprocess.STDOUT).pid
         # give it a moment to start up.
         time.sleep(1)
 
     def test_login(self):
-        set_base_url('http://localhost:8001/')
+        set_base_url('http://localhost:80/')
         go_to(reverse('home'))
         click_link('auth-link')
         write_textfield(get_element(name='username'), 'test')
