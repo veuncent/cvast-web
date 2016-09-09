@@ -1,32 +1,38 @@
-web:
-  restart: always
-  build: .
-  dockerfile: ./Dockerfile-web
-  command: bash -c  "./web_entrypoint.sh"
-  working_dir: /install
-  volumes:
-  - /c/Users/CVAST/Documents/arches-docker/cvast_arches/cvast_arches/uploadedfiles/files:/cvast_web/cvast_arches/cvast_arches/uploadedfiles/files
-  - web-log:/cvast_web/cvast_arches/cvast_arches/logs
-  - /c/Users/CVAST/Documents/arches-docker/:/cvast_web
-  environment:
-    - PG_PASSWORD=TestCVAST
-    - PG_HOST=db
-    - PG_PORT=5432
-    - ES_HOST=elasticsearch
-    - DJANGO_PASSWORD=TestAdminCVAST
-    - IS_CLEAN_ENV=true
-  ports:
-    - '8000:8000'
-    - '8001:8001'
-	
-nginx:
-  restart: always
-  build: ./nginx/
-  ports:
-    - "80:80"
-  volumes:
-    - /www/static
-  volumes_from:
-    - web
-  links:
-    - web:web
+version: '2'
+services:   
+    web:
+      restart: always
+      image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-web:$PROD_VERSION
+      command: bash -c  "/install/web_entrypoint.sh"
+      volumes:
+      - web-uploaded-files:/cvast_web/cvast_arches/cvast_arches/uploadedfiles/files
+      - web-log:/cvast_web/cvast_arches/cvast_arches/logs
+      environment:
+        - PG_PASSWORD=TestCVAST
+        - PG_HOST=ec2-54-82-243-40.compute-1.amazonaws.com
+        - PG_PORT=5432
+        - ES_HOST=ec2-54-196-36-11.compute-1.amazonaws.com
+        - DJANGO_PASSWORD=TestAdminCVAST
+        - DJANGO_MODE=PROD
+        - DJANGO_DEBUG=False
+        - IS_CLEAN_ENV=True
+      ports:
+        - '8000:8000'
+        - '8001:8001'
+        
+    nginx:
+      restart: always
+      image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-nginx:$PROD_VERSION
+      ports:
+        - '80:80'
+        - '443:443'
+      volumes:
+        - /www/static
+      depends_on:
+        - web
+      environment:
+        - DJANGO_HOST=web
+        
+volumes:
+    web-uploaded-files:
+    web-log:

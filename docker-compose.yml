@@ -69,10 +69,13 @@ services:
         dockerfile: ./Dockerfile-nginx
       ports:
         - '80:80'
+        - '443:443'
       volumes:
         - /www/static
       depends_on:
         - web
+      environment:
+        - DJANGO_HOST=web
         
 volumes:
     web-uploaded-files:
