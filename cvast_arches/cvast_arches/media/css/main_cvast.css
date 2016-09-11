@@ -31,3 +31,37 @@ blockquote p {
 blockquote footer {
     text-align: right;
 }
+
+
+
+
+/* Profile boxes */
+.cvast-profile-box{
+    margin-bottom: 30px;
+}
+
+.cvast-profile-box-image-container{
+    min-width: 250px;
+}
+
+.cvast-profile-box-image{
+    margin-left: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.cvast-profile-box-body{
+    margin-right: 40px;
+    text-align: justify;
+}
+
+.cvast-page-title{
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    font-size: 32px;
+}
+
+.cvast-url-low p{
+    margin-top: 70px;
+}

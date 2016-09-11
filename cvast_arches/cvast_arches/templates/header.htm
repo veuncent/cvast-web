@@ -57,15 +57,25 @@
                     </li>
                     <!-- End Home -->
 
-                    <!-- New Search-->
+                    <!-- Projects -->
+                    <li class="{% if active_page = 'Projects' %}active{% endif %}">
+                        <a href="{% url 'projects_index' %}">
+                            {% trans "Projects" %}
+                        </a>
+                    </li>
+                    <!-- End Projects-->
+
+                    {% if 'edit' in user.user_groups %}
+                    <!-- New Search -->
                     <li class="{% if active_page = 'Search' %}active{% endif %}">
                         <a href="{% url 'search_home' %}">
                             {% trans "Search" %}
                         </a>
                     </li>
-                    <!-- End Search-->
+                    <!-- End Search -->
+                    {% endif %}
 
-                    <!-- Map-->
+                    <!-- Map -->
                     <li class="{% if active_page = 'Map' %}active{% endif %}">
                         <a href="{% url 'map' %}">
                             {% trans "Map View" %}
@@ -88,7 +98,7 @@
                     <!-- End About Us -->
 
                     {% if 'edit' in user.user_groups %}
-                    <!-- Resource Editor-->
+                    <!-- Resource Editor -->
                     <li class="dropdown {% if active_page = 'ResourceManger' %}active{% endif %}">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                             {% trans "Resource Manager" %}
@@ -107,7 +117,7 @@
                             {% trans "RDM" %}
                         </a>
                     </li>
-                    <!-- End RDM-->
+                    <!-- End RDM -->
                     {% endif %}
 
                     <!-- Search Block -->

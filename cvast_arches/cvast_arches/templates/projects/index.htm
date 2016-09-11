@@ -1,0 +1,67 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+<div class="block-description">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Projects" %}</h1>
+    </div>
+</div>
+
+
+<div class="background-image" style="background-image: url({% static 'img/about_us/technology/equipment_in_the_sky.jpg' %}); margin-top: -50px;"></div>
+
+<div class="block-description" style="margin-top: 50px;">
+    <div class="container content padding-top-20">
+
+        <!-- Technology box La Mancha -->
+        <div class="row cvast-profile-box servive-block-default">
+            <div class="col-sm-6 cvast-profile-box-image-container">
+                <a href="{% url 'projects_la_mancha' %}">
+                    <img class='cvast-profile-box-image' src="{% static 'img/about_us/technology/faro330.JPG' %}" </img>
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <div class="cvast-profile-box-body">
+                    <a href="{% url 'projects_la_mancha' %}">
+                        <h2 class="txt-color-blue">La Mancha, Spain</h2>
+                    </a>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat.
+                    </p>
+                    <a href="{% url 'projects_la_mancha' %}">
+                        <p class="txt-color-blue">View project</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End technology box La Mancha-->
+
+        <!-- Technology box Faro Focus3D -->
+        <div class="row cvast-profile-box servive-block-default">
+            <div class="col-sm-6 cvast-profile-box-image-container">
+                <a href="{% url 'projects_paris_nhm' %}">
+                    <img class='cvast-profile-box-image' href="{% url 'projects_paris_nhm' %}" src="{% static 'img/about_us/technology/faro330.JPG' %}"
+                        </img>
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <div class="cvast-profile-box-body">
+                    <a href="{% url 'projects_paris_nhm' %}">
+                        <h2 class="txt-color-blue">Paris, France: Natural History Museum</h2>
+                    </a>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat.
+                    </p>
+                    <a href="{% url 'projects_paris_nhm' %}">
+                        <p class="txt-color-blue">View project</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End technology box Faro Focus3D-->
+
+    </div>
+</div>
+
+<!-- End Content Part -->
+{% endblock content %}
