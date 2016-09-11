@@ -52,7 +52,7 @@ Restart docker daemon:
 
 	
 
-Installation (client side, Windows)
+Installation (client side, Docker for Windows < version 12.0)
 -----------------------------------
 
 (Replace <your domain name> for used domain name)
