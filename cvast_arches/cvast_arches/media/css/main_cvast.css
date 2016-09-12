@@ -50,6 +50,12 @@ blockquote footer {
     margin-bottom: 30px;
 }
 
+.cvast-profile-box-image-full{
+    max-width:100%;
+    max-height:100%;
+    padding-right: 30px;
+}
+
 .cvast-profile-box-body{
     margin-right: 40px;
     text-align: justify;
