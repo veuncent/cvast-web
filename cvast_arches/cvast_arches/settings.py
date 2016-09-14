@@ -204,6 +204,9 @@ BUSISNESS_DATA_FILES = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+### Media
+
+S3_STATIC_URL = 'https://d6mtkwdpn24bt.cloudfront.net'
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT =  os.path.join(PACKAGE_ROOT, 'uploadedfiles')
 
@@ -237,6 +240,10 @@ LOGGING = {
 
 
 DATE_PARSING_FORMAT = ['%B %d, %Y', '%Y-%m-%d', '%Y-%m-%d %H:%M:%S']
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+	'cvast_arches.utils.context_processors.media_settings',
+) + TEMPLATE_CONTEXT_PROCESSORS
 		
 try:
     from settings_local import *
