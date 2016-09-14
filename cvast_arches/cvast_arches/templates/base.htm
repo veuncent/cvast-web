@@ -249,6 +249,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                 $('[data-toggle="popover"]').popover();
             });
+
+            require(["plugins/isInViewport-2.4.2/isInViewport.min", "jquery"], function () {
+                 $(document).ready(function() {
+                    $(window).scroll(function () {
+                        $('video').each(function () {
+                            if ($(this).is(":in-viewport")) {
+                                $(this)[0].play();
+                            } else {
+                                $(this)[0].pause();
+                            }
+                        })
+                    });
+                });
+            });
         });
     </script>
 
