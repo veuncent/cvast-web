@@ -1,7 +1,7 @@
 {% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
 
 <!--=== Content Part ===-->
-<div class="block-description">
+<div class="block-description cvast-project-page">
     <div class="container content padding-top-20">
         <h1 class="arches-breadcrumb-title cvast-page-title">{% trans "La Mancha, Spain - 2016" %}</h1>
     </div>
@@ -268,8 +268,8 @@
     <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_mancha_windmill_1.png' %});  height: 750px; background-position: 65% 70%;"></div>
     
     <!-- End Windmills -->
-
-    <div style="margin-bottom: 50px;" />
 </div>
+
+{% include 'projects/project-footer.htm' %}
 
 <script src="{% static 'js/cvast-video.js' %}"></script> {% endblock content %}

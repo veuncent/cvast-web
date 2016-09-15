@@ -42,7 +42,13 @@ blockquote footer {
     text-align: right;
 }
 
+.cvast-project-page {
+    margin-bottom: 50px;
+}
 
+.cvast-project-box {
+    margin-bottom: 13px;
+}
 
 
 /* Profile boxes */

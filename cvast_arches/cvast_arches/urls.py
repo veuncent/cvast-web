@@ -24,6 +24,7 @@ uuid_regex = '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-
 urlpatterns = patterns('',
     url(r'^projects/index.htm', 'cvast_arches.views.projects.index', name='projects_index'),
     url(r'^projects/la-mancha.htm', 'cvast_arches.views.projects.la_mancha', name='projects_la_mancha'),
+    url(r'^projects/la-motilla-del-azuer.htm', 'cvast_arches.views.projects.la_motilla_del_azuer', name='projects_la_motilla_del_azuer'),
     url(r'^projects/paris-nhm.htm', 'cvast_arches.views.projects.paris_nhm', name='projects_paris_nhm'),
     url(r'^about-us/mission.htm', 'cvast_arches.views.about_us.mission', name='mission'),
     url(r'^about-us/people.htm', 'cvast_arches.views.about_us.people', name='people'),
