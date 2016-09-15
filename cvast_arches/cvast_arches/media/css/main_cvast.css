@@ -24,6 +24,16 @@
     height: 650px;
 }
 
+.background-image-title {
+    margin-top: 30px; 
+    margin-bottom: 10px;
+}
+
+.background-image-title-notfirstrow {
+    margin-top: 90px; 
+}
+
+
 blockquote p {
     font-weight: bold;
 }
