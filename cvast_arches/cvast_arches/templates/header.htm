@@ -2,31 +2,8 @@
 <div class="header">
 
     <!-- Topbar -->
-    <div class="topbar">
-        <div class="container">
+    <div class="topbar" style="padding-bottom: 25px;">
 
-            <!-- Topbar Navigation -->
-            <ul class="loginbar pull-right">
-                <li>
-                    <i class="fa fa-globe"></i>
-                    <a>{% trans "Languages" %}</a>
-                    <ul class="lenguages">
-                        <li class="active">
-                            <a href="javascript:void(0);">{% trans "English" %} <i class="fa fa-check"></i></a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="topbar-devider"></li>
-                <li><a href="javascript:void(0);" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="{% trans 'Documentation coming soon.' %}">{% trans "Help" %}</a></li>
-                <li class="topbar-devider"></li>
-                <li>
-                    <a id="auth-link" href="{% url 'auth' %}?next={{ request.get_full_path }}{% if user.username != 'anonymous' %}&logout=true{% endif %}">
-                        {% if user.username == 'anonymous' %}{% trans "Login" %}{% else %}{% trans "Welcome" %} {{ user.username }} - {% trans "Logout" %}{% endif %}</a>
-                </li>
-
-            </ul>
-            <!-- End Topbar Navigation -->
-        </div>
     </div>
     <!-- End Topbar -->
 
