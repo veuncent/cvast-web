@@ -23,30 +23,30 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <div id="layerslider" style="width: 100%; height: 500px; margin: 0px auto; ">
 
             <!--Paris Slide-->
-            <div class="ls-layer" style="">
+            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_paris_nhm' %}'" style="cursor: pointer;">
 
                 <!-- Background -->
                 <img src="{% static 'img/home/Paris_Project.jpg' %}" class="ls-s1" style="top: -250px; left: -300px; durationin: 0;" alt="Slide background">
 
                 <!-- Text -->
                 <span class="ls-s-1" style="line-height: 42px; font-size:22px; font-weight: 200; color:#fff; top:100px; left: 10px; slidedirection: top; slideoutdirection: bottom; durationin: 0; durationout: 3500;">
-                Muséum national d'Histoire naturelle
+                Muséum National d'Histoire Naturelle
                 </span>
 
                 <span class="ls-s-1" style="line-height: 42px; font-size:42px; font-weight: 200; color:#fff; top:140px; left: 10px; slidedirection: top; slideoutdirection: bottom; durationin: 0; durationout: 3500;">
-                Paris Project
+                Paris, France
                 </span>
 
                 <!-- Photo Credit -->
                 <span class="ls-s-1" style="line-height: 16px; font-size:12px; color:#fff; top:470px; left: 750px; slidedirection: top; slideoutdirection: bottom; durationin: 0; durationout: 3500;">
-                The Paris Project team: CVAST and Muséum national d'Histoire naturelle
+                The Paris Project team: CVAST and Muséum National d'Histoire Naturelle
                 </span>
 
             </div>
             <!--End Paris Slide-->
 
             <!--Motilla del Azuer Slide-->
-            <div class="ls-layer" style="">
+            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha' %}'" style="cursor: pointer;">
 
                 <!-- Background -->
                 <img src="{% static 'img/home/MotillaDelAzuer.jpg' %}" class="ls-s1" style="top: 0px; left: -300px; durationin: 0;" alt="Slide background">
@@ -70,7 +70,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <!--End Motilla del Azuer Slide-->
             
             <!--La Vieja Slide-->
-            <div class="ls-layer" style="">
+            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha' %}'" style="cursor: pointer;">
 
                 <!-- Background -->
                 <img src="{% static 'img/home/La_Vieja.jpg' %}" class="ls-s1" style="top: -250px; left: -300px; durationin: 0;" alt="Slide background">
@@ -92,7 +92,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <!--End La Vieja Slide-->
 
             <!--Ciudad bull ring Slide-->
-            <div class="ls-layer" style="">
+            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha' %}'" style="cursor: pointer;">
 
                 <!-- Background -->
                 <img src="{% static 'img/home/Ciudad_bullring.jpg' %}" class="ls-s1" style="top: -250px; left: -300px; durationin: 0;" alt="Slide background">
@@ -156,7 +156,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <div class="col-sm-4">
                 <div class="servive-block servive-block-default" style="background: #ffffff;">
                     <i class="icon-custom rounded-x icon-bg-dark fa fa-university"></i>
-                    <a class="" href='{% url "search_home" %}?page=1&termFilter=[{"inverted"%3Afalse%2C"type"%3A"term"%2C"context"%3A"c4432f46-55c2-11e6-8f39-47ce58cb4b6c"%2C"context_label"%3A"Name.E41"%2C"id"%3A"Paris 2016c4432f46-55c2-11e6-8f39-47ce58cb4b6c"%2C"text"%3A"Paris 2016"%2C"value"%3A"Paris 2016"}]&temporalFilter={"year_min_max"%3A[]%2C"filters"%3A[]%2C"inverted"%3Afalse}&spatialFilter={"geometry"%3A{"type"%3A""%2C"coordinates"%3A[]}%2C"buffer"%3A{"width"%3A"0"%2C"unit"%3A"ft"}%2C"inverted"%3Afalse}&mapExpanded=false&timeExpanded=false&include_ids=true'><h2 class="txt-color-blue">Muséum National d'Histoire Naturelle</h2></a>
+                    <a class="" href="{% url 'projects_paris_nhm' %}"><h2 class="txt-color-blue">Muséum National d'Histoire Naturelle</h2></a>
                     <p>Our recent project in the natural history museum in Paris</p>
                 </div>
             </div>
@@ -164,7 +164,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <div class="col-sm-4">
                 <div class="servive-block servive-block-default" style="background: #ffffff;">
                     <i class="icon-custom rounded-x icon-bg-dark fa fa-map"></i>
-                    <a class="" href='{% url "search_home" %}?page=1&termFilter=[{"inverted"%3Afalse%2C"type"%3A"term"%2C"context"%3A"c4432f46-55c2-11e6-8f39-47ce58cb4b6c"%2C"context_label"%3A"Name.E41"%2C"id"%3A"La Mancha%2C Spainc4432f46-55c2-11e6-8f39-47ce58cb4b6c"%2C"text"%3A"La Mancha%2C Spain"%2C"value"%3A"La Mancha%2C Spain"}]&temporalFilter={"year_min_max"%3A[]%2C"filters"%3A[]%2C"inverted"%3Afalse}&spatialFilter={"geometry"%3A{"type"%3A""%2C"coordinates"%3A[]}%2C"buffer"%3A{"width"%3A"0"%2C"unit"%3A"ft"}%2C"inverted"%3Afalse}&mapExpanded=false&timeExpanded=false&include_ids=true'><h2 class="txt-color-blue">La Mancha, Spain</h2></a>
+                    <a class="" href="{% url 'projects_la_mancha' %}"><h2 class="txt-color-blue">La Mancha, Spain</h2></a>
                     <p>CVAST documented a wide variaty of heritage sites in the region of La Mancha, Spain</p>
                 </div>
             </div>
@@ -172,7 +172,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <div class="col-sm-4">
                 <div class="servive-block servive-block-default" style="background: #ffffff;">
                     <i class="icon-custom rounded-x icon-bg-dark fa fa-fort-awesome"></i>
-                    <a class="" href='{% url "search_home" %}?page=1&termFilter=[{"inverted"%3Afalse%2C"type"%3A"string"%2C"context"%3A""%2C"context_label"%3A""%2C"id"%3A"La Motilla del Azuer"%2C"text"%3A"La Motilla del Azuer"%2C"value"%3A"La Motilla del Azuer"}]&temporalFilter={"year_min_max"%3A[]%2C"filters"%3A[]%2C"inverted"%3Afalse}&spatialFilter={"geometry"%3A{"type"%3A""%2C"coordinates"%3A[]}%2C"buffer"%3A{"width"%3A"0"%2C"unit"%3A"ft"}%2C"inverted"%3Afalse}&mapExpanded=false&timeExpanded=false&include_ids=true'><h2 class="txt-color-blue">La Motilla del Azuer</h2></a>
+                    <a class="" href="{% url 'projects_la_mancha' %}"><h2 class="txt-color-blue">La Motilla del Azuer</h2></a>
                     <p>A spectacular, one-of-a-kind Bronze Age site in La Mancha, Spain</p>
                 </div>
             </div>
