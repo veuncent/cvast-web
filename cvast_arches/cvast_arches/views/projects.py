@@ -12,15 +12,16 @@ def index(request):
 
 
 def la_mancha(request):
-    return render_to_response('projects/la-mancha/index.htm', {
+    return render_to_response('projects/la_mancha/index.htm', {
         # 'main_script': 'index',
         'active_page': 'Projects',
     },
         context_instance=RequestContext(request))
 
-def la_mancha_resource(request, resource_name="calatrava-la-nueva"):
+def la_mancha_resource(request, resource_name):
     try:
-        return render_to_response('projects/la-mancha/%s.htm' % resource_name, {
+        filename = resource_name.replace ("-", "_")
+        return render_to_response('projects/la_mancha/%s.htm' % filename, {
             # 'main_script': 'index',
             'active_page': 'Projects',
         },
