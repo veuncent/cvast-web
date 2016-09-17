@@ -46,7 +46,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <!--End Paris Slide-->
 
             <!--Motilla del Azuer Slide-->
-            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha' %}'" style="cursor: pointer;">
+            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha_resource' resource_name='la-motilla-del-azuer' %}'" style="cursor: pointer;">
 
                 <!-- Background -->
                 <img src="{% static 'img/home/MotillaDelAzuer.jpg' %}" class="ls-s1" style="top: 0px; left: -300px; durationin: 0;" alt="Slide background">
@@ -70,7 +70,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <!--End Motilla del Azuer Slide-->
             
             <!--La Vieja Slide-->
-            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha' %}'" style="cursor: pointer;">
+            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha_resource' resource_name='calatrava-la-vieja' %}'" style="cursor: pointer;">
 
                 <!-- Background -->
                 <img src="{% static 'img/home/La_Vieja.jpg' %}" class="ls-s1" style="top: -250px; left: -300px; durationin: 0;" alt="Slide background">
@@ -92,7 +92,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             <!--End La Vieja Slide-->
 
             <!--Ciudad bull ring Slide-->
-            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha' %}'" style="cursor: pointer;">
+            <div class="ls-layer" style="" onclick="location.href='{% url 'projects_la_mancha_resource' resource_name='ciudad-real-bullring' %}'" style="cursor: pointer;">
 
                 <!-- Background -->
                 <img src="{% static 'img/home/Ciudad_bullring.jpg' %}" class="ls-s1" style="top: -250px; left: -300px; durationin: 0;" alt="Slide background">
@@ -142,34 +142,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <!--=== Content Part ===-->
 <div class="block-description">
-    <div class="container content padding-top-20">
+    <div class="container content" style=" margin-top: 50px;">
 
         <!--Title Box-->
         <div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
-            <div class="title-box-text"><span class="color-green">Featured projects</span></div>
-            <p>A highlight of expeditions conducted by CVAST</p>
+            <h1>Featured projects</h1>
         </div>
         <!-- End Title Box -->
 
-        <!-- Promo Box -->
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="servive-block servive-block-default" style="background: #ffffff;">
-                    <i class="icon-custom rounded-x icon-bg-dark fa fa-university"></i>
-                    <a class="" href="{% url 'projects_paris_nhm' %}"><h2 class="txt-color-blue">Muséum National d'Histoire Naturelle</h2></a>
-                    <p>Zoology and palaeontology at the Natural History Museum in Paris</p>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="servive-block servive-block-default" style="background: #ffffff;">
-                    <i class="icon-custom rounded-x icon-bg-dark fa fa-map"></i>
-                    <a class="" href="{% url 'projects_la_mancha' %}"><h2 class="txt-color-blue">La Mancha, Spain</h2></a>
-                    <p>CVAST documented a wide variaty of heritage sites in the region of La Mancha, Spain</p>
-                </div>
-            </div>
-        </div>
-        <!-- End Promo Box -->
+        {% include 'projects/project_footer_promoboxes.htm' %}
 
     </div>
 </div>

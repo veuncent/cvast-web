@@ -1,10 +1,17 @@
 {% load staticfiles %} {% load i18n %}
 
+<div style="margin-bottom: -80px">{% include 'projects/project_footer_base.htm' %}</div>
 
-<div class="container" style="margin-top: 100px; margin-bottom: -30px">
-    
-    <a href="{% url 'projects_index' %}"><i class="fa fa-angle-double-left"></i>  Back to Projects</a>
+<div class="block-description">
+    <div class="container content padding-top-20">
+
+        <!--Title Box-->
+        <div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
+            <h5>Explore our projects</h5>
+        </div>
+        <!-- End Title Box -->
+
+        {% include 'projects/project_footer_promoboxes.htm' %}
+
+    </div>
 </div>
-
-
-<script src="{% static 'js/cvast-video.js' %}"></script>
