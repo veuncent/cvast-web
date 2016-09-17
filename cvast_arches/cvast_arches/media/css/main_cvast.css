@@ -42,6 +42,24 @@ blockquote footer {
     text-align: right;
 }
 
+
+
+/* CVAST general */
+
+.cvast-page-title{
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    font-size: 32px;
+}
+
+.cvast-url-low p{
+    margin-top: 70px;
+}
+
+.cvast-project-title{
+    margin-top: 50px;
+}
 .cvast-project-page {
     margin-bottom: 50px;
 }
@@ -50,8 +68,14 @@ blockquote footer {
     margin-bottom: 13px;
 }
 
+.cvast-media-block{
+    margin-top: 150px;
+}
+
+
 
 /* Profile boxes */
+
 .cvast-profile-box{
     margin-bottom: 30px;
 }
@@ -77,20 +101,6 @@ blockquote footer {
     text-align: justify;
 }
 
-.cvast-page-title{
-    text-align: center;
-    margin-bottom: 50px;
-    margin-top: 30px;
-    font-size: 32px;
-}
-
-.cvast-url-low p{
-    margin-top: 70px;
-}
-
-.cvast-photo-block{
-    margin-top: 150px;
-}
 
 
 /* Video */

@@ -1,6 +1,6 @@
 {% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
 
-<div class="block-description cvast-photo-block">
+<div class="block-description cvast-project-title">
     <div class="container content padding-top-20">
         <div class="row cvast-profile-box">
             <div class="col-sm-4 cvast-profile-box-image-container">
@@ -30,7 +30,7 @@
 
 
 <!-- Videos -->
-<div class="block-description cvast-photo-block">
+<div class="block-description cvast-media-block">
     <div class="container content padding-top-20">
         <div class="row cvast-profile-box">
             <div class="col-sm-4 cvast-profile-box-image-container">
@@ -60,17 +60,13 @@
         </figcaption>
     </figure>
 </div>
-
-
-<!--<a href="{{ S3_STATIC_URL }}/streaming/Calatrava_la_Nueva_Animation-streaming.mp4"><img src="{% static 'img/projects/la_mancha/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}" alt="Nambia Timelapse 1"></a>-->
-
 <!-- End Videos -->
 
 
 <!-- Photos -->
-<div class="block-description cvast-photo-block">
+<div class="block-description cvast-media-block">
 
-    <div align="center" class="background-image-title background-image-title-notfirstrow">
+    <div align="center" class="background-image-title">
         <h5>Setting up scanners and spheres</h5>
     </div>
     <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer.jpg' %}); background-position: 20% 50%;"></div>

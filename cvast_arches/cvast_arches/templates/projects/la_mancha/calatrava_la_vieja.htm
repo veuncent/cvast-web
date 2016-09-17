@@ -1,6 +1,6 @@
 {% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
 
-<div class="block-description cvast-photo-block">
+<div class="block-description cvast-project-title">
     <div class="container content padding-top-20">
         <div class="row cvast-profile-box">
             <div class="col-sm-4 cvast-profile-box-image-container">
@@ -25,11 +25,11 @@
 <div align="center" class="background-image-title">
     <h5>View from our drone</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_vieja_aerial.jpg' %}); height: 850px; background-position: 40% 70%;"></div>
+<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_vieja/calatrava_la_vieja_aerial.jpg' %}); height: 850px; background-position: 40% 70%;"></div>
 
 
 <!-- Videos -->
-<div class="block-description cvast-photo-block">
+<div class="block-description cvast-media-block">
     <div class="container content padding-top-20">
         <div class="row cvast-profile-box">
             <div class="col-sm-4 cvast-profile-box-image-container">
@@ -57,20 +57,16 @@
         </figcaption>
     </figure>
 </div>
-
-
-<!--<a href="{{ S3_STATIC_URL }}/streaming/Calatrava_la_Nueva_Animation-streaming.mp4"><img src="{% static 'img/projects/la_mancha/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}" alt="Nambia Timelapse 1"></a>-->
-
 <!-- End Videos -->
 
 
 <!-- Photos -->
-<div class="block-description cvast-photo-block">
+<div class="block-description cvast-media-block">
 
     <div align="center" class="background-image-title">
         <h5>Scanning an ancient watermill</h5>
     </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_vieja_waterworks.jpg' %}); background-position: 25% 50%;"></div>
+    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_vieja/calatrava_la_vieja_waterworks.jpg' %}); background-position: 25% 50%;"></div>
 
 </div>
 <!-- End photos -->
