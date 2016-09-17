@@ -1,0 +1,54 @@
+{% load staticfiles %} {% load i18n %} 
+
+{% include 'projects/project-footer.htm' %}
+
+<div class="block-description">
+    <div class="container content padding-top-20">
+
+        <!--Title Box-->
+        <div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
+            <h5>Explore other La Mancha sites</h5>
+        </div>
+        <!-- End Title Box -->
+
+        <!-- Promo Box -->
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div class="servive-block servive-block-default" style="background: #ffffff;">
+                    <i class="icon-custom rounded-x icon-bg-dark fa fa-fort-awesome"></i>
+                    <a class="" href="{% url 'projects_la_mancha' %}">
+                        <h2 class="txt-color-blue">La Mancha</h2>
+                    </a>
+                    <h4 class="cvast-project-box"><i class="fa fa-map-marker"></i>Spain</h4>
+                    <p><i class="icon-map-marker"></i>A spectacular, one-of-a-kind Bronze Age site in La Mancha, Spain</p>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="servive-block servive-block-default" style="background: #ffffff;">
+                    <i class="icon-custom rounded-x icon-bg-dark fa fa-university"></i>
+                    <a class="" href="{% url 'projects_paris_nhm' %}">
+                        <h2 class="txt-color-blue">Muséum National d'Histoire Naturelle</h2>
+                    </a>
+                    <h4 class="cvast-project-box"><i class="fa fa-map-marker"></i>Paris, France</h4>
+                    <p>Zoology and palaeontology at the Natural History Museum in Paris</p>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="servive-block servive-block-default" style="background: #ffffff;">
+                    <i class="icon-custom rounded-x icon-bg-dark fa fa-fort-awesome"></i>
+                    <a class="" href="{% url 'projects_la_mancha_resource' resource_name='la-motilla-del-azuer' %}">
+                        <h2 class="txt-color-blue">La Motilla del Azuer</h2>
+                    </a>
+                    <h4 class="cvast-project-box"><i class="fa fa-map-marker"></i>La Mancha, Spain</h4>
+                    <p><i class="icon-map-marker"></i>A spectacular, one-of-a-kind Bronze Age site in La Mancha, Spain</p>
+                </div>
+            </div>
+        </div>
+        <!-- End Promo Box -->
+
+    </div>
+</div>

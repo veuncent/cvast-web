@@ -1,0 +1,41 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<div class="block-description cvast-photo-block">
+    <div class="container content padding-top-20">
+        <div class="row cvast-profile-box">
+            <div class="col-sm-4 cvast-profile-box-image-container">
+                <h1>Calatrava La Nueva</h1>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-profile-box-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                        ex ea commodo consequat. </p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+                        est laborum.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center" class="background-image-title">
+        <h5>View from our drone</h5>
+    </div>
+    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_nueva_aerial.jpg' %}); background-position: 30% 50%;"></div>
+
+
+    <!--<h3 align="center" style="margin-top: -20px">Calatrava La Nueva overview</h3>
+    <video class="cvast-video-full" controls loop="">        preload="auto"-->
+    <!--<source src="{{ S3_STATIC_URL }}/streaming/Calatrava+la+Nueva+Animation-streaming.mp4" type="video/mp4"> Your browser does not support html5 video. Please upgrade your browser.
+    </video>-->
+
+    <!--<h3 align="center" class="cvast-video-notfirstrow">Calatrava La Nueva church</h3>
+    <video class="cvast-video-full" controls loop="">
+        <source src="{{ S3_STATIC_URL }}/streaming/Iglesia+la+Nueva-streaming.mp4" type="video/mp4"> Your browser does not support html5 video. Please upgrade your browser.
+    </video>-->
+
+</div>
+
+{% include 'projects/la-mancha/project-footer-la-mancha.htm' %}
