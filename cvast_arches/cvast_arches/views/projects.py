@@ -10,18 +10,10 @@ def index(request):
     },
         context_instance=RequestContext(request))
 
-
-def la_mancha(request):
-    return render_to_response('projects/la_mancha/index.htm', {
-        # 'main_script': 'index',
-        'active_page': 'Projects',
-    },
-        context_instance=RequestContext(request))
-
-def la_mancha_resource(request, resource_name):
+def project_index(request, project_name):
     try:
-        filename = resource_name.replace ("-", "_")
-        return render_to_response('projects/la_mancha/%s.htm' % filename, {
+        project_name = project_name.replace ("-", "_")
+        return render_to_response('projects/%s/index.htm' % project_name, {
             # 'main_script': 'index',
             'active_page': 'Projects',
         },
@@ -29,9 +21,14 @@ def la_mancha_resource(request, resource_name):
     except TemplateDoesNotExist:
         raise Http404()
 
-def paris_nhm(request):
-    return render_to_response('projects/paris-nhm/index.htm', {
-        # 'main_script': 'index',
-        'active_page': 'Projects',
-    },
-        context_instance=RequestContext(request))
+def subproject(request, project_name, resource_name):
+    try:
+        project_name = project_name.replace ("-", "_")
+        filename = resource_name.replace ("-", "_")
+        return render_to_response('projects/%s/%s.htm' % (project_name, filename), {
+            # 'main_script': 'index',
+            'active_page': 'Projects',
+        },
+            context_instance=RequestContext(request))
+    except TemplateDoesNotExist:
+        raise Http404()

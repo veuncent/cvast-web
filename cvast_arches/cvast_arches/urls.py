@@ -23,9 +23,8 @@ uuid_regex = '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-
 
 urlpatterns = patterns('',
     url(r'^projects/$', 'cvast_arches.views.projects.index', name='projects_index'),
-    url(r'^projects/la-mancha/$', 'cvast_arches.views.projects.la_mancha', name='projects_la_mancha'),
-    url(r'^projects/la-mancha/(?P<resource_name>.+)/$', 'cvast_arches.views.projects.la_mancha_resource', name='projects_la_mancha_resource'),
-    url(r'^projects/paris-nhm/$', 'cvast_arches.views.projects.paris_nhm', name='projects_paris_nhm'),
+    url(r'^projects/(?P<project_name>[-\w]+)/$', 'cvast_arches.views.projects.project_index', name='projects_project_index'),    
+    url(r'^projects/(?P<project_name>[-\w]+)/(?P<resource_name>[-\w]+)/$', 'cvast_arches.views.projects.subproject', name='projects_subproject'),
     url(r'^about-us/mission/$', 'cvast_arches.views.about_us.mission', name='mission'),
     url(r'^about-us/people/$', 'cvast_arches.views.about_us.people', name='people'),
     url(r'^about-us/technology/$', 'cvast_arches.views.about_us.technology', name='technology'),

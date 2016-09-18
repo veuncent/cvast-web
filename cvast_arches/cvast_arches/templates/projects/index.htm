@@ -14,13 +14,13 @@
         <!-- La Mancha -->
         <div class="row cvast-profile-box servive-block-default">
             <div class="col-sm-6 cvast-profile-box-image-container">
-                <a href="{% url 'projects_la_mancha' %}">
                     <img class='cvast-profile-box-image' src="{% static 'img/projects/La_Vieja_thumbnail.jpg' %}" </img>
+                <a href="{% url 'projects_project_index' project_name='la-mancha' %}">
                 </a>
             </div>
             <div class="col-sm-6">
                 <div class="cvast-profile-box-body">
-                    <a href="{% url 'projects_la_mancha' %}">
+                    <a href="{% url 'projects_project_index' project_name='la-mancha' %}">
                         <h2 class="txt-color-blue">La Mancha, Spain</h2>
                     </a>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -35,14 +35,14 @@
         <!-- Paris NHM -->
         <div class="row cvast-profile-box servive-block-default">
             <div class="col-sm-6 cvast-profile-box-image-container">
-                <a href="{% url 'projects_paris_nhm' %}">
                     <img class='cvast-profile-box-image' src="{% static 'img/about_us/technology/faro330.JPG' %}"
                         </img>
+                <a href="{% url 'projects_project_index' project_name='paris-nhm' %}">
                 </a>
             </div>
             <div class="col-sm-6">
                 <div class="cvast-profile-box-body">
-                    <a href="{% url 'projects_paris_nhm' %}">
+                    <a href="{% url 'projects_project_index' project_name='paris-nhm' %}">
                         <h2 class="txt-color-blue">Paris, France: Natural History Museum</h2>
                     </a>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
