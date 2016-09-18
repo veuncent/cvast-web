@@ -1,17 +1,11 @@
-{% load staticfiles %} {% load i18n %}
+{% extends 'projects/project_footer_base.htm' %} {% load staticfiles %} {% load i18n %} {% block content %}
 
-<div style="margin-bottom: -80px">{% include 'projects/project_footer_base.htm' %}</div>
-
-<div class="block-description">
-    <div class="container content padding-top-20">
-
-        <!--Title Box-->
-        <div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
-            <h5>Explore our projects</h5>
-        </div>
-        <!-- End Title Box -->
-
-        {% include 'projects/project_footer_promoboxes.htm' %}
-
-    </div>
+<!--Title Box-->
+<div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
+    <h5>Explore our projects</h5>
 </div>
+<!-- End Title Box -->
+
+{% include 'projects/project_footer_promoboxes.htm' %} 
+
+{% endblock content %}

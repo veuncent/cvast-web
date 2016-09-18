@@ -1,10 +1,18 @@
 {% load staticfiles %} {% load i18n %}
 
 
-<div class="container" style="margin-top: 100px; margin-bottom: 30px">
-    
-    <a href="{% url 'projects_index' %}"><i class="fa fa-angle-double-left"></i>  Back to Projects</a>
+<div class="container" style="margin-top: 150px; margin-bottom: 30px">
+
+    <div style="position: relative">
+        <a href="{% url 'projects_index' %}" style="position: absolute; bottom: -35px; ">
+            <i class="fa fa-angle-double-left"></i> Back to Projects
+        </a>
+    </div>
+
+    {% block content %} {% endblock content %}
+
 </div>
+
 
 
 <script src="{% static 'js/cvast-video.js' %}"></script>

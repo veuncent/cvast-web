@@ -1,3 +1,5 @@
+{% load staticfiles %} {% load i18n %}
+
 <!-- Promo Box -->
 <div class="row">
 
@@ -31,6 +33,23 @@
             </a>
             <h4 class="cvast-project-box"><i class="fa fa-map-marker"></i>Global</h4>
             <p>Osteological comparative collections from around the world</p>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="servive-block servive-block-default" style="background: #ffffff;">
+            <i class="icon-custom rounded-x icon-bg-dark fa fa-university"></i>
+            <a class="" href="{% url 'projects_project_index' project_name='calc_rome' %}">
+                <h2 class="txt-color-blue">CALCRome: Capturing the Lifecycle of Ceramics in Rome</h2>
+            </a>
+            <h4 class="cvast-project-box"><i class="fa fa-map-marker"></i>Global</h4>
+            <p>The investigation of use traces seen on Black Gloss ceramics from the Sala V collection of Rome’s Capitoline
+                Museum
+            </p>
         </div>
     </div>
 
