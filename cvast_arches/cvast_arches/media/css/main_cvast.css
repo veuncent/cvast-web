@@ -20,6 +20,8 @@
 .background-image {
     /*width: 100vw;*/
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     /*height: 90vh;*/
     height: 650px;
 }
