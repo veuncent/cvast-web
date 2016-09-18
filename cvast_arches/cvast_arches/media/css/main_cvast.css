@@ -68,7 +68,7 @@ blockquote footer {
     margin-bottom: 13px;
 }
 
-.cvast-media-block{
+.cvast-media-block {
     margin-top: 150px;
 }
 
@@ -76,46 +76,55 @@ blockquote footer {
 
 /* Profile boxes */
 
-.cvast-profile-box{
+.cvast-profile-box {
+    padding: 15px;
+    padding-bottom: 30px;
+    padding-top: 30px;
     margin-bottom: 30px;
 }
 
-.cvast-profile-box-image-container{
-    min-width: 250px;
+.cvast-profile-box h1 {
+    margin: 0px;
+    line-height: 25px;
 }
 
-.cvast-profile-box-image{
-    margin-left: 15px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+.cvast-profile-box-image-container img {
+    max-width: 500px;
+    width: 100%;
 }
 
-.cvast-profile-box-image-full{
+.cvast-profile-box-image {
+    
+}
+
+.cvast-profile-box-image-full {
     max-width:100%;
     max-height:100%;
     padding-right: 30px;
 }
 
-.cvast-profile-box-body{
+.cvast-profile-box-body {
     margin-right: 40px;
     text-align: justify;
 }
 
-
+.cvast-profile-box-body h2 {
+    margin-top: 0px;
+}
 
 /* Video */
-.cvast-video-block{
+.cvast-video-block {
     margin-top: 200px;
 }
 
-.cvast-video-block h3{
+.cvast-video-block h3 {
     margin-bottom: 30px;
 }
-.cvast-video-block .cvast-video-notfirstrow{
+.cvast-video-block .cvast-video-notfirstrow {
     margin-top: 100px;
 }
 
-.cvast-video-full{
+.cvast-video-full {
     /*width: 1920px;*/
     /*height: 1080px; */
     width: 100%;
