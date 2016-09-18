@@ -250,6 +250,8 @@ docker-compose down
 
 
 ### Push all images to Docker Private Registry
+echo "Pushing to private Docker registry:  arches-complete"
+docker push cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
 push_to_registry web
 push_to_registry db
 push_to_registry elasticsearch
