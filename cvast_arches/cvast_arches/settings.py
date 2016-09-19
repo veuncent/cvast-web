@@ -13,20 +13,20 @@ def get_env_variable(var_name):
         raise ImproperlyConfigured(error_msg)
 
 MODE = get_env_variable('DJANGO_MODE') #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
-DEBUG = get_env_variable('DJANGO_DEBUG')
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 PACKAGE_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis', 
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': get_env_variable('PG_DBNAME'),
-        'USER': 'postgres',    
-        'PASSWORD': get_env_variable('PG_PASSWORD'), 
-        'HOST': get_env_variable('PG_HOST'),          
-        'PORT': get_env_variable('PG_PORT'),        
+        'USER': 'postgres',
+        'PASSWORD': get_env_variable('PG_PASSWORD'),
+        'HOST': get_env_variable('PG_HOST'),
+        'PORT': get_env_variable('PG_PORT'),
         'SCHEMAS': 'public,data,ontology,concepts',
         'POSTGIS_TEMPLATE': 'template_postgis_20',
     }
@@ -47,7 +47,7 @@ TEMPLATE_DIRS = (
 		os.path.join(PACKAGE_ROOT, 'templates'),
 		os.path.join(PACKAGE_ROOT, 'templatetags'),
 		os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates'), # Added by Vincent: cvast_arches needed this, but couldn't find it
-	) + TEMPLATE_DIRS 
+	) + TEMPLATE_DIRS
 RESOURCE_MODEL = {'default': 'arches_hip.models.resource.Resource'}
 APP_NAME = 'USF CVAST'
 PACKAGE_VALIDATOR = 'cvast_arches.source_data.validation.HIP_Validator'
@@ -179,7 +179,7 @@ def RESOURCE_TYPE_CONFIGS():
     }
 
 ELASTICSEARCH_CONNECTION_OPTIONS = {'timeout': 600}
-	
+
 EXPORT_CONFIG = ''
 
 DATE_SEARCH_ENTITY_TYPES = ['BEGINNING_OF_EXISTENCE_TYPE.E55', 'END_OF_EXISTENCE_TYPE.E55']
@@ -194,7 +194,7 @@ CONCEPT_SCHEME_LOCATIONS = (
     # Put strings here, like "/home/data/authority_files" or "C:/data/authority_files".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	
+
     # 'absolute/path/to/authority_files',
     # os.path.join(PACKAGE_ROOT, 'source_data', 'sample_data', 'concepts', 'sample_authority_files'),
 )
@@ -244,7 +244,7 @@ DATE_PARSING_FORMAT = ['%B %d, %Y', '%Y-%m-%d', '%Y-%m-%d %H:%M:%S']
 TEMPLATE_CONTEXT_PROCESSORS = (
 	'cvast_arches.utils.context_processors.media_settings',
 ) + TEMPLATE_CONTEXT_PROCESSORS
-		
+
 try:
     from settings_local import *
 except ImportError:

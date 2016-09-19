@@ -7,7 +7,7 @@ RUN apt-get purge -y --auto-remove postgis
 RUN apt-get purge -y --auto-remove postgresql-9.4
 RUN apt-get purge -y --auto-remove postgresql-server-dev-9.4
 RUN apt-get purge -y --auto-remove postgresql-contrib-9.4
-RUN apt-get autoremove -y 
+RUN apt-get autoremove -y
 RUN rm -rf /elasticsearch
 RUN rm -rf /usr/share/postgresql
 
@@ -21,6 +21,30 @@ RUN pip install ptvsd
 
 ENV IS_CLEAN_ENV=false
 ENV INSTALL_DIR=/install
+
+# Install the Arches application
+COPY arches ${WEB_ROOT}/arches
+WORKDIR	${WEB_ROOT}/arches
+RUN	pip install --no-index -e .
+# Seemed necessary, received errors without this
+RUN python setup.py build
+# Seemed necessary, received errors without this
+RUN python setup.py install
+
+
+# Install Arches Hip
+COPY arches_hip ${WEB_ROOT}/arches_hip
+WORKDIR ${WEB_ROOT}/arches_hip
+RUN pip install --no-index -e .
+# RUN python setup.py build							# Apparently not necessary
+# RUN python setup.py install						# Apparently not necessary
+
+# Install Elasticsearch
+COPY ${WEB_APP_NAME} ${WEB_ROOT}/${WEB_APP_NAME}
+WORKDIR ${WEB_ROOT}/${WEB_APP_NAME}
+RUN python manage.py packages -o setup_elasticsearch
+
+# Run database scripts & arches hip resources
 
 # Entrypoint to setup volume mounts
 COPY install/web/web_entrypoint.sh ${INSTALL_DIR}/web_entrypoint.sh

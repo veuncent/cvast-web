@@ -4,7 +4,7 @@ services:
     web:
       restart: always
       image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-web:$BUILD_NUMBER
-      build: 
+      build:
         context: .
         dockerfile: ./Dockerfile-web
       command: bash -c  "sleep 15 && /install/web_entrypoint.sh"
@@ -16,11 +16,11 @@ services:
       environment:
         - PG_PASSWORD=TestCVAST
         - PG_HOST=db
-        - PG_PORT=5432
+        - PG_PORT=55432
         - ES_HOST=elasticsearch
         - DJANGO_PASSWORD=TestAdminCVAST
-        - DJANGO_MODE=DEV
-        - DJANGO_DEBUG=True
+        - DJANGO_MODE="PROD"
+        - DJANGO_DEBUG=False
         - IS_CLEAN_ENV=True
       ports:
         - '8000:8000'
@@ -28,11 +28,11 @@ services:
       depends_on:
         - db
         - elasticsearch
-        
+
     db:
       restart: always
       image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-db:$BUILD_NUMBER
-      build: 
+      build:
         context: .
         dockerfile: ./Dockerfile-db
       volumes:
@@ -40,15 +40,15 @@ services:
           - postgres-log:/var/log/postgresql
           - postgres-config:/postgres-config
       ports:
-        - '5432:5432'
+        - '55432:5432'
       environment:
         - PG_PASSWORD=TestCVAST
         - IS_CLEAN_ENV=True
-        
+
     elasticsearch:
       restart: always
       image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-elasticsearch:$BUILD_NUMBER
-      build: 
+      build:
         context: .
         dockerfile: ./Dockerfile-elasticsearch
       volumes:
@@ -60,11 +60,11 @@ services:
         - "9300:9300"
       environment:
         - IS_CLEAN_ENV=True
-        
+
     nginx:
       restart: always
       image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-nginx:$BUILD_NUMBER
-      build: 
+      build:
         context: .
         dockerfile: ./Dockerfile-nginx
       ports:
@@ -76,7 +76,7 @@ services:
         - web
       environment:
         - DJANGO_HOST=web
-        
+
 volumes:
     web-uploaded-files:
     web-log:
