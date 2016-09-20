@@ -13,9 +13,11 @@ def get_env_variable(var_name):
         raise ImproperlyConfigured(error_msg)
 
 MODE = get_env_variable('DJANGO_MODE') #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
-DEBUG = get_env_variable('DJANGO_DEBUG')
+DEBUG = False #get_env_variable('DJANGO_DEBUG')
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost', 'cvast.usf.edu']
+
+STATIC_ROOT = '/static_root'
 
 PACKAGE_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
