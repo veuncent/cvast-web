@@ -3,6 +3,7 @@ import inspect
 from arches_hip.settings import *
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ImproperlyConfigured
+import ast
 
 def get_env_variable(var_name):
     msg = "Set the %s environment variable"
@@ -13,7 +14,7 @@ def get_env_variable(var_name):
         raise ImproperlyConfigured(error_msg)
 
 MODE = get_env_variable('DJANGO_MODE') #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
-DEBUG = False #get_env_variable('DJANGO_DEBUG')
+DEBUG = ast.literal_eval(get_env_variable('DJANGO_DEBUG'))
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['127.0.0.1','localhost', 'cvast.usf.edu']
 
@@ -23,12 +24,12 @@ PACKAGE_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfr
 PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis', 
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': get_env_variable('PG_DBNAME'),
-        'USER': 'postgres',    
-        'PASSWORD': get_env_variable('PG_PASSWORD'), 
-        'HOST': get_env_variable('PG_HOST'),          
-        'PORT': get_env_variable('PG_PORT'),        
+        'USER': 'postgres',
+        'PASSWORD': get_env_variable('PG_PASSWORD'),
+        'HOST': get_env_variable('PG_HOST'),
+        'PORT': get_env_variable('PG_PORT'),
         'SCHEMAS': 'public,data,ontology,concepts',
         'POSTGIS_TEMPLATE': 'template_postgis_20',
     }
@@ -49,7 +50,7 @@ TEMPLATE_DIRS = (
 		os.path.join(PACKAGE_ROOT, 'templates'),
 		os.path.join(PACKAGE_ROOT, 'templatetags'),
 		os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates'), # Added by Vincent: cvast_arches needed this, but couldn't find it
-	) + TEMPLATE_DIRS 
+	) + TEMPLATE_DIRS
 RESOURCE_MODEL = {'default': 'arches_hip.models.resource.Resource'}
 APP_NAME = 'USF CVAST'
 PACKAGE_VALIDATOR = 'cvast_arches.source_data.validation.HIP_Validator'
