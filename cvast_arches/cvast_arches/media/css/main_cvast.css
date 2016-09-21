@@ -71,6 +71,9 @@ blockquote footer {
     margin-top: 140px; 
 }
 
+
+
+/* Paragraph boxes */
 .cvast-paragraph-box {
     margin-top: 140px;
     padding: 15px;
@@ -96,6 +99,32 @@ blockquote footer {
 .cvast-paragraph-box-left-container {
 
 }
+
+
+/* Image boxes*/
+.cvast-image-box-with-caption-left {
+    margin-top: 140px;
+    padding: 15px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    margin-bottom: 30px;
+}
+
+.cvast-image-box-with-caption-left h1 {
+    margin: 0px;
+    padding-bottom: 20px;
+    line-height: 25px;
+}
+
+.cvast-image-box-with-caption-left-image {
+
+}
+
+.cvast-image-box-with-caption-left-body {
+    padding-right: 20px;
+    text-align: justify;
+}
+
 
 
 /* Profile boxes */
