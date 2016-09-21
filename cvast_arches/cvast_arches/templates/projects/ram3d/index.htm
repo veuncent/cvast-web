@@ -28,7 +28,7 @@
 
     <div align="center" class="background-image-title">
         <h5>3D model (made by a combination of photogrammetry and 3D modeling) of an authentic bronze warship ram</h5>
-        <p>Piraeus Archaeological Museum (Greece), perhaps from an Athenian trireme. Date: 5th-2nd centuries (?) BCE</p>
+        <p>Piraeus Archaeological Museum (Greece), perhaps from an Athenian trireme. Date: 5th-2nd centuries (?) BCE.</p>
     </div>
     <div class="background-image" style="background-image: url({% static 'img/projects/ram3d/bronze_warship_ram_piraeus_archaeological_museum.jpg' %});"></div>
 </div>
@@ -36,19 +36,30 @@
 
 <!-- Videos -->
 <div class="block-description cvast-media-block">
-    <div align="center" class="background-image-title">
-        <h5>Triumphal Arch at Orange (France)</h5>
-        <p>This video shows an animation the point clouds that resulted from scanning the Triumphal Arch at Orange, France
-        </p>
+    <div class="container content padding-top-20">
+        <div class="row cvast-profile-box">
+            <div class="col-sm-4 cvast-profile-box-left-container">
+                <h1>Videos</h1>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-profile-box-body">
+                    <p>These videos shows animations of the point clouds that resulted from scanning the Triumphal Arch at Orange,
+                        France.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <video align="middle" class="cvast-video-full" controls poster="{% static 'img/projects/ram3d/video_thumbnails/Arc-dOrange-Animation-02.png' %}"
-            loop="">
-            <source src="{{ S3_STATIC_URL }}/streaming/Arc-dOrange-Animation-02-streaming.mp4" type="video/mp4">
+    <figure id="video_player">
+        <video controls poster="{% static 'img/projects/ram3d/video_thumbnails/triumphal_arch_orange.png' %}" loop="">
+            <source src="{{ S3_STATIC_URL }}/streaming/triumphal_arch_orange-streaming.mp4" type="video/mp4">
         </video>
-    </div>
+        <figcaption>
+            <a href="{{ S3_STATIC_URL }}/streaming/triumphal_arch_orange-streaming.mp4"><img src="{% static 'img/projects/ram3d/video_thumbnails/triumphal_arch_orange.png' %}" alt=""></a>
+            <a href="{{ S3_STATIC_URL }}/streaming/Arc-dOrange-Animation-02-streaming.mp4"><img src="{% static 'img/projects/ram3d/video_thumbnails/Arc-dOrange-Animation-02.png' %}" alt=""></a>
+        </figcaption>
+    </figure>
 </div>
-
 <!-- End Videos -->
 
 
@@ -77,7 +88,7 @@
     <div align="center" class="background-image-title">
         <h5>Triumphal Arch at Orange (France)</h5>
         <p>Various battle spoils in a sculpted panel above the NE side, including both rams and warships’ bows. Date: 1st century
-            CE
+            CE.
         </p>
     </div>
     <div class="background-image" style="background-image: url({% static 'img/projects/ram3d/triumphal_arch_orange.jpg' %}); background-size: auto 100%; background-position: 50% 50%; "></div>
@@ -86,10 +97,10 @@
     <div align="center" class="background-image-title background-image-title-notfirstrow">
         <h5>3D model (made by photogrammetry) of a marble warship ram found near the Marina Gate, Ostia (Italy)</h5>
         <p>Modeled perhaps after the ram of a Roman quinquereme. Date: 1st century BCE.</p>
-    
+
 
         <div class="background-image" style="background-image: url({% static 'img/projects/ram3d/marble_warship_ram_marina_gate_ostia.jpg' %}); background-size: auto 100%; background-position: 50% 50%; "></div>
-</div>
+    </div>
 
 </div>
 <!-- End Images -->
