@@ -72,6 +72,7 @@ blockquote footer {
 }
 
 .cvast-paragraph-box {
+    margin-top: 140px;
     padding: 15px;
     padding-bottom: 30px;
     padding-top: 30px;
@@ -86,6 +87,10 @@ blockquote footer {
 .cvast-paragraph-box-body {
     margin-right: 40px;
     text-align: justify;
+}
+
+.cvast-paragraph-box-after-title { 
+    margin-top: 10px;
 }
 
 .cvast-paragraph-box-left-container {
