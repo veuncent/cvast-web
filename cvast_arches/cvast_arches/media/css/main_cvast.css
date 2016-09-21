@@ -71,6 +71,23 @@ blockquote footer {
     margin-top: 140px; 
 }
 
+.cvast-paragraph-box {
+    padding: 15px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    margin-bottom: 30px;
+}
+
+.cvast-paragraph-box h1 {
+    margin: 0px;
+    line-height: 25px;
+}
+
+.cvast-paragraph-box-body {
+    margin-right: 40px;
+    text-align: justify;
+}
+
 .cvast-paragraph-box-left-container {
 
 }
