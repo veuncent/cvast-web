@@ -8,7 +8,7 @@
 
     <div class="block-description">
         <div class="container">
-            <div class="row cvast-paragraph-box">
+            <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
                 <div class="col-sm-4 cvast-paragraph-box-left-container">
                     <h1>Ancient Mediterranean warship rams</h1>
                     <h5><i class="fa fa-map-marker"></i>Mediterranean region</h5>
@@ -35,74 +35,69 @@
 
 
 <!-- Videos -->
-<div class="block-description cvast-media-block">
-    <div class="container content padding-top-20">
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box-video">
+        <div class="col-sm-4 cvast-paragraph-box-video-left-container">
+            <h1>Videos</h1>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-paragraph-box-video-body">
+                <p>These videos shows animations of the point clouds that resulted from scanning the Triumphal Arch at Orange,
+                    France.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<figure id="video_player">
+    <video controls poster="{% static 'img/projects/ram3d/video_thumbnails/triumphal_arch_orange.png' %}" loop="">
+        <source src="{{ S3_STATIC_URL }}/streaming/triumphal_arch_orange-streaming.mp4" type="video/mp4">
+    </video>
+    <figcaption>
+        <a href="{{ S3_STATIC_URL }}/streaming/triumphal_arch_orange-streaming.mp4"><img src="{% static 'img/projects/ram3d/video_thumbnails/triumphal_arch_orange.png' %}" alt=""></a>
+        <a href="{{ S3_STATIC_URL }}/streaming/Arc-dOrange-Animation-02-streaming.mp4"><img src="{% static 'img/projects/ram3d/video_thumbnails/Arc-dOrange-Animation-02.png' %}" alt=""></a>
+    </figcaption>
+</figure>
+<!-- End Videos -->
+
+
+<!-- Images -->
+<div class="block-description">
+    <div class="container">
         <div class="row cvast-paragraph-box">
             <div class="col-sm-4 cvast-paragraph-box-left-container">
-                <h1>Videos</h1>
+                <h1>Research goal</h1>
             </div>
             <div class="col-sm-8">
                 <div class="cvast-paragraph-box-body">
-                    <p>These videos shows animations of the point clouds that resulted from scanning the Triumphal Arch at Orange,
-                        France.
+                    <p>Murray is gathering all kinds of evidence for Mediterranean ramming warfare, including 3D models of all
+                        15 surviving authentic rams. His goal: to help scholars, students and modeling enthusiasts better
+                        understand the ships that secured Athenian democracy and helped to build and maintain the Roman Empire.
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    <figure id="video_player">
-        <video controls poster="{% static 'img/projects/ram3d/video_thumbnails/triumphal_arch_orange.png' %}" loop="">
-            <source src="{{ S3_STATIC_URL }}/streaming/triumphal_arch_orange-streaming.mp4" type="video/mp4">
-        </video>
-        <figcaption>
-            <a href="{{ S3_STATIC_URL }}/streaming/triumphal_arch_orange-streaming.mp4"><img src="{% static 'img/projects/ram3d/video_thumbnails/triumphal_arch_orange.png' %}" alt=""></a>
-            <a href="{{ S3_STATIC_URL }}/streaming/Arc-dOrange-Animation-02-streaming.mp4"><img src="{% static 'img/projects/ram3d/video_thumbnails/Arc-dOrange-Animation-02.png' %}" alt=""></a>
-        </figcaption>
-    </figure>
 </div>
-<!-- End Videos -->
 
 
-<!-- Images -->
-<div class="block-description cvast-media-block">
-    <div class="block-description">
-        <div class="container">
-            <div class="row cvast-paragraph-box">
-                <div class="col-sm-4 cvast-paragraph-box-left-container">
-                    <h1>Research goal</h1>
-                </div>
-                <div class="col-sm-8">
-                    <div class="cvast-paragraph-box-body">
-                        <p>Murray is gathering all kinds of evidence for Mediterranean ramming warfare, including 3D models
-                            of all 15 surviving authentic rams. His goal: to help scholars, students and modeling enthusiasts
-                            better understand the ships that secured Athenian democracy and helped to build and maintain
-                            the Roman Empire.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div align="center" class="cvast-background-image-title">
-        <h5>Triumphal Arch at Orange (France)</h5>
-        <p>Various battle spoils in a sculpted panel above the NE side, including both rams and warships’ bows. Date: 1st century
-            CE.
-        </p>
-    </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/ram3d/triumphal_arch_orange.jpg' %}); background-size: auto 100%; background-position: 50% 50%; "></div>
-
-
-    <div align="center" class="cvast-background-image-title cvast-background-image-title-notfirstrow">
-        <h5>3D model (made by photogrammetry) of a marble warship ram found near the Marina Gate, Ostia (Italy)</h5>
-        <p>Modeled perhaps after the ram of a Roman quinquereme. Date: 1st century BCE.</p>
-
-
-        <div class="background-image" style="background-image: url({% static 'img/projects/ram3d/marble_warship_ram_marina_gate_ostia.jpg' %}); background-size: auto 100%; background-position: 50% 50%; "></div>
-    </div>
-
+<div align="center" class="cvast-background-image-title">
+    <h5>Triumphal Arch at Orange (France)</h5>
+    <p>Various battle spoils in a sculpted panel above the NE side, including both rams and warships’ bows. Date: 1st century
+        CE.
+    </p>
 </div>
+<div class="background-image" style="background-image: url({% static 'img/projects/ram3d/triumphal_arch_orange.jpg' %}); background-size: auto 100%; background-position: 50% 50%; "></div>
+
+
+<div align="center" class="cvast-background-image-title cvast-background-image-title-notfirstrow">
+    <h5>3D model (made by photogrammetry) of a marble warship ram found near the Marina Gate, Ostia (Italy)</h5>
+    <p>Modeled perhaps after the ram of a Roman quinquereme. Date: 1st century BCE.</p>
+
+
+    <div class="background-image" style="background-image: url({% static 'img/projects/ram3d/marble_warship_ram_marina_gate_ostia.jpg' %}); background-size: auto 100%; background-position: 50% 50%; "></div>
+</div>
+
 <!-- End Images -->
 
 {% include 'projects/project_footer.htm' %}
