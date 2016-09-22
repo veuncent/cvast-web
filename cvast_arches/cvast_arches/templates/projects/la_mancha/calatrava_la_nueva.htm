@@ -1,7 +1,7 @@
 {% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
 
 <div class="block-description cvast-project-title">
-    <div class="container content padding-top-20">
+    <div class="container">
         <div class="row cvast-paragraph-box">
             <div class="col-sm-4 cvast-paragraph-box-left-container">
                 <h1>Calatrava La Nueva</h1>
@@ -29,34 +29,32 @@
 
 
 <!-- Videos -->
-<div class="block-description cvast-media-block">
-    <div class="container content padding-top-20">
-        <div class="row cvast-paragraph-box">
-            <div class="col-sm-4 cvast-paragraph-box-left-container">
-                <h1>Videos</h1>
-            </div>
-            <div class="col-sm-8">
-                <div class="cvast-paragraph-box-body">
-                    <p>These animations show renderings of point clouds that CVAST created by scanning Calatrava la Nueva using
-                        terrestrial laser scanners.
-                    </p>
-                </div>
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box-video">
+        <div class="col-sm-4 cvast-paragraph-box-video-left-container">
+            <h1>Videos</h1>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-paragraph-box-video-body">
+                <p>These animations show renderings of point clouds that CVAST created by scanning Calatrava la Nueva using
+                    terrestrial laser scanners.
+                </p>
             </div>
         </div>
     </div>
-    
-    <figure id="video_player">
-        <video controls poster="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}"
-            loop="">
-            <source src="{{ S3_STATIC_URL }}/streaming/Calatrava_la_Nueva_Animation-streaming.mp4" type="video/mp4">
-        </video>
-        <figcaption>
-            <a href="{{ S3_STATIC_URL }}/streaming/Calatrava_la_Nueva_Animation-streaming.mp4"><img src="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}"
-                    alt="Calatrava la Nueva animation"></a>
-            <a href="{{ S3_STATIC_URL }}/streaming/Iglesia_la_Nueva-streaming.mp4"><img src="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Iglesia_la_Nueva.png' %}" alt="A flythrough of the chruch at Calatrava la Nueva"></a>
-        </figcaption>
-    </figure>
 </div>
+
+<figure id="video_player">
+    <video controls poster="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}"
+        loop="">
+        <source src="{{ S3_STATIC_URL }}/streaming/Calatrava_la_Nueva_Animation-streaming.mp4" type="video/mp4">
+    </video>
+    <figcaption>
+        <a href="{{ S3_STATIC_URL }}/streaming/Calatrava_la_Nueva_Animation-streaming.mp4"><img src="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}"
+                alt="Calatrava la Nueva animation"></a>
+        <a href="{{ S3_STATIC_URL }}/streaming/Iglesia_la_Nueva-streaming.mp4"><img src="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Iglesia_la_Nueva.png' %}" alt="A flythrough of the chruch at Calatrava la Nueva"></a>
+    </figcaption>
+</figure>
 <!-- End Videos -->
 
 

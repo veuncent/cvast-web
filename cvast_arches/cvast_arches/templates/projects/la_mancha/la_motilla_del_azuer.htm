@@ -1,7 +1,7 @@
 {% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
 
 <div class="block-description cvast-project-title">
-    <div class="container content padding-top-20">
+    <div class="container">
         <div class="row cvast-paragraph-box">
             <div class="col-sm-4 cvast-paragraph-box-left-container">
                 <h1>La Motilla del Azuer</h1>
@@ -9,7 +9,9 @@
             </div>
             <div class="col-sm-8">
                 <div class="cvast-paragraph-box-body">
-                    <p>The <a href="https://es.wikipedia.org/wiki/Motilla_del_Azuer" target="_blank">Motilla del Azuer</a> is a Bronze Age fortified farming community in La Mancha, Spain. Motillas are organized around deep wells, and are fortified to protect access to water. </p>
+                    <p>The <a href="https://es.wikipedia.org/wiki/Motilla_del_Azuer" target="_blank">Motilla del Azuer</a> is
+                        a Bronze Age fortified farming community in La Mancha, Spain. Motillas are organized around deep
+                        wells, and are fortified to protect access to water. </p>
                     <p>The site is contributing to our research on fortifications, warfare, and water control systems.
                     </p>
                 </div>
@@ -25,59 +27,73 @@
 
 
 
+
 <!-- Videos -->
-<div class="block-description cvast-media-block">
-    <div class="container content padding-top-20">
-        <div class="row cvast-paragraph-box">
-            <div class="col-sm-4 cvast-paragraph-box-left-container">
-                <h1>Videos</h1>
-            </div>
-            <div class="col-sm-8">
-                <div class="cvast-paragraph-box-body">
-                    <p>The following animation resulted from a meshed 3D model created with photogrammetry. The photos were taken using our DJI Phantom 4 drone. 
-                    </p>
-                </div>
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box-video">
+        <div class="col-sm-4 cvast-paragraph-box-video-left-container">
+            <h1>Videos</h1>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-paragraph-box-video-body">
+                <p>The following animation resulted from a meshed 3D model created with photogrammetry. The photos were taken
+                    using our DJI Phantom 4 drone.
+                </p>
             </div>
         </div>
     </div>
-    <figure id="video_player">
-        <video controls poster="{% static 'img/projects/la_mancha/la_motilla_del_azuer/video_thumbnails/Motilla_del_Azuer_Photogrammetric_Model.png' %}"
-            loop="">
-            <source src="{{ S3_STATIC_URL }}/streaming/Motilla_del_Azuer_Photogrammetric_Model-streaming.mp4" type="video/mp4">
-        </video>
-        <figcaption>
-            <a href="{{ S3_STATIC_URL }}/streaming/Motilla_del_Azuer_Photogrammetric_Model-streaming.mp4"><img src="{% static 'img/projects/la_mancha/la_motilla_del_azuer/video_thumbnails/Motilla_del_Azuer_Photogrammetric_Model.png' %}"
-                    alt=""></a>
-        </figcaption>
-    </figure>
 </div>
+<figure id="video_player">
+    <video controls poster="{% static 'img/projects/la_mancha/la_motilla_del_azuer/video_thumbnails/Motilla_del_Azuer_Photogrammetric_Model.png' %}"
+        loop="">
+        <source src="{{ S3_STATIC_URL }}/streaming/Motilla_del_Azuer_Photogrammetric_Model-streaming.mp4" type="video/mp4">
+    </video>
+    <figcaption>
+        <a href="{{ S3_STATIC_URL }}/streaming/Motilla_del_Azuer_Photogrammetric_Model-streaming.mp4"><img src="{% static 'img/projects/la_mancha/la_motilla_del_azuer/video_thumbnails/Motilla_del_Azuer_Photogrammetric_Model.png' %}"
+                alt=""></a>
+    </figcaption>
+</figure>
 <!-- End Videos -->
 
 
 <!-- Photos -->
-<div class="block-description cvast-media-block">
-
-    <div align="center" class="cvast-background-image-title">
-        <h5>Setting up scanners and spheres</h5>
+<div class="container padding-top-20" style="margin-top: 50px; margin-bottom: 50px;">
+    <div class="row cvast-paragraph-box">
+        <div class="col-sm-4 cvast-paragraph-box-left-container">
+            <h1>Scanning the Motilla with terrestrial laster scanners</h1>
+        </div>
     </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer.jpg' %}); background-position: 20% 50%;"></div>
-
-    <div align="center" class="cvast-background-image-title cvast-background-image-title-notfirstrow">
-        <h5>View into the Bronze Age well</h5>
-    </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_well.jpg' %}); background-position: 70% 70%;"></div>
-
-    <div align="center" class="cvast-background-image-title cvast-background-image-title-notfirstrow">
-        <h5>Elevation model of the well</h5>
-    </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_elevation.jpg' %}); height: 800px; background-position: 100% 50%;"></div>
-
-    <div align="center" class="cvast-background-image-title cvast-background-image-title-notfirstrow">
-        <h5>Scanning storage silos</h5>
-    </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_storage_silos.jpg' %}); background-position: 52% 52%;"></div>
-
 </div>
+
+<div align="center" class="cvast-background-image-title">
+    <h5>Setting up scanners and spheres</h5>
+</div>
+<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer.jpg' %}); background-position: 20% 50%;"></div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-title-notfirstrow">
+    <h5>View into the Bronze Age well</h5>
+</div>
+<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_well.jpg' %}); background-position: 70% 70%;"></div>
+
+
+<div align="center" class="cvast-background-image-title cvast-background-image-title-notfirstrow">
+    <h5>Scanning storage silos</h5>
+</div>
+<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_storage_silos.jpg' %}); background-position: 52% 52%;"></div>
+
+
+<div class="container padding-top-20" style="margin-top: 50px; margin-bottom: 50px;">
+    <div class="row cvast-paragraph-box">
+        <div class="col-sm-4 cvast-paragraph-box-left-container">
+            <h1>Preliminary results</h1>
+        </div>
+    </div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+    <h5>Elevation model of the well</h5>
+</div>
+<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_elevation.jpg' %}); height: 800px; background-position: 100% 50%;"></div>
 <!-- End photos -->
 
 {% include 'projects/la_mancha/project_footer_la_mancha.htm' %} {% endblock content %}

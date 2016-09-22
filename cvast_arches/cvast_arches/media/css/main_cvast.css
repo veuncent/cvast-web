@@ -1,5 +1,12 @@
 @import url(app_cvast.css);
 
+body { 
+   color: #333; 
+   font-size: 14px;
+   line-height: 1.6;
+   font-family: "Open Sans",sans-serif
+}
+
 .header .navbar-brand { 
     z-index: 1;
     top: -10px;
@@ -22,6 +29,12 @@
     background-repeat: no-repeat;
     background-position: center;
     height: 650px;
+}
+
+@media (max-width: 750px) {
+    .background-image {
+        height: 400px; 
+    }
 }
 
 blockquote p {
@@ -75,16 +88,17 @@ blockquote footer {
 
 /* Paragraph boxes */
 .cvast-paragraph-box {
-    margin-top: 140px;
+    margin-top: 130px;
     padding: 15px;
     padding-bottom: 30px;
-    padding-top: 30px;
+    /*padding-top: 30px;*/
     margin-bottom: 30px;
 }
 
 .cvast-paragraph-box h1 {
     margin: 0px;
     line-height: 25px;
+    padding-bottom: 15px;    
 }
 
 .cvast-paragraph-box-body {
@@ -96,18 +110,16 @@ blockquote footer {
     margin-top: 10px;
 }
 
+/* To be used when neccessary */
 .cvast-paragraph-box-left-container {
 
 }
 
 
+
 /* Image boxes*/
 .cvast-image-box-with-caption-left {
-    margin-top: 140px;
-    padding: 15px;
-    padding-bottom: 30px;
     padding-top: 30px;
-    margin-bottom: 30px;
 }
 
 .cvast-image-box-with-caption-left h1 {
@@ -116,12 +128,17 @@ blockquote footer {
     line-height: 25px;
 }
 
-.cvast-image-box-with-caption-left-image {
+.cvast-image-box-with-caption-left h5 {
+    margin: 0px;
+}
 
+.cvast-image-box-with-caption-left-image {
+    margin-top: 10px;
 }
 
 .cvast-image-box-with-caption-left-body {
     padding-right: 20px;
+    padding-bottom: 5px;
     text-align: justify;
 }
 
@@ -146,6 +163,7 @@ blockquote footer {
     width: 100%;
 }
 
+/* To be used when neccessary */
 .cvast-profile-box-image {
     
 }
@@ -165,6 +183,25 @@ blockquote footer {
     margin-top: 0px;
 }
 
+
+
+/* Video paragraph boxes */
+.cvast-paragraph-box-video {
+    margin-top: 150px;
+    padding: 15px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;    
+}
+
+.cvast-paragraph-box-video-body {
+    margin-right: 40px;
+    text-align: justify;
+}
+
+/* To be used when neccessary */
+cvast-paragraph-box-video-left-container {
+
+}
 
 
 
