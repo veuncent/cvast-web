@@ -147,7 +147,7 @@ blockquote footer {
 /* Profile boxes */
 
 .cvast-profile-box {
-    padding: 15px;
+    padding-left: 15px;
     padding-bottom: 30px;
     padding-top: 30px;
     margin-bottom: 30px;
@@ -161,6 +161,7 @@ blockquote footer {
 .cvast-profile-box-left-container img {
     max-width: 500px;
     width: 100%;
+    padding-bottom: 15px;
 }
 
 /* To be used when neccessary */
@@ -171,16 +172,18 @@ blockquote footer {
 .cvast-profile-box-image-full {
     max-width:100%;
     max-height:100%;
-    padding-right: 30px;
+    padding-right: 20px;
 }
 
 .cvast-profile-box-body {
-    margin-right: 40px;
+    padding-right: 30px;
+    /*margin-right: 40px;*/
     text-align: justify;
 }
 
 .cvast-profile-box-body h2 {
     margin-top: 0px;
+    text-align: left;
 }
 
 
