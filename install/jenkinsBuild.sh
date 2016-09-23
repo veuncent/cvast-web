@@ -243,7 +243,7 @@ done
 
 ### Run all containers (unit tests to be added)
 echo "Starting all Docker containers..."
-docker-compose up --no-build --force-recreate &
+docker-compose up --force-recreate &
 sleep 5 && echo "5"
 sleep 5 && echo "10"
 sleep 5 && echo "15"

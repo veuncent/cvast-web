@@ -140,7 +140,7 @@ if [ -z ${BUILD_NUMBER} ] || [ -z ${CVAST_APP} ] || [ -z ${ENVIRONMENT} ] ; then
 fi
 
 ### Env variables
-DOCKER_IMAGE=cvast-build.eastus.cloudapp.azure.com:5000/cvast-${CVAST_APP}:${BUILD_NUMBER}
+DOCKER_IMAGE=cvast/cvast-${CVAST_APP}:${BUILD_NUMBER}
 CONTAINER_NAME=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-container
 # Nginx is part of the web task and service
 if [[ ${CVAST_APP} == 'nginx' ]]; then
