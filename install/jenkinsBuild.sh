@@ -219,7 +219,7 @@ fi
 # In order to make docker-compose work, we need all docker images to have this latest BUILD_NUMBER, 
 # including images that are not explicitly built with this script (usually db & elasticsearch)
 for app in "${APP_OPTIONS[@]}"; do
-	if [[ array_not_contains_element $app ${DEPLOY_THESE_APPS} ]]; then
+	if [[ $(array_not_contains_element $app ${DEPLOY_THESE_APPS}) ]]; then
 		echo "Tagging latest jenkins build as cvast/cvast-$APP_NAME:$BUILD_NUMBER"
 		docker tag cvast/cvast-$APP_NAME:jenkins-latest cvast/cvast-$APP_NAME:$BUILD_NUMBER
 	fi
