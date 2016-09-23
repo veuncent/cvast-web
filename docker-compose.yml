@@ -3,7 +3,7 @@ services:
 
     web:
       restart: always
-      image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-web:$BUILD_NUMBER
+      image: cvast/cvast-web:$BUILD_NUMBER
       build: 
         context: .
         dockerfile: ./Dockerfile-web
@@ -30,7 +30,7 @@ services:
         
     db:
       restart: always
-      image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-db:$BUILD_NUMBER
+      image: cvast/cvast-db:$BUILD_NUMBER
       build: 
         context: .
         dockerfile: ./Dockerfile-db
@@ -46,7 +46,7 @@ services:
         
     elasticsearch:
       restart: always
-      image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-elasticsearch:$BUILD_NUMBER
+      image: cvast/cvast-elasticsearch:$BUILD_NUMBER
       build: 
         context: .
         dockerfile: ./Dockerfile-elasticsearch
@@ -62,7 +62,7 @@ services:
         
     nginx:
       restart: always
-      image: cvast-build.eastus.cloudapp.azure.com:5000/cvast-nginx:$BUILD_NUMBER
+      image: cvast/cvast-nginx:$BUILD_NUMBER
       build: 
         context: .
         dockerfile: ./Dockerfile-nginx
