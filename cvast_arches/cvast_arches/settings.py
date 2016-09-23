@@ -4,6 +4,7 @@ from arches_hip.settings import *
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ImproperlyConfigured
 import ast
+import requests
 
 def get_env_variable(var_name):
     msg = "Set the %s environment variable"
@@ -16,7 +17,13 @@ def get_env_variable(var_name):
 MODE = get_env_variable('DJANGO_MODE') #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
 DEBUG = ast.literal_eval(get_env_variable('DJANGO_DEBUG'))
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['127.0.0.1','localhost', 'cvast.usf.edu']
+ALLOWED_HOSTS = ['127.0.0.1','localhost', 'cvast.usf.edu', '.compute-1.amazonaws.com']
+# Fix for AWS ELB returning false bad health: ALLOWS_HOSTS did not allow ELB's private ip
+EC2_PRIVATE_IP  =   None
+try:
+    EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout = 0.01).text
+except requests.exceptions.RequestException:
+    pass
 
 STATIC_ROOT = '/static_root'
 
