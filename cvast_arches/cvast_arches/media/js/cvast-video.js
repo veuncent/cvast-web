@@ -17,6 +17,7 @@ define([
 			e.preventDefault();
 			videotarget = this.getAttribute("href");
 			video = document.querySelector("#video_player video");
+			videocaption = this.getAttribute("data-caption");
 			video.removeAttribute("controls");
 			video.removeAttribute("poster");
 			source = document.querySelectorAll("#video_player video source");
@@ -40,8 +41,16 @@ define([
 				$('html, body').animate({ scrollTop: offset }, speed);
 			}
 
+			setVideoCaption(videocaption);
+
 			video.load();
 			video.play();
+		}
+
+
+		function setVideoCaption(videocaption) {
+			caption = $(document.getElementById("cvast-video-caption"));
+			caption.html(videocaption);
 		}
 
 	});

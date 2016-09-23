@@ -193,6 +193,11 @@ blockquote footer {
     margin-bottom: 30px;    
 }
 
+.cvast-paragraph-box-video h1 {
+    margin: 0px;
+    line-height: 25px;
+}
+
 .cvast-paragraph-box-video-body {
     margin-right: 40px;
     text-align: justify;
