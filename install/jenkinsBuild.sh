@@ -31,7 +31,7 @@ AWS_DEFAULT_REGION=us-east-1
 build_image() {
 	local APP_NAME=$1
 	echo "Building Docker image:  $APP_NAME:$BUILD_NUMBER"
-	docker build -f Dockerfile-$APP_NAME -t cvast-build.eastus.cloudapp.azure.com:5000/cvast-$APP_NAME:$BUILD_NUMBER .
+	docker build -f Dockerfile-$APP_NAME -t cvast/cvast-$APP_NAME:$BUILD_NUMBER .
 }
 
 
@@ -40,9 +40,9 @@ build_image() {
 # Cleanup old images, keep latest 7
 cleanup_old_image() {
 	local APP_NAME=$1
-	if [[ $(docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$APP_NAME:$OLD_IMAGE_BUILD 2> /dev/null ) ]]; then
+	if [[ $(docker images -q cvast/cvast-$APP_NAME:$OLD_IMAGE_BUILD 2> /dev/null ) ]]; then
 		echo "Removing old image:  $APP_NAME:$OLD_IMAGE_BUILD"
-		docker rmi cvast-build.eastus.cloudapp.azure.com:5000/cvast-$APP_NAME:$OLD_IMAGE_BUILD
+		docker rmi cvast/cvast-$APP_NAME:$OLD_IMAGE_BUILD
 	fi
 }
 
@@ -52,7 +52,7 @@ cleanup_old_image() {
 push_to_registry() {
 	local APP_NAME=$1
 	echo "Pushing to private Docker registry:  $APP_NAME:$BUILD_NUMBER "
-	docker push cvast-build.eastus.cloudapp.azure.com:5000/cvast-$APP_NAME:$BUILD_NUMBER
+	docker push cvast/cvast-$APP_NAME:$BUILD_NUMBER
 }
 
 
@@ -60,20 +60,8 @@ push_to_registry() {
 # $1 = app (web, db, elasticsearch, nginx)
 prepare_deploy_image() {
 	local APP_NAME=$1
-	# See if old image exists.
-	if [[ $(docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$APP_NAME:$PREVIOUS_BUILD 2> /dev/null) ]]; then
-		local OLD_IMAGE=`docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$APP_NAME:$PREVIOUS_BUILD`
-	fi
-	
-	local NEW_IMAGE=`docker images -q cvast-build.eastus.cloudapp.azure.com:5000/cvast-$APP_NAME:$BUILD_NUMBER`
-	
-	# Test if deployment is forced through script parameters
-	if [[ ! -z $DEPLOY_THESE_APPS ]]; then 
-		if [[ $(array_contains_element $APP_NAME $DEPLOY_THESE_APPS) ]]; then
-			deploy_image $APP_NAME
-		fi
-	# Else, deploy only if there are no older images or if older image is different. Efficiency!
-	elif [[ $(array_contains_element $APP_NAME $DEFAULT_APPS_DEPLOYED) ]] && ([[ -z $OLD_IMAGE ]] || [[ "$OLD_IMAGE" != "$NEW_IMAGE" ]]) ; then
+
+	if [[ $(array_contains_element $APP_NAME $DEPLOY_THESE_APPS) ]]; then
 		deploy_image $APP_NAME
 	fi
 }
@@ -88,7 +76,7 @@ deploy_image() {
 		--env AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
 		--env AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
 		--env AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} \
-		cvast-build.eastus.cloudapp.azure.com:5000/cvast-arches-deploy \
+		cvast/cvast-arches-deploy \
 		-c $BUILD_NUMBER -e ${ENVIRONMENT} -a $APP_NAME
 }
 
@@ -100,6 +88,15 @@ array_contains_element() {
 		[[ "$e" == "$1" ]] && return 0; 
 	done
 	return 1
+}
+
+# Check if value is not in array
+array_not_contains_element() {
+	local e
+	for e in "${@:2}"; do 
+		[[ "$e" == "$1" ]] && return 1; 
+	done
+	return 0
 }
 
 display_help() {
@@ -126,7 +123,6 @@ do
 	case ${key} in
 		-a|--app)
 			IFS=' ' read -r -a DEPLOY_THESE_APPS <<< "$2"
-			# DEPLOY_THESE_APPS=("$2");
 			shift; # next argument
 		;;
 		-e|--environment)
@@ -171,8 +167,11 @@ if [[ ! -z ${DEPLOY_THESE_APPS} ]]; then
 				exit 1
 				;;
 		esac"
-	done 
+	done
+else
+	DEPLOY_THESE_APPS=$DEFAULT_APPS_DEPLOYED
 fi
+
 
 
 
@@ -217,22 +216,25 @@ if [[ -z ${AWS_SECRET_ACCESS_KEY} ]] ; then
 fi
 
 
-	
+# In order to make docker-compose work, we need all docker images to have this latest BUILD_NUMBER, 
+# including images that are not explicitly built with this script (usually db & elasticsearch)
+for app in "${APP_OPTIONS[@]}"; do
+	if [[ array_not_contains_element $app ${DEPLOY_THESE_APPS} ]]; then
+		echo "Tagging latest jenkins build as cvast/cvast-$APP_NAME:$BUILD_NUMBER"
+		docker tag cvast/cvast-$APP_NAME:jenkins-latest cvast/cvast-$APP_NAME:$BUILD_NUMBER
+done
+
+
 ### Build all images
-docker build -f Dockerfile-arches-complete -t cvast-build.eastus.cloudapp.azure.com:5000/arches-complete .
-build_image web
-build_image db
-build_image elasticsearch
-build_image nginx
+for app in "${DEPLOY_THESE_APPS[@]}"; do
+	build_image $app
+done
 
 
-
-### Cleanup old images, keep latest 7
-cleanup_old_image web
-cleanup_old_image db
-cleanup_old_image elasticsearch
-cleanup_old_image nginx
-
+### Cleanup all old images, keep latest 7
+for app in "${APP_OPTIONS[@]}"; do
+	cleanup_old_image $app
+done
 
 
 ### Run all containers (unit tests to be added)
@@ -250,18 +252,13 @@ docker-compose down
 
 
 ### Push all images to Docker Private Registry
-echo "Pushing to private Docker registry:  arches-complete"
-docker push cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
-push_to_registry web
-push_to_registry db
-push_to_registry elasticsearch
-push_to_registry nginx
-
+for app in "${DEPLOY_THESE_APPS[@]}"; do
+	push_to_registry $app
+done
 
 
 ### Deploy to AWS
-docker pull cvast-build.eastus.cloudapp.azure.com:5000/cvast-arches-deploy
-deploy_image web
-deploy_image nginx
-# deploy_image db
-# deploy_image elasticsearch
+docker pull cvast/cvast-arches-deploy
+for app in "${DEPLOY_THESE_APPS[@]}"; do
+	deploy_image $app
+done
