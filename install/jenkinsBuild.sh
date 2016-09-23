@@ -222,6 +222,7 @@ for app in "${APP_OPTIONS[@]}"; do
 	if [[ array_not_contains_element $app ${DEPLOY_THESE_APPS} ]]; then
 		echo "Tagging latest jenkins build as cvast/cvast-$APP_NAME:$BUILD_NUMBER"
 		docker tag cvast/cvast-$APP_NAME:jenkins-latest cvast/cvast-$APP_NAME:$BUILD_NUMBER
+	fi
 done
 
 
