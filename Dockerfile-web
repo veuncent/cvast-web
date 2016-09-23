@@ -32,6 +32,11 @@ RUN apt-get update -y &&\
 	easy_install pip &&\
 	pip install requests
 
+# Install postgres, because Arches installer is expecting it
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get update -y &&\
+	apt-get install -y postgresql-9.4
 
 # Root project folder
 RUN mkdir ${WEB_ROOT}
