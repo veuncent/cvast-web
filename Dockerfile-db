@@ -48,16 +48,13 @@ RUN apt-get update -y &&\
 	easy_install pip &&\
 	pip install requests
 
-# Needed for postgres-9.4
+# Install postgres
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-RUN apt-get update -y
-
-# Install postgres
-RUN apt-get install -y postgresql-9.4
-RUN apt-get install -y postgresql-server-dev-9.4
-RUN apt-get install -y postgresql-contrib-9.4
-
+RUN apt-get update -y &&\
+	apt-get install -y postgresql-9.4 &&\
+	apt-get install -y postgresql-server-dev-9.4 &&\
+	apt-get install -y postgresql-contrib-9.4
 
 
 # Manage postgres credentials and settings	
@@ -81,27 +78,27 @@ RUN chmod 666 ${PG_HBA_CONFIGFILE}
 
 # Install Geos	
 WORKDIR /tmp	
-RUN	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2
-RUN	tar xvfj geos-3.4.2.tar.bz2
-WORKDIR	/tmp/geos-3.4.2
-RUN	./configure
-RUN	make
-RUN	make install
+RUN	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 &&\
+	tar xvfj geos-3.4.2.tar.bz2 &&\
+	cd /tmp/geos-3.4.2 &&\
+	./configure &&\
+	make &&\
+	make install
 	
 	
 # Install Postgis
 WORKDIR /tmp
-RUN wget http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz
-RUN tar xfvz postgis-2.1.3.tar.gz
-WORKDIR /tmp/postgis-2.1.3
-RUN ./configure
-RUN make
-RUN make install
-RUN ldconfig
-RUN make comments-install
-RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql
-RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
-RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
+RUN wget http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz &&\
+	tar xfvz postgis-2.1.3.tar.gz &&\
+	cd /tmp/postgis-2.1.3 &&\
+	./configure &&\
+	make &&\
+	make install &&\
+	ldconfig &&\
+	make comments-install &&\
+	ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql &&\
+	ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp &&\
+	ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
 
 
 # Root project folder
