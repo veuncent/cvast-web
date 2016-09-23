@@ -245,7 +245,7 @@ cvast-paragraph-box-video-left-container {
 #video_player figcaption a img,
 	figure video {
 		width: 100%;
-		height: auto;
+        max-height: 90vh;
 }
 #video_player figcaption a:hover {
 	opacity: 1;
