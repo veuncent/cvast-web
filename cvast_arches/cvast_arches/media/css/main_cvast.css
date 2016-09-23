@@ -228,40 +228,40 @@ cvast-paragraph-box-video-left-container {
     /*width: auto;*/
 }
 
-#video_player {
+#video-player {
 	display: table;
 	line-height: 0;
 	font-size: 0;
 	background: #000;
 }
-#video_player video,
-	#video_player figcaption {
+#video-player video,
+	#video-player figcaption {
 		display: table-cell;
 		vertical-align: top;
 }
-#video_player figcaption {
+#video-player figcaption {
 	width: 25%;
 }
-#video_player figcaption a {
+#video-player figcaption a {
 	display: block;
 	opacity: .5;
 	transition: 1s opacity;
 }
-#video_player figcaption a img,
+#video-player figcaption a img,
 	figure video {
 		width: 100%;
         max-height: 90vh;
 }
-#video_player figcaption a:hover {
+#video-player figcaption a:hover {
 	opacity: 1;
 }
 
 @media (max-width: 700px) {
-	#video_player video,
-		#video_player figcaption {
+	#video-player video,
+		#video-player figcaption {
 			display: table-row;
 		}
-    #video_player figcaption a {
+    #video-player figcaption a {
         display: inline-block;
         width: 33.33%;
     }

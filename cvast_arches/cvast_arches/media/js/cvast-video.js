@@ -4,7 +4,7 @@ define([
     $(document).ready(function () {
 
 		// Allow users to click on thumbnails to play those videos
-		var video_player = document.getElementById("video_player");
+		var video_player = document.getElementById("video-player");
 		if (video_player != null) {
 			links = video_player.getElementsByTagName('a');
 			for (var i = 0; i < links.length; i++) {
@@ -16,16 +16,16 @@ define([
 		function playClickedThumbnailVideo(e) {
 			e.preventDefault();
 			videotarget = this.getAttribute("href");
-			video = document.querySelector("#video_player video");
 			videocaption = this.getAttribute("data-caption");
+			video = document.querySelector("#video-player video");
 			video.removeAttribute("controls");
 			video.removeAttribute("poster");
-			source = document.querySelectorAll("#video_player video source");
+			source = document.querySelectorAll("#video-player video source");
 			source[0].src = videotarget;
 			video.setAttribute("controls", "true");
 			video.onloadedmetadata = function () {
 				// Scroll to center the video on screen
-				var el = $(document.getElementById("video_player"));
+				var el = $(document.getElementById("video-player"));
 				var elOffset = el.offset().top;
 				var elHeight = el.height();
 				var windowHeight = $(window).height();
