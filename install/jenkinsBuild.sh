@@ -198,8 +198,11 @@ if [[ -z ${BUILD_NUMBER} ]] ; then
 	display_help
 	exit 1
 else
-	PREVIOUS_BUILD=`expr $BUILD_NUMBER - 1`
-	OLD_IMAGE_BUILD=`expr $BUILD_NUMBER - 7` # For cleaning up old junk
+	if [[ $BUILD_NUMBER -gt 7 ]]; then
+		OLD_IMAGE_BUILD=`expr $BUILD_NUMBER - 7` # For cleaning up old junk
+	else
+		OLD_IMAGE_BUILD=0
+	fi
 fi
 
 
