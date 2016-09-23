@@ -1,26 +1,85 @@
-FROM cvast-build.eastus.cloudapp.azure.com:5000/arches-complete
+FROM ubuntu:14.04
+USER root
+
+# Setting default environment variables
+ENV WEB_ROOT=/cvast_web
+ENV WEB_APP_NAME=cvast_arches
+
+ENV IS_CLEAN_ENV=false
+ENV INSTALL_DIR=/install
+
+ENV DJANGO_MODE=PROD
+ENV DJANGO_DEBUG=False
+ENV DJANGO_PASSWORD=admin
+
+
+# Install dependencies
+RUN apt-get update -y &&\
+	apt-get install -y wget &&\
+	apt-get install -y build-essential &&\
+	apt-get install -y libxml2-dev &&\
+	apt-get install -y libjson0-dev &&\
+	apt-get install -y libproj-dev &&\
+	apt-get install -y xsltproc docbook-xsl &&\
+	apt-get install -y docbook-mathml &&\
+	apt-get install -y libgdal1-dev &&\
+	apt-get install -y openjdk-7-jdk &&\
+	apt-get install -y python-setuptools &&\
+	apt-get install -y python-dev &&\
+	apt-get install -y libffi-dev &&\
+	apt-get install -y libpq-dev &&\
+	apt-get install -y dos2unix &&\
+	easy_install pip &&\
+	pip install requests
+
+
+# Root project folder
+RUN mkdir ${WEB_ROOT}
+
+
+# Install the Arches application	
+COPY arches ${WEB_ROOT}/arches
+WORKDIR	${WEB_ROOT}/arches
+RUN	pip install --no-index -e .
+# Seemed necessary, received errors without this
+RUN python setup.py build
+# Seemed necessary, received errors without this	
+RUN python setup.py install							
+
+
+# Install Arches Hip
+COPY arches_hip ${WEB_ROOT}/arches_hip
+WORKDIR ${WEB_ROOT}/arches_hip
+RUN pip install --no-index -e .
+# RUN python setup.py build							# Apparently not necessary
+# RUN python setup.py install						# Apparently not necessary
+
+
+# Setup custom app based on Arches Hip
+# WORKDIR /${WEB_ROOT}
+# RUN arches-app create ${WEB_APP_NAME} --app arches_hip
+
+# Install Elasticsearch
+COPY ${WEB_APP_NAME} ${WEB_ROOT}/${WEB_APP_NAME}
+WORKDIR ${WEB_ROOT}/${WEB_APP_NAME}
+
+
+
+
+
+################################################################
+
 
 USER root
 
-# Remove obsolete folders and packages
-RUN apt-get purge -y --auto-remove postgis
-RUN apt-get purge -y --auto-remove postgresql-9.4
-RUN apt-get purge -y --auto-remove postgresql-server-dev-9.4
-RUN apt-get purge -y --auto-remove postgresql-contrib-9.4
-RUN apt-get autoremove -y 
-RUN rm -rf /elasticsearch
-RUN rm -rf /usr/share/postgresql
 
 # Remove package list to free up space
 RUN rm -rf /var/lib/apt/lists/*
 
-ENV DJANGO_PASSWORD=admin
+
 
 # For debugging with Visual Studio Code
 RUN pip install ptvsd
-
-ENV IS_CLEAN_ENV=false
-ENV INSTALL_DIR=/install
 
 # Entrypoint to setup volume mounts
 COPY install/web/web_entrypoint.sh ${INSTALL_DIR}/web_entrypoint.sh
