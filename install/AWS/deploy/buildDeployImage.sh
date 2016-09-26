@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t cvast:5000/cvast-arches-deploy .
+docker build -t cvast/cvast-arches-deploy .
