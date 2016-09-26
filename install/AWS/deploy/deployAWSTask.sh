@@ -140,14 +140,18 @@ if [ -z ${BUILD_NUMBER} ] || [ -z ${CVAST_APP} ] || [ -z ${ENVIRONMENT} ] ; then
 fi
 
 ### Env variables
+if [[ ${CVAST_APP} == "web" ]] || [[ ${CVAST_APP} == "nginx" ]] || [[ ${CVAST_APP} == "elasticsearch" ]] || [[ ${CVAST_APP} == "db" ]]; then
+	PREFIX="-arches"
+fi
+
 DOCKER_IMAGE=cvast/cvast-${CVAST_APP}:${BUILD_NUMBER}
-CONTAINER_NAME=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-container
+CONTAINER_NAME=${ENVIRONMENT}-cvast${PREFIX}-${CVAST_APP}-container
 # Nginx is part of the web task and service
 if [[ ${CVAST_APP} == 'nginx' ]]; then
 	CVAST_APP='web'
 fi
-TASK_FAMILY=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-task
-SERVICE_NAME=${ENVIRONMENT}-cvast-arches-${CVAST_APP}-service
+TASK_FAMILY=${ENVIRONMENT}-cvast${PREFIX}-${CVAST_APP}-task
+SERVICE_NAME=${ENVIRONMENT}-cvast${PREFIX}-${CVAST_APP}-service
 CLUSTER_NAME=${ENVIRONMENT}-cvast-arches-cluster
 TMP_FOLDER=./tmp
 
