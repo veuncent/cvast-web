@@ -58,17 +58,6 @@ push_to_registry() {
 
 # parameters: 
 # $1 = app (web, db, elasticsearch, nginx)
-prepare_deploy_image() {
-	local APP_NAME=$1
-
-	if [[ $(array_contains_element $APP_NAME $DEPLOY_THESE_APPS) ]]; then
-		deploy_image $APP_NAME
-	fi
-}
-
-
-# parameters: 
-# $1 = app (web, db, elasticsearch, nginx)
 deploy_image() {
 	local APP_NAME=$1
 	echo "Deploying to AWS:  $APP_NAME:$BUILD_NUMBER"
@@ -100,7 +89,7 @@ array_not_contains_element() {
 }
 
 display_help() {
-	echo ${HELP_TEXT}
+	echo "${HELP_TEXT}"
 }
 
 #################################################################################################################################
