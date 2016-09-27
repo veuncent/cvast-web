@@ -17,7 +17,7 @@ def get_env_variable(var_name):
 MODE = get_env_variable('DJANGO_MODE') #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
 DEBUG = ast.literal_eval(get_env_variable('DJANGO_DEBUG'))
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['127.0.0.1','localhost', 'cvast.usf.edu', 'acc-cvast-arches-web-loadb-1026040265.us-east-1.elb.amazonaws.com', 'test-cvast-arches-web-loadb-1229376776.us-east-1.elb.amazonaws.com']
+ALLOWED_HOSTS = ['127.0.0.1','localhost', 'cvast.usf.edu', 'acc-cvast-arches-web-loadb-1026040265.us-east-1.elb.amazonaws.com', 'test-cvast-arches-web-loadb-1229376776.us-east-1.elb.amazonaws.com', 'feature-cvast-arches-web-loadb-868844127.us-east-1.elb.amazonaws.com']
 
 # Fix for AWS ELB returning false bad health: ALLOWS_HOSTS did not allow ELB's private ip
 EC2_PRIVATE_IP  =   None
