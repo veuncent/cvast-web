@@ -17,12 +17,15 @@ define([
 			e.preventDefault();
 			videotarget = this.getAttribute("href");
 			videocaption = this.getAttribute("data-caption");
+			videostyle = this.getAttribute("style");
 			video = document.querySelector("#video-player video");
 			video.removeAttribute("controls");
 			video.removeAttribute("poster");
+			video.setAttribute("style", "");
 			source = document.querySelectorAll("#video-player video source");
 			source[0].src = videotarget;
 			video.setAttribute("controls", "true");
+			video.setAttribute("style", videostyle);
 			video.onloadedmetadata = function () {
 				// Scroll to center the video on screen
 				var el = $(document.getElementById("video-player"));
