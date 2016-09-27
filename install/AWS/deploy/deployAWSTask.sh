@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_OPTIONS="db|web|elasticsearch|nginx"
+APP_OPTIONS="db|web|elasticsearch|nginx|potree"
 ENVIRONMENT_OPTIONS="test|acc"
 HELP_TEXT="
 Arguments:
