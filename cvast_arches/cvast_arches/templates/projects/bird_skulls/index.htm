@@ -1,0 +1,107 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description cvast-project-title">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Bird skulls: Morphological and functional evolution" %}</h1>
+    </div>
+
+    <div class="block-description">
+        <div class="container">
+            <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+                <div class="col-sm-4 cvast-paragraph-box-left-container">
+                    <h1>Bird skulls</h1>
+                    <h5><i class="fa fa-map-marker"></i>Global</h5>
+                </div>
+                <div class="col-sm-8">
+                    <div class="cvast-paragraph-box-body">
+                        <p>
+                            We are using a combination of surface and microCT scans to understand how the range of diets and behaviours seen in modern
+                            birds is linked to beak and skull shape, and their biomechanical performance. In particular,
+                            how have these features changed as birds evolved from large, strong dinosaurian ancestors to
+                            the small, lightly-built animals we have today?
+                        </p>
+                        <h6 style="margin-top: 30px;">Participate by visiting <a href="http://www.markmybird.org" target="_blank">www.markmybird.org</a></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Image 2 -->
+<div class="block-description">
+    <div class="container">
+        <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <div class="col-sm-6" style="padding-left: 0px;">
+                        <h5 style="max-width: 300px; margin-bottom: 30px;">Animation showing the main shape variation in birds of prey.</h5>
+                        <p>Full paper available <a href="http://www.pnas.org/content/113/19/5352.abstract" target="_blank">here.</a></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <div >
+                            <img style="max-width: 256px; max-height: 256px;" src="{% static 'img/projects/bird_skulls/PC1_oblique.gif' %}"></img>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="container">
+    <div class="row cvast-image-box-with-caption-left">
+        <div class="col-sm-4 cvast-image-box-with-caption-left-body">
+            <h5 style="max-width: 300px; margin-bottom: 30px;">Animation showing the main shape variation in birds of prey.</h5>
+            <p>Full paper available <a href="http://www.pnas.org/content/113/19/5352.abstract" target="_blank">here.</a></p>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-image-box-with-caption-left-image">
+                <img align="center" style="max-width: 256px; max-height: 256px;" src="{% static 'img/projects/bird_skulls/PC1_oblique.gif' %}"></img>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<!-- Image 1 -->
+<div class="container" >
+    <div class="row cvast-image-box-with-caption-left">
+        <div class="col-sm-4 cvast-image-box-with-caption-left-body">
+            <h1>Finite element model of a Lammergeier vulture</h1>
+            <p>Warm colours indicate areas of high mechanical stress.</p>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-image-box-with-caption-left-image">
+                <div class="background-image" style="background-image: url({% static 'img/projects/bird_skulls/vulture.jpg' %}); background-size: 100% auto; background-position: 50% 0%; max-width: 700px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Paragraph 1 -->
+<div class="container">
+    <div class="row cvast-paragraph-box">
+        <div class="col-sm-4 cvast-paragraph-box-left-container">
+            <h1>Mark My Bird</h1>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-paragraph-box-body">
+                <p>The scan data is the starting point for detailed computer analysis using geometric morphometrics and finite
+                    element modelling. You can participate in this work by visiting <a href="http://www.markmybird.org" target="_blank">www.markmybird.org</a>                    (collaboration with University of Sheffield, UK) and helping us to measure the beaks of all of the world’s
+                    bird species.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% include 'projects/project_footer.htm' %}
+</div>
+
+{% endblock content %}
