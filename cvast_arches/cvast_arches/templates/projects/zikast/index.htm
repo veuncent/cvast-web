@@ -27,35 +27,24 @@
         </div>
     </div>
 
-<div align="center" class="cvast-background-image-title">
-    <h5>West Nile virus early warning system (red=high risk, black=human cases).</h5>
-</div>
-<div class="background-image" style="background-image: url({% static 'img/projects/zikast/04_wnv_dycast_epidemic.png' %}); background-size: auto 100%; background-size: fit;"></div>
-
-
-<!-- Videos -->
-<div class="container">
-    <div class="row cvast-paragraph-box-video">
-        <div class="col-sm-4 cvast-paragraph-box-video-left-container">
-            <h1>Videos</h1>
-        </div>
-        <div class="col-sm-8">
-            <div class="cvast-paragraph-box-video-body">
-            </div>
-        </div>
+    <div align="center" class="cvast-background-image-title">
+        <h5>West Nile virus early warning system (red=high risk, black=human cases).</h5>
+        <p>From: <a href="http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article" target="_blank">Carney et al 2011 <i>Emerging Infectious Diseases</i></a></p>
     </div>
-</div>
+    <div class="background-image" style="background-image: url({% static 'img/projects/zikast/04_wnv_dycast_epidemic.png' %}); background-size: auto 100%; background-size: fit;"></div>
 
-<div align="center" class="cvast-background-image-title">
-    <h5 id="cvast-video-caption">West Nile virus early warning system (red=high risk, black=human cases).</h5>
-    <p>From: <a href="http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article" target="_blank">Carney et al 2011 <i>Emerging Infectious Diseases</i></a></p>
-</div>
-<video align="center" class="cvast-video-full" controls poster="{% static 'img/projects/zikast/video_thumbnails/03_wnv_dycast_480x560_video.png' %}"
-    loop="" style="max-height: 560px;">
-    <source src="{{ S3_STATIC_URL }}/streaming/zikast/03_WNV+DYCAST_480x560_video.webm">
-</video>
 
-<!--<figure id="video-player">
+    <!-- Videos -->
+    <div align="center" class="cvast-background-image-title cvast-background-image-title-notfirstrow">
+        <h5 id="cvast-video-caption">West Nile virus early warning system (red=high risk, black=human cases).</h5>
+        <p>From: <a href="http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article" target="_blank">Carney et al 2011 <i>Emerging Infectious Diseases</i></a></p>
+    </div>
+    <video align="center" class="cvast-video-full" controls poster="{% static 'img/projects/zikast/video_thumbnails/03_wnv_dycast_480x560_video.png' %}"
+        loop="" style="max-height: 560px;">
+        <source src="{{ S3_STATIC_URL }}/streaming/zikast/03_WNV+DYCAST_480x560_video.webm">
+    </video>
+
+    <!--<figure id="video-player">
     <video controls poster="{% static 'img/projects/zikast/video_thumbnails/03_wnv_dycast_480x560_video.png' %}" loop="" style="max-height: 560px;">
         <source src="{{ S3_STATIC_URL }}/streaming/zikast/03_WNV+DYCAST_480x560_video.webm">
     </video>
@@ -68,28 +57,28 @@
                 alt=""></a>
     </figcaption>
 </figure>-->
-<!-- End Videos -->
+    <!-- End Videos -->
 
 
-<div class="container">
-    <div class="row cvast-paragraph-box">
-        <div class="col-sm-4 cvast-paragraph-box-left-container">
-            <h1>Title</h1>
-        </div>
-        <div class="col-sm-8">
-            <div class="cvast-paragraph-box-body">
-                <p>A collaboration with Prof. Sean Ahearn (CUNY) and several international institutions, this predictive model
-                    will build upon our previously successful results predicting epidemics of West Nile and dengue viruses.
-                    Real-time risk maps will be generated and supplied to local agencies in Florida, Puerto Rico and Brazil,
-                    in order to target mosquito control efforts.
-                </p>
+    <div class="container">
+        <div class="row cvast-paragraph-box">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>Title</h1>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <p>A collaboration with Prof. Sean Ahearn (CUNY) and several international institutions, this predictive
+                        model will build upon our previously successful results predicting epidemics of West Nile and dengue
+                        viruses. Real-time risk maps will be generated and supplied to local agencies in Florida, Puerto
+                        Rico and Brazil, in order to target mosquito control efforts.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-{% include 'projects/project_footer.htm' %}
+    {% include 'projects/project_footer.htm' %}
 </div>
 
 {% endblock content %}
