@@ -89,7 +89,7 @@ blockquote footer {
 /* Paragraph boxes */
 .cvast-paragraph-box {
     margin-top: 130px;
-    padding: 15px;
+    padding-right: 15px;
     padding-bottom: 30px;
     /*padding-top: 30px;*/
     margin-bottom: 30px;
@@ -142,6 +142,9 @@ blockquote footer {
     text-align: justify;
 }
 
+.cvast-image-box-with-caption-left-body H1 {
+    text-align: left;
+}
 
 
 /* Profile boxes */
