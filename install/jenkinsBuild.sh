@@ -4,14 +4,16 @@ set -e
 
 ### Global variables and Help
 
-APP_OPTIONS="db|web|elasticsearch|nginx"
-DEFAULT_APPS_DEPLOYED="web|nginx"
-ENVIRONMENT_OPTIONS="test|acc"
+APP_OPTIONS=(db web elasticsearch nginx)
+DEFAULT_APPS_DEPLOYED=(web nginx)
+ENVIRONMENT_OPTIONS=(test acc)
+DEPLOY_THESE_APPS=()
 
 HELP_TEXT="
+
 Arguments:  
--a or --app: Optional: CVAST app to be deployed, multiple allowed within quotes "" (options: ${APP_OPTIONS}). If --app not specified, these apps are deployed: ${DEFAULT_APPS_DEPLOYED}  
--e or --environment: The AWS environment to deploy on (options: ${ENVIRONMENT_OPTIONS})
+-a or --app: Optional: CVAST app to be deployed, multiple allowed within quotes "" (options: ${APP_OPTIONS[@]}). If --app not specified, these apps are deployed: ${DEFAULT_APPS_DEPLOYED[@]}  
+-e or --environment: The AWS environment to deploy on (options: ${ENVIRONMENT_OPTIONS[@]})
 -c or --commit: The build / commit number to tag the images with (e.g. the \$BUILD_NUMBER variable in Jenkins)
 -i or --access_key_id: The AWS Access Key ID of your AWS account  
 -k or --secret_access_key: The AWS Secret Access Key of your AWS account  
@@ -31,7 +33,14 @@ AWS_DEFAULT_REGION=us-east-1
 build_image() {
 	local APP_NAME=$1
 	echo "Building Docker image:  $APP_NAME:$BUILD_NUMBER"
-	docker build -f Dockerfile-$APP_NAME -t cvast/cvast-$APP_NAME:$BUILD_NUMBER .
+	
+	if [[ ${APP_NAME} == "web" ]] || [[ ${APP_NAME} == "nginx" ]] || [[ ${APP_NAME} == "elasticsearch" ]] || [[ ${APP_NAME} == "db" ]]; then
+		DOCKERFILE="Dockerfile-"${APP_NAME}
+	else
+		DOCKERFILE="Dockerfile"
+	fi
+	
+	docker build -f ${DOCKERFILE} -t cvast/cvast-${APP_NAME}:${BUILD_NUMBER} .
 }
 
 
@@ -79,14 +88,6 @@ array_contains_element() {
 	return 1
 }
 
-# Check if value is not in array
-array_not_contains_element() {
-	local e
-	for e in "${@:2}"; do 
-		[[ "$e" == "$1" ]] && return 1; 
-	done
-	return 0
-}
 
 display_help() {
 	echo "${HELP_TEXT}"
@@ -111,7 +112,7 @@ do
 
 	case ${key} in
 		-a|--app)
-			IFS=' ' read -r -a DEPLOY_THESE_APPS <<< "$2"
+			DEPLOY_THESE_APPS=($2)
 			shift; # next argument
 		;;
 		-e|--environment)
@@ -143,25 +144,22 @@ do
 	shift # next argument or value
 done
 
+
 if [[ ! -z ${DEPLOY_THESE_APPS} ]]; then
 	for app in "${DEPLOY_THESE_APPS[@]}"; do
-		eval "case ${app} in
-			${APP_OPTIONS})
-				echo \"Image set for deployment: ${app}\"
-				;;
-			*)			
-				# Any other input
-				echo \"Invalid option: -a|--app: ${app}\"
-				display_help
-				exit 1
-				;;
-		esac"
+
+		if ! array_contains_element "${app}" "${APP_OPTIONS[@]}"; then
+			echo "Invalid option: -a|--app: ${app}"
+			display_help
+			exit 1
+		else 
+			echo "Image set for deployment: ${app}"
+		fi
+
 	done
 else
-	DEPLOY_THESE_APPS=$DEFAULT_APPS_DEPLOYED
+	DEPLOY_THESE_APPS=(${DEFAULT_APPS_DEPLOYED[@]})
 fi
-
-
 
 
 if [[ -z ${ENVIRONMENT} ]] ; then
@@ -170,17 +168,27 @@ if [[ -z ${ENVIRONMENT} ]] ; then
 	exit 1
 fi
 
-eval "case ${ENVIRONMENT} in
-	${ENVIRONMENT_OPTIONS})
-		echo \"Deploying on environment: ${ENVIRONMENT}\"
-		;;
-	*)			
+
+if ! array_contains_element "${ENVIRONMENT}" "${ENVIRONMENT_OPTIONS[@]}"; then
+	echo "Invalid option: -e|--environment ${ENVIRONMENT}"
+	display_help
+	exit 1
+else 
+	echo "Deploying on environment: ${ENVIRONMENT}"
+fi
+
+		
+# eval "case ${ENVIRONMENT} in
+	# ${ENVIRONMENT_OPTIONS})
+		# echo \"Deploying on environment: ${ENVIRONMENT}\"
+		# ;;
+	# *)			
 		# Any other input
-		echo \"Invalid option: -e|--environment ${ENVIRONMENT}\"
-		display_help
-		exit 1
-		;;
-esac"
+		# echo \"Invalid option: -e|--environment ${ENVIRONMENT}\"
+		# display_help
+		# exit 1
+		# ;;
+# esac"
 
 if [[ -z ${BUILD_NUMBER} ]] ; then
 	echo "ERROR! -c|--commit parameter not specified. Exiting..."
@@ -210,10 +218,11 @@ fi
 
 # In order to make docker-compose work, we need all docker images to have this latest BUILD_NUMBER, 
 # including images that are not explicitly built with this script (usually db & elasticsearch)
-for app in "${APP_OPTIONS[@]}"; do
-	if [[ $(array_not_contains_element $app ${DEPLOY_THESE_APPS}) ]]; then
-		echo "Tagging latest jenkins build as cvast/cvast-$APP_NAME:$BUILD_NUMBER"
-		docker tag cvast/cvast-$APP_NAME:jenkins-latest cvast/cvast-$APP_NAME:$BUILD_NUMBER
+for app in ${APP_OPTIONS[@]}; do
+	if ! array_contains_element "$app" "${DEPLOY_THESE_APPS[@]}"; then
+		echo "--> $app not set to be deployed, but required for unit testing."
+		echo "--> Tagging latest jenkins build of $app as cvast/cvast-$app:$BUILD_NUMBER"
+		docker tag cvast/cvast-$app:jenkins-latest cvast/cvast-$app:$BUILD_NUMBER
 	fi
 done
 
