@@ -177,18 +177,6 @@ else
 	echo "Deploying on environment: ${ENVIRONMENT}"
 fi
 
-		
-# eval "case ${ENVIRONMENT} in
-	# ${ENVIRONMENT_OPTIONS})
-		# echo \"Deploying on environment: ${ENVIRONMENT}\"
-		# ;;
-	# *)			
-		# Any other input
-		# echo \"Invalid option: -e|--environment ${ENVIRONMENT}\"
-		# display_help
-		# exit 1
-		# ;;
-# esac"
 
 if [[ -z ${BUILD_NUMBER} ]] ; then
 	echo "ERROR! -c|--commit parameter not specified. Exiting..."
