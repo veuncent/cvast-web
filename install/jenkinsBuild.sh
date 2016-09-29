@@ -237,7 +237,7 @@ sleep 5 && echo "20"
 sleep 5 && echo "25"
 sleep 5 && echo "30"
 echo "Stopping all Docker containers..."
-docker-compose down
+docker-compose stop
 
 
 
