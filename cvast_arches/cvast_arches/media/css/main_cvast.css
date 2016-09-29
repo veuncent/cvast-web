@@ -73,6 +73,8 @@ blockquote footer {
 
 .cvast-media-block {
     margin-top: 150px;
+    padding: 15px;
+    /*margin-bottom: 30px;   */
 }
 
 .cvast-background-image-title {
@@ -88,11 +90,7 @@ blockquote footer {
 
 /* Paragraph boxes */
 .cvast-paragraph-box {
-    margin-top: 130px;
-    padding-right: 15px;
-    padding-bottom: 30px;
-    /*padding-top: 30px;*/
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 
 .cvast-paragraph-box h1 {
@@ -119,7 +117,7 @@ blockquote footer {
 
 /* Image boxes*/
 .cvast-image-box-with-caption-left {
-    padding-top: 30px;
+    padding-top: 80px;
 }
 
 .cvast-image-box-with-caption-left h1 {
@@ -133,7 +131,7 @@ blockquote footer {
 }
 
 .cvast-image-box-with-caption-left-image {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .cvast-image-box-with-caption-left-body {
@@ -192,13 +190,6 @@ blockquote footer {
 
 
 /* Video paragraph boxes */
-.cvast-paragraph-box-video {
-    margin-top: 150px;
-    padding: 15px;
-    padding-bottom: 30px;
-    margin-bottom: 30px;    
-}
-
 .cvast-paragraph-box-video h1 {
     margin: 0px;
     line-height: 25px;

@@ -2,7 +2,7 @@
 
 <div class="block-description cvast-project-title">
     <div class="container">
-        <div class="row cvast-paragraph-box">
+        <div class="row cvast-paragraph-box cvast-media-block">
             <div class="col-sm-4 cvast-paragraph-box-left-container">
                 <h1>La Motilla del Azuer</h1>
                 <h5><i class="fa fa-map-marker"></i>La Mancha, Spain</h5>
@@ -26,8 +26,14 @@
 <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_aerial.jpg' %}); background-position: 50% 30%;"></div>
 
 
-
-<div align="center" class="sketchfab-embed-wrapper cvast-media-block cvast-sketchfab-embeded">
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box cvast-media-block">
+        <div class="col-sm-4 cvast-paragraph-box-left-container">
+            <h1>3D models</h1>
+        </div>
+    </div>
+</div>
+<div align="center" class="sketchfab-embed-wrapper cvast-sketchfab-embeded">
     <div align="center" class="cvast-background-image-title">
         <h5>3D model of the Motilla del Azuer</h5>
     </div>
@@ -45,7 +51,29 @@
 
 <!-- Videos -->
 <div class="container padding-top-20">
-    <div class="row cvast-paragraph-box-video">
+    <div class="row cvast-paragraph-box-video cvast-media-block">
+        <div class="col-sm-4 cvast-paragraph-box-video-left-container">
+            <h1>Videos</h1>
+        </div>
+    </div>
+</div>
+<div class="block-description">
+    <div align="center" class="cvast-background-image-title">
+        <h5>Animation resulted from a meshed 3D model created with photogrammetry</h5>
+        <p>The photos were taken using our DJI Phantom 4 drone.
+        </p>
+    </div>
+    <div>
+        <video align="center" class="cvast-video-full" style="max-height: 80vh;" controls poster="{% static 'img/projects/la_mancha/la_motilla_del_azuer/video_thumbnails/Motilla_del_Azuer_Photogrammetric_Model.png' %}"
+            loop="">
+            <source src="{{ S3_STATIC_URL }}/streaming/Motilla_del_Azuer_Photogrammetric_Model-streaming.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+
+<!--<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box-video cvast-media-block">
         <div class="col-sm-4 cvast-paragraph-box-video-left-container">
             <h1>Videos</h1>
         </div>
@@ -67,13 +95,13 @@
         <a href="{{ S3_STATIC_URL }}/streaming/Motilla_del_Azuer_Photogrammetric_Model-streaming.mp4"><img src="{% static 'img/projects/la_mancha/la_motilla_del_azuer/video_thumbnails/Motilla_del_Azuer_Photogrammetric_Model.png' %}"
                 alt=""></a>
     </figcaption>
-</figure>
+</figure>-->
 <!-- End Videos -->
 
 
 <!-- Photos -->
-<div class="container padding-top-20" style="margin-top: 50px; margin-bottom: 50px;">
-    <div class="row cvast-paragraph-box">
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box cvast-media-block">
         <div class="col-sm-4 cvast-paragraph-box-left-container">
             <h1>Scanning the Motilla with terrestrial laster scanners</h1>
         </div>
@@ -97,8 +125,8 @@
 <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_storage_silos.jpg' %}); background-position: 52% 52%;"></div>
 
 
-<div class="container padding-top-20" style="margin-top: 50px; margin-bottom: 50px;">
-    <div class="row cvast-paragraph-box">
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box cvast-media-block">
         <div class="col-sm-4 cvast-paragraph-box-left-container">
             <h1>Preliminary results</h1>
         </div>
