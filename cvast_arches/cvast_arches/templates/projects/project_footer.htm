@@ -1,11 +1,21 @@
-{% extends 'projects/project_footer_base.htm' %} {% load staticfiles %} {% load i18n %} {% block content %}
+{% load staticfiles %} {% load i18n %} {% block content %}
 
-<!--Title Box-->
-<div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
-    <h5>Explore our projects</h5>
+<div class="block-description">
+    <div class="container content" style=" margin-top: 50px;">
+
+        <!--Title Box-->
+        <div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
+            <h1>Featured projects</h1>
+            <a href="{% url 'projects_index' %}">
+                See all projects
+            </a>
+        </div>
+        <!-- End Title Box -->
+
+
+        {% include 'projects/project_footer_promoboxes.htm' %}
+
+    </div>
 </div>
-<!-- End Title Box -->
-
-{% include 'projects/project_footer_promoboxes.htm' %} 
 
 {% endblock content %}
