@@ -272,3 +272,12 @@ cvast-paragraph-box-video-left-container {
         width: 33.33%;
     }
 }
+
+.cvast-sketchfab-embeded {
+    padding-top: 20px;
+}
+
+.cvast-sketchfab-embeded iframe {
+    width: 60vw;
+    height: 60vh;
+}
