@@ -11,15 +11,15 @@
             <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
                 <div class="col-sm-4 cvast-paragraph-box-left-container">
                     <h1>Zika virus early warning system</h1>
-                    <h5><i class="fa fa-map-marker"></i>Florida, Puerto Rico and Brazil</h5>
+                    <h5><i class="fa fa-map-marker"></i>Florida, Puerto Rico, and Brazil</h5>
                 </div>
                 <div class="col-sm-8">
                     <div class="cvast-paragraph-box-body">
-                        <p>National Geographic Explorer Dr. Ryan Carney is an Assistant Professor of Digital Science in the
-                            Department of Integrative Biology and CVAST. His interdisciplinary work primarily focuses on
-                            flying dinosaurs and fighting diseases. This includes using new technologies to reconstruct the
-                            skeletons and original colors of fossil creatures, as well as predicting outbreaks of mosquito-borne
-                            viruses. (<a href="www.ryancarney.com" target="_blank">www.ryancarney.com</a>)
+                        <p>A collaboration between <a href="{% url 'people' %}" target="_blank">Prof. Ryan Carney</a> (USF),
+                            Prof. Sean Ahearn (CUNY), and several international institutions, this predictive model will
+                            build upon the team's previously successful results predicting epidemics of West Nile and dengue
+                            viruses. Real-time risk maps will be generated and supplied to local agencies in Florida, Puerto
+                            Rico, and Brazil, in order to target mosquito control efforts.
                         </p>
                     </div>
                 </div>
@@ -27,7 +27,12 @@
         </div>
     </div>
 
-    <div align="center" class="cvast-background-image-title cvast-background-image-title-spacer">
+    <!-- banner image -->
+    <div align="center" class="cvast-narrow-banner cvast-background-image-spacer" style="margin-bottom: 10px;">
+        <img src="{% static 'img/projects/zikast/zikast_header.png' %}" style="width: 50vw;" />
+    </div>
+
+    <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
         <h5>West Nile virus early warning system (red=high risk, black=human cases).</h5>
         <p>From: <a href="http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article" target="_blank">Carney et al 2011 <i>Emerging Infectious Diseases</i></a></p>
     </div>
@@ -43,40 +48,7 @@
         loop="" style="max-height: 560px;">
         <source src="{{ S3_STATIC_URL }}/streaming/zikast/03_WNV+DYCAST_480x560_video.webm">
     </video>
-
-    <!--<figure id="video-player">
-    <video controls poster="{% static 'img/projects/zikast/video_thumbnails/03_wnv_dycast_480x560_video.png' %}" loop="" style="max-height: 560px;">
-        <source src="{{ S3_STATIC_URL }}/streaming/zikast/03_WNV+DYCAST_480x560_video.webm">
-    </video>
-    <figcaption>
-        <a href="{{ S3_STATIC_URL }}/streaming/zikast/03_WNV+DYCAST_480x560_video.webm" data-caption="West Nile virus early warning system (red=high risk, black=human cases). From: <a href='http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article' target='_blank'>Carney et al 2011 <i>Emerging Infectious Diseases</i></a>"
-            style="max-height: 560px;">
-            <img src="{% static 'img/projects/zikast/video_thumbnails/03_wnv_dycast_480x560_video.png' %}" alt="">
-        </a>
-        <a href="{{ S3_STATIC_URL }}/streaming/3d_archaeopteryx_project/02_London+Archaeopteryx_photogrammetry_1920x1080.webm" data-caption="London specimen of <i>Archaeopteryx</i>, 3D photogrammetric reconstruction. Credit: Peter Falkingham"><img src="{% static 'img/projects/3d_archaeopteryx_project/video_thumbnails/02_London Archaeopteryx_photogrammetry_1920x1080.png' %}"
-                alt=""></a>
-    </figcaption>
-</figure>-->
     <!-- End Videos -->
-
-
-    <div class="container">
-        <div class="row cvast-paragraph-box cvast-media-block">
-            <div class="col-sm-4 cvast-paragraph-box-left-container">
-                <h1>Title</h1>
-            </div>
-            <div class="col-sm-8">
-                <div class="cvast-paragraph-box-body">
-                    <p>A collaboration with Prof. Sean Ahearn (CUNY) and several international institutions, this predictive
-                        model will build upon our previously successful results predicting epidemics of West Nile and dengue
-                        viruses. Real-time risk maps will be generated and supplied to local agencies in Florida, Puerto
-                        Rico and Brazil, in order to target mosquito control efforts.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     {% include 'projects/project_footer.htm' %}
 </div>
