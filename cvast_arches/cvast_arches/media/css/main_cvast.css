@@ -124,9 +124,19 @@ blockquote footer {
     .cvast-narrow-banner img {
         width: 90vw !important;
     }
-
-    
 }
+
+.cvast-collage {
+    background-color: white;
+}
+
+.cvast-collage img {
+    margin: 40px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    max-width: 300px;
+}
+
 
 /* Paragraph boxes */
 .cvast-paragraph-box {
