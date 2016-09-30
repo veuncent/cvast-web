@@ -60,7 +60,7 @@ cleanup_old_image() {
 # $1 = app (web, db, elasticsearch, nginx)
 push_to_registry() {
 	local APP_NAME=$1
-	echo "Pushing to private Docker registry:  $APP_NAME:$BUILD_NUMBER "
+	echo "Pushing to Docker registry:  $APP_NAME:$BUILD_NUMBER "
 	docker push cvast/cvast-$APP_NAME:$BUILD_NUMBER
 }
 
