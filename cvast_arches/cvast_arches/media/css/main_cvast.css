@@ -209,6 +209,12 @@ blockquote footer {
     line-height: 25px;
 }
 
+@media (max-width: 768px) {
+    .cvast-profile-box-left-container {
+        padding-right: 30px;
+    }
+}
+
 .cvast-profile-box-left-container img {
     max-width: 500px;
     width: 100%;
