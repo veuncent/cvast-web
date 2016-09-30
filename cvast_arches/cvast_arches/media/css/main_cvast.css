@@ -79,7 +79,12 @@ blockquote footer {
 .cvast-media-block {
     margin-top: 150px;
     padding: 15px;
-    /*margin-bottom: 30px;   */
+}
+
+@media (max-width: 768px) {
+    .cvast-media-block {
+        margin-top: 90px;
+    }
 }
 
 .cvast-background-image-title {
@@ -87,8 +92,20 @@ blockquote footer {
     margin-bottom: 10px;
 }
 
+@media (max-width: 768px) {
+    .cvast-background-image-title {
+        margin-top: 10px; 
+    }
+}
+
 .cvast-background-image-spacer {
     margin-top: 140px; 
+}
+
+@media (max-width: 768px) {
+    .cvast-background-image-spacer{
+        margin-top: 90px; 
+    }
 }
 
 .cvast-promobox {
@@ -97,6 +114,18 @@ blockquote footer {
 
 .cvast-promobox-small {
     min-height: 270px;
+}
+
+@media (max-width: 768px) {
+    .cvast-narrow-banner {
+        margin-top: 50px !important;
+    }
+    
+    .cvast-narrow-banner img {
+        width: 90vw !important;
+    }
+
+    
 }
 
 /* Paragraph boxes */
@@ -264,7 +293,7 @@ cvast-paragraph-box-video-left-container {
 	opacity: 1;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
 	#video-player video,
 		#video-player figcaption {
 			display: table-row;
@@ -275,6 +304,10 @@ cvast-paragraph-box-video-left-container {
     }
 }
 
+
+
+/* Sketchfab */
+
 .cvast-sketchfab-embeded {
     padding-top: 20px;
 }
@@ -282,4 +315,11 @@ cvast-paragraph-box-video-left-container {
 .cvast-sketchfab-embeded iframe {
     width: 60vw;
     height: 60vh;
+}
+
+@media (max-width: 768px) {
+    .cvast-sketchfab-embeded iframe {
+        height: 70vh;
+        width: 100vw;
+    }
 }
