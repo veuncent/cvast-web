@@ -12,11 +12,11 @@ body {
     top: -10px;
     position: relative;
     padding: 0 10px 65px;
+    height: 80px;
 }
 
 .arches-logo-header {
     max-height: 80px;
-    margin-top: -15px;
 }
 
 .arches-logo-copyright {
@@ -31,9 +31,14 @@ body {
     height: 650px;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
     .background-image {
         height: 400px; 
+    }
+
+    .arches-logo-header {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 }
 
@@ -86,7 +91,13 @@ blockquote footer {
     margin-top: 140px; 
 }
 
+.cvast-promobox {
+    min-height: 315px;
+}
 
+.cvast-promobox-small {
+    min-height: 270px;
+}
 
 /* Paragraph boxes */
 .cvast-paragraph-box {
