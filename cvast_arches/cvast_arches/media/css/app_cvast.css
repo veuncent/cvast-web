@@ -1,13 +1,1 @@
 .social_sketchfab {background: url(../img/icons/social/sketchfab.png) no-repeat;}
-
-.btn-u {
-   background: #466069;
-}
-
-.btn-u:hover, 
-.btn-u:focus, 
-.btn-u:active, 
-.btn-u.active, 
-.open .dropdown-toggle.btn-u.btn-u-dark-blue {
-    background:  #7E96A0;
-}

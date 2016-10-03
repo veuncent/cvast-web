@@ -1,5 +1,7 @@
 @import url(app_cvast.css);
 
+/* Overwrite existing Arches css */
+
 body { 
    color: #333; 
    font-size: 14px;
@@ -49,6 +51,90 @@ blockquote p {
 blockquote footer {
     text-align: right;
 }
+
+
+/*Header v1
+------------------------------------*/
+/*Navber*/
+.header .navbar-default .navbar-nav > .active > a {
+    color: #466069;
+}
+
+/*Navbar Toggle*/
+.navbar-toggle,
+.navbar-default .navbar-toggle:hover, 
+.navbar-default .navbar-toggle:focus {
+    background: #466069;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #7E96A0;
+}
+
+.navbar-default .navbar-toggle:hover {
+    background: #7E96A0;
+}
+
+/*Responsive Navbar*/
+@media (max-width: 767px) {
+    .header .navbar-default .navbar-nav > li > a:hover {
+        color: #466069;
+    }
+
+    .header .navbar-default .navbar-nav > .active > a,
+    .header .navbar-default .navbar-nav > .active > a:hover,
+    .header .navbar-default .navbar-nav > .active > a:focus {
+        color: #fff;
+        background: #466069;
+    }
+}
+
+@media (min-width: 767px) {
+    /*Navbar*/
+    .header .navbar-default .navbar-nav > li > a:hover,
+    .header .navbar-default .navbar-nav > .active > a {
+        border-bottom: solid 2px #466069;
+    }
+
+    .header .navbar-default .navbar-nav > .open > a,
+    .header .navbar-default .navbar-nav > .open > a:hover,
+    .header .navbar-default .navbar-nav > .open > a:focus {
+        color: #466069;
+    }
+
+    /*Dropdown Menu*/
+    .header .dropdown-menu { 
+        border-top: solid 2px #466069; 
+    }   
+}
+
+/*Search Box*/
+.header .navbar .nav > li > .search:hover {
+    color: #466069;
+    border-bottom-color: #466069;
+}
+
+@media (max-width: 767px) {
+    .header .navbar .nav > li > .search:hover {
+        background: #7E96A0;
+    }
+}
+
+/*Buttons
+------------------------------------*/
+
+.btn-u {
+   background: #466069;
+}
+
+.btn-u:hover, 
+.btn-u:focus, 
+.btn-u:active, 
+.btn-u.active, 
+.open .dropdown-toggle.btn-u.btn-u-dark-blue {
+    background:  #7E96A0;
+}
+
 
 
 
