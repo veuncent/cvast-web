@@ -147,6 +147,34 @@ blockquote footer {
     font-size: 32px;
 }
 
+.cvast-slideshow-text {
+    background: rgba(126, 150, 160, .5) !important;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.cvast-slideshow-title {
+    padding-bottom: 5px;
+    border-radius: 0px 4px 4px 4px;
+}
+
+.cvast-slideshow-subtitle {
+    border-radius: 4px 4px 0px 0px;
+}
+
+@media (max-width: 500px) {
+    .cvast-slideshow-title {
+    line-height: 25px !important;
+    font-size: 25px !important; 
+    margin-top: 20px !important;
+    }
+
+    .cvast-slideshow-subtitle {
+    line-height: 25px !important; 
+    font-size: 15px !important; 
+    }
+}
+
 .cvast-url-low p{
     margin-top: 70px;
 }
