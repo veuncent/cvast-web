@@ -33,9 +33,10 @@ body {
     height: 650px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .background-image {
         height: 400px; 
+        max-height: 70vh;
     }
 
     .arches-logo-header {
@@ -202,14 +203,21 @@ blockquote footer {
     }
 }
 
-.cvast-background-image-title {
-    margin-top: 30px; 
-    margin-bottom: 10px;
+@media (max-width: 400px) {
+    .cvast-media-block {
+        margin-top: 30px;
+    }
 }
 
-@media (max-width: 768px) {
+.cvast-background-image-title {
+    margin: 10px;
+    margin-top: 30px; 
+}
+
+@media (max-width: 400px) {
     .cvast-background-image-title {
-        margin-top: 10px; 
+        margin: 20px;
+        /*margin-top: 10px; */
     }
 }
 
@@ -269,6 +277,15 @@ blockquote footer {
     text-align: justify;
 }
 
+@media (max-width: 400px) {
+    .cvast-paragraph-box h1 {
+        padding-bottom: 10px;    
+    }
+
+    .cvast-paragraph-box-body {
+        margin-right: 0px;
+    }
+}
 .cvast-paragraph-box-after-title { 
     margin-top: 10px;
 }
@@ -362,7 +379,8 @@ blockquote footer {
 
 /* Video paragraph boxes */
 .cvast-paragraph-box-video h1 {
-    margin: 0px;
+    margin-top: 0px;
+    margin-bottom: 30px;
     line-height: 25px;
 }
 
@@ -376,6 +394,11 @@ cvast-paragraph-box-video-left-container {
 
 }
 
+@media (max-width: 400px) {
+    .cvast-paragraph-box-video-body {
+        margin-right: 0px;
+    }
+}
 
 
 /* Video */
