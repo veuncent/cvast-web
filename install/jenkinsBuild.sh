@@ -236,8 +236,8 @@ TIMEOUT_COUNTER=0
 while ! ${SERVER_UP}; do
 	sleep 5
 	echo "+++ Testing if server is up and running..."
-	curl localhost:80 >/dev/null 2>&1
-	if [[ $? == 0 ]]; then
+	http_code=$(curl -sL -w "%{http_code}\\n" localhost:80 -o /dev/null)
+	if [[ x$http_code == x200 ]]; then
 		echo "Server is up and accepting connections."
 		SERVER_UP=true
 	else 
