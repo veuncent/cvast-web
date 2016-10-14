@@ -23,7 +23,7 @@ This Docker image requires the following environment variables in order to run:
 # }
 
 display_help() {
-	echo ${HELP_TEXT}
+	echo "${HELP_TEXT}"
 }
 
 create_task_definition() {
