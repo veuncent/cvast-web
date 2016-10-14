@@ -230,12 +230,24 @@ done
 ### Run all containers (unit tests to be added)
 echo "Starting all Docker containers..."
 docker-compose up --force-recreate &
-sleep 5 && echo "5"
-sleep 5 && echo "10"
-sleep 5 && echo "15"
-sleep 5 && echo "20"
-sleep 5 && echo "25"
-sleep 5 && echo "30"
+
+SERVER_UP=false
+TIMEOUT_COUNTER=0
+while ! ${SERVER_UP}; do
+	sleep 5
+	echo "Testing if server is up and running..."
+	curl localhost:80 >/dev/null 2>&1
+	if [[ $? == 0 ]]; then
+		echo "Server is up and accepting connections."
+		SERVER_UP=true
+	else 
+		TIMEOUT_COUNTER=$((TIMEOUT_COUNTER + 1))
+		if [[ ${TIMEOUT_COUNTER} = 36 ]]; then
+			echo "Connection timed out, which means something is wrong. Exiting build..."
+			exit 1
+		fi
+	fi
+done
 echo "Stopping all Docker containers..."
 docker-compose stop
 
