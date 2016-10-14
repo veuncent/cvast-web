@@ -9,6 +9,10 @@ body {
    font-family: "Open Sans",sans-serif
 }
 
+p a {
+    text-decoration: underline;
+} 
+
 .header .navbar-brand { 
     z-index: 1;
     top: -10px;
@@ -286,6 +290,7 @@ blockquote footer {
         margin-right: 0px;
     }
 }
+
 .cvast-paragraph-box-after-title { 
     margin-top: 10px;
 }
