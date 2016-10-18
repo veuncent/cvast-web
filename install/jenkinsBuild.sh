@@ -229,7 +229,7 @@ done
 
 ### Run all containers (unit tests to be added)
 echo "Starting all Docker containers..."
-docker-compose up --force-recreate &
+docker-compose up --force-recreate -d
 
 SERVER_UP=false
 TIMEOUT_COUNTER=0
@@ -239,6 +239,10 @@ while ! ${SERVER_UP}; do
 	http_code=$(curl -sL -w "%{http_code}\\n" localhost:80 -o /dev/null)
 	if [[ x$http_code == x200 ]]; then
 		echo "Server is up and accepting connections."
+		echo "Running containers:"
+		echo ""
+		docker ps
+		echo ""
 		SERVER_UP=true
 	else 
 		TIMEOUT_COUNTER=$((TIMEOUT_COUNTER + 1))
