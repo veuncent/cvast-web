@@ -156,12 +156,6 @@ blockquote footer {
     font-size: 32px;
 }
 
-@media (max-width: 767px) {
-    .cvast-page-title {
-        text-align: left;
-    }
-}
-
 .cvast-slideshow-text {
     /*background: rgba(126, 150, 160, .5) !important;*/
     background: rgba(0, 0, 0, .5) !important;
@@ -195,9 +189,10 @@ blockquote footer {
     margin-top: 70px;
 }
 
-.cvast-project-title{
+.cvast-project-title {
     margin-top: 50px;
 }
+
 .cvast-project-page {
     margin-bottom: 50px;
 }
@@ -214,12 +209,14 @@ blockquote footer {
 @media (max-width: 768px) {
     .cvast-media-block {
         margin-top: 90px;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 }
 
 @media (max-width: 400px) {
     .cvast-media-block {
-        margin-top: 30px;
+        margin-top: 70px;
     }
 }
 
@@ -228,10 +225,10 @@ blockquote footer {
     margin-top: 30px; 
 }
 
-@media (max-width: 400px) {
+@media (max-width: 768px) {
     .cvast-background-image-title {
-        margin: 20px;
-        /*margin-top: 10px; */
+        margin: 30px;
+        margin-bottom: 10px; 
     }
 }
 
@@ -240,7 +237,7 @@ blockquote footer {
 }
 
 @media (max-width: 768px) {
-    .cvast-background-image-spacer{
+    .cvast-background-image-spacer {
         margin-top: 90px; 
     }
 }
@@ -271,15 +268,32 @@ blockquote footer {
     margin: 40px;
     margin-top: 80px;
     margin-bottom: 80px;
-    max-width: 300px;
+    max-width: 300px;    
 }
 
+@media (max-width: 630px) {
+    .cvast-collage img {
+        margin: 15px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        max-width: 50vw;
+    }
+}
+
+@media (max-width: 380px) {
+    .cvast-collage img {
+        margin: 20px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        max-width: 80vw;
+    }
+}
+
+.cvast-image-footer {
+    padding-top: 5px;
+}
 
 /* Paragraph boxes */
-.cvast-paragraph-box {
-    /*margin-bottom: 30px;*/
-}
-
 .cvast-paragraph-box h1 {
     margin: 0px;
     line-height: 25px;
@@ -291,13 +305,26 @@ blockquote footer {
     text-align: justify;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 767px) {
     .cvast-paragraph-box h1 {
-        padding-bottom: 10px;    
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        text-align: center; 
+    }
+
+    .cvast-paragraph-box h5 {
+        padding-bottom: 10px;
+        text-align: center; 
     }
 
     .cvast-paragraph-box-body {
-        margin-right: 0px;
+        margin: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .cvast-paragraph-box-body {
+        margin: 10px;
     }
 }
 
@@ -328,7 +355,15 @@ blockquote footer {
 }
 
 .cvast-image-box-with-caption-left-image {
-    /*margin-top: 10px;*/
+    max-width:100%;
+}
+
+@media (max-width: 768px) {
+.cvast-image-box-with-caption-left-image {
+        display: block; 
+        margin: auto auto;
+        max-height: 70vh;
+    }
 }
 
 .cvast-image-box-with-caption-left-body {
@@ -341,6 +376,28 @@ blockquote footer {
     text-align: left;
 }
 
+@media (max-width: 768px) {
+    .cvast-image-box-with-caption-left h1,
+    .cvast-image-box-with-caption-left p,
+    .cvast-image-box-with-caption-left h5,
+    .cvast-image-box-with-caption-left-body {
+        text-align: center !important;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cvast-image-box-with-caption-left h1,
+    .cvast-image-box-with-caption-left p,
+    .cvast-image-box-with-caption-left h5,
+    .cvast-image-box-with-caption-left-body {
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-left: 0px;
+        padding-right: 0px;        
+    }
+}
 
 /* Profile boxes */
 
@@ -381,7 +438,6 @@ blockquote footer {
 
 .cvast-profile-box-body {
     padding-right: 30px;
-    /*margin-right: 40px;*/
     text-align: justify;
 }
 
@@ -390,6 +446,37 @@ blockquote footer {
     text-align: left;
 }
 
+@media (max-width: 767px) {
+    .cvast-profile-box {
+        margin: 20px;
+    }
+
+    .cvast-profile-box-body {
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cvast-profile-box {
+        margin: 10px;
+        margin-top: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 15px;
+    }
+
+    .cvast-profile-box-body {
+        padding-right: 0px;
+    }
+
+    .cvast-profile-box-left-container {
+        padding: 0px;
+    }
+
+    .cvast-profile-box-list {
+        padding: 5px;
+    }
+}
 
 
 /* Video paragraph boxes */
@@ -409,7 +496,16 @@ cvast-paragraph-box-video-left-container {
 
 }
 
-@media (max-width: 400px) {
+@media (max-width: 768px) {
+    .cvast-paragraph-box-video h1 {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .cvast-paragraph-box-video-left-container {
+        margin-bottom: 10px;
+    }
+
     .cvast-paragraph-box-video-body {
         margin-right: 0px;
     }
@@ -426,12 +522,8 @@ cvast-paragraph-box-video-left-container {
 }
 
 .cvast-video-full {
-    /*width: 1920px;*/
-    /*height: 1080px; */
     width: 100%;
     max-height: 100vh;
-    /*height: auto;*/
-    /*width: auto;*/
 }
 
 #video-player {
