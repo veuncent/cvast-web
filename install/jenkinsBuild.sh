@@ -257,8 +257,8 @@ while ! ${SERVER_UP}; do
 		fi
 	fi
 done
-echo "Stopping all Docker containers..."
-docker-compose stop
+echo "Killing all Docker containers..."
+docker-compose kill
 
 
 
