@@ -18,4 +18,4 @@ services:
       - jenkins-home:/var/jenkins_home/
 
 volumes:
-    jenkins-home:
+    jenkins-home: 
