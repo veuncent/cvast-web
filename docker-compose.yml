@@ -70,7 +70,7 @@ services:
         - web
       environment:
         - DJANGO_HOST=web
-        - GET_NEW_CERTIFICATE=False
+        - GET_NEW_CERTIFICATE=True
         - DOMAIN_NAME=ec2-52-23-160-10.compute-1.amazonaws.com
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
         - ADDITIONAL_CERTBOT_PARAMS=--staging
