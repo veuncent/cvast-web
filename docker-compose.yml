@@ -66,12 +66,14 @@ services:
       volumes:
         - web-static:/www/static/
         - web-log:/var/log/nginx/
+        - web-log::/var/log/letsencrypt
+        - web-letsencrypt:/etc/letsencrypt
       depends_on:
         - web
       environment:
         - DJANGO_HOST=web
         - GET_NEW_CERTIFICATE=True
-        - DOMAIN_NAME=ec2-52-23-160-10.compute-1.amazonaws.com
+        - DOMAIN_NAME=build.usfcvast.org
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
         - ADDITIONAL_CERTBOT_PARAMS=--staging
         
@@ -79,6 +81,7 @@ volumes:
     web-uploaded-files:
     web-log:
     web-static:
+    web-letsencrypt:
     postgres-data:
     postgres-log:
     postgres-config:
