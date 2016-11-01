@@ -64,11 +64,16 @@ services:
         - '80:80'
         - '443:443'
       volumes:
-        - web-static:/www/static
+        - web-static:/www/static/
+        - web-log:/var/log/nginx/
       depends_on:
         - web
       environment:
         - DJANGO_HOST=web
+        - GET_NEW_CERTIFICATE=False
+        - DOMAIN_NAME=ec2-52-23-160-10.compute-1.amazonaws.com
+        - LETSENCRYPT_EMAIL=vmeijer@usf.edu
+        - ADDITIONAL_CERTBOT_PARAMS=--staging
         
 volumes:
     web-uploaded-files:
