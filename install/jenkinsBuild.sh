@@ -240,10 +240,10 @@ TIMEOUT_COUNTER=0
 HOST_IP=$(/sbin/ip route|awk '/default/ { print $3 }')
 while ! ${SERVER_UP}; do
 	sleep 5
-	echo "+++ Testing if server is up and running..."
+	echo "+++ Testing if server is up and running... +++"
 	http_code=$(curl -sL -w "%{http_code}\\n" ${HOST_IP}:80 -o /dev/null)
 	if [[ x$http_code == x200 ]]; then
-		echo "Server is up and accepting connections."
+		echo "+++ Server is up and accepting connections. +++"
 		echo "Running containers:"
 		echo ""
 		docker ps
