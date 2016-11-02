@@ -1,8 +1,12 @@
 #!/bin/bash
 
+set -e 
+
 # For Letsencrypt / Certbot verification
 LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+LETSENCRYPT_BASE_PATH=/etc/letsencrypt
 NGINX_DEFAULT_CONF=/etc/nginx/conf.d/default.conf
+
 
 start_nginx_daemon() {
 	cp ${INSTALL_DIR}/default.conf ${NGINX_DEFAULT_CONF}
@@ -12,15 +16,13 @@ start_nginx_daemon() {
 	sed -i "s/<django_host>/${DJANGO_HOST}/g" ${NGINX_DEFAULT_CONF}
 	sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
 
+	echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
 	exec nginx -g 'daemon off;'
 }
 
-
-if [[ ${GET_NEW_CERTIFICATE} == True ]]; then
-	echo "GET_NEW_CERTIFICATE = True, so downloading new certificate from LetsEncrypt"
-
-	# Http-only nginx conf
-	cp ${INSTALL_DIR}/nginx_http_only.conf ${NGINX_DEFAULT_CONF}
+download_certificates() {
+	echo "Downloading new certificate from LetsEncrypt..."
+	cp ${INSTALL_DIR}/nginx_http_only.conf ${NGINX_DEFAULT_CONF} # Http-only nginx conf
 	sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
 	
 	mkdir -p /var/www/${DOMAIN_NAME}
@@ -45,12 +47,26 @@ if [[ ${GET_NEW_CERTIFICATE} == True ]]; then
 	else
 		echo "Stopping Nginx in order to reload config and run it in the foreground..."
 		service nginx stop
-		
-		echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
-		start_nginx_daemon
 	fi
+}
+
+renew_certificates() {
+	echo "Checking if certificates needs to be renewed..."
+	certbot renew --dry-run
+}
+
+# Starting point
+if [[ ${DEV_MODE} == True ]]; then
+	echo "DEV_MODE = True, so not downloading any certificate from LetsEncrypt"
 else
-	echo "Running Nginx on ${DOMAIN_NAME} without downloading new certificate"
-	start_nginx_daemon 
+	if [[ -d "$LETSENCRYPT_BASE_PATH/live/${DOMAIN_NAME}" ]]; then
+		echo "Certificate already exists in $LETSENCRYPT_BASE_PATH/live/${DOMAIN_NAME}"
+		renew_certificates
+	else
+		echo "No certificate exists for doman: ${DOMAIN_NAME}"
+		download_certificates
+	fi
 fi
 
+
+start_nginx_daemon
