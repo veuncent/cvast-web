@@ -31,12 +31,16 @@ if [[ ${GET_NEW_CERTIFICATE} == True ]]; then
 		-d ${DOMAIN_NAME} \
 		${ADDITIONAL_CERTBOT_PARAMS}
 	
-	echo "Stopping Nginx in order to reload config and run it in the foreground..."
-	service nginx stop
-	
-	echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
-	exec nginx -g 'daemon off;'
-	
+	if [[ $? != 0 ]]; then
+		echo "Failed to download certificate with Certbot, exiting..."
+		exit 1
+	else
+		echo "Stopping Nginx in order to reload config and run it in the foreground..."
+		service nginx stop
+		
+		echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
+		exec nginx -g 'daemon off;'
+	fi
 else
 	echo "Running Nginx on ${DOMAIN_NAME} without downloading new certificate"
 	exec nginx -g 'daemon off;' 
