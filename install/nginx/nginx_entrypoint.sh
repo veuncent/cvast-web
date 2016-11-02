@@ -2,20 +2,26 @@
 
 # For Letsencrypt / Certbot verification
 LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+NGINX_DEFAULT_CONF=/etc/nginx/conf.d/default.conf
 
-# Set name of Django container
-echo "Initializing NginX to run on ${DOMAIN_NAME} and serve as reverse proxy for ${DJANGO_HOST}..."
-sed -i "s/<django_host>/${DJANGO_HOST}/g" /etc/nginx/conf.d/default.conf
-sed -i "s/<domain_name>/${DOMAIN_NAME}/g" /etc/nginx/conf.d/default.conf
+start_nginx_daemon() {
+	cp ${INSTALL_DIR}/default.conf ${NGINX_DEFAULT_CONF}
+	
+	# Set name of host and Django container
+	echo "Initializing NginX to run on ${DOMAIN_NAME} and serve as reverse proxy for ${DJANGO_HOST}..."
+	sed -i "s/<django_host>/${DJANGO_HOST}/g" ${NGINX_DEFAULT_CONF}
+	sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
+
+	exec nginx -g 'daemon off;'
+}
 
 
 if [[ ${GET_NEW_CERTIFICATE} == True ]]; then
 	echo "GET_NEW_CERTIFICATE = True, so downloading new certificate from LetsEncrypt"
-		
-	# Temporary dummy certs so Nginx will startup without complaining
-	mkdir -p /etc/letsencrypt/live/${DOMAIN_NAME}
-	cp ${INSTALL_DIR}/fullchain.pem /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem;
-	cp ${INSTALL_DIR}/privkey.pem /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem;
+
+	# Http-only nginx conf
+	cp ${INSTALL_DIR}/nginx_http_only.conf ${NGINX_DEFAULT_CONF}
+	sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
 	
 	mkdir -p /var/www/${DOMAIN_NAME}
 	
@@ -39,10 +45,10 @@ if [[ ${GET_NEW_CERTIFICATE} == True ]]; then
 		service nginx stop
 		
 		echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
-		exec nginx -g 'daemon off;'
+		start_nginx_daemon
 	fi
 else
 	echo "Running Nginx on ${DOMAIN_NAME} without downloading new certificate"
-	exec nginx -g 'daemon off;' 
+	start_nginx_daemon 
 fi
 
