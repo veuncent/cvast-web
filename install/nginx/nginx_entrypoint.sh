@@ -31,6 +31,8 @@ if [[ ${GET_NEW_CERTIFICATE} == True ]]; then
 	echo "Starting Certbot to download certificate"
 	certbot certonly \
 		--agree-tos \
+		--text \
+		--non-interactive \
 		--email ${LETSENCRYPT_EMAIL} \
 		--webroot \
 		-w /var/www/${DOMAIN_NAME} \
