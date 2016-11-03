@@ -8,17 +8,6 @@ LETSENCRYPT_BASE_PATH=/etc/letsencrypt
 NGINX_DEFAULT_CONF=/etc/nginx/conf.d/default.conf
 NGINX_ROOT=/var/www
 
-start_nginx_daemon() {
-	cp ${INSTALL_DIR}/default.conf ${NGINX_DEFAULT_CONF}
-	
-	# Set name of host and Django container
-	echo "Initializing NginX to run on ${DOMAIN_NAME} and serve as reverse proxy for ${DJANGO_HOST}..."
-	sed -i "s/<django_host>/${DJANGO_HOST}/g" ${NGINX_DEFAULT_CONF}
-	sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
-
-	echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
-	exec nginx -g 'daemon off;'
-}
 
 download_certificates() {
 	echo "Downloading new certificate from LetsEncrypt..."
@@ -76,4 +65,14 @@ else
 	cp ${INSTALL_DIR}/robots_private.txt ${NGINX_ROOT}/robots.txt
 fi
 
-start_nginx_daemon
+
+### Run Nginx server
+cp ${INSTALL_DIR}/default.conf ${NGINX_DEFAULT_CONF}
+
+# Set name of host and Django container
+echo "Initializing NginX to run on ${DOMAIN_NAME} and serve as reverse proxy for ${DJANGO_HOST}..."
+sed -i "s/<django_host>/${DJANGO_HOST}/g" ${NGINX_DEFAULT_CONF}
+sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
+
+echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
+exec nginx -g 'daemon off;'
