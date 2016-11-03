@@ -14,6 +14,8 @@ ENV INSTALL_DIR=/install
 COPY install/nginx/nginx.conf ${INSTALL_DIR}/default.conf
 COPY install/nginx/nginx_http_only.conf ${INSTALL_DIR}/nginx_http_only.conf
 COPY install/nginx/nginx_entrypoint.sh ${INSTALL_DIR}/nginx_entrypoint.sh
+COPY install/nginx/robots_private.txt ${INSTALL_DIR}/robots_private.txt
+COPY install/nginx/robots_public.txt ${INSTALL_DIR}/robots_public.txt
 
 RUN chmod -R 700 ${INSTALL_DIR}
 RUN dos2unix ${INSTALL_DIR}/nginx_entrypoint.sh

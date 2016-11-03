@@ -75,6 +75,7 @@ services:
         - DOMAIN_NAME=build.usfcvast.org
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
         - ADDITIONAL_CERTBOT_PARAMS=--staging
+        - PUBLIC_MODE=False
         
 volumes:
     web-uploaded-files:

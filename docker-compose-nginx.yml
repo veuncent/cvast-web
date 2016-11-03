@@ -33,6 +33,7 @@ services:
         - web
       environment:
         - DJANGO_HOST=web
+        - PUBLIC_MODE=True
         
 volumes:
     web-uploaded-files:

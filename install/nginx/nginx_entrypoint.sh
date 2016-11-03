@@ -6,7 +6,7 @@ set -e
 LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
 LETSENCRYPT_BASE_PATH=/etc/letsencrypt
 NGINX_DEFAULT_CONF=/etc/nginx/conf.d/default.conf
-
+NGINX_ROOT=/var/www
 
 start_nginx_daemon() {
 	cp ${INSTALL_DIR}/default.conf ${NGINX_DEFAULT_CONF}
@@ -25,7 +25,7 @@ download_certificates() {
 	cp ${INSTALL_DIR}/nginx_http_only.conf ${NGINX_DEFAULT_CONF} # Http-only nginx conf
 	sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
 	
-	mkdir -p /var/www/${DOMAIN_NAME}
+	mkdir ${NGINX_ROOT}/${DOMAIN_NAME}
 	
 	echo "Temporarilly starting NginX in order to let Certbot verify something is running on port 80..."
 	service nginx start
@@ -56,6 +56,8 @@ renew_certificates() {
 }
 
 # Starting point
+mkdir -p ${NGINX_ROOT}
+
 if [[ ${DEV_MODE} == True ]]; then
 	echo "DEV_MODE = True, so not downloading any certificate from LetsEncrypt"
 else
@@ -68,5 +70,10 @@ else
 	fi
 fi
 
+if [[ ${PUBLIC_MODE} == True ]]; then
+	cp ${INSTALL_DIR}/robots_public.txt ${NGINX_ROOT}/robots.txt
+else 
+	cp ${INSTALL_DIR}/robots_private.txt ${NGINX_ROOT}/robots.txt
+fi
 
 start_nginx_daemon
