@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e 
+
 # For Letsencrypt / Certbot verification
 LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
 LETSENCRYPT_BASE_PATH=/etc/letsencrypt
