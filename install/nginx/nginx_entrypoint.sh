@@ -31,16 +31,15 @@ download_certificates() {
 	service nginx start
 	
 	echo "Starting Certbot to download certificate"
-	echo "Commented out"
-	# certbot certonly \
-		# --agree-tos \
-		# --text \
-		# --non-interactive \
-		# --email ${LETSENCRYPT_EMAIL} \
-		# --webroot \
-		# -w /var/www/${DOMAIN_NAME} \
-		# -d ${DOMAIN_NAME} \
-		# ${ADDITIONAL_CERTBOT_PARAMS}
+	certbot certonly \
+		--agree-tos \
+		--text \
+		--non-interactive \
+		--email ${LETSENCRYPT_EMAIL} \
+		--webroot \
+		-w /var/www/${DOMAIN_NAME} \
+		-d ${DOMAIN_NAME} \
+		${ADDITIONAL_CERTBOT_PARAMS}
 	
 	if [[ $? != 0 ]]; then
 		echo "Failed to download certificate with Certbot, exiting..."
@@ -53,8 +52,7 @@ download_certificates() {
 
 renew_certificates() {
 	echo "Checking if certificates needs to be renewed..."
-	echo "Commented out"
-	# certbot renew --dry-run
+	certbot renew --dry-run
 }
 
 # Starting point
