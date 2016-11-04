@@ -17,7 +17,8 @@ start_nginx_daemon() {
 	sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
 
 	echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
-	exec nginx -g 'daemon off;'
+	echo "Commented out"
+	# exec nginx -g 'daemon off;'
 }
 
 download_certificates() {
