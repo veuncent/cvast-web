@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x 
 
 ### Global variables and Help
 
@@ -240,6 +241,7 @@ TIMEOUT_COUNTER=0
 HOST_IP=$(/sbin/ip route|awk '/default/ { print $3 }')
 while ! ${SERVER_UP}; do
 	sleep 5
+	set +e
 	echo "+++ Testing if server is up and running... +++"
 	http_code=$(curl -sL -w "%{http_code}\\n" -k https://${HOST_IP} -o /dev/null)
 	if [[ x$http_code == x200 ]]; then
@@ -256,6 +258,7 @@ while ! ${SERVER_UP}; do
 			exit 1
 		fi
 	fi
+	set -e
 done
 echo "Killing all Docker containers..."
 docker-compose kill
