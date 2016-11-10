@@ -58,8 +58,8 @@ renew_certificates() {
 # Starting point
 mkdir -p ${NGINX_ROOT}
 
-if [[ ${DEV_MODE} == True ]]; then
-	echo "DEV_MODE = True, so not downloading any certificate from LetsEncrypt"
+if [[ ${USE_LETSENCRYPT} == True ]]; then
+	echo "USE_LETSENCRYPT = True, so not downloading any certificate from LetsEncrypt"
 else
 	if [[ -d "$LETSENCRYPT_BASE_PATH/live/${DOMAIN_NAME}" ]]; then
 		echo "Certificate already exists in $LETSENCRYPT_BASE_PATH/live/${DOMAIN_NAME}"
