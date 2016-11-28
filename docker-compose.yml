@@ -72,6 +72,7 @@ services:
         - web
       environment:
         - DJANGO_HOST=web
+        - USE_LETSENCRYPT=True
         - DOMAIN_NAME=build.usfcvast.org
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
         - ADDITIONAL_CERTBOT_PARAMS=--staging
