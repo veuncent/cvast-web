@@ -8,14 +8,15 @@ LETSENCRYPT_BASE_PATH=/etc/letsencrypt
 NGINX_DEFAULT_CONF=/etc/nginx/conf.d/default.conf
 NGINX_ROOT=/var/www
 
-start_nginx_daemon() {
+set_nginx_conf() {
 	cp ${INSTALL_DIR}/default.conf ${NGINX_DEFAULT_CONF}
-	
-	# Set name of host and Django container
 	echo "Initializing NginX to run on ${DOMAIN_NAME} and serve as reverse proxy for ${DJANGO_HOST}..."
 	sed -i "s/<django_host>/${DJANGO_HOST}/g" ${NGINX_DEFAULT_CONF}
 	sed -i "s/<domain_name>/${DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
+}
 
+start_nginx_daemon() {
+	set_nginx_conf
 	echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
 	exec nginx -g 'daemon off;'
 }
@@ -60,6 +61,9 @@ mkdir -p ${NGINX_ROOT}
 
 if [[ ! ${USE_LETSENCRYPT} == True ]]; then
 	echo "USE_LETSENCRYPT = False, so not downloading any certificate from LetsEncrypt"
+	echo "Removing letsencrypt certificate paths from  nginx.conf"
+	sed -i "#^ssl_certificate /etc/letsencrypt#d" ${NGINX_DEFAULT_CONF}
+	sed -i "#^ssl_certificate_key /etc/letsencrypt#d" ${NGINX_DEFAULT_CONF}
 else
 	if [[ -d "$LETSENCRYPT_BASE_PATH/live/${DOMAIN_NAME}" ]]; then
 		echo "Certificate already exists in $LETSENCRYPT_BASE_PATH/live/${DOMAIN_NAME}"
