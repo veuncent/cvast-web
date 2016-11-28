@@ -53,7 +53,7 @@ download_certificates() {
 
 renew_certificates() {
 	echo "Checking if certificates needs to be renewed..."
-	certbot renew --dry-run
+	certbot renew
 }
 
 # Starting point
