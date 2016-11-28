@@ -1,2 +1,3 @@
 docker-compose-local.yml
 *.pyc
+cvast_arches/cvast_arches/logs_local/
