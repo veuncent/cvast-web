@@ -62,8 +62,8 @@ mkdir -p ${NGINX_ROOT}
 if [[ ! ${USE_LETSENCRYPT} == True ]]; then
 	echo "USE_LETSENCRYPT = False, so not downloading any certificate from LetsEncrypt"
 	echo "Removing letsencrypt certificate paths from  nginx.conf"
-	sed -i "#^ssl_certificate /etc/letsencrypt#d" ${NGINX_DEFAULT_CONF}
-	sed -i "#^ssl_certificate_key /etc/letsencrypt#d" ${NGINX_DEFAULT_CONF}
+	sed -i "\#ssl_certificate /etc/letsencrypt#d" ${NGINX_DEFAULT_CONF}
+	sed -i "\#ssl_certificate_key /etc/letsencrypt#d" ${NGINX_DEFAULT_CONF}
 else
 	if [[ -d "$LETSENCRYPT_BASE_PATH/live/${DOMAIN_NAME}" ]]; then
 		echo "Certificate already exists in $LETSENCRYPT_BASE_PATH/live/${DOMAIN_NAME}"
