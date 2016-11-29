@@ -9,9 +9,11 @@ RUN apt-get update -y &&\
 	apt-get install -y dos2unix &&\
 	apt-get install -y certbot -t jessie-backports
 	
+RUN apt-get install -y curl
+	
 ENV INSTALL_DIR=/install
 
-COPY install/nginx/nginx.conf ${INSTALL_DIR}/default.conf
+COPY install/nginx/nginx_strict_https.conf ${INSTALL_DIR}/nginx_strict_https.conf
 COPY install/nginx/nginx_http_only.conf ${INSTALL_DIR}/nginx_http_only.conf
 COPY install/nginx/nginx_entrypoint.sh ${INSTALL_DIR}/nginx_entrypoint.sh
 COPY install/nginx/robots_private.txt ${INSTALL_DIR}/robots_private.txt
