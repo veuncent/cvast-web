@@ -88,6 +88,10 @@ array_contains_element() {
 	return 1
 }
 
+kill_all_containers() {
+	echo "Killing all Docker containers..."
+	docker-compose kill
+}
 
 display_help() {
 	echo "${HELP_TEXT}"
@@ -256,15 +260,15 @@ while ! ${SERVER_UP}; do
 			echo "Connection timed out, which means something is wrong."
 			echo "Containers currently running:"
 			docker ps
+			kill_all_containers
 			echo "Exiting build..."
 			exit 1
 		fi
 	fi
 	set -e
 done
-echo "Killing all Docker containers..."
-docker-compose kill
 
+kill_all_containers
 
 
 ### Push all images to Docker Private Registry
