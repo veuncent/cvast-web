@@ -13,6 +13,8 @@ RUN apt-get install -y curl
 	
 ENV INSTALL_DIR=/install
 
+COPY install/nginx/localhost/fullchain.pem ${INSTALL_DIR}/fullchain.pem
+COPY install/nginx/localhost/privkey.pem ${INSTALL_DIR}/privkey.pem
 COPY install/nginx/nginx_strict_https.conf ${INSTALL_DIR}/nginx_strict_https.conf
 COPY install/nginx/nginx_http_only.conf ${INSTALL_DIR}/nginx_http_only.conf
 COPY install/nginx/nginx_entrypoint.sh ${INSTALL_DIR}/nginx_entrypoint.sh
