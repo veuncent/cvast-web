@@ -67,26 +67,30 @@ services:
         - web-static:/www/static
         - web-log:/var/log/nginx
         - web-letsencrypt:/etc/letsencrypt
+        - nginx-conf:/etc/nginx/conf.d/
+        - nginx-root:/var/www
       depends_on:
         - web
       environment:
         - DJANGO_HOST=web
-        - USE_LETSENCRYPT=True
-        - DOMAIN_NAME=build.usfcvast.org
-        - LETSENCRYPT_EMAIL=vmeijer@usf.edu
+        - DOMAIN_NAMES=build.usfcvast.org
         - PUBLIC_MODE=False
     
     letsencrypt:
-        image: cvast/cvast-letsencrypt:latest
-        volumes:
-            - web-letsencrypt:/etc/letsencrypt
-            - nginx-conf.d:/etc/nginx/conf.d/
-            - web-log:/var/log/letsencrypt
-        environment:
-          -  FORCE_NON_AWS=True 
+      image: cvast/cvast-letsencrypt:latest
+      volumes:
+        - web-letsencrypt:/etc/letsencrypt
+        - nginx-conf:/etc/nginx/conf.d/
+        - letsencrypt:/letsencrypt
+        - nginx-root:/var/www
+      environment:
+        - NGINX_CONTAINER=nginx
+        - FORCE_NON_AWS=True
+        - LETSENCRYPT_EMAIL=vmeijer@usf.edu
+        - DOMAIN_NAMES=build.usfcvast.org
+        - ADDITIONAL_CERTBOT_PARAMS=--staging
         
 volumes:
-    web-uploaded-files:
     web-log:
     web-static:
     web-letsencrypt:
@@ -96,3 +100,6 @@ volumes:
     elasticsearch-data:
     elasticsearch-log:
     elasticsearch-config:
+    nginx-conf:
+    nginx-root:
+    letsencrypt:
