@@ -253,7 +253,10 @@ while ! ${SERVER_UP}; do
 	else 
 		TIMEOUT_COUNTER=$((TIMEOUT_COUNTER + 1))
 		if [[ ${TIMEOUT_COUNTER} == 36 ]]; then
-			echo "Connection timed out, which means something is wrong. Exiting build..."
+			echo "Connection timed out, which means something is wrong."
+			echo "Containers currently running:"
+			docker ps
+			echo "Exiting build..."
 			exit 1
 		fi
 	fi
