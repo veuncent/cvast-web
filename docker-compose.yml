@@ -66,7 +66,7 @@ services:
       volumes:
         - web-static:/www/static
         - web-log:/var/log/nginx
-        - web-letsencrypt:/etc/letsencrypt
+        - nginx-letsencrypt:/etc/letsencrypt
         - nginx-conf:/etc/nginx/conf.d/
         - nginx-root:/var/www
       depends_on:
@@ -79,10 +79,10 @@ services:
     letsencrypt:
       image: cvast/cvast-letsencrypt:latest
       volumes:
-        - web-letsencrypt:/etc/letsencrypt
+        - nginx-letsencrypt:/etc/letsencrypt
         - nginx-conf:/etc/nginx/conf.d/
-        - letsencrypt:/letsencrypt
         - nginx-root:/var/www
+        - letsencrypt:/letsencrypt
       environment:
         - NGINX_CONTAINER=nginx
         - FORCE_NON_AWS=True
@@ -91,9 +91,9 @@ services:
         - ADDITIONAL_CERTBOT_PARAMS=--staging
         
 volumes:
+    web-uploaded-files:
     web-log:
     web-static:
-    web-letsencrypt:
     postgres-data:
     postgres-log:
     postgres-config:
@@ -102,4 +102,5 @@ volumes:
     elasticsearch-config:
     nginx-conf:
     nginx-root:
+    nginx-letsencrypt:
     letsencrypt:
