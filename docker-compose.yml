@@ -88,7 +88,6 @@ services:
         - FORCE_NON_AWS=True
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
         - DOMAIN_NAMES=build.usfcvast.org
-        - ADDITIONAL_CERTBOT_PARAMS=--staging
         
 volumes:
     web-uploaded-files:
