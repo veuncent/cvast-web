@@ -41,7 +41,7 @@ services:
       environment:
         - DJANGO_HOST=web
         - DOMAIN_NAMES=build.usfcvast.org
-        - PUBLIC_MODE=False
+        - PUBLIC_MODE=True
         
     letsencrypt:
       image: cvast/cvast-letsencrypt:1.0
