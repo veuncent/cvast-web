@@ -24,18 +24,42 @@ services:
     nginx:
       restart: always
       image: cvast/cvast-nginx:$PROD_VERSION
+      build: 
+        context: .
+        dockerfile: ./Dockerfile-nginx
       ports:
         - '80:80'
         - '443:443'
       volumes:
         - web-static:/www/static
+        - web-log:/var/log/nginx
+        - nginx-letsencrypt:/etc/letsencrypt
+        - nginx-conf:/etc/nginx/conf.d/
+        - nginx-root:/var/www
       depends_on:
         - web
       environment:
         - DJANGO_HOST=web
-        - PUBLIC_MODE=True
+        - DOMAIN_NAMES=build.usfcvast.org
+        - PUBLIC_MODE=False
+        
+    letsencrypt:
+      image: cvast/cvast-letsencrypt:1.0
+      volumes:
+        - nginx-letsencrypt:/etc/letsencrypt
+        - nginx-conf:/etc/nginx/conf.d/
+        - nginx-root:/var/www
+        - letsencrypt:/letsencrypt
+      environment:
+        - NGINX_CONTAINER=nginx
+        - LETSENCRYPT_EMAIL=vmeijer@usf.edu
+        - DOMAIN_NAMES=cvast.usf.edu
         
 volumes:
     web-uploaded-files:
     web-log:
     web-static:
+    nginx-conf:
+    nginx-root:
+    nginx-letsencrypt:
+    letsencrypt:
