@@ -77,7 +77,7 @@ services:
         - PUBLIC_MODE=False
     
     letsencrypt:
-      image: cvast/cvast-letsencrypt:latest
+      image: cvast/cvast-letsencrypt:1
       volumes:
         - nginx-letsencrypt:/etc/letsencrypt
         - nginx-conf:/etc/nginx/conf.d/
