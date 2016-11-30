@@ -2,7 +2,7 @@
 
 set -- ${DOMAIN_NAMES}
 PRIMARY_DOMAIN_NAME=$1
-LETSENCRYPT_BASEDIR=/etc/letsencrypt
+LETSENCRYPT_BASEDIR=/letsencrypt/config
 LETSENCRYPT_LOCALHOST_DIR=${LETSENCRYPT_BASEDIR}/live/localhost
 NGINX_DEFAULT_CONF=/etc/nginx/conf.d/default.conf
 NGINX_ROOT=/var/www
