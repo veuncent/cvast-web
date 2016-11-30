@@ -93,6 +93,11 @@ kill_all_containers() {
 	docker-compose kill
 }
 
+update_docker_images() {
+	echo "Pulling Docker images listed in docker-compose.yml..."
+	docker-compose pull
+}
+
 display_help() {
 	echo "${HELP_TEXT}"
 }
@@ -230,6 +235,7 @@ for app in "${APP_OPTIONS[@]}"; do
 	cleanup_old_image $app
 done
 
+update_docker_images
 
 ### Run all containers (unit tests to be added)
 echo "Starting all Docker containers..."
