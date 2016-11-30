@@ -67,7 +67,7 @@ services:
         - web-static:/www/static
         - web-log:/var/log/nginx
         - nginx-letsencrypt:/etc/letsencrypt
-        - nginx-conf:/etc/nginx/conf.d/
+        - nginx-conf:/etc/nginx/conf.d
         - nginx-root:/var/www
       depends_on:
         - web
@@ -80,7 +80,7 @@ services:
       image: cvast/cvast-letsencrypt:1
       volumes:
         - nginx-letsencrypt:/etc/letsencrypt
-        - nginx-conf:/etc/nginx/conf.d/
+        - nginx-conf:/etc/nginx/conf.d
         - nginx-root:/var/www
         - letsencrypt:/letsencrypt
       environment:
