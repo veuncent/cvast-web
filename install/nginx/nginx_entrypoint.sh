@@ -7,8 +7,23 @@ LETSENCRYPT_LOCALHOST_DIR=${LETSENCRYPT_BASEDIR}/live/localhost
 NGINX_DEFAULT_CONF=/etc/nginx/conf.d/default.conf
 NGINX_ROOT=/var/www
 
+CERTIFICATE_WAIT_TIMEOUT="${CERTIFICATE_WAIT_TIMEOUT:-15}"
 
-start_nginx_daemon() {
+wait_for_certificate() {
+	sleep $CERTIFICATE_WAIT_TIMEOUT
+}
+
+start_nginx_background() {
+    echo "Temporarilly starting NginX in order to let the certificate service verify something is running on port 80..."
+	service nginx start
+}
+
+stop_nginx_background() {
+    echo "Stopping Nginx in order to reload config and run it in the foreground..."
+	service nginx stop
+}
+
+start_nginx_foreground() {
 	echo "Running Nginx on ${DOMAIN_NAME} in the foreground"
 	exec nginx -g 'daemon off;'
 }
@@ -57,4 +72,8 @@ copy_localhost_certificates
 # Environment variable PUBLIC_MODE needs to be explicitly set to True if search enginges should pick this up
 set_search_engine_settings
 
-start_nginx_daemon
+start_nginx_background
+wait_for_certificate
+stop_nginx_background
+
+start_nginx_foreground
