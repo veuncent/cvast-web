@@ -66,9 +66,9 @@ services:
       volumes:
         - web-static:/www/static
         - web-log:/var/log/nginx
-        - nginx-letsencrypt:/etc/letsencrypt
         - nginx-conf:/etc/nginx/conf.d
         - nginx-root:/var/www
+        - letsencrypt-config:/etc/letsencrypt
       depends_on:
         - web
       environment:
@@ -79,10 +79,11 @@ services:
     letsencrypt:
       image: cvast/cvast-letsencrypt:dev
       volumes:
-        - nginx-letsencrypt:/etc/letsencrypt
         - nginx-conf:/etc/nginx/conf.d
         - nginx-root:/var/www
-        - letsencrypt:/letsencrypt
+        - letsencrypt-config:/etc/letsencrypt
+        - letsencrypt-log:/var/log/letsencrypt
+        - letsencrypt-workdir:/var/lib/letsencrypt
       environment:
         - NGINX_CONTAINER=nginx
         - FORCE_NON_AWS=True
@@ -101,5 +102,6 @@ volumes:
     elasticsearch-config:
     nginx-conf:
     nginx-root:
-    nginx-letsencrypt:
-    letsencrypt:
+    letsencrypt-config:
+    letsencrypt-log:
+    letsencrypt-workdir:
