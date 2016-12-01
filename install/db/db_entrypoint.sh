@@ -30,17 +30,17 @@ init_datadir() {
 init_configdir() {
 	echo "Initializing Postgres config dir..."
 	if [[ -d ${PG_CONFIG_VOLUME} ]]; then
-		echo "Copying and overwriting ${PG_CONFIGDIR} to ${PG_CONFIGFILE_VOLUME}"
-		cp -f ${PG_CONFIGFILE} ${PG_CONFIGFILE_VOLUME}
-		echo "Removing ${PG_CONFIGFILE}"
-		rm -f ${PG_CONFIGFILE}
-			
+		if [[ -f PG_CONFIGFILE ]]; then
+			echo "Copying and overwriting ${PG_CONFIGDIR} to ${PG_CONFIGFILE_VOLUME}"
+			cp -f ${PG_CONFIGFILE} ${PG_CONFIGFILE_VOLUME}
+			echo "Removing ${PG_CONFIGFILE}"
+			rm -f ${PG_CONFIGFILE}
+		fi
+		
 		echo "Setting ownership and permissions on ${PG_CONFIGDIR}"
 		chown -R postgres:postgres ${PG_CONFIG_VOLUME}
 		chown root:root ${PG_CONFIGFILE_VOLUME}
-        # chown root:root ${PG_CONFIG_VOLUME}/pg_hba.conf
 		chmod 666 ${PG_CONFIGFILE_VOLUME}
-		# chmod 666 ${PG_CONFIG_VOLUME}/pg_hba.conf
 	else
 		echo "!!! Config volume does not exist !!!"
 		exit 1
