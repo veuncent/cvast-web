@@ -30,7 +30,7 @@ services:
         
     db:
       restart: always
-      image: cvast/cvast-db:jenkins-latest
+      image: cvast/cvast-db:$BUILD_NUMBER
       volumes:
           - postgres-data:/postgres-data
           - postgres-log:/var/log/postgresql
@@ -43,7 +43,7 @@ services:
         
     elasticsearch:
       restart: always
-      image: cvast/cvast-elasticsearch:jenkins-latest
+      image: cvast/cvast-elasticsearch:$BUILD_NUMBER
       volumes:
         - elasticsearch-data:/elasticsearch-data
         - elasticsearch-log:/elasticsearch-log
