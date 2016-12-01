@@ -15,6 +15,15 @@ ENV PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
 ENV PG_CONFIGFILE=${PG_CONFIGDIR}/postgresql.conf
 ENV PG_HBA_CONFIGFILE=${PG_CONFIGDIR}/pg_hba.conf
 
+# Paths for volumes mounted to host
+ENV PG_DATA_VOLUME=/postgres-data
+ENV PG_CONFIG_VOLUME=/postgres-config
+ENV PG_CONFIGFILE_VOLUME=${PG_CONFIG_VOLUME}/postgresql.conf
+ENV PG_LOG_VOLUME=${PG_LOGDIR}
+ENV INSTALL_DIR=/install
+ENV IS_CLEAN_ENV=false
+ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin
+
 ENV ES_HOST=localhost
 
 ENV WEB_ROOT=/cvast_web
@@ -28,6 +37,8 @@ RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LC_LANG en_US.UTF-8
 ENV LC_LANGUAGE en_US.UTF-8
+
+
 
 # Install dependencies
 RUN apt-get update -y &&\
@@ -144,7 +155,6 @@ RUN python manage.py packages -o setup_elasticsearch
 # Run database scripts & arches hip resources
 RUN ${PG_BINARY} start &&\
 	python manage.py packages -o start_elasticsearch &&\
-	# Wait for elasticsearch to start
 	sleep 10 &&\ 
 	python manage.py packages -o install &&\
 	python manage.py packages -o load_concept_scheme -s ${WEB_APP_NAME}/source_data/concepts/authority_files &&\
@@ -160,15 +170,6 @@ RUN rm -rf /tmp/*
 
 USER root
 WORKDIR /
-
-# Path for volumes mounted to host
-ENV PG_DATA_VOLUME=/postgres-data
-ENV PG_CONFIG_VOLUME=/postgres-config
-ENV PG_CONFIGFILE_VOLUME=${PG_CONFIG_VOLUME}/postgresql.conf
-ENV PG_LOG_VOLUME=${PG_LOGDIR}
-ENV INSTALL_DIR=/install
-ENV IS_CLEAN_ENV=false
-ENV PG_BINDIR=/usr/lib/postgresql/${PG_VERSION}/bin
 
 # Remove obsolete folders
 RUN rm -rf /${WEB_ROOT}
