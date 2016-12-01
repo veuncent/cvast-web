@@ -2,10 +2,12 @@
 
 set -- ${DOMAIN_NAMES}
 PRIMARY_DOMAIN_NAME=$1
-LETSENCRYPT_BASEDIR=/letsencrypt/config
-LETSENCRYPT_LOCALHOST_DIR=${LETSENCRYPT_BASEDIR}/live/localhost
-NGINX_DEFAULT_CONF=/etc/nginx/conf.d/default.conf
-NGINX_ROOT=/var/www
+LETSENCRYPT_BASEDIR="${LETSENCRYPT_BASEDIR:-/letsencrypt/config}"
+LETSENCRYPT_LIVEDIR=${LETSENCRYPT_BASEDIR}/live
+LETSENCRYPT_LOCALHOST_DIR=${LETSENCRYPT_LIVEDIR}/localhost
+LETSENCRYPT_DOMAIN_DIR=${LETSENCRYPT_LIVEDIR}/${PRIMARY_DOMAIN_NAME}
+NGINX_DEFAULT_CONF="${NGINX_DEFAULT_CONF:-/etc/nginx/conf.d/default.conf}"
+NGINX_ROOT="${NGINX_ROOT:-/var/www}"
 
 CERTIFICATE_WAIT_TIMEOUT="${CERTIFICATE_WAIT_TIMEOUT:-15}"
 
@@ -46,6 +48,10 @@ set_strict_https_nginx_conf() {
 	sed -i "s/<primary_domain_name>/${PRIMARY_DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
 }
 
+set_nginx_certificate_paths() {
+	sed -i "s#${LETSENCRYPT_LOCALHOST_DIR}#${LETSENCRYPT_DOMAIN_DIR}#g" ${NGINX_DEFAULT_CONF}
+}
+
 copy_localhost_certificates() {
 	mkdir -p ${LETSENCRYPT_LOCALHOST_DIR}
 	cp ${INSTALL_DIR}/fullchain.pem ${LETSENCRYPT_LOCALHOST_DIR}
@@ -75,5 +81,6 @@ set_search_engine_settings
 start_nginx_background
 wait_for_certificate
 stop_nginx_background
+set_nginx_certificate_paths
 
 start_nginx_foreground
