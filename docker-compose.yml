@@ -72,7 +72,7 @@ services:
       depends_on:
         - web
       environment:
-        - DJANGO_HOST=web
+        - WEB_CONTAINER=web
         - DOMAIN_NAMES=build.usfcvast.org
         - PUBLIC_MODE=False
     

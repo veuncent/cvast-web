@@ -42,8 +42,8 @@ set_search_engine_settings() {
 set_strict_https_nginx_conf() {
 	cp ${INSTALL_DIR}/nginx_strict_https.conf ${NGINX_DEFAULT_CONF}
 	echo "Initializing NginX to run on: ${DOMAIN_NAMES}"
-	echo "... and serve as reverse proxy for Docker container: ${DJANGO_HOST}..."
-	sed -i "s/<django_host>/${DJANGO_HOST}/g" ${NGINX_DEFAULT_CONF}
+	echo "... and serve as reverse proxy for Docker container: ${WEB_CONTAINER}..."
+	sed -i "s/<web_container>/${WEB_CONTAINER}/g" ${NGINX_DEFAULT_CONF}
 	sed -i "s/<domain_names>/${DOMAIN_NAMES}/g" ${NGINX_DEFAULT_CONF}
 	sed -i "s/<primary_domain_name>/${PRIMARY_DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
 }
@@ -69,7 +69,7 @@ check_variable() {
 
 #### Starting point
 check_variable "${DOMAIN_NAMES}" DOMAIN_NAMES
-check_variable "${DJANGO_HOST}" DJANGO_HOST
+check_variable "${WEB_CONTAINER}" WEB_CONTAINER
 
 set_strict_https_nginx_conf
 copy_localhost_certificates
