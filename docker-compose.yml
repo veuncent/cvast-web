@@ -85,10 +85,12 @@ services:
         - letsencrypt-log:/var/log/letsencrypt
         - letsencrypt-workdir:/var/lib/letsencrypt
       environment:
-        - NGINX_CONTAINER=nginx
-        - FORCE_NON_AWS=True
+        - FORCE_NON_ELB=True
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
         - DOMAIN_NAMES=build.usfcvast.org
+        - PRODUCTION_MODE=False
+        # - PRIVATE_KEY_PATH=
+
         
 volumes:
     web-uploaded-files:
