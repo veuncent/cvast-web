@@ -49,6 +49,7 @@ set_strict_https_nginx_conf() {
 }
 
 set_nginx_certificate_paths() {
+	echo "Setting NginX certificate paths to use certificates in ${LETSENCRYPT_DOMAIN_DIR}..."
 	sed -i "s#${LETSENCRYPT_LOCALHOST_DIR}#${LETSENCRYPT_DOMAIN_DIR}#g" ${NGINX_DEFAULT_CONF}
 }
 
