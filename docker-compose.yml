@@ -84,6 +84,7 @@ services:
         - letsencrypt-config:/etc/letsencrypt
         - letsencrypt-log:/var/log/letsencrypt
         - letsencrypt-workdir:/var/lib/letsencrypt
+      command: get_certificate
       environment:
         - FORCE_NON_ELB=True
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
