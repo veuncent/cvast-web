@@ -17,7 +17,11 @@ def get_env_variable(var_name):
 MODE = get_env_variable('DJANGO_MODE') #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
 DEBUG = ast.literal_eval(get_env_variable('DJANGO_DEBUG'))
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['127.0.0.1','localhost', 'cvast.usf.edu', 'acc-cvast-arches-web-loadb-1026040265.us-east-1.elb.amazonaws.com', 'test-cvast-arches-web-loadb-1229376776.us-east-1.elb.amazonaws.com', 'feature-cvast-arches-web-loadb-868844127.us-east-1.elb.amazonaws.com']
+DOMAIN_NAMES = get_env_variable('DOMAIN_NAMES')
+ALLOWED_HOSTS = []
+if DOMAIN_NAMES:
+    for domain in DOMAIN_NAMES:
+        ALLOWED_HOSTS.append(domain)
 
 # Fix for AWS ELB returning false bad health: ALLOWS_HOSTS did not allow ELB's private ip
 EC2_PRIVATE_IP  =   None
@@ -35,6 +39,7 @@ except requests.exceptions.RequestException:
 if EC2_PUBLIC_HOSTNAME:
     ALLOWED_HOSTS.append(EC2_PUBLIC_HOSTNAME)
 
+print ALLOWED_HOSTS
 
 STATIC_ROOT = '/static_root'
 
@@ -61,14 +66,14 @@ ELASTICSEARCH_HOSTS = [
 ROOT_URLCONF = '%s.urls' % (PACKAGE_NAME)
 INSTALLED_APPS = INSTALLED_APPS + (PACKAGE_NAME,)
 STATICFILES_DIRS = (
-		os.path.join(PACKAGE_ROOT, 'media'),
-		os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'media'), # Added by Vincent: cvast_arches needed this, but couldn't find it
+        os.path.join(PACKAGE_ROOT, 'media'),
+        os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'media'), # Added by Vincent: cvast_arches needed this, but couldn't find it
 ) + STATICFILES_DIRS
 TEMPLATE_DIRS = (
-		os.path.join(PACKAGE_ROOT, 'templates'),
-		os.path.join(PACKAGE_ROOT, 'templatetags'),
-		os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates'), # Added by Vincent: cvast_arches needed this, but couldn't find it
-	) + TEMPLATE_DIRS
+        os.path.join(PACKAGE_ROOT, 'templates'),
+        os.path.join(PACKAGE_ROOT, 'templatetags'),
+        os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates'), # Added by Vincent: cvast_arches needed this, but couldn't find it
+    ) + TEMPLATE_DIRS
 RESOURCE_MODEL = {'default': 'arches_hip.models.resource.Resource'}
 APP_NAME = 'USF CVAST'
 PACKAGE_VALIDATOR = 'cvast_arches.source_data.validation.HIP_Validator'
@@ -200,7 +205,7 @@ def RESOURCE_TYPE_CONFIGS():
     }
 
 ELASTICSEARCH_CONNECTION_OPTIONS = {'timeout': 600}
-	
+    
 EXPORT_CONFIG = ''
 
 DATE_SEARCH_ENTITY_TYPES = ['BEGINNING_OF_EXISTENCE_TYPE.E55', 'END_OF_EXISTENCE_TYPE.E55']
@@ -209,13 +214,13 @@ RESOURCE_GRAPH_LOCATIONS = (
     # Put strings here, like "/home/data/resource_graphs" or "C:/data/resource_graphs".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	os.path.join(PACKAGE_ROOT, 'source_data', 'resource_graphs'),
+    os.path.join(PACKAGE_ROOT, 'source_data', 'resource_graphs'),
 )
 CONCEPT_SCHEME_LOCATIONS = (
     # Put strings here, like "/home/data/authority_files" or "C:/data/authority_files".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	
+    
     # 'absolute/path/to/authority_files',
     # os.path.join(PACKAGE_ROOT, 'source_data', 'sample_data', 'concepts', 'sample_authority_files'),
 )
@@ -263,9 +268,9 @@ LOGGING = {
 DATE_PARSING_FORMAT = ['%B %d, %Y', '%Y-%m-%d', '%Y-%m-%d %H:%M:%S']
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-	'cvast_arches.utils.context_processors.media_settings',
+    'cvast_arches.utils.context_processors.media_settings',
 ) + TEMPLATE_CONTEXT_PROCESSORS
-		
+        
 try:
     from settings_local import *
 except ImportError:
