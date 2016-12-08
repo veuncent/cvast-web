@@ -7,7 +7,9 @@ LETSENCRYPT_LIVEDIR=${LETSENCRYPT_BASEDIR}/live
 LETSENCRYPT_LOCALHOST_DIR=${LETSENCRYPT_LIVEDIR}/localhost
 LETSENCRYPT_DOMAIN_DIR=${LETSENCRYPT_LIVEDIR}/${PRIMARY_DOMAIN_NAME}
 NGINX_DEFAULT_CONF="${NGINX_DEFAULT_CONF:-/etc/nginx/conf.d/default.conf}"
-NGINX_ROOT="${NGINX_ROOT:-/var/www}"
+WEB_ROOT="${WEB_ROOT:-/var/www}"
+FULLCHAIN_FILENAME=fullchain.pem
+PRIVATE_KEY_FILENAME=privkey.pem
 
 CERTIFICATE_WAIT_TIMEOUT="${CERTIFICATE_WAIT_TIMEOUT:-15}"
 
@@ -31,11 +33,11 @@ start_nginx_foreground() {
 }
 
 set_search_engine_settings() {
-	mkdir -p ${NGINX_ROOT}
+	mkdir -p ${WEB_ROOT}
 	if [[ ${PUBLIC_MODE} == True ]]; then
-		cp ${INSTALL_DIR}/robots_public.txt ${NGINX_ROOT}/robots.txt
+		cp ${INSTALL_DIR}/robots_public.txt ${WEB_ROOT}/robots.txt
 	else 
-		cp ${INSTALL_DIR}/robots_private.txt ${NGINX_ROOT}/robots.txt
+		cp ${INSTALL_DIR}/robots_private.txt ${WEB_ROOT}/robots.txt
 	fi
 }
 
@@ -49,14 +51,18 @@ set_strict_https_nginx_conf() {
 }
 
 set_nginx_certificate_paths() {
-	echo "Setting NginX certificate paths to use certificates in ${LETSENCRYPT_DOMAIN_DIR}..."
+	echo "Setting NginX certificate conf to use certificates in ${LETSENCRYPT_DOMAIN_DIR}..."
 	sed -i "s#${LETSENCRYPT_LOCALHOST_DIR}#${LETSENCRYPT_DOMAIN_DIR}#g" ${NGINX_DEFAULT_CONF}
 }
 
 copy_localhost_certificates() {
 	mkdir -p ${LETSENCRYPT_LOCALHOST_DIR}
-	cp ${INSTALL_DIR}/fullchain.pem ${LETSENCRYPT_LOCALHOST_DIR}
-	cp ${INSTALL_DIR}/privkey.pem ${LETSENCRYPT_LOCALHOST_DIR}
+	if [[ ! -f ${LETSENCRYPT_LOCALHOST_DIR}/${FULLCHAIN_FILENAME} ]]; then
+		cp ${INSTALL_DIR}/${FULLCHAIN_FILENAME} ${LETSENCRYPT_LOCALHOST_DIR}
+	fi
+	if [[ ! -f ${LETSENCRYPT_LOCALHOST_DIR}/${PRIVATE_KEY_FILENAME} ]]; then
+		cp ${INSTALL_DIR}/${PRIVATE_KEY_FILENAME} ${LETSENCRYPT_LOCALHOST_DIR}
+	fi	
 }
 
 check_variable() {
