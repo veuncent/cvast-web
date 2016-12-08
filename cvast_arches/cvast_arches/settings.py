@@ -17,23 +17,19 @@ def get_env_variable(var_name):
 MODE = get_env_variable('DJANGO_MODE') #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
 DEBUG = ast.literal_eval(get_env_variable('DJANGO_DEBUG'))
 TEMPLATE_DEBUG = DEBUG
-DOMAIN_NAMES = get_env_variable('DOMAIN_NAMES')
-ALLOWED_HOSTS = []
-if DOMAIN_NAMES:
-    for domain in DOMAIN_NAMES:
-        ALLOWED_HOSTS.append(domain)
+ALLOWED_HOSTS = get_env_variable('DOMAIN_NAMES').split()
 
 # Fix for AWS ELB returning false bad health: ALLOWS_HOSTS did not allow ELB's private ip
-EC2_PRIVATE_IP  =   None
+EC2_PRIVATE_IP = None
 try:
-    EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout = 0.01).text
+    EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
 except requests.exceptions.RequestException:
     pass
 if EC2_PRIVATE_IP:
     ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
-EC2_PUBLIC_HOSTNAME  =   None
+EC2_PUBLIC_HOSTNAME = None
 try:
-    EC2_PUBLIC_HOSTNAME = requests.get('http://169.254.169.254/latest/meta-data/public-hostname', timeout = 0.01).text
+    EC2_PUBLIC_HOSTNAME = requests.get('http://169.254.169.254/latest/meta-data/public-hostname', timeout=0.01).text
 except requests.exceptions.RequestException:
     pass
 if EC2_PUBLIC_HOSTNAME:
@@ -205,7 +201,7 @@ def RESOURCE_TYPE_CONFIGS():
     }
 
 ELASTICSEARCH_CONNECTION_OPTIONS = {'timeout': 600}
-    
+
 EXPORT_CONFIG = ''
 
 DATE_SEARCH_ENTITY_TYPES = ['BEGINNING_OF_EXISTENCE_TYPE.E55', 'END_OF_EXISTENCE_TYPE.E55']
@@ -220,7 +216,7 @@ CONCEPT_SCHEME_LOCATIONS = (
     # Put strings here, like "/home/data/authority_files" or "C:/data/authority_files".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    
+
     # 'absolute/path/to/authority_files',
     # os.path.join(PACKAGE_ROOT, 'source_data', 'sample_data', 'concepts', 'sample_authority_files'),
 )
@@ -270,7 +266,7 @@ DATE_PARSING_FORMAT = ['%B %d, %Y', '%Y-%m-%d', '%Y-%m-%d %H:%M:%S']
 TEMPLATE_CONTEXT_PROCESSORS = (
     'cvast_arches.utils.context_processors.media_settings',
 ) + TEMPLATE_CONTEXT_PROCESSORS
-        
+
 try:
     from settings_local import *
 except ImportError:
