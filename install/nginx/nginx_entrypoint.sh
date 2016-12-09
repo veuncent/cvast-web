@@ -71,7 +71,7 @@ check_variable() {
 	if [[ -z ${VARIABLE_VALUE} ]] || [[ "${VARIABLE_VALUE}" == "" ]]; then
 		echo "ERROR! Environment variable ${VARIABLE_NAME} not specified. Exiting..."
 		exit 1
-	fi	
+	fi
 }
 
 #### Starting point
