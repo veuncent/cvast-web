@@ -72,7 +72,7 @@ check_variable() {
 		echo "ERROR! Environment variable ${VARIABLE_NAME} not specified. Exiting..."
 		exit 1
 	fi	
-}
+} 
 
 #### Starting point
 check_variable "${DOMAIN_NAMES}" DOMAIN_NAMES
