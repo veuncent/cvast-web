@@ -1,0 +1,159 @@
+FROM ubuntu:14.04
+USER root
+
+# Setting default environment variables
+ENV PG_VERSION=9.4
+ENV PG_DBNAME=cvast_arches
+ENV PG_HOST=localhost
+ENV PG_PORT=5432
+ENV PG_PASSWORD=postgis
+ENV PG_HOME=/var/lib/postgresql
+ENV PG_DATADIR=${PG_HOME}/${PG_VERSION}/main
+ENV PG_BINARY=/etc/init.d/postgresql
+ENV PG_LOGDIR=/var/log/postgresql
+ENV PG_CONFIGDIR=/etc/postgresql/${PG_VERSION}/main
+ENV PG_CONFIGFILE=${PG_CONFIGDIR}/postgresql.conf
+ENV PG_HBA_CONFIGFILE=${PG_CONFIGDIR}/pg_hba.conf
+
+ENV ES_HOST=localhost
+
+ENV WEB_ROOT=/cvast_web
+ENV WEB_APP_NAME=cvast_arches
+
+ENV DJANGO_MODE=DEV
+ENV DJANGO_DEBUG=True
+
+# Setting locale variables for database
+RUN locale-gen en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV LC_LANG en_US.UTF-8
+ENV LC_LANGUAGE en_US.UTF-8
+
+# Install dependencies
+RUN apt-get update -y &&\
+	apt-get install -y wget &&\
+	apt-get install -y build-essential &&\
+	apt-get install -y libxml2-dev &&\
+	apt-get install -y libjson0-dev &&\
+	apt-get install -y libproj-dev &&\
+	apt-get install -y xsltproc docbook-xsl &&\
+	apt-get install -y docbook-mathml &&\
+	apt-get install -y libgdal1-dev &&\
+	apt-get install -y openjdk-7-jdk &&\
+	apt-get install -y python-setuptools &&\
+	apt-get install -y python-dev &&\
+	apt-get install -y libffi-dev &&\
+	apt-get install -y libpq-dev &&\
+	apt-get install -y dos2unix &&\
+	easy_install pip
+
+# Needed for postgres-9.4
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get update -y
+
+# Install postgres
+RUN apt-get install -y postgresql-9.4
+RUN apt-get install -y postgresql-server-dev-9.4
+RUN apt-get install -y postgresql-contrib-9.4
+
+
+
+# Manage postgres credentials and settings	
+COPY ./install/db/postgresql.conf ${PG_CONFIGFILE}
+COPY ./install/db/pg_hba.conf ${PG_HBA_CONFIGFILE}
+
+USER postgres
+RUN ${PG_BINARY} start &&\
+	psql -d postgres -c "ALTER DATABASE postgres set timezone to 'US/Eastern';" &&\
+	${PG_BINARY} stop
+
+USER root
+RUN chown -R postgres:postgres ${PG_HOME}
+RUN chown -R postgres:postgres ${PG_LOGDIR}
+RUN chown -R postgres:postgres ${PG_CONFIGDIR}
+RUN chown root:root ${PG_CONFIGFILE}
+RUN chown root:root ${PG_HBA_CONFIGFILE}
+RUN chmod 666 ${PG_CONFIGFILE}
+RUN chmod 666 ${PG_HBA_CONFIGFILE}
+
+
+# Install Geos	
+WORKDIR /tmp	
+RUN	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2
+RUN	tar xvfj geos-3.4.2.tar.bz2
+WORKDIR	/tmp/geos-3.4.2
+RUN	./configure
+RUN	make
+RUN	make install
+	
+	
+# Install Postgis
+WORKDIR /tmp
+RUN wget http://download.osgeo.org/postgis/source/postgis-2.1.3.tar.gz
+RUN tar xfvz postgis-2.1.3.tar.gz
+WORKDIR /tmp/postgis-2.1.3
+RUN ./configure
+RUN make
+RUN make install
+RUN ldconfig
+RUN make comments-install
+RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/shp2pgsql
+RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/pgsql2shp
+RUN ln -sf /usr/share/postgresql-common/pg_wrapper /usr/local/bin/raster2pgsql
+
+
+# Root project folder
+RUN mkdir ${WEB_ROOT}
+
+# Install the Arches application	
+COPY arches ${WEB_ROOT}/arches
+WORKDIR	${WEB_ROOT}/arches
+RUN	pip install --no-index -e .
+# Seemed necessary, received errors without this
+RUN python setup.py build
+# Seemed necessary, received errors without this	
+RUN python setup.py install							
+
+
+# Install Arches Hip
+COPY arches_hip ${WEB_ROOT}/arches_hip
+WORKDIR ${WEB_ROOT}/arches_hip
+RUN pip install --no-index -e .
+# RUN python setup.py build							# Apparently not necessary
+# RUN python setup.py install						# Apparently not necessary
+
+
+# Setup databases
+USER postgres	
+RUN ${PG_BINARY} start &&\
+	createdb -E UTF8 -T template0 --locale=en_US.utf8 template_postgis_20 &&\
+	psql -d postgres -c "UPDATE pg_database SET datistemplate='true' WHERE datname='template_postgis_20'" &&\
+	psql -d template_postgis_20 -c "CREATE EXTENSION postgis;" &&\
+	psql -d template_postgis_20 -c "GRANT ALL ON geometry_columns TO PUBLIC;" &&\
+	psql -d template_postgis_20 -c "GRANT ALL ON geography_columns TO PUBLIC;" &&\
+	psql -d template_postgis_20 -c "GRANT ALL ON spatial_ref_sys TO PUBLIC;" &&\
+	${PG_BINARY} stop
+USER root	
+
+# Setup custom app based on Arches Hip
+# WORKDIR /${WEB_ROOT}
+# RUN arches-app create ${WEB_APP_NAME} --app arches_hip
+
+# Install Elasticsearch
+COPY ${WEB_APP_NAME} ${WEB_ROOT}/${WEB_APP_NAME}
+WORKDIR ${WEB_ROOT}/${WEB_APP_NAME}
+RUN python manage.py packages -o setup_elasticsearch
+
+# Run database scripts & arches hip resources
+RUN ${PG_BINARY} start &&\
+	python manage.py packages -o start_elasticsearch &&\
+	# Wait for elasticsearch to start
+	sleep 10 &&\ 
+	python manage.py packages -o install &&\
+	python manage.py packages -o load_concept_scheme -s ${WEB_APP_NAME}/source_data/concepts/authority_files &&\
+	${PG_BINARY} stop
+
+
+# Cleanup
+RUN rm -rf /tmp/*

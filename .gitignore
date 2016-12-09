@@ -1,4 +1,5 @@
-arches-cvast/arches/.idea/arches.iml
-arches-cvast/arches/.idea/modules.xml
-arches-cvast/arches/.idea/vcs.xml
-arches-cvast/arches/.idea/workspace.xml
+docker-compose-local.yml
+*.pyc
+cvast_arches/cvast_arches/logs_local/
+letsencrypt_local/
+Thumbs.db

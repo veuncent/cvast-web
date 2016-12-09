@@ -1,0 +1,51 @@
+#!/bin/bash
+yum install -y aws-cli
+
+
+
+### ECS config 
+aws s3 cp s3://cvast-arches-config/global/ecs.config /etc/ecs/ecs.config
+echo "" | sudo tee -a  /etc/ecs/ecs.config
+echo ECS_CLUSTER=cvast-arches-cluster-test | sudo tee -a  /etc/ecs/ecs.config
+
+
+
+### Mount Elastic File Storage
+EFS_NAME="cvast-arches-efs-test"
+sudo yum install -y nfs-utils
+sudo yum install -y jq
+sudo mkdir /mnt/persist
+
+#Add support for EFS to the CLI configuration
+aws configure set preview.efs true
+
+# Get region of EC2 from instance metadata
+EC2_AVAIL_ZONE=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
+
+#Get EFS FileSystemID attribute
+#Instance needs to be added to a EC2 role that give the instance at least read access to EFS
+EFS_FILE_SYSTEM_ID=`aws efs describe-file-systems --region $EC2_REGION | jq '.FileSystems[]' | jq --arg EFS_NAME $EFS_NAME 'select(.Name==$EFS_NAME)' | jq -r '.FileSystemId'`
+#Check to see if the variable is set. If not, then exit.
+if [-z "$EFS_FILE_SYSTEM_ID"]; then
+	echo "ERROR: variable not set" 1> /etc/efssetup.log
+	exit
+fi
+
+# Instance needs to be a member of security group that allows 2049 inbound/outbound
+# The security group that the instance belongs to has to be added to EFS file system configuration
+
+# Create variables for source and target
+DIR_SRC=$EC2_AVAIL_ZONE.$EFS_FILE_SYSTEM_ID.efs.$EC2_REGION.amazonaws.com
+DIR_TGT=/mnt/persist
+
+#Mount EFS file system
+sudo mount -t nfs4 $DIR_SRC:/ $DIR_TGT
+#Backup fstab
+sudo cp -p /etc/fstab /etc/fstab.back-$(date +%F)
+#Append line to fstab
+echo -e "$DIR_SRC:/ \t\t $DIR_TGT \t\t nfs \t\t defaults \t\t 0 \t\t 0" | sudo tee -a /etc/fstab
+
+#restart docker
+sudo service docker stop
+sudo service docker start

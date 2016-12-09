@@ -1,0 +1,57 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<div class="block-description cvast-project-title">
+	<div class="container">
+		<div class="row cvast-paragraph-box cvast-media-block">
+			<div class="col-sm-4 cvast-paragraph-box-left-container">
+				<h1>Santuario Virgen de las Nieves</h1>
+				<h5><i class="fa fa-map-marker"></i>La Mancha, Spain</h5>
+			</div>
+			<div class="col-sm-8">
+				<div class="cvast-paragraph-box-body">
+					<p>Santuario de Nuestra Señora de las Nieves is a 17th century church and attached bull ring outside of Bolaños de Calatrava
+						and Almagro in La Mancha, Spain. </p>
+					<p>This site is contributing to our efforts to study the evolution of ecclesiastical architecture and our interest in the
+						organization and social control of public spaces.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>View from our drone</h5>
+</div>
+<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/santuario_virgen_de_las_nieves_aerial.jpg' %}); height: 800px; background-position: 60% 10%;"></div>
+
+
+<!-- Videos -->
+<div class="container padding-top-20">
+	<div class="row cvast-paragraph-box-video cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-video-left-container">
+			<h1>Videos</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-video-body">
+				<p>This animation shows a rendering of point clouds that CVAST created by scanning Santuario Virgen de las Nieves using
+					terrestrial laser scanners.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<figure id="video-player">
+	<video controls poster="{% static 'img/projects/la_mancha/santuario_virgen_de_las_nieves/video_thumbnails/Las_Nieves_Plaza_de_Toros.png' %}"
+		loop="">
+		<source src="{{ S3_STATIC_URL }}/streaming/la_mancha/santuario_virgen_de_las_nieves/Las_Nieves_Plaza_de_Toros-streaming.mp4" type="video/mp4">
+	</video>
+	<figcaption>
+		<a href="{{ S3_STATIC_URL }}/streaming/la_mancha/santuario_virgen_de_las_nieves/Las_Nieves_Plaza_de_Toros-streaming.mp4"><img src="{% static 'img/projects/la_mancha/santuario_virgen_de_las_nieves/video_thumbnails/Las_Nieves_Plaza_de_Toros.png' %}"
+				alt=""></a>
+	</figcaption>
+</figure>
+<!-- End Videos -->
+
+
+{% include 'projects/la_mancha/project_footer_la_mancha.htm' %} {% endblock content %}

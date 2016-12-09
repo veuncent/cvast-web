@@ -1,0 +1,97 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description cvast-project-title">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Virtual Osteology of the World (VOW) Project" %}</h1>
+    </div>
+
+    <div class="block-description">
+        <div class="container">
+            <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+                <div class="col-sm-4 cvast-paragraph-box-left-container">
+                    <h1>Virtual Osteology of the World</h1>
+                    <h5><i class="fa fa-map-marker"></i>Global</h5>
+                </div>
+                <div class="col-sm-8">
+                    <div class="cvast-paragraph-box-body">
+                        <p>
+                            Building on the success of the <a href="http://vzap.iri.isu.edu/ViewPage.aspx" target="_blank">Virtual Zooarchaeology of the Arctic Project</a>                            (VZAP), which was created by CVAST Executive Director <a href="{% url 'people'%}#herb" target="_blank">Herbert Maschner</a>,
+                            Matthew Betts of the Canadian Museum of History, and Corey Schou of Idaho State University, we
+                            are expanding the collections on a global scale.
+                        </p>
+                        <p>
+                            Incorporating the VZAP collections, and adding scanned materials from other projects, we are seeking collaborations to create
+                            osteological comparative collections around the world. Most recently, we did the first complete
+                            scan of the now-extinct Steller Sea Cow in the <a href="https://en.wikipedia.org/wiki/National_Museum_of_Natural_History_(France)"
+                                target="_blank"> Muséum national d'histoire naturelle</a> in Paris (MNHN). The database is currently
+                            being reconstructed and we expect full functionality in the next few months.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+        <h5>Scanning Steller's Sea Cow, bone for bone</h5>
+    </div>
+    <div class="background-image" style="background-image: url({% static 'img/projects/virtual_osteology_of_the_world/paris_nhm_manatee_vertebra.jpg' %}); background-position: 50% 55%;"></div>
+</div>
+
+
+<!-- Sketchfab -->
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box cvast-media-block">
+        <div class="col-sm-4 cvast-paragraph-box-left-container">
+            <h1>3D models</h1>
+        </div>
+    </div>
+</div>
+
+<div id="cvast-sketchfab-viewer" align="center" class="sketchfab-embed-wrapper cvast-sketchfab-embeded">
+
+    <iframe src="https://sketchfab.com/playlists/embed?collection=b1fc268334b8422ba9f945b1d6b2c692" frameborder="0" allowfullscreen
+        mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+
+    <p>
+        <a href="https://sketchfab.com/cvast/collections/virtual-osteology-of-the-world-vow-project" target="_blank">Virtual Osteology of the World (VOW) Project</a>        by
+        <a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
+    </p>
+
+</div>
+<!-- End Sketchfab -->
+
+
+<!-- Videos -->
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box-video cvast-media-block">
+        <div class="col-sm-4 cvast-paragraph-box-video-left-container">
+            <h1>Videos</h1>
+        </div>
+        <div class="col-sm-8">
+        </div>
+    </div>
+</div>
+
+<div class="block-description">
+    <div align="center" class="cvast-background-image-title">
+        <h5>MNHN1919-48 Steller&#39;s sea cow skull</h5>
+        <p>A turntable render of the mesh that resulted from scanning Steller's sea cow at the National Museum of Natural History
+            in Paris, France.
+        </p>
+    </div>
+    <div>
+        <video align="center" class="cvast-video-full" style="max-height: 70vh;" controls poster="{% static 'img/projects/virtual_osteology_of_the_world/video_thumbnails/steller_sea_cow_mnhn1919-48_cranium_turntable_softer_shadows.png' %}"
+            loop="">
+            <source src="{{ S3_STATIC_URL }}/streaming/stellers_sea_cow_mnhn1919-48_cranium_turntable-streaming.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+<!-- End Videos -->
+
+
+{% include 'projects/project_footer.htm' %}
+</div>
+
+{% endblock content %}

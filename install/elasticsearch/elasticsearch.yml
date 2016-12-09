@@ -1,0 +1,29 @@
+path:
+  logs: /elasticsearch-log
+  data: /elasticsearch-data
+   
+  
+# Lock the process address space into RAM, preventing any Elasticsearch memory
+# from being swapped out.
+bootstrap.mlockall: true
+
+# Automatically add node attributes relating to ec2 (for example, availability zone,
+# that can be used with the awareness allocation feature).
+cloud.node.auto_attributes: true
+
+network.host: 0.0.0.0  
+# this value is required because we set "network.host"
+# be sure to modify it appropriately for a production cluster deployment
+discovery.zen.minimum_master_nodes: 1
+
+# ----------------- FOR TESTING ONLY -----------------
+# - THESE SETTINGS SHOULD BE REVIEWED FOR PRODUCTION -
+# node.max_local_storage_nodes: 1
+# index.number_of_shards: 1
+# index.number_of_replicas: 0
+http.port: 9200
+# discovery.zen.ping.multicast.enabled: false
+# discovery.zen.ping.unicast.hosts: ["localhost"]  
+
+# One thing to be wary of, with the default ES config (unless that has been changed by now), the nodes have a tendency to go and look for each other. I remember when my ES instance started syncing with a colleagues (without us realising). Easiest way to prevent that is to give your cluster a dedicated name (cluster.name in the config). 
+# cluster.name: 

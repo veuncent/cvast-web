@@ -1,0 +1,113 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description cvast-project-title">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Virtual Ancient Siracusa Project (VASP)" %}</h1>
+    </div>
+
+    <div class="block-description">
+        <div class="container">
+            <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+                <div class="col-sm-4 cvast-paragraph-box-left-container">
+                    <h1>VASP</h1>
+                    <h5><i class="fa fa-map-marker"></i>Syracuse, Italy</h5>
+                </div>
+                <div class="col-sm-8">
+                    <div class="cvast-paragraph-box-body">
+                        <p>
+                            As culmination of a long-term scientific effort to virtualize the archaeological heritage of ancient Siracusa, which led
+                            to a preliminary 3D scanning campaign of Greek statuary (in partnership with the
+                            <a href="http://www.archeomatica.unict.it/index.php?page=1&lang=english" target="_blank">University of Catania</a>)
+                            and to the production of the movie <i>Siracusa 3D Reborn</i> (in partnership with the <a href="http://itlab.ibam.cnr.it/"
+                                target="_blank">Information Technologies Laboratory of IBAM-CNR</a>), CVAST Executive Director
+                            <a href="{% url 'people'%}#herb" target="_blank">Herbert Maschner</a> and <a href="{% url 'people'%}#davide"
+                                target="_blank">Dr. Davide Tanasi</a> (CVAST – Department of History, University of South Florida)
+                            are planning to undertake the virtualization of the Greek and Roman collection of the Archaeological
+                            Museum of Siracusa and of main urban and suburban archaeological sites representing the archaeological
+                            context for artifacts in the collection.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+        <h5>The poster for the film <i>Siracusa 3D Reborn</i></h5>
+    </div>
+    <div class="background-image" style="background-image: url({% static 'img/projects/vasp/siracusa_3d_reborn_poster.jpg' %}); background-position: 50% 40%; height: 750px;"></div>
+</div>
+
+
+<!-- Videos -->
+<div class="block-description cvast-media-block">
+    <div align="center" class="cvast-background-image-title">
+        <h5>Siracusa 3D Reborn: trailer</h5>
+    </div>
+    <div>
+        <video align="center" class="cvast-video-full" style="max-height: 70vh;" controls poster="{% static 'img/projects/vasp/video_thumbnails/Siracusa_3D_Reborn_trailer_short_version.png' %}"
+            loop="">
+            <source src="{{ S3_STATIC_URL }}/streaming/vasp/Siracusa_3D_Reborn_trailer_short_version-streaming.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+<!-- End Videos -->
+
+<!-- Paragraph 1 -->
+<div class="container">
+    <div class="row cvast-paragraph-box cvast-media-block">
+        <div class="col-sm-4 cvast-paragraph-box-left-container">
+            <h1>Paolo Orsi</h1>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-paragraph-box-body">
+                <p>The <a href="http://www.regione.sicilia.it/beniculturali/museopaoloorsi/homeENG.htm" target="_blank">Archaeological Museum ‘Paolo Orsi’ of Siracusa</a>                    has more than 20.000 artifacts on display on over 9.000 m<sup>2</sup> of exhibition area and it is the
+                    largest archaeological museum of southern Italy and one of the most important in Europe. That of Siracusa
+                    is the most numerous and remarkable collection of ancient Greek artifacts available in a museum outside
+                    Greece.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Image 1 -->
+<div align="center" class="cvast-background-image-title">
+    <h5>Scanning Greek statuary</h5>
+</div>
+<div class="background-image" style="background-image: url({% static 'img/projects/vasp/3d_greek statuary_2.jpg' %}); background-position: 20% 50%;"></div>
+
+
+<!-- Paragraph 2 -->
+<div class="container">
+    <div class="row cvast-paragraph-box cvast-media-block">
+        <div class="col-sm-4 cvast-paragraph-box-left-container">
+            <h1>Siracusa</h1>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-paragraph-box-body">
+                <p><a href="http://whc.unesco.org/en/list/1200" target="_blank">Siracusa</a> (Sicily) is a UNESCO World Heritage
+                    Site since 2005 for the importance of its archaeological heritage, in most part related to Greek civilizations.
+                    Founded in Sicily by the Greeks of Corinth in 733 BC, Siracusa was the birthplace of poets and thinkers,
+                    such as Epicharmus and Archimedes. It was visited by many prominent figures of Greek culture, like Pindar,
+                    Aeschylus and Plato, and over centuries it became one of the most prominent cities of the ancient Mediterranean.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Image 2 -->
+<div align="center" class="cvast-background-image-title">
+    <h5>Scanning Greek statuary</h5>
+</div>
+<div class="background-image" style="background-image: url({% static 'img/projects/vasp/3d_greek_statuary_1.jpg' %}); background-position: 50% 25%; height: 850px;"></div>
+
+
+{% include 'projects/project_footer.htm' %}
+</div>
+
+{% endblock content %}

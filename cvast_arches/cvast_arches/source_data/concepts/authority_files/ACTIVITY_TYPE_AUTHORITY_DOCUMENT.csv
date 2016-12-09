@@ -1,0 +1,15 @@
+conceptid,PrefLabel,AltLabels,ParentConceptid,ConceptType,Provider 
+ACTIVITY_TYPE:1,Documentation,,ACTIVITY_TYPE_AUTHORITY_DOCUMENT.csv,Collector,CVAST
+ACTIVITY_TYPE:2,Photographic recording,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:3,Short range scanning,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:4,Long range scanning,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:5,GPS survey,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:6,Field survey,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:7,Archaeological survey,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:8,Architectural survey,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:9,Measured survey,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:10,Topographic survey,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:11,Condition assessment,,ACTIVITY_TYPE:1,Index,CVAST
+ACTIVITY_TYPE:12,Processing,,ACTIVITY_TYPE_AUTHORITY_DOCUMENT.csv,Collector,CVAST
+ACTIVITY_TYPE:13,Photogrammetry processing,,ACTIVITY_TYPE:12,Index,CVAST
+ACTIVITY_TYPE:14,Point cloud registration,,ACTIVITY_TYPE:12,Index,CVAST

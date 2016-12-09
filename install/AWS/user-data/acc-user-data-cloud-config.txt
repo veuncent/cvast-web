@@ -1,0 +1,74 @@
+#cloud-config
+
+write-files:
+    -
+        path: /etc/conf.d/nfs
+        permissions: '0644'
+        content: |
+            OPTS_RPC_MOUNTD=""
+coreos:
+    units:
+    -
+        name: amazon-ecs-agent.service
+        command: start
+        runtime: true
+        content: |
+            [Unit]
+            Description=AWS ECS Agent
+            Documentation=https://docs.aws.amazon.com/AmazonECS/latest/developerguide/
+            Requires=docker.socket
+            After=docker.socket
+
+            [Service]
+            Environment=ECS_CLUSTER=acc-cvast-arches-cluster
+            Environment=ECS_LOGLEVEL=info
+            Environment=ECS_VERSION=latest
+            Environment=ECS_AVAILABLE_LOGGING_DRIVERS=["awslogs"]
+            Restart=on-failure
+            RestartSec=30
+            RestartPreventExitStatus=5
+            SyslogIdentifier=ecs-agent
+            ExecStartPre=-/bin/mkdir -p /var/log/ecs /var/ecs-data /etc/ecs
+            ExecStartPre=-/usr/bin/touch /etc/ecs/ecs.config
+            ExecStartPre=-/usr/bin/docker kill ecs-agent
+            ExecStartPre=-/usr/bin/docker rm ecs-agent
+            ExecStartPre=/usr/bin/docker pull amazon/amazon-ecs-agent:${ECS_VERSION}
+            ExecStart=/usr/bin/docker run --name ecs-agent \
+            --env-file=/etc/ecs/ecs.config \
+            --volume=/var/run/docker.sock:/var/run/docker.sock \
+            --volume=/var/log/ecs:/log \
+            --volume=/var/ecs-data:/data \
+            --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro \
+            --volume=/run/docker/execdriver/native:/var/lib/docker/execdriver/native:ro \
+            --publish=127.0.0.1:51678:51678 \
+            --env=ECS_LOGFILE=/log/ecs-agent.log \
+            --env=ECS_LOGLEVEL=${ECS_LOGLEVEL} \
+            --env=ECS_DATADIR=/data \
+            --env=ECS_CLUSTER=${ECS_CLUSTER} \
+            --env=ECS_AVAILABLE_LOGGING_DRIVERS=${ECS_AVAILABLE_LOGGING_DRIVERS} \
+            amazon/amazon-ecs-agent:${ECS_VERSION}
+    -
+        name: rpc-statd.service
+        command: start
+        enable: true
+    - 
+        name: mnt-persist.mount
+        content: |
+            [Mount]
+            What=EC2_AVAIL_ZONE.fs-8f4086c6.efs.EC2_REGION.amazonaws.com:/
+            Where=/mnt/persist
+            Type=nfs
+    - 
+        name: runcmd.service
+        command: start
+        content: |
+            [Unit]
+            Description=command
+            [Service]
+            Type=oneshot
+            ExecStart=/bin/bash -c 'EC2_AVAIL_ZONE=$(curl -L http://169.254.169.254/latest/meta-data/placement/availability-zone); \
+            EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e "s:\([0-9][0-9]*\)[a-z]*\$:\\1:"`"; \
+            sed -i "s/EC2_AVAIL_ZONE/$EC2_AVAIL_ZONE/" /etc/systemd/system/mnt-persist.mount; \
+            sed -i "s/EC2_REGION/$EC2_REGION/" /etc/systemd/system/mnt-persist.mount; \
+            systemctl daemon-reload; \
+            systemctl restart mnt-persist.mount'

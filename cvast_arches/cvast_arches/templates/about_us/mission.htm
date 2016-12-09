@@ -1,0 +1,37 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+
+<div class="block-description">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Mission" %}</h1>
+        <blockquote style="margin-bottom: 50px;">
+            <p>“The destruction of heritage has become an instrument of terror, in a global strategy to undermine societies,
+                propagate intolerance and erase memories.”</p>
+            <footer>Irina Bokova, Director General, UNESCO</footer>
+        </blockquote>
+
+    </div>
+</div>
+
+<div class="background-image" style="background-image: url({% static 'img/about_us/mission/press_conference.jpg' %}); margin-top: -50px;"></div>
+
+<div class="block-description">
+    <div class="container content padding-top-20">
+        <div class="row cvast-paragraph-box cvast-media-block" style="margin-bottom: 110px;">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>Mission statement</h1>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <p>The University of South Florida’s Center for Virtualization and Applied Spatial Technologies works to
+                        document, preserve, and protect the world’s cultural and natural heritage through the use of digital
+                        visualization, geospatial technologies, informatics and 3D virtualization.</p>
+                    <p>Central to our mission is the democratization of science and the facilitation of scientific research,
+                        collaboration, and education by delivering digital data and heritage resources to the global community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

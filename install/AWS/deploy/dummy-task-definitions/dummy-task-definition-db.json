@@ -1,0 +1,63 @@
+{
+    "containerDefinitions": [
+        {
+            "memory": 600,
+            "portMappings": [
+                {
+                    "hostPort": 5432,
+                    "containerPort": 5432,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "mountPoints": [
+                {
+                    "containerPath": "/postgres-data",
+                    "sourceVolume": "postgresData"
+                },
+                {
+                    "containerPath": "/var/log/postgresql",
+                    "sourceVolume": "postgresLog"
+                },
+                {
+                    "containerPath": "/postgres-config",
+                    "sourceVolume": "postgresConfig"
+                }
+            ],
+            "name": "test-cvast-arches-db-container",
+            "environment": [
+                {
+                    "name": "PG_PASSWORD",
+                    "value": "<password>"
+                },
+                {
+                    "name": "IS_CLEAN_ENV",
+                    "value": "true"
+                }
+            ],
+            "image": "<Docker registry URL>:5000/cvast-db:%BUILD_NUMBER%",
+            "cpu": 256
+        }
+    ],
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/postgres-data/"
+            },
+            "name": "postgresData"
+        },
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/postgres-log"
+            },
+            "name": "postgresLog"
+        },
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/postgres-config"
+            },
+            "name": "postgresConfig"
+        }
+    ],
+    "family": "<environment name>-cvast-arches-db-task"
+}

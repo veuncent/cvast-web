@@ -1,0 +1,18 @@
+{% load i18n %}
+
+{% if 'RESOURCE_TYPE_CLASSIFICATION_E55' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title">{% trans "Resource Types" %}</h5>
+                </dt>
+
+                {% for RESOURCE_TYPE_CLASSIFICATION_E55 in report_info.source.graph.RESOURCE_TYPE_CLASSIFICATION_E55 %}
+                    <dd class="arches-report-subsection-item report-list-item">{{RESOURCE_TYPE_CLASSIFICATION_E55.RESOURCE_TYPE_CLASSIFICATION_E55__value}}</dd> 
+                {% endfor %} 
+
+            </dl>
+        </div>
+    </div>
+{% endif %} 

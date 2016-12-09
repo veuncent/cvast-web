@@ -1,0 +1,66 @@
+{
+    "containerDefinitions": [
+        {
+            "memory": 400,
+            "portMappings": [
+                {
+                    "hostPort": 8000,
+                    "containerPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "mountPoints": [
+                {
+                    "containerPath": "/cvast_web/arches/arches/uploadedfiles",
+                    "sourceVolume": "uploadedFiles"
+                },
+                {
+                    "containerPath": "/cvast_web/cvast_arches/cvast_arches/logs",
+                    "sourceVolume": "webLog"
+                }
+            ],
+            "name": "test-cvast-arches-web-container",
+            "environment": [
+                {
+                    "name": "PG_PASSWORD",
+                    "value": "<password>"
+                },
+                {
+                    "name": "PG_PORT",
+                    "value": "5432"
+                },
+                {
+                    "name": "ES_HOST",
+                    "value": "<host url>"
+                },
+                {
+                    "name": "PG_HOST",
+                    "value": "<host url>"
+                },
+                {
+                    "name": "DJANGO_PASSWORD",
+                    "value": "<password>"
+                }
+            ],
+            "readonlyRootFilesystem": false,
+            "image": "<Docker registry URL>:5000/cvast-web:%BUILD_NUMBER%",
+            "cpu": 256
+        }
+    ],
+    "volumes": [
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/web-uploaded-files"
+            },
+            "name": "uploadedFiles"
+        },
+        {
+            "host": {
+                "sourcePath": "/mnt/persist/cvast-arches/web-log"
+            },
+            "name": "webLog"
+        }
+    ],
+    "family": "<environment name>-cvast-arches-web-task"
+}
