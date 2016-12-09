@@ -44,8 +44,8 @@ set_search_engine_settings() {
 set_strict_https_nginx_conf() {
 	cp ${INSTALL_DIR}/nginx_strict_https.conf ${NGINX_DEFAULT_CONF}
 	echo "Initializing NginX to run on: ${DOMAIN_NAMES}"
-	echo "... and serve as reverse proxy for Docker container: ${WEB_CONTAINER}..."
-	sed -i "s/<web_container>/${WEB_CONTAINER}/g" ${NGINX_DEFAULT_CONF}
+	echo "... and serve as reverse proxy for Docker container: ${PROXY_CONTAINER}..."
+	sed -i "s/<proxy_container>/${PROXY_CONTAINER}/g" ${NGINX_DEFAULT_CONF}
 	sed -i "s/<domain_names>/${DOMAIN_NAMES}/g" ${NGINX_DEFAULT_CONF}
 	sed -i "s/<primary_domain_name>/${PRIMARY_DOMAIN_NAME}/g" ${NGINX_DEFAULT_CONF}
 }
@@ -76,7 +76,7 @@ check_variable() {
 
 #### Starting point
 check_variable "${DOMAIN_NAMES}" DOMAIN_NAMES
-check_variable "${WEB_CONTAINER}" WEB_CONTAINER
+check_variable "${PROXY_CONTAINER}" PROXY_CONTAINER
 
 set_strict_https_nginx_conf
 copy_localhost_certificates
