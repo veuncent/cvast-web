@@ -5,7 +5,7 @@ This repository lets you run Arches ([http://archesproject.org/](Link URL)) in a
 
 To get started with Docker: [https://www.docker.com/](Link URL)  
 
-**Note**: if you run Docker on **Windows or Mac**, your Arches app will not run on localhost:8000, but on a different IP address. To find out this ip address, open Docker and type: 
+**Note**: if you run Docker on **Windows or Mac < version 1.12 **, your Arches app will not run on localhost:8000, but on a different IP address. To find out this ip address, open Docker and type: 
 
 ```
 #!shell
@@ -17,26 +17,29 @@ docker-machine ip
 Config
 ------
 
-- In the file 'Dockerfile-arches-complete':  
-	* Optionally you can change the variables marked with ############### to your own requirements  
+- In the Dockerfiles:  
+	* Optionally you can change the ENV variables to your needs  
 
 - In the file 'docker-compose.yml':  
-	* If you run this in your development environment, don't forget to change to mount folder path to your workspace folder  
+	* Change environment variables to your needs. 
+	* If you run this in your development environment, you might wannt to change the mount folder path to your workspace folder  
 		* e.g.: - /c/Users/<your Windows user>/Documents/<your repo workspace>/:/<root of your project>  
-	* Remove this line if you run this in a non-development environment.  
-	* Change the passwords of environment variables PG_PASSWORD and DJANGO_PASSWORD to the passwords you want to set.  
+		This way you can edit code without having to build the Docker image again.
+	* Remove the above-mentioned line if you run this in a non-development environment.  
+	* **Change the passwords of environment variables PG_PASSWORD and DJANGO_PASSWORD to the passwords you want to set.**
 
 	
 **Advanced:**  
 
-- The cvast_arches app contains a few (minor) changes to Arches Hip. You can continue to build on this app if desired. If you want to start with a clean Arches custom app:  
+- The cvast_arches app contains customizations made by CVAST based on the Arches Hip application. You can continue to build on this app if desired. If you want to start with a clean Arches custom app:  
 	* Delete the cvast_arches folder in the root of this repository  
-	* In the file 'docker-arches-complete':  
+	* In the file 'Dockerfile-web':  
 		* Change the environment variable WEB_APP_NAME into the name of your new app  
 		* Uncomment these lines (141 and 142):  
 			#WORKDIR /${WEB_ROOT}  
 			#RUN arches-app create ${WEB_APP_NAME} --app arches_hip  
 		Comment these lines out again after first run, as you only need to do this once.
+	* Mount your development file system to the Docker container (as explained above), so your new app folder is persisted.
 
 - If you want to run clusters of the same containers (e.g. multiple web containers, perhaps on different host machines), the mount points should be on a folder accessible by all containers, e.g. a shared (network) drive.
 	* This is currently not possible with the elasticsearch and db containers, these require some extra configuration. Coming soon...
@@ -49,18 +52,16 @@ Build
 -----
 
 From the repository root directory : 
-(The first one takes a long time, probably > 15 minutes)
+(The first build takes a long time, probably > 30 minutes)
 
-	./buildBaseImage.sh
 	docker-compose build
 
 	
 	
 Run
 ---
-(Because files are moved around and deleted on container startup, we need to force docker-compose not to reuse containers:)
 
-	docker-compose.exe up --force-recreate
+	docker-compose.exe up
 
 After the first successful deployment, your host volumes have been initialized for data persistence. 
 **For subsequent deployments you should change the environment variable IS_CLEAN_ENV for web, db and elasticsearch to 'false' in docker-compose.yml.**
@@ -99,7 +100,6 @@ Roadmap
 -------
 Among other things: 
  
-- Add NginX container to be paired with the Django container to serve as entrypoint for the web.  
 - Make Postgres work in a cluster. Need the right settings for the nodes to communicate with each other.  
 - Make Elasticsearch work in cluster. Ibid.
 
