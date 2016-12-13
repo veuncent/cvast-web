@@ -32,6 +32,9 @@ ENV WEB_APP_NAME=cvast_arches
 ENV DJANGO_MODE=DEV
 ENV DJANGO_DEBUG=True
 
+# Required, because used in settings.py
+ENV DOMAIN_NAMES=localhost
+
 # Setting locale variables for database
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
