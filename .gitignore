@@ -3,3 +3,5 @@ docker-compose-local.yml
 cvast_arches/cvast_arches/logs_local/
 letsencrypt_local/
 Thumbs.db
+arches/build/
+arches/arches.egg-info/
