@@ -111,8 +111,10 @@ AWS
 ===
 Configure AWS
 -------------
-CVAST Arches requires an AWS ECS cluster to be set up.
-The deployment script in ./AWS/deploy/deployAWSTask.sh assumes the following resource names:
+CVAST Arches can be set up in an AWS ECS cluster. We provide a deployment script in ./AWS/deploy/deployAWSTask.sh, 
+which is still under construction. At the moment it is written very specificly for CVAST, but it will be made more generic in the future.  
+
+Currently it assumes the following resource names:
 - CLUSTER_NAME=${ENVIRONMENT}-cvast-arches-cluster
 	e.g. prod-cvast-arches-cluster
 - SERVICE_NAME=${ENVIRONMENT}-cvast-arches-${DOCKER_IMAGE}-service
@@ -120,7 +122,7 @@ The deployment script in ./AWS/deploy/deployAWSTask.sh assumes the following res
 - TASK_FAMILY=${ENVIRONMENT}-cvast-arches-${DOCKER_IMAGE}-task
 	e.g. test-cvast-arches-web-task
 
-
+For further usage information, run .install/AWS/deploy/deployAWSTask.sh --help
 
 Deploy to AWS
 ------
