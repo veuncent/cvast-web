@@ -38,16 +38,12 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
 RUN apt-get update -y &&\
 	apt-get install -y postgresql-9.4
 
+# Remove package list to free up space
+RUN rm -rf /var/lib/apt/lists/*
 
-ENV PG_HOST=localhost
-ENV PG_PORT=5432
-ENV PG_PASSWORD=postgis
-ENV ES_HOST=localhost
-ENV PG_DBNAME=cvast_arches
 
 # Root project folder
 RUN mkdir ${WEB_ROOT}
-
 
 # Install the Arches application	
 COPY arches ${WEB_ROOT}/arches
@@ -80,13 +76,6 @@ WORKDIR ${WEB_ROOT}/${WEB_APP_NAME}
 
 
 ################################################################
-
-
-USER root
-
-
-# Remove package list to free up space
-RUN rm -rf /var/lib/apt/lists/*
 
 
 
