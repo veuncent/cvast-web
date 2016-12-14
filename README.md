@@ -90,9 +90,10 @@ __________________________________
     elasticsearch_1  |←[0m /bin/sh: 1: /install/es_entrypoint.sh: not found  
 	* Cause: Line endings (EOL) are in Windows format  
 	* Fix: In Notepad ++ --> Edit --> EOL Conversion --> UNIX/OSX Format --> Save file  
+
 &nbsp;
 __________________________________
-### Roadmap
+### Roadmap  
 Among other things: 
  
 - Make Postgres work in a cluster. Need the right settings for the nodes to communicate with each other.  
