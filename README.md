@@ -67,7 +67,7 @@ After the first successful deployment, your host volumes have been initialized f
 &nbsp;
 __________________________________
 ### Housekeeping
-To clean up unused images and containers run from the repository root directory: 
+To clean up unused images and containers run this from the repository root directory: 
 	
 	./cleanup.sh
 &nbsp;
