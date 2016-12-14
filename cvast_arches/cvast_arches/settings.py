@@ -35,8 +35,6 @@ except requests.exceptions.RequestException:
 if EC2_PUBLIC_HOSTNAME:
     ALLOWED_HOSTS.append(EC2_PUBLIC_HOSTNAME)
 
-print ALLOWED_HOSTS
-
 STATIC_ROOT = '/static_root'
 
 PACKAGE_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
