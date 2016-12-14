@@ -45,7 +45,8 @@ ____________________________________________
 - If you want to run clusters of the same containers (e.g. multiple web containers, perhaps on different host machines), the mount points should be on a folder accessible by all containers, e.g. a shared (network) drive.
 	* This is currently not possible with the elasticsearch and db containers, these require some extra configuration. Coming soon...
 	
-- If you create your own custom app on top of this, you might want to add the uploadedfiles/files path to the .dockerignore file in the root of this repository. This in order to keep these files from taking up space in your Docker image.
+- If you create your own custom app on top of this, you might want to add the uploadedfiles/files path to the .dockerignore file in the root of this repository. This in order to keep these files from taking up space in your Docker image.  
+
 &nbsp;
 __________________________________
 ### Build
