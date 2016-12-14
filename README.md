@@ -1,5 +1,7 @@
-Docker build for the CVAST implementation of Arches
-===================================================
+# Docker build for the CVAST implementation of Arches
+
+Developed by the Center for Virtualization and Applied Spatial Technologies (CVAST),
+University of South Florida.
 
 This repository lets you run Arches ([http://archesproject.org/](Link URL)) in a Docker container, alongside containers for Elasticsearch and Postgresql.  
 
@@ -11,11 +13,10 @@ To get started with Docker: [https://www.docker.com/](Link URL)
 #!shell
 
 docker-machine ip
-```
-
-
-Config
-------
+```  
+&nbsp;
+____________________________________________
+### Config
 
 - In the Dockerfiles:  
 	* Optionally you can change the ENV variables to your needs  
@@ -45,38 +46,32 @@ Config
 	* This is currently not possible with the elasticsearch and db containers, these require some extra configuration. Coming soon...
 	
 - If you create your own custom app on top of this, you might want to add the uploadedfiles/files path to the .dockerignore file in the root of this repository. This in order to keep these files from taking up space in your Docker image.
-
-
-
-Build
------
+&nbsp;
+__________________________________
+### Build
 
 From the repository root directory : 
 (The first build takes a long time, probably > 30 minutes)
 
 	docker-compose build
+&nbsp;	
+__________________________________
+### Run
 
-	
-	
-Run
----
 
 	docker-compose.exe up
 
 After the first successful deployment, your host volumes have been initialized for data persistence. 
 **For subsequent deployments you should change the environment variable IS_CLEAN_ENV for web, db and elasticsearch to 'false' in docker-compose.yml.**
-
-
-
-Housekeeping
-------------
+&nbsp;
+__________________________________
+### Housekeeping
 To clean up unused images and containers run from the repository root directory: 
 	
 	./cleanup.sh
-
-
-Persistence
------------
+&nbsp;
+__________________________________
+### Persistence
 The data of all containers is kept (persisted) in volumes as specified in docker-compose.yml.  
 
 Basically, a 'Named Volume' (or 'relative path') creates a folder on the host machine under /var/lib/docker/volumes.
@@ -86,31 +81,28 @@ Most important difference: a volume with absolute path is mounted over the folde
 Read more:  
 https://docs.docker.com/engine/tutorials/dockervolumes/  
 And specifically: https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-host-directory-as-a-data-volume    	
-
-Known Issues
-------------
-
+&nbsp;
+__________________________________
+### Known Issues
 - EOL Windows/Unix:
 	* Error: When running the containers, certain .sh files are not found, e.g.:  
     elasticsearch_1  |←[0m /bin/sh: 1: /install/es_entrypoint.sh: not found  
 	* Cause: Line endings (EOL) are in Windows format  
 	* Fix: In Notepad ++ --> Edit --> EOL Conversion --> UNIX/OSX Format --> Save file  
-
-Roadmap
--------
+&nbsp;
+__________________________________
+### Roadmap
 Among other things: 
  
 - Make Postgres work in a cluster. Need the right settings for the nodes to communicate with each other.  
 - Make Elasticsearch work in cluster. Ibid.
 
+&nbsp;
+__________________________________
+&nbsp;
+# AWS
+### Configure AWS
 
-
-
-
-AWS
-===
-Configure AWS
--------------
 CVAST Arches can be set up in an AWS ECS cluster. We provide a deployment script in ./AWS/deploy/deployAWSTask.sh, 
 which is still under construction. At the moment it is written very specificly for CVAST, but it will be made more generic in the future.  
 
@@ -123,10 +115,9 @@ Currently it assumes the following resource names:
 	e.g. test-cvast-arches-web-task
 
 For further usage information, run .install/AWS/deploy/deployAWSTask.sh --help
-
-Deploy to AWS
-------
-
+&nbsp;
+__________________________________
+### Deploy to AWS
 Copy the files from ./AWS/deploy/dummy-task-definitions to ./AWS/deploy/task-definitions
 Change the file prefixes from 'dummy-' to 'your-environment-name-'
 Change the endpoints and variable values between <> to your specific values
