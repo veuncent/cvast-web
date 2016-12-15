@@ -63,33 +63,56 @@
 <!-- End Sketchfab -->
 
 
+
 <!-- Videos -->
-<div class="container padding-top-20">
+<div class="container">
     <div class="row cvast-paragraph-box-video cvast-media-block">
         <div class="col-sm-4 cvast-paragraph-box-video-left-container">
             <h1>Videos</h1>
         </div>
         <div class="col-sm-8">
+            <div class="cvast-paragraph-box-video-body">
+            </div>
         </div>
     </div>
 </div>
 
-<div class="block-description">
-    <div align="center" class="cvast-background-image-title">
+<div align="center" class="cvast-background-image-title">
+    <div id="cvast-video-caption">
         <h5>MNHN1919-48 Steller&#39;s sea cow skull</h5>
         <p>A turntable render of the mesh that resulted from scanning Steller's sea cow at the National Museum of Natural History
             in Paris, France.
         </p>
     </div>
-    <div>
-        <video align="center" class="cvast-video-full" style="max-height: 70vh;" controls poster="{% static 'img/projects/virtual_osteology_of_the_world/video_thumbnails/steller_sea_cow_mnhn1919-48_cranium_turntable_softer_shadows.png' %}"
-            loop="">
-            <source src="{{ S3_STATIC_URL }}/streaming/stellers_sea_cow_mnhn1919-48_cranium_turntable-streaming.mp4" type="video/mp4">
-        </video>
-    </div>
 </div>
-<!-- End Videos -->
+<figure id="video-player" class="cvast-video-player-large">
+    <video controls poster="{{ S3_STATIC_URL_IMG }}/projects/virtual_osteology_of_the_world/video_thumbnails/steller_sea_cow_mnhn1919-48_cranium_turntable_softer_shadows.png"
+        loop="">
+        <source src="{{ S3_STATIC_URL }}/streaming/stellers_sea_cow_mnhn1919-48_cranium_turntable-streaming.mp4">
+    </video>
+    <figcaption>
+        <a href="{{ S3_STATIC_URL }}/streaming/stellers_sea_cow_mnhn1919-48_cranium_turntable-streaming.mp4" data-caption="<h5>MNHN1919-48 Steller&#39;s sea cow skull</h5>
+        <p>A turntable render of the mesh that resulted from scanning Steller's sea cow at the National Museum of Natural History
+            in Paris, France.</p>">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/virtual_osteology_of_the_world/video_thumbnails/steller_sea_cow_mnhn1919-48_cranium_turntable_softer_shadows.png"
+                alt="">
+        </a>
 
+        <a href="{{ S3_STATIC_URL }}/streaming/vow/Hydrodamalis+scapulum+high+detail+turntable.mp4" data-caption="<h5>High resolution detail of Steller’s sea cow scapulum captured by the Faro Arm.</h5>
+        <p>Showing off the amount of detail that can be captured by the Faro Arm. This model consists of 12+ million points.</p>">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/virtual_osteology_of_the_world/video_thumbnails/hydrodamalis_scapulum_high_detail_turntable.png"
+                alt="">
+        </a>
+
+        <a href="{{ S3_STATIC_URL }}/streaming/vow/MNHN+Gazella+cuvieri+composite.mp4" data-caption="<h5>Composite skeleton of Gazella cuvieri</h5>
+        <p>Each color represents a separate scan. The composite is made of 33+ million points. The limb bones were scanned from one side only and mirrored to create this composite. Note that a number of bones were fused, especially in the vertebral column, causing the skew of the overall composition.</p>">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/virtual_osteology_of_the_world/video_thumbnails/mnhn_gazella_cuvieri_composite.png"
+                alt="">
+        </a>
+
+    </figcaption>
+</figure>
+<!-- End Videos -->
 
 {% include 'projects/project_footer.htm' %}
 </div>
