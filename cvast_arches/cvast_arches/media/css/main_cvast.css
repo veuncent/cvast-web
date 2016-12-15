@@ -554,8 +554,8 @@ cvast-paragraph-box-video-left-container {
 }
 
 .cvast-video-player-large figcaption a img {
-        width: 100%;
-        max-height: 25vh;
+        max-width: 100%;
+        max-height: 26vh;
 }
 
 .cvast-video-player-medium {
@@ -568,8 +568,8 @@ cvast-paragraph-box-video-left-container {
 }
 
 .cvast-video-player-medium figcaption a img {
-		width: 100%;
-        max-height: 20vh;
+		max-width: 100%;
+        max-height: 23vh;
 }
 
 #video-player figcaption a:hover {
