@@ -543,11 +543,35 @@ cvast-paragraph-box-video-left-container {
 	opacity: .5;
 	transition: 1s opacity;
 }
-#video-player figcaption a img,
-	figure video {
-		width: 100%;
-        max-height: 90vh;
+
+.cvast-video-player-large {
+    width: 100%;
 }
+
+.cvast-video-player-large video {
+		width: 100%;
+        max-height: 80vh;
+}
+
+.cvast-video-player-large figcaption a img {
+        width: 100%;
+        max-height: 25vh;
+}
+
+.cvast-video-player-medium {
+    width: 100%;
+}
+
+.cvast-video-player-medium video {
+		width: 100%;
+        max-height: 70vh;
+}
+
+.cvast-video-player-medium figcaption a img {
+		width: 100%;
+        max-height: 20vh;
+}
+
 #video-player figcaption a:hover {
 	opacity: 1;
 }
@@ -574,7 +598,7 @@ cvast-paragraph-box-video-left-container {
 .cvast-sketchfab-embeded iframe {
     width: 80vw;
     height: 80vh;
-    
+
 }
 
 @media (max-width: 768px) {
