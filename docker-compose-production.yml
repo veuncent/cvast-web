@@ -9,17 +9,18 @@ services:
       - web-log:/cvast_web/cvast_arches/cvast_arches/logs
       - web-static:/static_root
       environment:
-        - PG_PASSWORD=TestCVAST
-        - PG_HOST=ec2-54-82-243-40.compute-1.amazonaws.com
+        - PG_PASSWORD=
+        - PG_HOST=
         - PG_PORT=5432
-        - ES_HOST=ec2-54-196-36-11.compute-1.amazonaws.com
-        - DJANGO_PASSWORD=TestAdminCVAST
+        - ES_HOST=
+        - DJANGO_PASSWORD=
         - DJANGO_MODE=PROD
         - DJANGO_DEBUG=False
+        - DOMAIN_NAMES=cvast.usf.edu
         - IS_CLEAN_ENV=True
+        - TZ=EST
       ports:
         - '8000:8000'
-        - '8001:8001'
         
     nginx:
       restart: always
@@ -33,27 +34,32 @@ services:
       volumes:
         - web-static:/www/static
         - web-log:/var/log/nginx
-        - nginx-letsencrypt:/etc/letsencrypt
-        - nginx-conf:/etc/nginx/conf.d/
+        - nginx-conf:/etc/nginx/conf.d
         - nginx-root:/var/www
+        - letsencrypt-config:/etc/letsencrypt
       depends_on:
         - web
       environment:
-        - DJANGO_HOST=web
-        - DOMAIN_NAMES=build.usfcvast.org
+        - PROXY_CONTAINER=web
+        - DOMAIN_NAMES=cvast.usf.edu
         - PUBLIC_MODE=True
+        - TZ=EST
         
     letsencrypt:
       image: cvast/cvast-letsencrypt:1.0
       volumes:
-        - nginx-letsencrypt:/etc/letsencrypt
-        - nginx-conf:/etc/nginx/conf.d/
         - nginx-root:/var/www
-        - letsencrypt:/letsencrypt
+        - letsencrypt-config:/etc/letsencrypt
+        - letsencrypt-log:/var/log/letsencrypt
+        - letsencrypt-workdir:/var/lib/letsencrypt
+      command: get_certificate
       environment:
-        - NGINX_CONTAINER=nginx
+        - FORCE_NON_ELB=True
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
         - DOMAIN_NAMES=cvast.usf.edu
+        - PRODUCTION_MODE=True
+        - PERSISTENT_MODE=True
+        - TZ=EST
         
 volumes:
     web-uploaded-files:
@@ -61,5 +67,6 @@ volumes:
     web-static:
     nginx-conf:
     nginx-root:
-    nginx-letsencrypt:
-    letsencrypt:
+    letsencrypt-config:
+    letsencrypt-log:
+    letsencrypt-workdir:
