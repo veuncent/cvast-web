@@ -52,16 +52,16 @@
 	<iframe src="https://sketchfab.com/playlists/embed?collection=9d218e2f79e0461b9b4e2a048f092cbf" frameborder="0" allowfullscreen
 		mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
 
-	<p>
-		<a href="https://sketchfab.com/cvast/collections/french-national-museum-of-natural-history-project" target="_blank">French National Museum of Natural History Project</a>		by <a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
-	</p>
+<p>
+	<a href="https://sketchfab.com/cvast/collections/french-national-museum-of-natural-history-project" target="_blank">French National Museum of Natural History Project</a>	by <a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
+</p>
 
 </div>
 <!-- End Sketchfab -->
 
 
 <!-- Videos -->
-<div class="container padding-top-20">
+<div class="container">
 	<div class="row cvast-paragraph-box-video cvast-media-block">
 		<div class="col-sm-4 cvast-paragraph-box-video-left-container">
 			<h1>Videos</h1>
@@ -75,16 +75,38 @@
 	</div>
 </div>
 
-<figure id="video-player" class="cvast-video-player-large">
-	<video controls poster="{% static 'img/projects/paris_nhm/video_thumbnails/Level1_Full_Resolution.png' %}" loop="">
-		<source src="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/Level1_Full_Resolution-streaming.mp4" type="video/mp4">
+<div align="center" class="cvast-background-image-title">
+	<div id="cvast-video-caption">
+		<h5>Gallery of Paleontology</h5>
+		<p>Discover the Galerie de Paléontologie, showcasing all stages in the history of life.</p>
+	</div>
+</div>
+<figure id="video-player" class="cvast-video-player-medium">
+	<video controls poster="{{ S3_STATIC_URL_IMG }}/projects/paris_nhm/video_thumbnails/museum_of_paleontology_full_res.png"
+		loop="">
+		<source src="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/museum_of_paleontology_full_res-streaming.mp4">
 	</video>
 	<figcaption>
-		<a href="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/Level1_Full_Resolution-streaming.mp4"><img src="{% static 'img/projects/paris_nhm/video_thumbnails/Level1_Full_Resolution.png' %}" alt=""></a>
-		<a href="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/MNHN_Baleen_Whale-streaming.mp4"><img src="{% static 'img/projects/paris_nhm/video_thumbnails/MNHN_Baleen_Whale.png' %}" alt=""></a>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/museum_of_paleontology_full_res-streaming.mp4" data-caption="<h5>Gallery of Paleontology</h5>
+        <p>Discover the Galerie de Paléontologie, showcasing all stages in the history of life.</p>">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/paris_nhm/video_thumbnails/museum_of_paleontology_full_res.png" alt="">
+		</a>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/Level1_Full_Resolution-streaming.mp4" data-caption="<h5>Gallery of Comparative Anatomy</h5><p>Fly through the Galerie d'Anatomie comparée and discover the more than 650 skeletons of fish, amphibians, reptiles, birds and mammals on display.
+		</p>">
+			<img src="{% static 'img/projects/paris_nhm/video_thumbnails/Level1_Full_Resolution.png' %}" alt="">
+		</a>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/MNHN_Baleen_Whale-streaming.mp4" data-caption="<h5>Baleen whale</h5>
+        <p>On display in the Galerie d'Anatomie comparée (Gallery of Comparative Anatomy).</p>">
+			<img src="{% static 'img/projects/paris_nhm/video_thumbnails/MNHN_Baleen_Whale.png' %}" alt="">
+		</a>
+
 	</figcaption>
 </figure>
 <!-- End Videos -->
+
 
 
 <!-- Images -->
