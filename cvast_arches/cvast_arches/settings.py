@@ -226,8 +226,9 @@ BUSISNESS_DATA_FILES = (
 
 ### Media
 
-S3_STATIC_URL = 'https://d6mtkwdpn24bt.cloudfront.net'
+S3_STATIC_URL = 'https://media.usfcvast.org'
 S3_STATIC_URL_IMG = os.path.join(S3_STATIC_URL, 'images')
+S3_STATIC_URL_VIDEO = os.path.join(S3_STATIC_URL, 'videos')
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT =  os.path.join(PACKAGE_ROOT, 'uploadedfiles')
