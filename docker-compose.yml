@@ -97,7 +97,7 @@ services:
         - PERSISTENT_MODE=True
         - TZ=EST
 
-        
+ 
 volumes:
     web-uploaded-files:
     web-log:
