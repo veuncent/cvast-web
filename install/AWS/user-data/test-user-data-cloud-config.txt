@@ -72,23 +72,3 @@ coreos:
             sed -i "s/EC2_REGION/$EC2_REGION/" /etc/systemd/system/mnt-persist.mount; \
             systemctl daemon-reload; \
             systemctl restart mnt-persist.mount'
-            
-#cloud-config
-
-# write-files:
- # - path: /etc/conf.d/nfs
-   # permissions: '0644'
-   # content: |
-     # OPTS_RPC_MOUNTD=""
-# users:
-   # - name: XYZ
-     # groups:
-       # - sudo
-       # - docker
-     # ssh-authorized-keys:
-       # - ssh-rsa XYZ
-# coreos:
-  # etcd:
-    # discovery: https://discovery.etcd.io/XYZ
-    # peer-addr: $private_ipv4:7001
-
