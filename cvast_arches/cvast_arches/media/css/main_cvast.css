@@ -354,6 +354,7 @@ blockquote footer {
 
 .cvast-image-box-with-caption-left-image {
     max-width:100%;
+    max-height: 85vh;
 }
 
 @media (max-width: 768px) {
