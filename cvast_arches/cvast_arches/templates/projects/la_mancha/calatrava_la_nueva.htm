@@ -25,7 +25,7 @@
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
     <h5>View from our drone</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_aerial.jpg' %}); background-position: 30% 50%;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_aerial.jpg); background-position: 30% 50%;"></div>
 
 
 <!-- Sketchfab -->
@@ -75,17 +75,17 @@
     </div>
 </div>
 <figure id="video-player" class="cvast-video-player-medium">
-    <video controls poster="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}"
+    <video controls poster="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png"
         loop="">
         <source src="{{ S3_STATIC_URL_VIDEO }}/la_mancha/calatrava_la_nueva/Calatrava_la_Nueva_Animation-streaming.mp4">
     </video>
     <figcaption>
         <a href="{{ S3_STATIC_URL_VIDEO }}/la_mancha/calatrava_la_nueva/Calatrava_la_Nueva_Animation-streaming.mp4" data-caption="<h5>Calatrava la Nueva: main gate, church and tower area</h5> <p>Interior rooms displayed with intensity values.</p>">
-            <img src="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}" alt="">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png" alt="">
         </a>
 
         <a href="{{ S3_STATIC_URL_VIDEO }}/la_mancha/calatrava_la_nueva/Iglesia_la_Nueva-streaming.mp4" data-caption="<h5>Calatrava La Nueva: church interior</h5><p>Flying in from above, you are led though a rendering of a point cloud created from approxiamtely 25 scan positions.</p>">
-            <img src="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Iglesia_la_Nueva.png' %}" alt="">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Iglesia_la_Nueva.png" alt="">
         </a>
 
         <a href="{{ S3_STATIC_URL_VIDEO }}/la_mancha/calatrava_la_nueva/stonecarving5_color-streaming.mp4" data-caption="<h5>Stone relief found at Calatrava La Nueva</h5>
@@ -106,7 +106,7 @@
     <div align="center" class="cvast-background-image-title">
         <h5>Scanning the cistern</h5>
     </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_cistern.jpg' %}); background-size: auto 100%; background-position: 50% 0%; height: 100vh"></div>
+    <div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_cistern.jpg); background-size: auto 100%; background-position: 50% 0%; height: 100vh"></div>
 
 </div>
 <!-- End photos -->

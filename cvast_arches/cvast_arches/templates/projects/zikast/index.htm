@@ -3,7 +3,7 @@
 <!--=== Content Part ===-->
 <div class="block-description cvast-project-title">
 	<div class="container content padding-top-20">
-		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "ZIKAST" %} <img src="{% static 'img/projects/zikast/zikast_logo.png' %}" style="max-height: 50px; padding-left: 10px;"
+		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "ZIKAST" %} <img src="{{ S3_STATIC_URL_IMG }}/projects/zikast/zikast_logo.png" style="max-height: 50px; padding-left: 10px;"
 			/></h1>
 	</div>
 
@@ -44,7 +44,7 @@
 		<h5>West Nile virus early warning system (red=high risk, black=human cases).</h5>
 		<p>From: <a href="http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article" target="_blank">Carney et al 2011 <i>Emerging Infectious Diseases</i></a></p>
 	</div>
-	<div class="background-image" style="background-image: url({% static 'img/projects/zikast/04_wnv_dycast_epidemic.png' %}); background-size: auto 100%; background-size: fit;"></div>
+	<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/zikast/04_wnv_dycast_epidemic.png); background-size: auto 100%; background-size: fit;"></div>
 
 
 	<!-- Videos -->
@@ -52,7 +52,7 @@
 		<h5 id="cvast-video-caption">West Nile virus early warning system (red=high risk, black=human cases).</h5>
 		<p>From: <a href="http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article" target="_blank">Carney et al 2011 <i>Emerging Infectious Diseases</i></a></p>
 	</div>
-	<video align="center" class="cvast-video-full" controls poster="{% static 'img/projects/zikast/video_thumbnails/03_wnv_dycast_480x560_video.png' %}"
+	<video align="center" class="cvast-video-full" controls poster="{{ S3_STATIC_URL_IMG }}/projects/zikast/video_thumbnails/03_wnv_dycast_480x560_video.png"
 		loop="" style="max-height: 560px;">
 		<source src="{{ S3_STATIC_URL_VIDEO }}/zikast/03_WNV+DYCAST_480x560_video.webm">
 	</video>

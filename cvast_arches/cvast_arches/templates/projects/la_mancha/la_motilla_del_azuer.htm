@@ -23,7 +23,7 @@
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
     <h5>View from our blimp</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_aerial.jpg' %}); background-position: 50% 30%;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_aerial.jpg); background-position: 50% 30%;"></div>
 
 
 <!-- Sketchfab -->
@@ -64,7 +64,7 @@
         </p>
     </div>
     <div>
-        <video align="center" class="cvast-video-full" style="max-height: 80vh;" controls poster="{% static 'img/projects/la_mancha/la_motilla_del_azuer/video_thumbnails/Motilla_del_Azuer_Photogrammetric_Model.png' %}"
+        <video align="center" class="cvast-video-full" style="max-height: 80vh;" controls poster="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_motilla_del_azuer/video_thumbnails/Motilla_del_Azuer_Photogrammetric_Model.png"
             loop="">
             <source src="{{ S3_STATIC_URL_VIDEO }}/la_mancha/la_motilla_del_azuer/Motilla_del_Azuer_Photogrammetric_Model-streaming.mp4" type="video/mp4">
         </video>
@@ -84,18 +84,18 @@
 <div align="center" class="cvast-background-image-title">
     <h5>Setting up scanners and spheres</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer.jpg' %}); background-position: 20% 50%;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer.jpg); background-position: 20% 50%;"></div>
 
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
     <h5>View into the Bronze Age well</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_well.jpg' %}); background-position: 70% 70%;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_well.jpg); background-position: 70% 70%;"></div>
 
 
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
     <h5>Scanning storage silos</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_storage_silos.jpg' %}); background-position: 52% 52%;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_storage_silos.jpg); background-position: 52% 52%;"></div>
 
 
 <div class="container padding-top-20">
@@ -109,7 +109,7 @@
 <div align="center" class="cvast-background-image-title">
     <h5>Elevation model of the well</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_elevation.jpg' %}); height: 800px; background-position: 100% 50%;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_motilla_del_azuer/la_motilla_del_azuer_elevation.jpg); height: 800px; background-position: 100% 50%;"></div>
 <!-- End photos -->
 
 {% include 'projects/la_mancha/project_footer_la_mancha.htm' %} {% endblock content %}
