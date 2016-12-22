@@ -25,9 +25,6 @@ services:
     nginx:
       restart: always
       image: cvast/cvast-nginx:$PROD_VERSION
-      build: 
-        context: .
-        dockerfile: ./Dockerfile-nginx
       ports:
         - '80:80'
         - '443:443'
@@ -43,6 +40,7 @@ services:
         - PROXY_CONTAINER=web
         - DOMAIN_NAMES=cvast.usf.edu
         - PUBLIC_MODE=True
+        - CERTIFICATE_WAIT_TIMEOUT=90
         - TZ=EST
         
     letsencrypt:
