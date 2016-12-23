@@ -33,11 +33,12 @@ start_nginx_foreground() {
 }
 
 set_search_engine_settings() {
-	mkdir -p ${WEB_ROOT}
 	if [[ ${PUBLIC_MODE} == True ]]; then
-		cp ${INSTALL_DIR}/robots_public.txt ${WEB_ROOT}/robots.txt
+		allow_text="" 
+		sed -i "s/<allow_or_disallow>/${allow_text}/g" ${NGINX_DEFAULT_CONF}
 	else 
-		cp ${INSTALL_DIR}/robots_private.txt ${WEB_ROOT}/robots.txt
+		disallow_text=" /" 
+		sed -i "s/<allow_or_disallow>/${allow_text}/g" ${NGINX_DEFAULT_CONF}
 	fi
 }
 
@@ -75,6 +76,9 @@ check_variable() {
 }
 
 #### Starting point
+# For LetsEncrypt acme challange
+mkdir -p ${WEB_ROOT}
+
 check_variable "${DOMAIN_NAMES}" DOMAIN_NAMES
 check_variable "${PROXY_CONTAINER}" PROXY_CONTAINER
 
