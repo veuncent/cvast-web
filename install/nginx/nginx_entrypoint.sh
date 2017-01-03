@@ -38,7 +38,7 @@ set_search_engine_settings() {
 		sed -i "s/<allow_or_disallow>/${allow_text}/g" ${NGINX_DEFAULT_CONF}
 	else 
 		disallow_text=" /" 
-		sed -i "s/<allow_or_disallow>/${allow_text}/g" ${NGINX_DEFAULT_CONF}
+		sed -i "s/<allow_or_disallow>/${disallow_text}/g" ${NGINX_DEFAULT_CONF}
 	fi
 }
 
