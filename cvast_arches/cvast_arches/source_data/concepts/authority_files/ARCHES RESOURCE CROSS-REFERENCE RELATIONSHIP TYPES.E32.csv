@@ -25,3 +25,5 @@ RELATIONSHIP_TYPE:23,was made significant by / contributed to the significance o
 RELATIONSHIP_TYPE:24,Historic Resource/District - Historical Event/Activity,,ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPES.E32.csv,Collector,CVAST
 RELATIONSHIP_TYPE:25,was the location of / took place at,Historic Resource/District and Historical Event/Activity Relationship,RELATIONSHIP_TYPE:24,Index,CVAST
 RELATIONSHIP_TYPE:26,was made significant by / contributed to the significance of,Historic Resource/District and Significant Event Relationship,RELATIONSHIP_TYPE:24,Index,CVAST
+RELATIONSHIP_TYPE:27,Project - Actor,,ARCHES RESOURCE CROSS-REFERENCE RELATIONSHIP TYPES.E32.csv,Collector,CVAST
+RELATIONSHIP_TYPE:28,was carried out by / carried out,,RELATIONSHIP_TYPE:27,Index,CVAST
