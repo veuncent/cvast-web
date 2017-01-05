@@ -1,18 +1,15 @@
 conceptid,PrefLabel,AltLabels,ParentConceptid,ConceptType,Provider 
-HISTRES_TYPE_ID:1,Object,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,CVAST
-,Other,Object: other,HISTRES_TYPE_ID:1,Index,CVAST
-,Unknown,Object: unknown,HISTRES_TYPE_ID:1,Index,CVAST
-HISTRES_TYPE_ID:2,Jewelry,,HISTRES_TYPE_ID:1,Index,CVAST
-HISTRES_TYPE_ID:3,Lithic,,HISTRES_TYPE_ID:1,Index,CVAST
-HISTRES_TYPE_ID:4,Pottery,,HISTRES_TYPE_ID:1,Index,CVAST
-HISTRES_TYPE_ID:5,Tool,,HISTRES_TYPE_ID:1,Index,CVAST
-HISTRES_TYPE_ID:6,"Visual object (relief, painting, etc.)",,HISTRES_TYPE_ID:1,Index,CVAST
-HISTRES_TYPE_ID:7,Human remains,,HISTRES_TYPE_ID:1,Index,CVAST
-HISTRES_TYPE_ID:8,Organic remains,Non-human organic remains,HISTRES_TYPE_ID:1,Index,CVAST
+HISTRES_TYPE_ID:1,Object,Object: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
+HISTRES_TYPE_ID:2,Human remains,,HISTRES_TYPE_ID:1,Index,CVAST
+HISTRES_TYPE_ID:3,Jewelry,,HISTRES_TYPE_ID:1,Index,CVAST
+HISTRES_TYPE_ID:4,Lithic,,HISTRES_TYPE_ID:1,Index,CVAST
+,Animal remains,,,,
+HISTRES_TYPE_ID:5,Botanical remains,Non-human organic remains,HISTRES_TYPE_ID:1,Index,CVAST
+HISTRES_TYPE_ID:6,Pottery,,HISTRES_TYPE_ID:1,Index,CVAST
+HISTRES_TYPE_ID:7,Tool,,HISTRES_TYPE_ID:1,Index,CVAST
+HISTRES_TYPE_ID:8,"Visual object (relief, painting, etc.)",,HISTRES_TYPE_ID:1,Index,CVAST
 HISTRES_TYPE_ID:10,Weapon,,HISTRES_TYPE_ID:1,Index,CVAST
-HISTRES_TYPE_ID:11,Building material,,HISTRES_TYPE_ID:1,Collector,CVAST
-,Other,Building material: other,HISTRES_TYPE_ID:11,Index,CVAST
-,Unknown,Building material: unknown,HISTRES_TYPE_ID:11,Index,CVAST
+HISTRES_TYPE_ID:11,Building material,Building material: unknown,HISTRES_TYPE_ID:1,Index,CVAST
 ,Brick,,HISTRES_TYPE_ID:11,Index,CVAST
 ,Clay tile,,HISTRES_TYPE_ID:11,Index,CVAST
 ,Composition shingle,,HISTRES_TYPE_ID:11,Index,CVAST
@@ -24,61 +21,46 @@ HISTRES_TYPE_ID:11,Building material,,HISTRES_TYPE_ID:1,Collector,CVAST
 ,Half timbering,,HISTRES_TYPE_ID:11,Index,CVAST
 ,Rolled Asphalt,,HISTRES_TYPE_ID:11,Index,CVAST
 ,Standing seam,,HISTRES_TYPE_ID:11,Index,CVAST
+,Stone block,,,,
 ,Stucco,,HISTRES_TYPE_ID:11,Index,CVAST
-,"Stucco, smooth",,HISTRES_TYPE_ID:11,Index,CVAST
-,"Stucco, textured",,HISTRES_TYPE_ID:11,Index,CVAST
-,Terra cotta,,HISTRES_TYPE_ID:11,,
-,Terrazzo,,HISTRES_TYPE_ID:11,,
-,Tile,,HISTRES_TYPE_ID:11,,
-,Wood clapboards,,HISTRES_TYPE_ID:11,,
-,Wood shake,,HISTRES_TYPE_ID:11,,
-,Wood shingle,,HISTRES_TYPE_ID:11,,
-,Wood shingles,,HISTRES_TYPE_ID:11,,
-,"Wood shingles, fish scale",,HISTRES_TYPE_ID:11,,
-,Wood tongue-and-groove,,HISTRES_TYPE_ID:11,,
-,Wood vertical  boards,,HISTRES_TYPE_ID:11,,
-,"Wood, Board and Batten",,HISTRES_TYPE_ID:11,,
-,Wrought iron,,HISTRES_TYPE_ID:11,,
-HISTRES_TYPE_ID:12,Structure,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,CVAST
-,Other,Structure: other,HISTRES_TYPE_ID:12,Index,CVAST
-,Unknown,Structure: unknown,HISTRES_TYPE_ID:12,Index,CVAST
+,Terra cotta,,HISTRES_TYPE_ID:11,Index,
+,Terrazzo,,HISTRES_TYPE_ID:11,Index,
+,Tile,,HISTRES_TYPE_ID:11,Index,
+,Wood clapboards,,HISTRES_TYPE_ID:11,Index,
+,Wood shake,,HISTRES_TYPE_ID:11,Index,
+,Wood shingle,,HISTRES_TYPE_ID:11,Index,
+,Wood tongue-and-groove,,HISTRES_TYPE_ID:11,Index,
+,Wood vertical  boards,,HISTRES_TYPE_ID:11,Index,
+,"Wood, Board and Batten",,HISTRES_TYPE_ID:11,Index,
+,Wrought iron,,HISTRES_TYPE_ID:11,Index,
+HISTRES_TYPE_ID:12,Structure,Structure: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:13,Dwelling,,HISTRES_TYPE_ID:12,Index,CVAST
 HISTRES_TYPE_ID:14,Fortification/defensive structure,,HISTRES_TYPE_ID:12,Index,CVAST
 HISTRES_TYPE_ID:15,Agricultural structure,,HISTRES_TYPE_ID:12,Index,CVAST
 HISTRES_TYPE_ID:16,Industrial structure,,HISTRES_TYPE_ID:12,Index,CVAST
 HISTRES_TYPE_ID:17,Religious structure,,HISTRES_TYPE_ID:12,Index,CVAST
 HISTRES_TYPE_ID:18,Public structure,,HISTRES_TYPE_ID:12,Index,CVAST
-HISTRES_TYPE_ID:20,Site,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,CVAST
-,Other,Site: other,HISTRES_TYPE_ID:20,Index,CVAST
-,Unknown,Site: unknown,HISTRES_TYPE_ID:20,Index,CVAST
+HISTRES_TYPE_ID:20,Site,Site: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:21,Residential site,,HISTRES_TYPE_ID:20,Index,CVAST
 HISTRES_TYPE_ID:22,Defensive site,,HISTRES_TYPE_ID:20,Index,CVAST
 HISTRES_TYPE_ID:23,Agricultural site,,HISTRES_TYPE_ID:20,Index,CVAST
 HISTRES_TYPE_ID:24,Industrial site,,HISTRES_TYPE_ID:20,Index,CVAST
 HISTRES_TYPE_ID:25,Religious site,,HISTRES_TYPE_ID:20,Index,CVAST
 HISTRES_TYPE_ID:26,Public site,,HISTRES_TYPE_ID:20,Index,CVAST
-HISTRES_TYPE_ID:28,Residential-Single Family,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Residential-Single Family: other,HISTRES_TYPE_ID:28,Index,CVAST
-,Unknown,Residential-Single Family: unknown,HISTRES_TYPE_ID:28,Index,CVAST
+HISTRES_TYPE_ID:28,Residential-Single Family,Residential-Single Family: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:29,Bungalow,,HISTRES_TYPE_ID:28,Index,SurveyLA
 HISTRES_TYPE_ID:30,House,,HISTRES_TYPE_ID:28,Index,SurveyLA
 HISTRES_TYPE_ID:31,Farm/Ranch House,,HISTRES_TYPE_ID:28,Index,SurveyLA
 HISTRES_TYPE_ID:32,Estate,,HISTRES_TYPE_ID:28,Index,SurveyLA
 HISTRES_TYPE_ID:33,Adobe,,HISTRES_TYPE_ID:28,Index,SurveyLA
-HISTRES_TYPE_ID:34,Other,,HISTRES_TYPE_ID:28,Index,SurveyLA
-HISTRES_TYPE_ID:35,Residential-District,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Residential-District: other,HISTRES_TYPE_ID:35,Index,CVAST
-,Unknown,Residential-District: unknown,HISTRES_TYPE_ID:35,Index,CVAST
+HISTRES_TYPE_ID:35,Residential-District,Residential-District: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:36,Residential Grouping,,HISTRES_TYPE_ID:35,Index,SurveyLA
 HISTRES_TYPE_ID:37,Public Housing Complex,,HISTRES_TYPE_ID:35,Index,SurveyLA
 HISTRES_TYPE_ID:38,Employer Built Worker Housing,,HISTRES_TYPE_ID:35,Index,SurveyLA
 HISTRES_TYPE_ID:39,Garden Apartment Complex,,HISTRES_TYPE_ID:35,Index,SurveyLA
 HISTRES_TYPE_ID:40,Multi-family District,,HISTRES_TYPE_ID:35,Index,SurveyLA
 HISTRES_TYPE_ID:41,Mobile Home Park,,HISTRES_TYPE_ID:35,Index,SurveyLA
-HISTRES_TYPE_ID:42,Other,,HISTRES_TYPE_ID:35,Index,SurveyLA
-HISTRES_TYPE_ID:43,Residential-Suburb,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Residential-Suburb: other,HISTRES_TYPE_ID:43,Index,CVAST
-,Unknown,Residential-Suburb: unknown,HISTRES_TYPE_ID:43,Index,CVAST
+HISTRES_TYPE_ID:43,Residential-Suburb,Residential-Suburb: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:44,Streetcar Suburb,,HISTRES_TYPE_ID:43,Index,SurveyLA
 HISTRES_TYPE_ID:45,Early Automobile Suburb,,HISTRES_TYPE_ID:43,Index,SurveyLA
 HISTRES_TYPE_ID:46,Post World War II and Early Freeway Suburb,,HISTRES_TYPE_ID:43,Index,SurveyLA
@@ -89,15 +71,9 @@ HISTRES_TYPE_ID:50,Custom Home Subdivision,,HISTRES_TYPE_ID:43,Index,SurveyLA
 HISTRES_TYPE_ID:51,Hillside Suburb,,HISTRES_TYPE_ID:43,Index,SurveyLA
 HISTRES_TYPE_ID:52,Multi-family,,HISTRES_TYPE_ID:43,Index,SurveyLA
 HISTRES_TYPE_ID:53,Country Club Suburb,,HISTRES_TYPE_ID:43,Index,SurveyLA
-HISTRES_TYPE_ID:54,Other,,HISTRES_TYPE_ID:43,Index,SurveyLA
-HISTRES_TYPE_ID:55,Residential-Ancillary Feature,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Residential-Ancillary Feature: other,HISTRES_TYPE_ID:55,Index,CVAST
-,Unknown,Residential-Ancillary Feature: unknown,HISTRES_TYPE_ID:55,Index,CVAST
+HISTRES_TYPE_ID:55,Residential-Ancillary Feature,Residential-Ancillary Feature: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:56,Carriage house,,HISTRES_TYPE_ID:55,Index,SurveyLA
-HISTRES_TYPE_ID:57,Other,,HISTRES_TYPE_ID:55,Index,SurveyLA
-HISTRES_TYPE_ID:58,Residential-Multi Family,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Residential-Multi Family: other,HISTRES_TYPE_ID:58,Index,CVAST
-,Unknown,Residential-Multi Family: unknown,HISTRES_TYPE_ID:58,Index,CVAST
+HISTRES_TYPE_ID:58,Residential-Multi Family,Residential-Multi Family: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:59,Duplex,,HISTRES_TYPE_ID:58,Index,SurveyLA
 HISTRES_TYPE_ID:60,Triplex,,HISTRES_TYPE_ID:58,Index,SurveyLA
 HISTRES_TYPE_ID:61,Fourplex,,HISTRES_TYPE_ID:58,Index,SurveyLA
@@ -108,9 +84,7 @@ HISTRES_TYPE_ID:65,Apartment Tower,,HISTRES_TYPE_ID:58,Index,SurveyLA
 HISTRES_TYPE_ID:66,Condominium,,HISTRES_TYPE_ID:58,Index,SurveyLA
 HISTRES_TYPE_ID:67,Stucco Box/Dingbat,,HISTRES_TYPE_ID:58,Index,SurveyLA
 HISTRES_TYPE_ID:68,Garden Apartment,,HISTRES_TYPE_ID:58,Index,SurveyLA
-HISTRES_TYPE_ID:70,Commercial-Retail,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Commercial-Retail: other,HISTRES_TYPE_ID:70,Index,CVAST
-,Unknown,Commercial-Retail: unknown,HISTRES_TYPE_ID:70,Index,CVAST
+HISTRES_TYPE_ID:70,Commercial-Retail,Commercial-Retail: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:71,Retail Store,,HISTRES_TYPE_ID:70,Index,SurveyLA
 HISTRES_TYPE_ID:72,Department Store,,HISTRES_TYPE_ID:70,Index,SurveyLA
 HISTRES_TYPE_ID:73,Neighborhood Market,,HISTRES_TYPE_ID:70,Index,SurveyLA
@@ -120,29 +94,21 @@ HISTRES_TYPE_ID:76,Chain Store,,HISTRES_TYPE_ID:70,Index,SurveyLA
 HISTRES_TYPE_ID:77,Strip Mall,,HISTRES_TYPE_ID:70,Index,SurveyLA
 HISTRES_TYPE_ID:78,Drive-thru Commercial,,HISTRES_TYPE_ID:70,Index,SurveyLA
 HISTRES_TYPE_ID:79,Drive-in Commercial,,HISTRES_TYPE_ID:70,Index,SurveyLA
-HISTRES_TYPE_ID:81,Commercial-Office,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Commercial-Office: other,HISTRES_TYPE_ID:81,Index,CVAST
-,Unknown,Commercial-Office: unknown,HISTRES_TYPE_ID:81,Index,CVAST
+HISTRES_TYPE_ID:81,Commercial-Office,Commercial-Office: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:82,Low Rise,,HISTRES_TYPE_ID:81,Index,SurveyLA
 HISTRES_TYPE_ID:83,High Rise,,HISTRES_TYPE_ID:81,Index,SurveyLA
-HISTRES_TYPE_ID:85,Commercial District,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Commercial District: other,HISTRES_TYPE_ID:85,Index,CVAST
-,Unknown,Commercial District: unknown,HISTRES_TYPE_ID:85,Index,CVAST
+HISTRES_TYPE_ID:85,Commercial District,Commercial District: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:86,Node,,HISTRES_TYPE_ID:85,Index,SurveyLA
 HISTRES_TYPE_ID:87,Corridor,,HISTRES_TYPE_ID:85,Index,SurveyLA
 HISTRES_TYPE_ID:88,Neighborhood/Village Commercial Center,,HISTRES_TYPE_ID:85,Index,SurveyLA
 HISTRES_TYPE_ID:89,Shopping Center,,HISTRES_TYPE_ID:85,Index,SurveyLA
 HISTRES_TYPE_ID:90,Shopping Mall,,HISTRES_TYPE_ID:85,Index,SurveyLA
-HISTRES_TYPE_ID:92,Commercial-Lodging,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Commercial-Lodging: other,HISTRES_TYPE_ID:92,Index,CVAST
-,Unknown,Commercial-Lodging: unknown,HISTRES_TYPE_ID:92,Index,CVAST
+HISTRES_TYPE_ID:92,Commercial-Lodging,Commercial-Lodging: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:93,Hotel,,HISTRES_TYPE_ID:92,Index,SurveyLA
 HISTRES_TYPE_ID:94,Boarding House,,HISTRES_TYPE_ID:92,Index,SurveyLA
 HISTRES_TYPE_ID:95,Apartment Hotel,,HISTRES_TYPE_ID:92,Index,SurveyLA
 HISTRES_TYPE_ID:96,Motel,,HISTRES_TYPE_ID:92,Index,SurveyLA
-HISTRES_TYPE_ID:98,Commercial-Auto Related,,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Collector,SurveyLA
-,Other,Commercial-Auto Related: other,HISTRES_TYPE_ID:98,Index,CVAST
-,Unknown,Commercial-Auto Related: unknown,HISTRES_TYPE_ID:98,Index,CVAST
+HISTRES_TYPE_ID:98,Commercial-Auto Related,Commercial-Auto Related: unknown,HERITAGE_RESOURCE_TYPE_AUTHORITY_DOCUMENT.csv,Index,CVAST
 HISTRES_TYPE_ID:99,Gas/Service Station,,HISTRES_TYPE_ID:98,Index,SurveyLA
 HISTRES_TYPE_ID:100,Carwash,,HISTRES_TYPE_ID:98,Index,SurveyLA
 HISTRES_TYPE_ID:101,Service Station with Carwash,,HISTRES_TYPE_ID:98,Index,SurveyLA
