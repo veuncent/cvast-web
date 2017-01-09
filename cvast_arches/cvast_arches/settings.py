@@ -68,7 +68,7 @@ TEMPLATE_DIRS = (
         os.path.join(PACKAGE_ROOT, 'templatetags'),
         os.path.join(PACKAGE_ROOT, '..', '..', 'arches_hip', 'arches_hip', 'templates'), # Added by Vincent: cvast_arches needed this, but couldn't find it
     ) + TEMPLATE_DIRS
-RESOURCE_MODEL = {'default': 'arches_hip.models.resource.Resource'}
+RESOURCE_MODEL = {'default': 'cvast_arches.models.resource.Resource'}
 APP_NAME = 'USF CVAST'
 PACKAGE_VALIDATOR = 'cvast_arches.source_data.validation.HIP_Validator'
 
