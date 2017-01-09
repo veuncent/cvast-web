@@ -426,7 +426,7 @@ blockquote footer {
 
 /* To be used when neccessary */
 .cvast-profile-box-image {
-
+    max-width: 300px !important;
 }
 
 .cvast-profile-box-image-full {
@@ -452,6 +452,12 @@ blockquote footer {
 
     .cvast-profile-box-body {
         padding-top: 15px;
+    }
+
+    .cvast-profile-box-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
