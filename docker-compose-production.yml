@@ -1,5 +1,5 @@
 version: '2'
-services:   
+services:
     web:
       restart: always
       image: cvast/cvast-web:$PROD_VERSION
@@ -21,7 +21,7 @@ services:
         - TZ=EST
       ports:
         - '8000:8000'
-        
+
     nginx:
       restart: always
       image: cvast/cvast-nginx:$PROD_VERSION
@@ -42,7 +42,7 @@ services:
         - PUBLIC_MODE=True
         - CERTIFICATE_WAIT_TIMEOUT=90
         - TZ=EST
-        
+
     letsencrypt:
       image: cvast/cvast-letsencrypt:1.0
       volumes:
@@ -58,7 +58,7 @@ services:
         - PRODUCTION_MODE=True
         - PERSISTENT_MODE=True
         - TZ=EST
-        
+
 volumes:
     web-uploaded-files:
     web-log:
