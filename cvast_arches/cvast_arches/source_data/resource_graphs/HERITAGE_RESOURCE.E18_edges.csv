@@ -117,6 +117,6 @@ Source,Target,Type,id,label,weight
 175,178,Directed,185,P4,1.0
 178,179,Directed,186,P78,1.0
 4,182,Directed,187,-P41,1.0
-182,183,Directed,190,P42i,1.0
+182,183,Directed,190,P14,1.0
 183,184,Directed,191,P2,1.0
 184,185,Directed,192,-P71,1.0
