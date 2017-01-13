@@ -28,11 +28,6 @@ AWS_DEFAULT_REGION=us-east-1
 ####Functions####################################################################################################################
 
 
-run_unit_tests() {
-	./cvast_arches/tests/run_tests.sh
-}
-
-
 # Parameters: 
 # $1 = app (web, db, elasticsearch, nginx)
 build_image() {
@@ -273,7 +268,6 @@ while ! ${SERVER_UP}; do
 	set -e
 done
 
-run_unit_tests
 kill_all_containers
 
 
