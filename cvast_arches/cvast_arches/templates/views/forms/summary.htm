@@ -22,7 +22,7 @@
                             <div class="col-xs-12 hidden-xs">
 
                                 <input style="width:80%; height: 36px; padding-top: 2px;" class="select2 arches-select2-crud-form resource-type" id="resource-type-dropdown
-                                " data-bind="select2: {value: getEditedNode('RESOURCE_TYPE_CLASSIFICATION.E55', 'value'), placeholder: '{% trans "Type" %}', multiple: false, dataKey: 'RESOURCE_TYPE_CLASSIFICATION.E55'}"></input>
+                                " data-bind="select2: {value: getEditedNode('HERITAGE_RESOURCE_CLASSIFICATION.E55', 'value'), placeholder: '{% trans "Type" %}', multiple: false, dataKey: 'HERITAGE_RESOURCE_CLASSIFICATION.E55'}"></input>
 
                                 {% include 'views/components/add-item-button.htm' %}
 
@@ -31,7 +31,7 @@
                             <div class="col-xs-12  hidden-sm hidden-md hidden-lg">
 
                                 <input style="width:100%; height: 36px; padding-top: 2px; margin-bottom: 5px" class="select2 arches-select2-crud-form resource-type" id="resource-type-dropdown
-                                " data-bind="select2: {value: getEditedNode('RESOURCE_TYPE_CLASSIFICATION.E55', 'value'), placeholder: '{% trans "Type" %}', multiple: false, dataKey: 'RESOURCE_TYPE_CLASSIFICATION.E55'}"></input>
+                                " data-bind="select2: {value: getEditedNode('HERITAGE_RESOURCE_CLASSIFICATION.E55', 'value'), placeholder: '{% trans "Type" %}', multiple: false, dataKey: 'HERITAGE_RESOURCE_CLASSIFICATION.E55'}"></input>
 
                                 {% include 'views/components/add-item-button.htm' %}
 
@@ -63,7 +63,7 @@
                         <div data-bind='foreach: getBranchLists()'>
                             <div class="arches-crud-record">
                                 <a href="javascript:void(0)" class="arches-CRUD-child" title="{% trans "Delete this type" %}"><i data-bind="click: $parent.deleteItem.bind($parent)" class="arches-CRUD-delete fa fa-times-circle"></i></a>
-                                <a href="javascript:void(0)" class="arches-CRUD-child arches-CRUD-edit" data-bind="click: $parent.editItem.bind($parent)" title="{% trans "Edit this type" %}"><span data-bind='text: nodes.get("RESOURCE_TYPE_CLASSIFICATION.E55", "label")' style="padding-right:2px;"></span>
+                                <a href="javascript:void(0)" class="arches-CRUD-child arches-CRUD-edit" data-bind="click: $parent.editItem.bind($parent)" title="{% trans "Edit this type" %}"><span data-bind='text: nodes.get("HERITAGE_RESOURCE_CLASSIFICATION.E55", "label")' style="padding-right:2px;"></span>
                                 </a>
                             </div>
                         </div>

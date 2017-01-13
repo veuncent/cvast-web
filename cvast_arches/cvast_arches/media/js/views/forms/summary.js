@@ -18,7 +18,7 @@ define(['jquery',
                 this.addBranchList(new BranchList({
                     el: this.$el.find('#heritage-type-section')[0],
                     data: this.data,
-                    dataKey: 'RESOURCE_TYPE_CLASSIFICATION.E55',
+                    dataKey: 'HERITAGE_RESOURCE_CLASSIFICATION.E55',
                     validateBranch: function (nodes) {
                         return true;
                     }//,

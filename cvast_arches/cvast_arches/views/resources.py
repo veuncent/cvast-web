@@ -120,11 +120,11 @@ def report(request, resourceid):
         related_resource['relationship'] = []
         if related_resource['entitytypeid'] == 'HERITAGE_RESOURCE.E18':
             for entity in related_resource['domains']:
-                if entity['entitytypeid'] == 'RESOURCE_TYPE_CLASSIFICATION.E55':
+                if entity['entitytypeid'] == 'HERITAGE_RESOURCE_CLASSIFICATION.E55':
                     related_resource['relationship'].append(get_preflabel_from_valueid(entity['value'], lang)['value'])
         elif related_resource['entitytypeid'] == 'HERITAGE_RESOURCE_GROUP.E27':
             for entity in related_resource['domains']:
-                if entity['entitytypeid'] == 'RESOURCE_TYPE_CLASSIFICATION.E55':
+                if entity['entitytypeid'] == 'HERITAGE_RESOURCE_CLASSIFICATION.E55':
                     related_resource['relationship'].append(get_preflabel_from_valueid(entity['value'], lang)['value'])
         elif related_resource['entitytypeid'] == 'ACTIVITY.E7':
             for entity in related_resource['domains']:
