@@ -91,6 +91,7 @@ RUN pip install ptvsd
 COPY install/web/web_entrypoint.sh ${INSTALL_DIR}/web_entrypoint.sh
 RUN chmod -R 700 ${INSTALL_DIR}
 RUN dos2unix ${INSTALL_DIR}/*
+RUN dos2unix ${WEB_ROOT}/${WEB_APP_NAME}/tests/run_tests.sh
 
 VOLUME ["${WEB_ROOT}/${WEB_APP_NAME}/${WEB_APP_NAME}/uploadedfiles/files", "${WEB_ROOT}/${WEB_APP_NAME}/${WEB_APP_NAME}/logs"]
 EXPOSE 8000 3000
