@@ -76,7 +76,6 @@ class AuthTests(SimpleTestCase):
 
         """
 
-        print "Testing: test_login() ..."
         request = self.factory.post(reverse('auth'), {'username': 'test', 'password': 'password'})
         request.user = self.user
         apply_middleware(request)
@@ -92,7 +91,6 @@ class AuthTests(SimpleTestCase):
 
         """
 
-        print "Testing: test_set_anonymous_user_middleware() ..."
         request = self.factory.get(reverse('home'))
         request.user = AnonymousUser()
         set_anonymous_user(request)
@@ -106,7 +104,6 @@ class AuthTests(SimpleTestCase):
 
         """
 
-        print "Testing: test_nonauth_user_access_to_RDM() ..."
         request = self.factory.get(reverse('rdm', args=['']))
         request.user = AnonymousUser()
         apply_middleware(request)
@@ -172,7 +169,6 @@ class AuthTests(SimpleTestCase):
 
         """
 
-        print "Testing: test_nonauth_user_access_to_resource_manager() ..."
         response = self.client.get(reverse('resource_manager', kwargs={'resourcetypeid':'HERITAGE_RESOURCE.E18', 'form_id': 'summary', 'resourceid': ''}))
 
         self.assertTrue(response.status_code == 302)
