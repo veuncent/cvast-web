@@ -263,9 +263,17 @@ blockquote footer {
     min-height: 315px;
 }
 
+.cvast-promobox p {
+    hyphens: none;
+}
+
 .cvast-promobox-small {
     min-height: 270px;
 }
+
+    .cvast-promobox-small p {
+        hyphens: none;
+    }
 
 @media (max-width: 768px) {
     .cvast-narrow-banner {
