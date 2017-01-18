@@ -20,6 +20,22 @@
     </div>
 </div>
 
+<!-- Videos -->
+<div class="block-description cvast-media-block">
+    <div align="center" class="cvast-background-image-title">
+        <h5>Video title / description here</h5>
+        </p>
+    </div>
+    <div>
+        <video align="center" class="cvast-video-full" style="max-height: 80vh;" controls poster="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/video_thumbnails/puerta_de_toledo_ciudad_real_point_cloud_animation.png"
+            loop="">
+            <source src="{{ S3_STATIC_URL_VIDEO }}/la_mancha/la_puerta_de_toledo_ciudad_real/puerta_de_toledo_ciudad_real_point_cloud_animation-streaming.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+<!-- End Videos -->
+
+
 <!-- Images -->
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
     <h5>Image title here</h5>
@@ -51,7 +67,7 @@
 <div class="cvast-image-full-view">
     <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/toledo_gate_4.jpg" alt="" />
 </div>
-
+<!-- End Images -->
 
 
 {% include 'projects/la_mancha/project_footer_la_mancha.htm' %} {% endblock content %}
