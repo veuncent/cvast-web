@@ -427,8 +427,9 @@ blockquote footer {
     }
 }
 
-/* Profile boxes */
 
+
+/* Profile boxes */
 .cvast-profile-box {
     padding-left: 15px;
     padding-bottom: 30px;
@@ -454,7 +455,6 @@ blockquote footer {
     border-radius: 3px;
 }
 
-/* To be used when neccessary */
 .cvast-profile-box-image {
     max-width: 300px !important;
 }
@@ -643,4 +643,22 @@ cvast-paragraph-box-video-left-container {
         height: 70vh;
         width: 100vw;
     }
+}
+
+
+/* Images */
+.cvast-image-full-view {
+  float: none;
+  padding: 0;
+  background: #000;
+  display: table;
+  width: 100%;
+  height: 100%;  
+}
+
+.cvast-image-full-view img {
+  display: block;
+  max-height: 80vh;
+  max-width: 100%;
+  margin: auto;
 }
