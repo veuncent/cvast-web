@@ -1,0 +1,57 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<div class="block-description cvast-project-title">
+    <div class="container">
+        <div class="row cvast-paragraph-box cvast-media-block">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>La Puerta de Toledo</h1>
+                <h5><i class="fa fa-map-marker"></i>Ciudad Real, La Mancha, Spain</h5>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <p><a href="http://www.spain.info/en/que-quieres/arte/monumentos/ciudad_real/puerta_de_toledo.html" target="_blank">La Puerta de Toledo</a>,
+                        located in the heart of Ciudad Real, Spain was constructed in the 13th Century and was part of a
+                        large, 4.5 kilometer stone wall that once surrounded the city. The monument contains six arches and
+                        has the remains of two towers on two of its sides.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Images -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+    <h5>Image title here</h5>
+</div>
+<div class="cvast-image-full-view">
+    <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/toledo_gate_1.jpg" alt="" />
+</div>
+
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+    <h5>Image title here</h5>
+</div>
+<div class="cvast-image-full-view">
+    <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/toledo_gate_2.jpg" alt="" />
+</div>
+
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+    <h5>Image title here</h5>
+</div>
+<div class="cvast-image-full-view">
+    <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/toledo_gate_3.jpg" alt="" />
+</div>
+
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+    <h5>Image title here</h5>
+</div>
+<div class="cvast-image-full-view">
+    <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/toledo_gate_4.jpg" alt="" />
+</div>
+
+
+
+{% include 'projects/la_mancha/project_footer_la_mancha.htm' %} {% endblock content %}
