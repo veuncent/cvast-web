@@ -54,11 +54,11 @@
 	<iframe src="https://sketchfab.com/playlists/embed?collection=92db630c6e9540b28d1e34201def1400" frameborder="0" allowvr allowvr
 		allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
 
-<p>
-	<a href="https://sketchfab.com/cvast/collections/the-farid-karam-antiquities-collection-at-usf" target="_blank">The Farid Karam Antiquities Collection at USF</a>	by
-	<a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on
-	<a href="https://sketchfab.com" target="_blank">Sketchfab</a>
-</p>
+	<p>
+		<a href="https://sketchfab.com/cvast/collections/the-farid-karam-antiquities-collection-at-usf" target="_blank">The Farid Karam Antiquities Collection at USF</a>	by
+		<a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on
+		<a href="https://sketchfab.com" target="_blank">Sketchfab</a>
+	</p>
 
 </div>
 <!-- End Sketchfab -->
@@ -135,25 +135,20 @@
 	<div class="row">
 		<div class="col-sm-4" align="center">
 			<h5 style="text-align: center; padding-top: 40px;">Head of Jupiter - Serapis</h5>
-			<img class="cvast-image-box-with-caption-left-image" src="{% static 'img/projects/virtual_karam/head_jupiter_serapis.jpg' %}"
-			/>
+			<img class="cvast-image-box-with-caption-left-image" src="{{ S3_STATIC_URL_IMG }}/projects/virtual_karam/head_jupiter_serapis.jpg"/>
 		</div>
 		<div class="col-sm-4" align="center">
 			<h5 style="text-align: center; padding-top: 40px;">Polychrome glass vial</h5>
-			<!--<p style="text-align: left;">Karam Collection: University of South Florida Libraries - Special Collections Department</p>-->
-			<img class="cvast-image-box-with-caption-left-image" src="{% static 'img/projects/virtual_karam/polychrome_glass_vial.jpg' %}"
-			/>
+			<img class="cvast-image-box-with-caption-left-image" src="{{ S3_STATIC_URL_IMG }}/projects/virtual_karam/polychrome_glass_vial.jpg"/>
 		</div>
 		<div class="col-sm-4" align="center">
 			<h5 style="text-align: center; padding-top: 40px;">Statuette of Aphrodite and Eros</h5>
-			<!--<p style="text-align: left;">Karam Collection: University of South Florida Libraries - Special Collections Department</p>-->
-			<img class="cvast-image-box-with-caption-left-image" src="{% static 'img/projects/virtual_karam/female_figure_holding_a_child_on_the_left_shoulder.jpg' %}"
-			/>
+			<img class="cvast-image-box-with-caption-left-image" src="{{ S3_STATIC_URL_IMG }}/projects/virtual_karam/female_figure_holding_a_child_on_the_left_shoulder.jpg"/>
 		</div>
 	</div>
-	<!-- End Images -->
-
-	{% include 'projects/project_footer.htm' %}
 </div>
+<!-- End Images -->
+
+{% include 'projects/project_footer.htm' %}
 
 {% endblock content %}
