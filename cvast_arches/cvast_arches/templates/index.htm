@@ -15,91 +15,40 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-{% extends "base.htm" %} {% load staticfiles %} {% block css %}
-<link rel="stylesheet" href="{% static 'plugins/layer_slider/css/layerslider.css' %}" type="text/css"> {{ block.super }} {% endblock css %} {% block content %}
+{% extends "base.htm" %} {% load staticfiles %} {% block css %} {{ block.super }} {% endblock css %} {% block content %}
 <!--=== Slider ===-->
-<div class="layer_slider">
-	<div id="layerslider-container-fw">
-		<div id="layerslider" style="width: 100%; height: 520px; margin: 0px auto; cursor: pointer;">
+<div class="flexslider">
+	<ul class="slides">
 
+		<!--Paris Slide-->
+		<li style="background-image: url({{ S3_STATIC_URL_IMG }}/home/Paris_Project.jpg); background-position: 50% 40%; ">
+			<p class="cvast-slideshow-text cvast-slideshow-subtitle">Muséum National d'Histoire Naturelle</p>
+			<p class="cvast-slideshow-text cvast-slideshow-title">Paris, France</p>
+		</li>
+		<!--End Paris Slide-->
 
-			<!--Paris Slide-->
-			<div class="ls-layer" onclick="location.href='{% url 'projects_project_index' project_name='paris-nhm' %}'">
+		<!--Motilla del Azuer Slide-->
+		<li style="background-image: url({{ S3_STATIC_URL_IMG }}/home/MotillaDelAzuer.jpg);">
+			<p class="cvast-slideshow-text cvast-slideshow-subtitle">Prehistoric Spain</p>
+			<p class="cvast-slideshow-text cvast-slideshow-title">Motilla del Azuer</p>
+		</li>
+		<!--End Motilla del Azuer Slide-->
 
-				<!-- Background -->
-				<img src="{{ S3_STATIC_URL_IMG }}/home/Paris_Project.jpg" class="ls-s1" style="top: -70px; left: -473px; durationin: 0;" alt="Slide background"></img>
+		<!--La Vieja Slide-->
+		<li style="background-image: url({{ S3_STATIC_URL_IMG }}/home/La_Vieja.jpg);">
+			<p class="cvast-slideshow-text cvast-slideshow-subtitle">Medieval Spain</p>
+			<p class="cvast-slideshow-text cvast-slideshow-title">Calatrava La Vieja</p>
+		</li>
+		<!--End La Vieja Slide-->
 
-				<!-- Text -->
-				<span class="ls-s-1 cvast-slideshow-text cvast-slideshow-subtitle" style="left: 10px; durationin: 0;">
-                Muséum National d'Histoire Naturelle
-                </span>
+		<!--Ciudad bull ring Slide-->
+		<li style="background-image: url({{ S3_STATIC_URL_IMG }}/home/Ciudad_bullring.jpg);">
+			<p class="cvast-slideshow-text cvast-slideshow-subtitle">Historic Spain</p>
+			<p class="cvast-slideshow-text cvast-slideshow-title">Ciudad Real bull ring</p>
+		</li>
+		<!--Ciudad bull ring Slide-->
 
-				<span class="ls-s-1 cvast-slideshow-text cvast-slideshow-title" style="left: 10px; durationin: 0;">
-                Paris, France
-                </span>
-			</div>
-			<!--End Paris Slide-->
-
-
-			<!--Motilla del Azuer Slide-->
-			<div class="ls-layer" onclick="location.href='{% url 'projects_subproject' project_name='la-mancha' resource_name='la-motilla-del-azuer' %}'">
-
-				<!-- Background -->
-				<img src="{{ S3_STATIC_URL_IMG }}/home/MotillaDelAzuer.jpg" class="ls-s1" style="top: -300px; left: -473px; durationin: 0;;" alt="Slide background">
-
-				<!-- Text -->
-				<span class="ls-s-1 cvast-slideshow-text cvast-slideshow-subtitle" style="left: 10px;">
-                Prehistoric Spain
-                </span>
-
-				<!-- Text -->
-				<span class="ls-s-1 cvast-slideshow-text cvast-slideshow-title" style="left: 10px;">
-                Motilla del Azuer
-                </span>
-
-			</div>
-			<!--End Motilla del Azuer Slide-->
-
-
-			<!--La Vieja Slide-->
-			<div class="ls-layer" onclick="location.href='{% url 'projects_subproject' project_name='la-mancha' resource_name='calatrava-la-vieja' %}'">
-
-				<!-- Background -->
-				<img src="{{ S3_STATIC_URL_IMG }}/home/La_Vieja.jpg" class="ls-s1" style="top: -270px; left: -473px; durationin: 0;" alt="Slide background">
-
-				<!-- Text -->
-				<span class="ls-s-1 cvast-slideshow-text cvast-slideshow-subtitle" style="left: 10px; ">
-                Medieval Spain
-                </span>
-				<span class="ls-s-1 cvast-slideshow-text cvast-slideshow-title" style="left: 10px;">
-                Calatrava La Vieja
-                </span>
-
-			</div>
-			<!--End La Vieja Slide-->
-
-
-			<!--Ciudad bull ring Slide-->
-			<div class="ls-layer" onclick="location.href='{% url 'projects_subproject' project_name='la-mancha' resource_name='plaza-de-toros-de-ciudad-real' %}'">
-
-				<!-- Background -->
-				<img src="{{ S3_STATIC_URL_IMG }}/home/Ciudad_bullring.jpg" class="ls-s1" style="top: -320px; left: -473px; durationin: 0;" alt="Slide background">
-
-				<!-- Text -->
-				<span class="ls-s-1 cvast-slideshow-text cvast-slideshow-subtitle" style="left: 10px;">
-                Historic Spain
-                </span>
-
-				<span class="ls-s-1 cvast-slideshow-text cvast-slideshow-title" style="left: 10px;">
-                Ciudad Real bull ring
-                </span>
-
-			</div>
-			<!--Ciudad bull ring Slide-->
-
-
-		</div>
-	</div>
+	</ul>
 </div>
 <!--=== End Slider ===-->
 

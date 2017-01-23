@@ -158,50 +158,6 @@ blockquote footer {
     font-size: 32px;
 }
 
-.cvast-slideshow-text {
-    background: rgba(0, 0, 0, .5) !important;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 4px;
-    slidedirection: top !important;
-    slideoutdirection: bottom !important; 
-    durationout: 3500 !important;
-}
-
-.cvast-slideshow-title {
-    font-weight: 300;
-    font-size: 35px; 
-    line-height: 35px; 
-    color: #fff;    
-    padding-top: 3px;
-    padding-bottom: 7px;
-    margin-top: 3px !important;
-    top: 92px !important; 
-}
-
-.cvast-slideshow-subtitle {
-    font-weight: 300;
-    font-size: 23px; 
-    line-height: 42px;
-    color: #fff; 
-    top: 50px !important; 
-}
-
-@media (max-width: 500px) {
-    .cvast-slideshow-title {
-        font-size: 25px !important;
-        line-height: 25px !important;
-        margin-top: 15px !important;
-        top: 25px !important;
-    }
-
-    .cvast-slideshow-subtitle {
-        font-size: 15px !important;
-        line-height: 25px !important;
-        top: 10px !important;
-    }
-}
-
 .cvast-url-low p{
     margin-top: 70px;
 }
