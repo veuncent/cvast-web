@@ -34,6 +34,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    cursor: pointer;
   }
 
   .flexslider .cvast-slideshow-caption-container {
