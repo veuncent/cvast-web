@@ -6,6 +6,7 @@
   width: 100%;
   height: 70vh;
   border: 0px !important;
+  position: relative;
 }
 
   .flexslider .flex-direction-nav a {
@@ -17,7 +18,13 @@
     color: #FFF !important;
   }
   
+  .flexslider .slides {
+    position: relative;
+    height: 70vh;
+  }
+
   .flexslider .slides > li {
+    right: 0;
     background-position: center;
     width: 100%;
     height: 70vh;
@@ -29,13 +36,19 @@
     background-size: cover;
   }
 
-  .flexslider .slides > li > p {
+  .flexslider .cvast-slideshow-caption-container {
+      position: absolute;
+      bottom: 10vh;
+      margin-left: 10vw;
+  }
+
+  .flexslider .cvast-slideshow-caption-container p {
     display: inline-block;
     background: rgba(0, 0, 0, .5) !important;
+    padding: 1px;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 4px;
-    margin-left: 10vw;
     font-weight: 300;
     hyphens: none;
     clear: both;
@@ -43,21 +56,18 @@
 }
 
   .flexslider .cvast-slideshow-title {
-      font-size: 3em; 
-      line-height: 35px; 
-      color: #fff;    
-      padding-top: 3px;
-      padding-bottom: 7px;
+    font-size: 2.5em; 
+    line-height: 50px; 
+    color: #fff; 
   }
 
   .flexslider .cvast-slideshow-subtitle {
     font-size: 2em; 
     line-height: 42px;
     color: #fff; 
-    margin-top: 40vh !important;
   }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
   .flexslider { 
     height: 60vh;
   }
@@ -66,22 +76,24 @@
     height: 60vh;
   }
 
-  .flexslider .slides > li > p {
-    max-width: 95vw;
+  #cvast-slideshow-image-3d-global-heritage {
+    background-position: 85% 50% !important;
+  }
+
+  .flexslider .cvast-slideshow-caption-container {
     margin-left: 3vw;
+    max-width: 94vw;
+    bottom: 15vh;
   }
 
   .flexslider .cvast-slideshow-title {
     font-size: 1.5em !important;
     line-height: 25px !important;
-    padding-bottom: 3px;
   }
 
   .flexslider .cvast-slideshow-subtitle {
     font-size: 1em !important;
     line-height: 25px !important;
-    margin-top: 45vh !important;
-    margin-bottom: 3px; 
   }
 }
 
