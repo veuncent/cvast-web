@@ -77,6 +77,10 @@
     height: 60vh;
   }
 
+  .flexslider .flex-direction-nav a {
+    display: none;
+  }
+
   #cvast-slideshow-image-3d-global-heritage {
     background-position: 85% 50% !important;
   }
