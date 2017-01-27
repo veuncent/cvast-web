@@ -30,7 +30,7 @@ init_datadir() {
 init_configdir() {
 	echo "Initializing Postgres config dir..."
 	if [[ -d ${PG_CONFIG_VOLUME} ]]; then
-		if [[ -f PG_CONFIGFILE ]]; then
+		if [[ -f ${PG_CONFIGFILE} ]]; then
 			echo "Copying and overwriting ${PG_CONFIGDIR} to ${PG_CONFIGFILE_VOLUME}"
 			cp -f ${PG_CONFIGFILE} ${PG_CONFIGFILE_VOLUME}
 			echo "Removing ${PG_CONFIGFILE}"

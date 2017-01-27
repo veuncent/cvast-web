@@ -1,0 +1,7 @@
+    - 
+        name: docker.service
+        drop-ins:
+        - name: 10-docker-data-path.conf
+          content: |
+            [Service]
+            Environment="DOCKER_OPTS=-g /mnt/persist/docker-images"

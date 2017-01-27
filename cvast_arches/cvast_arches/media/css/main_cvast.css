@@ -1,17 +1,21 @@
 /* Overwrite existing Arches css */
 
-body { 
-   color: #333; 
+body {
+   color: #333;
    font-size: 14px;
    line-height: 1.6;
-   font-family: "Open Sans",sans-serif
+   font-family: "Open Sans",sans-serif;
+}
+
+p {
+    hyphens: auto;
 }
 
 p a {
     text-decoration: underline;
-} 
+}
 
-.header .navbar-brand { 
+.header .navbar-brand {
     z-index: 1;
     top: -10px;
     position: relative;
@@ -37,7 +41,7 @@ p a {
 
 @media (max-width: 900px) {
     .background-image {
-        height: 400px; 
+        height: 400px;
         max-height: 70vh;
     }
 
@@ -69,7 +73,7 @@ blockquote footer {
 
 /*Navbar Toggle*/
 .navbar-toggle,
-.navbar-default .navbar-toggle:hover, 
+.navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
     background: #466069;
 }
@@ -110,9 +114,9 @@ blockquote footer {
     }
 
     /*Dropdown Menu*/
-    .header .dropdown-menu { 
-        border-top: solid 2px #466069; 
-    }   
+    .header .dropdown-menu {
+        border-top: solid 2px #466069;
+    }
 }
 
 /*Search Box*/
@@ -134,10 +138,10 @@ blockquote footer {
    background: #466069;
 }
 
-.btn-u:hover, 
-.btn-u:focus, 
-.btn-u:active, 
-.btn-u.active, 
+.btn-u:hover,
+.btn-u:focus,
+.btn-u:active,
+.btn-u.active,
 .open .dropdown-toggle.btn-u.btn-u-dark-blue {
     background:  #7E96A0;
 }
@@ -152,35 +156,6 @@ blockquote footer {
     margin-bottom: 50px;
     margin-top: 30px;
     font-size: 32px;
-}
-
-.cvast-slideshow-text {
-    /*background: rgba(126, 150, 160, .5) !important;*/
-    background: rgba(0, 0, 0, .5) !important;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 4px;
-}
-
-.cvast-slideshow-title {
-    padding-top: 3px;
-    padding-bottom: 7px;
-    margin-top: 3px !important;
-}
-
-@media (max-width: 500px) {
-    .cvast-slideshow-title {
-    line-height: 25px !important;
-    font-size: 25px !important; 
-    margin-top: 15px !important;
-    top: 25px !important;
-    }
-
-    .cvast-slideshow-subtitle {
-    line-height: 25px !important; 
-    font-size: 15px !important; 
-    top: 10px !important;
-    }
 }
 
 .cvast-url-low p{
@@ -204,7 +179,8 @@ blockquote footer {
     padding: 15px;
 }
 
-@media (max-width: 768px) {
+
+@media (max-width: 1700px) {
     .cvast-media-block {
         margin-top: 90px;
         padding-left: 0px;
@@ -220,23 +196,23 @@ blockquote footer {
 
 .cvast-background-image-title {
     margin: 10px;
-    margin-top: 30px; 
+    margin-top: 30px;
 }
 
 @media (max-width: 768px) {
     .cvast-background-image-title {
         margin: 30px;
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
     }
 }
 
 .cvast-background-image-spacer {
-    margin-top: 140px; 
+    margin-top: 140px;
 }
 
 @media (max-width: 768px) {
     .cvast-background-image-spacer {
-        margin-top: 90px; 
+        margin-top: 90px;
     }
 }
 
@@ -244,15 +220,23 @@ blockquote footer {
     min-height: 315px;
 }
 
+.cvast-promobox p {
+    hyphens: none;
+}
+
 .cvast-promobox-small {
     min-height: 270px;
 }
+
+    .cvast-promobox-small p {
+        hyphens: none;
+    }
 
 @media (max-width: 768px) {
     .cvast-narrow-banner {
         margin-top: 50px !important;
     }
-    
+
     .cvast-narrow-banner img {
         width: 90vw !important;
     }
@@ -266,7 +250,7 @@ blockquote footer {
     margin: 40px;
     margin-top: 80px;
     margin-bottom: 80px;
-    max-width: 300px;    
+    max-width: 300px;
 }
 
 @media (max-width: 630px) {
@@ -295,7 +279,7 @@ blockquote footer {
 .cvast-paragraph-box h1 {
     margin: 0px;
     line-height: 25px;
-    padding-bottom: 15px;    
+    padding-bottom: 15px;
 }
 
 .cvast-paragraph-box-body {
@@ -307,12 +291,12 @@ blockquote footer {
     .cvast-paragraph-box h1 {
         padding-bottom: 10px;
         margin-bottom: 10px;
-        text-align: center; 
+        text-align: center;
     }
 
     .cvast-paragraph-box h5 {
         padding-bottom: 10px;
-        text-align: center; 
+        text-align: center;
     }
 
     .cvast-paragraph-box-body {
@@ -326,7 +310,7 @@ blockquote footer {
     }
 }
 
-.cvast-paragraph-box-after-title { 
+.cvast-paragraph-box-after-title {
     margin-top: 10px;
 }
 
@@ -354,11 +338,13 @@ blockquote footer {
 
 .cvast-image-box-with-caption-left-image {
     max-width:100%;
+    max-height: 85vh;
+    border-radius: 3px;
 }
 
 @media (max-width: 768px) {
 .cvast-image-box-with-caption-left-image {
-        display: block; 
+        display: block;
         margin: auto auto;
         max-height: 70vh;
     }
@@ -393,12 +379,13 @@ blockquote footer {
         margin-left: 10px;
         margin-right: 10px;
         padding-left: 0px;
-        padding-right: 0px;        
+        padding-right: 0px;
     }
 }
 
-/* Profile boxes */
 
+
+/* Profile boxes */
 .cvast-profile-box {
     padding-left: 15px;
     padding-bottom: 30px;
@@ -420,12 +407,12 @@ blockquote footer {
 .cvast-profile-box-left-container img {
     max-width: 500px;
     width: 100%;
-    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-radius: 3px;
 }
 
-/* To be used when neccessary */
 .cvast-profile-box-image {
-    
+    max-width: 300px !important;
 }
 
 .cvast-profile-box-image-full {
@@ -451,6 +438,12 @@ blockquote footer {
 
     .cvast-profile-box-body {
         padding-top: 15px;
+    }
+
+    .cvast-profile-box-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -543,11 +536,35 @@ cvast-paragraph-box-video-left-container {
 	opacity: .5;
 	transition: 1s opacity;
 }
-#video-player figcaption a img,
-	figure video {
-		width: 100%;
-        max-height: 90vh;
+
+.cvast-video-player-large {
+    width: 100%;
 }
+
+.cvast-video-player-large video {
+		width: 100%;
+        max-height: 80vh;
+}
+
+.cvast-video-player-large figcaption a img {
+        max-width: 100%;
+        max-height: 26vh;
+}
+
+.cvast-video-player-medium {
+    width: 100%;
+}
+
+.cvast-video-player-medium video {
+		width: 100%;
+        max-height: 70vh;
+}
+
+.cvast-video-player-medium figcaption a img {
+		max-width: 100%;
+        max-height: 23vh;
+}
+
 #video-player figcaption a:hover {
 	opacity: 1;
 }
@@ -574,7 +591,7 @@ cvast-paragraph-box-video-left-container {
 .cvast-sketchfab-embeded iframe {
     width: 80vw;
     height: 80vh;
-    
+
 }
 
 @media (max-width: 768px) {
@@ -582,4 +599,22 @@ cvast-paragraph-box-video-left-container {
         height: 70vh;
         width: 100vw;
     }
+}
+
+
+/* Images */
+.cvast-image-full-view {
+  float: none;
+  padding: 0;
+  background: #000;
+  display: table;
+  width: 100%;
+  height: 100%;  
+}
+
+.cvast-image-full-view img {
+  display: block;
+  max-height: 80vh;
+  max-width: 100%;
+  margin: auto;
 }

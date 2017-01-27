@@ -20,5 +20,7 @@ from django.conf import settings
 
 def media_settings(request):
     return {
-        'S3_STATIC_URL': settings.S3_STATIC_URL
+        'S3_STATIC_URL': settings.S3_STATIC_URL,
+        'S3_STATIC_URL_IMG': settings.S3_STATIC_URL_IMG,
+        'S3_STATIC_URL_VIDEO': settings.S3_STATIC_URL_VIDEO
     }

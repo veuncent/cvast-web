@@ -37,14 +37,14 @@
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
 	<h5>Engineering team with <i>Archaeopteryx</i> and custom X-ray microtomosynthesis instrument</h5>
 </div>
-<div class="background-image background-image-responsive" style="background-image: url({% static 'img/projects/digital_dinosaurs/LLNL_scanning.jpg' %}); background-position: 55% 30%; height: 750px;"></div>
+<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/LLNL_scanning.jpg); background-position: 55% 30%; height: 750px;"></div>
 
 
 <!-- Image 2 -->
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
 	<h5><i>Deinonychus</i> forelimb model in the Maya animation environment</h5>
 </div>
-<img src="{% static 'img/projects/digital_dinosaurs/Deinonychus_Maya_original.png' %}" style="max-height: 90vh; width: 100%; object-fit: contain;"
+<img src="{{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/Deinonychus_Maya_original.png" style="max-height: 90vh; width: 100%; object-fit: contain;"
 />
 
 
@@ -65,16 +65,16 @@
 	<h5 id="cvast-video-caption">Forelimb predatory strike of <i>Deinonychus</i> (the “velociraptor” from <i>Jurassic Park</i>), 3D laser scanning and Maya
 		computer animation. Credit: Ryan Carney</h5>
 </div>
-<figure id="video-player">
-	<video controls poster="{% static 'img/projects/digital_dinosaurs/video_thumbnails/01_Deinonychus_1280x1024_video.png' %}"
+<figure id="video-player" class="cvast-video-player-medium">
+	<video controls poster="{{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/video_thumbnails/01_Deinonychus_1280x1024_video.png"
 		loop="">
-		<source src="{{ S3_STATIC_URL }}/streaming/digital_dinosaurs/01_Deinonychus_1280x1024_video.webm">
+		<source src="{{ S3_STATIC_URL_VIDEO }}/digital_dinosaurs/01_Deinonychus_1280x1024_video.webm">
 	</video>
 	<figcaption>
-		<a href="{{ S3_STATIC_URL }}/streaming/digital_dinosaurs/01_Deinonychus_1280x1024_video.webm" data-caption="Forelimb predatory strike of <i>Deinonychus</i> (the “velociraptor” from <i>Jurassic Park</i>), 3D laser scanning and Maya computer animation. Credit: Ryan Carney">
-			<img src="{% static 'img/projects/digital_dinosaurs/video_thumbnails/01_Deinonychus_1280x1024_video.png' %}" alt="">
+		<a href="{{ S3_STATIC_URL_VIDEO }}/digital_dinosaurs/01_Deinonychus_1280x1024_video.webm" data-caption="Forelimb predatory strike of <i>Deinonychus</i> (the “velociraptor” from <i>Jurassic Park</i>), 3D laser scanning and Maya computer animation. Credit: Ryan Carney">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/video_thumbnails/01_Deinonychus_1280x1024_video.png" alt="">
 		</a>
-		<a href="{{ S3_STATIC_URL }}/streaming/digital_dinosaurs/02_London+Archaeopteryx_photogrammetry_1920x1080.webm" data-caption="London specimen of <i>Archaeopteryx</i>, 3D photogrammetric reconstruction. Credit: Peter Falkingham"><img src="{% static 'img/projects/digital_dinosaurs/video_thumbnails/02_London Archaeopteryx_photogrammetry_1920x1080.png' %}"
+		<a href="{{ S3_STATIC_URL_VIDEO }}/digital_dinosaurs/02_London+Archaeopteryx_photogrammetry_1920x1080.webm" data-caption="London specimen of <i>Archaeopteryx</i>, 3D photogrammetric reconstruction. Credit: Peter Falkingham"><img src="{{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/video_thumbnails/02_London Archaeopteryx_photogrammetry_1920x1080.png"
 				alt=""></a>
 	</figcaption>
 </figure>

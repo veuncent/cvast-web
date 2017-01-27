@@ -1633,6 +1633,7 @@ i.icon-bg-light-grey {
 .servive-block-default {
   background: #fafafa;
   border: solid 1px #eee; 
+  border-radius: 3px;
 }
 
 .servive-block-default:hover {

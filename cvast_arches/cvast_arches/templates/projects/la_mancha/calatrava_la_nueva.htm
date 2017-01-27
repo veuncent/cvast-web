@@ -22,11 +22,12 @@
     </div>
 </div>
 
-<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
-    <h5>View from our drone</h5>
+<div class="cvast-image-and-title-container">
+    <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+        <h5>View from our drone</h5>
+    </div>
+    <div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_aerial.jpg); background-position: 30% 50%;"></div>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_aerial.jpg' %}); background-position: 30% 50%;"></div>
-
 
 <!-- Sketchfab -->
 <div class="container padding-top-20">
@@ -39,19 +40,20 @@
 
 <div id="cvast-sketchfab-viewer" align="center" class="sketchfab-embed-wrapper cvast-sketchfab-embeded">
 
-    <iframe src="https://sketchfab.com/playlists/embed?collection=a90a5e97984444cca68ce9e5738410ae" frameborder="0" allowfullscreen
+    <iframe src="https://sketchfab.com/playlists/embed?collection=a90a5e97984444cca68ce9e5738410ae" frameborder="0" allowvr allowfullscreen
         mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
 
-    <p>
-        <a href="https://sketchfab.com/cvast/collections/calatrava-la-nueva" target="_blank">Calatrava La Nueva</a> by
-        <a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
-    </p>
+<p>
+    <a href="https://sketchfab.com/cvast/collections/calatrava-la-nueva" target="_blank">Calatrava La Nueva</a> by
+    <a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
+</p>
 
 </div>
 <!-- End Sketchfab -->
 
+
 <!-- Videos -->
-<div class="container padding-top-20">
+<div class="container">
     <div class="row cvast-paragraph-box-video cvast-media-block">
         <div class="col-sm-4 cvast-paragraph-box-video-left-container">
             <h1>Videos</h1>
@@ -66,27 +68,57 @@
     </div>
 </div>
 
-<figure id="video-player">
-    <video controls poster="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}"
+<div align="center" class="cvast-background-image-title">
+    <div id="cvast-video-caption">
+        <h5>Calatrava la Nueva: main gate, church and tower area</h5>
+        <p>The interior rooms are displayed with intensity values.
+        </p>
+    </div>
+</div>
+<figure id="video-player" class="cvast-video-player-medium">
+    <video controls poster="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png"
         loop="">
-        <source src="{{ S3_STATIC_URL }}/streaming/Calatrava_la_Nueva_Animation-streaming.mp4" type="video/mp4">
+        <source src="{{ S3_STATIC_URL_VIDEO }}/la_mancha/calatrava_la_nueva/Calatrava_la_Nueva_Animation-streaming.mp4">
     </video>
     <figcaption>
-        <a href="{{ S3_STATIC_URL }}/streaming/Calatrava_la_Nueva_Animation-streaming.mp4"><img src="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png' %}"
-                alt="Calatrava la Nueva animation"></a>
-        <a href="{{ S3_STATIC_URL }}/streaming/Iglesia_la_Nueva-streaming.mp4"><img src="{% static 'img/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Iglesia_la_Nueva.png' %}" alt="A flythrough of the chruch at Calatrava la Nueva"></a>
+        <a href="{{ S3_STATIC_URL_VIDEO }}/la_mancha/calatrava_la_nueva/Calatrava_la_Nueva_Animation-streaming.mp4" data-caption="<h5>Calatrava la Nueva: main gate, church and tower area</h5> <p>Interior rooms displayed with intensity values.</p>">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Calatrava_la_Nueva_Animation.png"
+                alt="">
+        </a>
+
+        <a href="{{ S3_STATIC_URL_VIDEO }}/la_mancha/calatrava_la_nueva/Iglesia_la_Nueva-streaming.mp4" data-caption="<h5>Calatrava La Nueva: church interior</h5><p>Flying in from above, you are led though a rendering of a point cloud created from approxiamtely 25 scan positions.</p>">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/video_thumbnails/Iglesia_la_Nueva.png" alt="">
+        </a>
+
+        <a href="{{ S3_STATIC_URL_VIDEO }}/la_mancha/calatrava_la_nueva/stonecarving5_color-streaming.mp4" data-caption="<h5>Stone relief found at Calatrava La Nueva</h5>
+        <p>This relief was scanned using the Artec Eva handheld structured light scanner.</p>">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/video_thumbnails/stonecarving5_color.png" alt="">
+        </a>
+
     </figcaption>
 </figure>
 <!-- End Videos -->
 
 
+
+
 <!-- Photos -->
 <div class="block-description cvast-media-block">
-
-    <div align="center" class="cvast-background-image-title">
-        <h5>Scanning the cistern</h5>
+    
+    <div class="cvast-image-and-title-container">
+        <div align="center" class="cvast-background-image-title">
+            <h5>Scanning the cistern</h5>
+        </div>
+        <div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_cistern.jpg); background-size: auto 100%; background-position: 50% 0%; height: 100vh"></div>
     </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_cistern.jpg' %}); background-size: auto 100%; background-position: 50% 0%; height: 100vh"></div>
+
+
+    <div class="cvast-image-and-title-container">
+        <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+            <h5>Scanning the Sala Capitular (chapter house), a structure with burials and murals</h5>
+        </div>
+        <div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/calatrava_la_nueva/calatrava_la_nueva_salon.jpg); background-size: auto 100%; background-position: 50% 0%; height: 80vh"></div>
+    </div>
 
 </div>
 <!-- End photos -->

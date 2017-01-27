@@ -45,7 +45,8 @@ ____________________________________________
 - If you want to run clusters of the same containers (e.g. multiple web containers, perhaps on different host machines), the mount points should be on a folder accessible by all containers, e.g. a shared (network) drive.
 	* This is currently not possible with the elasticsearch and db containers, these require some extra configuration. Coming soon...
 	
-- If you create your own custom app on top of this, you might want to add the uploadedfiles/files path to the .dockerignore file in the root of this repository. This in order to keep these files from taking up space in your Docker image.
+- If you create your own custom app on top of this, you might want to add the uploadedfiles/files path to the .dockerignore file in the root of this repository. This in order to keep these files from taking up space in your Docker image.  
+
 &nbsp;
 __________________________________
 ### Build
@@ -66,7 +67,7 @@ After the first successful deployment, your host volumes have been initialized f
 &nbsp;
 __________________________________
 ### Housekeeping
-To clean up unused images and containers run from the repository root directory: 
+To clean up unused images and containers run this from the repository root directory: 
 	
 	./cleanup.sh
 &nbsp;
@@ -89,9 +90,10 @@ __________________________________
     elasticsearch_1  |←[0m /bin/sh: 1: /install/es_entrypoint.sh: not found  
 	* Cause: Line endings (EOL) are in Windows format  
 	* Fix: In Notepad ++ --> Edit --> EOL Conversion --> UNIX/OSX Format --> Save file  
+
 &nbsp;
 __________________________________
-### Roadmap
+### Roadmap  
 Among other things: 
  
 - Make Postgres work in a cluster. Need the right settings for the nodes to communicate with each other.  

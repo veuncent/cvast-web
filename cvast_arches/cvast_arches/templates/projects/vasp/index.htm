@@ -36,7 +36,7 @@
     <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
         <h5>The poster for the film <i>Siracusa 3D Reborn</i></h5>
     </div>
-    <div class="background-image" style="background-image: url({% static 'img/projects/vasp/siracusa_3d_reborn_poster.jpg' %}); background-position: 50% 40%; height: 750px;"></div>
+    <div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/vasp/siracusa_3d_reborn_poster.jpg); background-position: 50% 40%; height: 750px;"></div>
 </div>
 
 
@@ -46,9 +46,9 @@
         <h5>Siracusa 3D Reborn: trailer</h5>
     </div>
     <div>
-        <video align="center" class="cvast-video-full" style="max-height: 70vh;" controls poster="{% static 'img/projects/vasp/video_thumbnails/Siracusa_3D_Reborn_trailer_short_version.png' %}"
+        <video align="center" class="cvast-video-full" style="max-height: 70vh;" controls poster="{{ S3_STATIC_URL_IMG }}/projects/vasp/video_thumbnails/Siracusa_3D_Reborn_trailer_short_version.png"
             loop="">
-            <source src="{{ S3_STATIC_URL }}/streaming/vasp/Siracusa_3D_Reborn_trailer_short_version-streaming.mp4" type="video/mp4">
+            <source src="{{ S3_STATIC_URL_VIDEO }}/vasp/Siracusa_3D_Reborn_trailer_short_version-streaming.mp4" type="video/mp4">
         </video>
     </div>
 </div>
@@ -77,7 +77,7 @@
 <div align="center" class="cvast-background-image-title">
     <h5>Scanning Greek statuary</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/vasp/3d_greek statuary_2.jpg' %}); background-position: 20% 50%;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/vasp/3d_greek_statuary_2.jpg); background-position: 20% 50%;"></div>
 
 
 <!-- Paragraph 2 -->
@@ -104,7 +104,7 @@
 <div align="center" class="cvast-background-image-title">
     <h5>Scanning Greek statuary</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/vasp/3d_greek_statuary_1.jpg' %}); background-position: 50% 25%; height: 850px;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/vasp/3d_greek_statuary_1.jpg); background-position: 50% 25%; height: 850px;"></div>
 
 
 {% include 'projects/project_footer.htm' %}

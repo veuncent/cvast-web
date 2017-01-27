@@ -30,7 +30,7 @@
 		<h5>3D model (made by a combination of photogrammetry and 3D modeling) of an authentic bronze warship ram</h5>
 		<p>Piraeus Archaeological Museum (Greece), perhaps from an Athenian trireme. Date: 5th-2nd centuries (?) BCE.</p>
 	</div>
-	<div class="background-image" style="background-image: url({% static 'img/projects/ram3d/bronze_warship_ram_piraeus_archaeological_museum.jpg' %});"></div>
+	<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/ram3d/bronze_warship_ram_piraeus_archaeological_museum.jpg);"></div>
 </div>
 
 
@@ -45,13 +45,13 @@
 
 <div id="cvast-sketchfab-viewer" align="center" class="sketchfab-embed-wrapper cvast-sketchfab-embeded">
 
-	<iframe src="https://sketchfab.com/playlists/embed?collection=c95cfffeea9e4c8aa89f3a5c39842507" frameborder="0" allowfullscreen
+	<iframe src="https://sketchfab.com/playlists/embed?collection=c95cfffeea9e4c8aa89f3a5c39842507" frameborder="0" allowvr allowfullscreen
 		mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
 
-	<p>
-		<a href="https://sketchfab.com/murray1/collections/cvast-ram3d" target="_blank">RAM<sup>3D</sup></a> by <a href="https://sketchfab.com/murray1"
-			target="_blank">William Murray</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
-	</p>
+<p>
+	<a href="https://sketchfab.com/murray1/collections/cvast-ram3d" target="_blank">RAM<sup>3D</sup></a> by <a href="https://sketchfab.com/murray1"
+		target="_blank">William Murray</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
+</p>
 
 </div>
 <!-- End Sketchfab -->
@@ -77,13 +77,13 @@
 	</h5>
 </div>
 
-<figure id="video-player">
-	<video controls poster="{% static 'img/projects/ram3d/video_thumbnails/Arc-dOrange-Animation-02.png' %}" loop="">
-		<source src="{{ S3_STATIC_URL }}/streaming/Arc-dOrange-Animation-02-streaming.mp4" type="video/mp4">
+<figure id="video-player" class="cvast-video-player-large">
+	<video controls poster="{{ S3_STATIC_URL_IMG }}/projects/ram3d/video_thumbnails/Arc-dOrange-Animation-02.png" loop="">
+		<source src="{{ S3_STATIC_URL_VIDEO }}/ram3d/Arc-dOrange-Animation-02-streaming.mp4" type="video/mp4">
 	</video>
 	<figcaption>
-		<a href="{{ S3_STATIC_URL }}/streaming/Arc-dOrange-Animation-02-streaming.mp4" data-caption="An animation of the point clouds that resulted from scanning the Triumphal Arch at Orange, France"><img src="{% static 'img/projects/ram3d/video_thumbnails/Arc-dOrange-Animation-02.png' %}" alt=""></a>
-		<a href="{{ S3_STATIC_URL }}/streaming/triumphal_arch_orange-streaming.mp4" data-caption="Panel 01 on the NE side of the Triumphal Arch at Orange, France."><img src="{% static 'img/projects/ram3d/video_thumbnails/triumphal_arch_orange.png' %}" alt=""></a>
+		<a href="{{ S3_STATIC_URL_VIDEO }}/ram3d/Arc-dOrange-Animation-02-streaming.mp4" data-caption="An animation of the point clouds that resulted from scanning the Triumphal Arch at Orange, France"><img src="{{ S3_STATIC_URL_IMG }}/projects/ram3d/video_thumbnails/Arc-dOrange-Animation-02.png" alt=""></a>
+		<a href="{{ S3_STATIC_URL_VIDEO }}/ram3d/triumphal_arch_orange-streaming.mp4" data-caption="Panel 01 on the NE side of the Triumphal Arch at Orange, France."><img src="{{ S3_STATIC_URL_IMG }}/projects/ram3d/video_thumbnails/triumphal_arch_orange.png" alt=""></a>
 	</figcaption>
 </figure>
 <!-- End Videos -->
@@ -114,16 +114,14 @@
 	<p>Various battle spoils in a sculpted panel above the NE side, including both rams and warships’ bows. Date: 1st century CE.
 	</p>
 </div>
-<img src="{% static 'img/projects/ram3d/triumphal_arch_orange.jpg' %}" style="max-height: 90vh; width: 100%; object-fit: contain;"
-/>
+<img src="{{ S3_STATIC_URL_IMG }}/projects/ram3d/triumphal_arch_orange.jpg" style="max-height: 90vh; width: 100%; object-fit: contain;" />
 
 
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
 	<h5>3D model (made by photogrammetry) of a marble warship ram found near the Marina Gate, Ostia (Italy)</h5>
 	<p>Modeled perhaps after the ram of a Roman quinquereme. Date: 1st century BCE.</p>
 </div>
-<img src="{% static 'img/projects/ram3d/marble_warship_ram_marina_gate_ostia.jpg' %}" style="max-height: 90vh; width: 100%; object-fit: contain;"
-/>
+<img src="{{ S3_STATIC_URL_IMG }}/projects/ram3d/marble_warship_ram_marina_gate_ostia.jpg" style="max-height: 90vh; width: 100%; object-fit: contain;" />
 
 <!-- End Images -->
 

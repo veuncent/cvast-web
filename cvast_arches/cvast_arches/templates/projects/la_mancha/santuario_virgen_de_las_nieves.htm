@@ -23,7 +23,7 @@
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
 	<h5>View from our drone</h5>
 </div>
-<div class="background-image" style="background-image: url({% static 'img/projects/la_mancha/santuario_virgen_de_las_nieves_aerial.jpg' %}); height: 800px; background-position: 60% 10%;"></div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/santuario_virgen_de_las_nieves_aerial.jpg); height: 800px; background-position: 60% 10%;"></div>
 
 
 <!-- Videos -->
@@ -41,13 +41,13 @@
 		</div>
 	</div>
 </div>
-<figure id="video-player">
-	<video controls poster="{% static 'img/projects/la_mancha/santuario_virgen_de_las_nieves/video_thumbnails/Las_Nieves_Plaza_de_Toros.png' %}"
+<figure id="video-player" class="cvast-video-player-large">
+	<video controls poster="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/santuario_virgen_de_las_nieves/video_thumbnails/Las_Nieves_Plaza_de_Toros.png"
 		loop="">
-		<source src="{{ S3_STATIC_URL }}/streaming/la_mancha/santuario_virgen_de_las_nieves/Las_Nieves_Plaza_de_Toros-streaming.mp4" type="video/mp4">
+		<source src="{{ S3_STATIC_URL_VIDEO }}/la_mancha/santuario_virgen_de_las_nieves/Las_Nieves_Plaza_de_Toros-streaming.mp4" type="video/mp4">
 	</video>
 	<figcaption>
-		<a href="{{ S3_STATIC_URL }}/streaming/la_mancha/santuario_virgen_de_las_nieves/Las_Nieves_Plaza_de_Toros-streaming.mp4"><img src="{% static 'img/projects/la_mancha/santuario_virgen_de_las_nieves/video_thumbnails/Las_Nieves_Plaza_de_Toros.png' %}"
+		<a href="{{ S3_STATIC_URL_VIDEO }}/la_mancha/santuario_virgen_de_las_nieves/Las_Nieves_Plaza_de_Toros-streaming.mp4"><img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/santuario_virgen_de_las_nieves/video_thumbnails/Las_Nieves_Plaza_de_Toros.png"
 				alt=""></a>
 	</figcaption>
 </figure>

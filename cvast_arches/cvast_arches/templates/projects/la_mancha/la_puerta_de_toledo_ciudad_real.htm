@@ -1,0 +1,100 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<div class="block-description cvast-project-title">
+    <div class="container">
+        <div class="row cvast-paragraph-box cvast-media-block">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>La Puerta de Toledo</h1>
+                <h5><i class="fa fa-map-marker"></i>Ciudad Real, La Mancha, Spain</h5>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <p><a href="http://www.spain.info/en/que-quieres/arte/monumentos/ciudad_real/puerta_de_toledo.html" target="_blank">La Puerta de Toledo</a>,
+                        located in the heart of Ciudad Real, Spain was constructed in the 13th Century and was part of a
+                        large, 4.5 kilometer stone wall that once surrounded the city. The monument contains six arches and
+                        has the remains of two towers on two of its sides.
+                    </p>
+                    <p>The site is contributing to our efforts in the study of the organization and social control of public space.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Cover photo -->
+<div class="cvast-image-and-title-container">
+    <div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+        <h5>3D scanning at La Puerta de Toledo</h5>
+    </div>
+    <div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/faro_focus_330_la_puerta_de_toledo.jpg); background-position: 50% 27%; height: 80vh;"></div>
+</div>
+<!-- End cover photo -->
+
+
+<!-- Sketchfab -->
+<div class="container padding-top-20">
+    <div class="row cvast-paragraph-box cvast-media-block">
+        <div class="col-sm-4 cvast-paragraph-box-left-container">
+            <h1>3D models</h1>
+        </div>
+    </div>
+</div>
+
+<div id="cvast-sketchfab-viewer" align="center" class="sketchfab-embed-wrapper cvast-sketchfab-embeded">
+
+    <iframe src="https://sketchfab.com/playlists/embed?collection=f61f148d8a1e44df93c3de5e5dc24be5" frameborder="0" allowvr allowfullscreen
+        mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+
+    <p>
+        <a href="https://sketchfab.com/cvast/collections/la-puerta-de-toledo" target="_blank">La Puerta de Toledo</a> by
+        <a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
+    </p>
+
+</div>
+<!-- End Sketchfab -->
+
+
+<!-- Videos -->
+<div class="block-description cvast-media-block">
+    <div align="center" class="cvast-background-image-title">
+        <h5>3D point cloud animation of La Puerta de Toledo</h5>
+        </p>
+    </div>
+    <div>
+        <video align="center" class="cvast-video-full" style="max-height: 80vh;" controls poster="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/video_thumbnails/puerta_de_toledo_ciudad_real_point_cloud_animation.png"
+            loop="">
+            <source src="{{ S3_STATIC_URL_VIDEO }}/la_mancha/la_puerta_de_toledo_ciudad_real/puerta_de_toledo_ciudad_real_point_cloud_animation-streaming.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+<!-- End Videos -->
+
+
+<!-- Images -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+    <h5>Colorized point cloud render (front view)</h5>
+</div>
+<div class="cvast-image-full-view">
+    <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/toledo_gate_1.jpg" alt="" />
+</div>
+
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+    <h5>Grayscale point cloud render (front view)</h5>
+</div>
+<div class="cvast-image-full-view">
+    <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/toledo_gate_3.jpg" alt="" />
+</div>
+
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+    <h5>Cross-section point cloud render showing interior stairwell</h5>
+</div>
+<div class="cvast-image-full-view">
+    <img src="{{ S3_STATIC_URL_IMG }}/projects/la_mancha/la_puerta_de_toledo_ciudad_real/toledo_gate_4.jpg" alt="" />
+</div>
+<!-- End Images -->
+
+
+{% include 'projects/la_mancha/project_footer_la_mancha.htm' %} {% endblock content %}
