@@ -1,6 +1,7 @@
 version: '2'
 services:
     web:
+      name: web
       restart: always
       image: cvast/cvast-web:$PROD_VERSION
       command: bash -c  "/install/web_entrypoint.sh"
@@ -17,12 +18,15 @@ services:
         - DJANGO_MODE=PROD
         - DJANGO_DEBUG=False
         - DOMAIN_NAMES=cvast.usf.edu
-        - IS_CLEAN_ENV=True
+        - IS_CLEAN_ENV=False
         - TZ=EST
       ports:
         - '8000:8000'
+      labels:
+        org.label-schema.group: "prod-cvast-arches-monitoring"
 
     nginx:
+      name: nginx
       restart: always
       image: cvast/cvast-nginx:$PROD_VERSION
       ports:
@@ -42,8 +46,11 @@ services:
         - PUBLIC_MODE=True
         - CERTIFICATE_WAIT_TIMEOUT=90
         - TZ=EST
+      labels:
+        org.label-schema.group: "prod-cvast-arches-monitoring"
 
     letsencrypt:
+      name: letsencrypt
       image: cvast/cvast-letsencrypt:1.0
       volumes:
         - nginx-root:/var/www
@@ -58,6 +65,38 @@ services:
         - PRODUCTION_MODE=True
         - PERSISTENT_MODE=True
         - TZ=EST
+       labels:
+        org.label-schema.group: "prod-cvast-arches-monitoring"
+
+    node-exporter:
+      name: node-exporter
+      restart: unless-stopped
+      image: prom/node-exporter:0.12.0
+      command: "-collector.procfs /host/proc -collector.sysfs /host/sys -collector.filesystem.ignored-mount-points '^/(sys|proc|dev|host|etc)($$|/)'"
+      volumes:
+        - /proc:/host/proc:ro
+        - /sys:/host/sys:ro
+        - /:/rootfs:ro
+      ports:
+        - 9100:9100
+      environment:
+        - TZ=EST
+      labels:
+        org.label-schema.group: "prod-cvast-arches-monitoring"
+
+    cadvisor:
+      name: cvadvisor
+      image: google/cadvisor:v0.24.1
+      volumes:
+        - /:/rootfs:ro
+        - /var/run:/var/run:rw
+        - /sys:/sys:ro
+        - /var/lib/docker/:/var/lib/docker:ro
+      restart: unless-stopped
+      ports:
+        - 8080:8080
+      labels:
+        org.label-schema.group: "prod-cvast-arches-monitoring"
 
 volumes:
     web-uploaded-files:
