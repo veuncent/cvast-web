@@ -2,7 +2,6 @@ version: '2'
 services:
 
     web:
-      restart: always
       image: cvast/cvast-web:$BUILD_NUMBER
       build: 
         context: .
@@ -30,7 +29,6 @@ services:
         - elasticsearch
         
     db:
-      restart: always
       image: cvast/cvast-db:$BUILD_NUMBER
       volumes:
           - postgres-data:/postgres-data
@@ -44,7 +42,6 @@ services:
         - TZ=EST
         
     elasticsearch:
-      restart: always
       image: cvast/cvast-elasticsearch:$BUILD_NUMBER
       volumes:
         - elasticsearch-data:/elasticsearch-data
@@ -58,7 +55,6 @@ services:
         - TZ=EST
         
     nginx:
-      restart: always
       image: cvast/cvast-nginx:$BUILD_NUMBER
       build: 
         context: .
