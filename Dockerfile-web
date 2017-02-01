@@ -97,6 +97,6 @@ RUN chmod -R 700 ${WEB_ROOT}/${WEB_APP_NAME}/tests/run_tests.sh
 RUN dos2unix ${WEB_ROOT}/${WEB_APP_NAME}/tests/run_tests.sh
 
 VOLUME ["${WEB_ROOT}/${WEB_APP_NAME}/${WEB_APP_NAME}/uploadedfiles/files", "${WEB_ROOT}/${WEB_APP_NAME}/${WEB_APP_NAME}/logs"]
-EXPOSE 8000 3000
+EXPOSE 8000
 WORKDIR ${WEB_ROOT}/${WEB_APP_NAME}
 CMD ${INSTALL_DIR}/web_entrypoint.sh
