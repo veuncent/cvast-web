@@ -87,7 +87,7 @@ services:
     
     letsencrypt:
       container_name: letsencrypt
-      image: cvast/cvast-letsencrypt:dev
+      image: cvast/cvast-letsencrypt:1.0
       restart: unless-stopped
       volumes:
         - nginx-root:/var/www
