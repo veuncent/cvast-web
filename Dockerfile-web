@@ -22,7 +22,6 @@ RUN apt-get update -y &&\
 	apt-get install -y xsltproc docbook-xsl &&\
 	apt-get install -y docbook-mathml &&\
 	apt-get install -y libgdal1-dev &&\
-	apt-get install -y openjdk-7-jdk &&\
 	apt-get install -y python-setuptools &&\
 	apt-get install -y python-dev &&\
 	apt-get install -y libffi-dev &&\
