@@ -13,11 +13,11 @@ from settings import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis', 
-        'NAME': get_env_variable('PG_DBNAME'),
+        'NAME': get_env_variable('PGDBNAME'),
         'USER': 'postgres',    
-        'PASSWORD': get_env_variable('PG_PASSWORD'), 
-        'HOST': get_env_variable('PG_HOST'),          
-        'PORT': get_env_variable('PG_PORT'),        
+        'PASSWORD': get_env_variable('PGPASSWORD'), 
+        'HOST': get_env_variable('PGHOST'),          
+        'PORT': get_env_variable('PGPORT'),        
         'SCHEMAS': 'public,data,ontology,concepts',
         'POSTGIS_TEMPLATE': 'template_postgis_20',
     }

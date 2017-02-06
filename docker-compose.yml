@@ -12,10 +12,11 @@ services:
       - web-log:/cvast_web/cvast_arches/cvast_arches/logs
       - web-static:/static_root
       environment:
-        - PG_PASSWORD=TestCVAST
-        - PG_HOST=db
-        - PG_PORT=5432
-        - ES_HOST=elasticsearch
+        - PGPASSWORD=TestCVAST
+        - PGDBNAME=cvast_arches
+        - PGHOST=db
+        - PGPORT=5432
+        - ESHOST=elasticsearch
         - DJANGO_PASSWORD=TestAdminCVAST
         - DJANGO_MODE=DEV
         - DJANGO_DEBUG=True
@@ -31,27 +32,25 @@ services:
     db:
       image: cvast/cvast-db:$BUILD_NUMBER
       volumes:
-          - postgres-data:/postgres-data
+          - postgres-data:/var/lib/postgresql/data
           - postgres-log:/var/log/postgresql
-          - postgres-config:/postgres-config
+          - ./install/db/db_entrypoint.sh:/docker-entrypoint-initdb.d/db_entrypoint.sh
       ports:
         - '5432:5432'
       environment:
-        - PG_PASSWORD=TestCVAST
-        - IS_CLEAN_ENV=True
+        - POSTGRES_PASSWORD=TestCVAST
         - TZ=EST
         
     elasticsearch:
-      image: cvast/cvast-elasticsearch:$BUILD_NUMBER
+      image: elasticsearch:1.5.2
       volumes:
-        - elasticsearch-data:/elasticsearch-data
-        - elasticsearch-log:/elasticsearch-log
-        - elasticsearch-config:/elasticsearch-config
+        - elasticsearch-data:/var/lib/elasticsearch/data
+        - elasticsearch-log:/var/log/elasticsearch
+        - elasticsearch-config:/etc/elasticsearch
       ports:
         - "9200:9200"
         - "9300:9300"
       environment:
-        - IS_CLEAN_ENV=True
         - TZ=EST
         
     nginx:

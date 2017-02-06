@@ -12,12 +12,6 @@ ENV DJANGO_MODE=PROD
 ENV DJANGO_DEBUG=False
 ENV DJANGO_PASSWORD=admin
 
-ENV PG_HOST=localhost
-ENV PG_PORT=5432
-ENV PG_PASSWORD=postgis
-ENV ES_HOST=localhost
-ENV PG_DBNAME=cvast_arches
-
 # Install dependencies
 RUN apt-get update -y &&\
 	apt-get install -y wget &&\
