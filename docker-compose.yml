@@ -2,6 +2,7 @@ version: '2'
 services:
 
     web:
+      container_name: web
       image: cvast/cvast-web:$BUILD_NUMBER
       build: 
         context: .
@@ -30,6 +31,7 @@ services:
         - elasticsearch
         
     db:
+      container_name: db
       image: cvast/cvast-db:$BUILD_NUMBER
       volumes:
           - postgres-data:/var/lib/postgresql/data
@@ -42,6 +44,7 @@ services:
         - TZ=EST
         
     elasticsearch:
+      container_name: elasticsearch
       image: elasticsearch:1.5.2
       volumes:
         - elasticsearch-data:/var/lib/elasticsearch/data
@@ -54,6 +57,7 @@ services:
         - TZ=EST
         
     nginx:
+      container_name: nginx
       image: cvast/cvast-nginx:$BUILD_NUMBER
       build: 
         context: .
@@ -76,6 +80,7 @@ services:
         - TZ=EST
     
     letsencrypt:
+      container_name: letsencrypt
       image: cvast/cvast-letsencrypt:dev
       volumes:
         - nginx-root:/var/www
