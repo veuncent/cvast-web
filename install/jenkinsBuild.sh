@@ -64,8 +64,8 @@ array_contains_element() {
 }
 
 kill_all_containers() {
-	echo "Killing all Docker containers..."
-	docker-compose kill
+	echo "Stopping all Docker containers..."
+	docker-compose down
 }
 
 display_help() {
