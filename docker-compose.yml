@@ -4,6 +4,7 @@ services:
     web:
       container_name: web
       image: cvast/cvast-web:$BUILD_NUMBER
+      restart: unless-stopped
       build: 
         context: .
         dockerfile: ./Dockerfile-web
@@ -33,6 +34,7 @@ services:
     db:
       container_name: db
       image: cvast/cvast-db:$BUILD_NUMBER
+      restart: unless-stopped
       build: 
         context: .
         dockerfile: ./Dockerfile-db
@@ -48,6 +50,7 @@ services:
     elasticsearch:
       container_name: elasticsearch
       image: elasticsearch:1.5.2
+      restart: unless-stopped
       volumes:
         - elasticsearch-data:/var/lib/elasticsearch/data
         - elasticsearch-log:/var/log/elasticsearch
@@ -61,6 +64,7 @@ services:
     nginx:
       container_name: nginx
       image: cvast/cvast-nginx:$BUILD_NUMBER
+      restart: unless-stopped
       build: 
         context: .
         dockerfile: ./Dockerfile-nginx
@@ -84,6 +88,7 @@ services:
     letsencrypt:
       container_name: letsencrypt
       image: cvast/cvast-letsencrypt:dev
+      restart: unless-stopped
       volumes:
         - nginx-root:/var/www
         - letsencrypt-config:/etc/letsencrypt
