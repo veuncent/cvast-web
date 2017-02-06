@@ -2,9 +2,6 @@
 
 script_dir=`dirname $0`
 
-# Set Postgresql password in environment variable for authentication during tests
-export PGPASSWORD=${PG_PASSWORD}
-
 echo "."
 echo "."
 echo ----- RUNNING CORE ARCHES TESTS -----

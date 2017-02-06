@@ -27,7 +27,7 @@ ____________________________________________
 		* e.g.: - /c/Users/<your Windows user>/Documents/<your repo workspace>/:/<root of your project>  
 		This way you can edit code without having to build the Docker image again.
 	* Remove the above-mentioned line if you run this in a non-development environment.  
-	* **Change the passwords of environment variables PG_PASSWORD and DJANGO_PASSWORD to the passwords you want to set.**
+	* **Change the passwords of environment variables PGPASSWORD and DJANGO_PASSWORD to the passwords you want to set.**
 
 	
 **Advanced:**  
