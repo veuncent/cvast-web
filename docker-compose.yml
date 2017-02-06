@@ -35,7 +35,7 @@ services:
       image: cvast/cvast-db:$BUILD_NUMBER
       build: 
         context: .
-        dockerfile: ./Dockerfile-web
+        dockerfile: ./Dockerfile-db
       volumes:
           - postgres-data:/var/lib/postgresql/data
           - postgres-log:/var/log/postgresql
