@@ -31,5 +31,6 @@ urlpatterns = patterns('',
     url(r'^about-us/people/$', 'cvast_arches.views.about_us.people', name='people'),
     url(r'^about-us/technology/$', 'cvast_arches.views.about_us.technology', name='technology'),
     url(r'^about-us/partners/$', 'cvast_arches.views.about_us.partners', name='partners'),
+    url(r'^news/$', 'cvast_arches.views.news.index', name='news_index'),
     url(r'^loaderio-cb219f4f97bd62cb751a2e5bfca5f0a3\.txt/$', 'cvast_arches.views.load_test.load_test', name='load_test')
 )

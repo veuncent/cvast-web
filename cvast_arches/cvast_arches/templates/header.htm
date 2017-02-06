@@ -34,13 +34,21 @@
                     </li>
                     <!-- End Home -->
 
+                    <!-- News -->
+                    <li class="{% if active_page = 'News' %}active{% endif %}">
+                        <a href="{% url 'news_index' %}">
+                            {% trans "News" %}
+                        </a>
+                    </li>
+                    <!-- End News -->
+
                     <!-- Projects -->
                     <li class="{% if active_page = 'Projects' %}active{% endif %}">
                         <a href="{% url 'projects_index' %}">
                             {% trans "Projects" %}
                         </a>
                     </li>
-                    <!-- End Projects-->
+                    <!-- End Projects -->
 
                     {% if 'edit' in user.user_groups %}
                     <!-- New Search -->
@@ -58,7 +66,7 @@
                             {% trans "Map View" %}
                         </a>
                     </li>
-                    <!-- End Map-->
+                    <!-- End Map -->
                     {% endif %}
 
                     <!-- About Us -->
@@ -89,7 +97,7 @@
                     </li>
                     <!-- End Resource Editor -->
 
-                    <!-- RDM-->
+                    <!-- RDM -->
                     <li class="{% if user.is_anonymous %}{% endif %} {% if active_page = 'RDM' %}active{% endif %}">
                         <a href="{% url 'rdm' '' %}">
                             {% trans "RDM" %}
