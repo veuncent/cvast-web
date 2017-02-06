@@ -53,7 +53,7 @@ DATABASES = {
 }
 
 ELASTICSEARCH_HOSTS = [
-    {'host': get_env_variable('ES_HOST'), 'port': ELASTICSEARCH_HTTP_PORT}
+    {'host': get_env_variable('ESHOST'), 'port': ELASTICSEARCH_HTTP_PORT}
 
 ]
 
