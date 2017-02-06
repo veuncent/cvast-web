@@ -25,5 +25,7 @@ RUN	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 &&\
 # Remove package list to free up space
 RUN rm -rf /var/lib/apt/lists/*
 
+COPY ./install/db/db_entrypoint.sh /docker-entrypoint-initdb.d/db_entrypoint.sh
+
 EXPOSE 5432
 VOLUME  ["${PG_LOG_VOLUME}", "${PG_DATA_VOLUME}"]
