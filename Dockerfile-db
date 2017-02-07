@@ -1,18 +1,23 @@
-FROM mdillon/postgis:9.5
+FROM postgres:9.4
 
-# Paths for volumes mounted to host
+# Environment variables
+ENV TMP_FOLDER=/tmp
 ENV PG_DATA_VOLUME=/var/lib/postgresql/data
 ENV PG_LOG_VOLUME=/var/log/postgresql
+ENV PG_VERSION=9.4
+ENV POSTGIS_VERSION=2.1
 
 # Install packages
 RUN apt-get update -y &&\
 	apt-get install -y wget \
 		build-essential \
 		libproj-dev \
-		libgdal1-dev
-
+		libgdal1-dev \
+		postgresql-$PG_VERSION-postgis-$POSTGIS_VERSION \
+		postgresql-$PG_VERSION-postgis-$POSTGIS_VERSION-scripts
+		
 # Install Geos
-WORKDIR /tmp
+WORKDIR ${TMP_FOLDER}
 RUN	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 &&\
 	tar xvfj geos-3.4.2.tar.bz2 &&\
 	cd /tmp/geos-3.4.2 &&\
@@ -20,12 +25,13 @@ RUN	wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 &&\
 	make &&\
 	make install &&\
 	rm -rf /tmp
-
-
+	
 # Remove package list to free up space
 RUN rm -rf /var/lib/apt/lists/*
+RUN rm -rf ${TMP_FOLDER}
 
-COPY ./install/db/db_entrypoint.sh /docker-entrypoint-initdb.d/db_entrypoint.sh
+# Rename script to make it run after postgis.sh (alphabetical order)
+COPY ./install/db/db_entrypoint.sh /docker-entrypoint-initdb.d/template_entrypoint.sh
 
 EXPOSE 5432
 VOLUME  ["${PG_LOG_VOLUME}", "${PG_DATA_VOLUME}"]

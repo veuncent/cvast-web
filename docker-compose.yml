@@ -111,7 +111,6 @@ volumes:
     web-static:
     postgres-data:
     postgres-log:
-    postgres-config:
     elasticsearch-data:
     elasticsearch-log:
     elasticsearch-config:
