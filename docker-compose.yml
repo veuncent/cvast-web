@@ -88,7 +88,7 @@ services:
     
     letsencrypt:
       container_name: letsencrypt
-      image: cvast/cvast-letsencrypt:1.0
+      image: cvast/cvast-letsencrypt:1.1
       volumes:
         - nginx-root:/var/www
         - letsencrypt-config:/etc/letsencrypt
