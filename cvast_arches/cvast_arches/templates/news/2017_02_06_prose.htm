@@ -1,20 +1,21 @@
 {% load staticfiles %} {% load i18n %}
 
-<div class="container content">
-    <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
-        <div class="col-sm-4 cvast-paragraph-box-left-container">
-            <h1>2017 PROSE Awards</h1>
-
-            <h5><i class="fa fa-calendar"></i>2/6/2017</h5>
-        </div>
-        <div class="col-sm-8">
-            <div class="cvast-paragraph-box-body">
-                <p>CVAST Director Michael Decker was recently awarded with an Honorable Mention in the 2017 PROSE Awards with
-                    his book The Byzantine Dark Ages.</p>
-                <p> Read more on the
-                    <a href="https://proseawards.com/winners" target="_blank">PROSE website</a>.
-                    <img src="{{ S3_STATIC_URL_IMG }}/news/2017_02_06_PROSE/PROSE_logo.png" style="max-width: 95px; padding: 15px;" />
-                </p>
+<div class="cvast-content-block">
+    <div class="container">
+        <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>2017 PROSE Awards</h1>
+                <h5><i class="fa fa-calendar"></i>2/6/2017</h5>
+                <img class="cvast-paragraph-box-left-logo" src="{{ S3_STATIC_URL_IMG }}/news/2017_02_06_PROSE/PROSE_logo.png"/>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <p>CVAST Director <a href="{% url 'people'%}#michael" target="_blank">Michael Decker</a> was recently awarded
+                        with an Honorable Mention in the 2017 PROSE Awards with his book The Byzantine Dark Ages.</p>
+                    <p> Read more on the
+                        <a href="https://proseawards.com/winners" target="_blank">PROSE website</a>.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
