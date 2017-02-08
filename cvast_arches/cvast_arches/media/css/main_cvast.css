@@ -63,6 +63,9 @@ blockquote footer {
     text-align: right;
 }
 
+.purchase {
+    border-top: solid 1px #eee;
+}
 
 /*Header v1
 ------------------------------------*/
