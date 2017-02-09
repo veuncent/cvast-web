@@ -10,10 +10,11 @@ services:
       - web-log:/cvast_web/cvast_arches/cvast_arches/logs
       - web-static:/static_root
       environment:
-        - PG_PASSWORD=
-        - PG_HOST=
-        - PG_PORT=5432
-        - ES_HOST=
+        - PGPASSWORD=
+        - PGDBNAME=cvast_arches
+        - PGHOST=
+        - PGPORT=5432
+        - ESHOST=
         - DJANGO_PASSWORD=
         - DJANGO_MODE=PROD
         - DJANGO_DEBUG=False
@@ -26,7 +27,7 @@ services:
         org.label-schema.group: "prod-cvast-arches-monitoring"
 
     nginx:
-      name: nginx
+      container_name: nginx
       restart: always
       image: cvast/cvast-nginx:$PROD_VERSION
       ports:
@@ -50,8 +51,8 @@ services:
         org.label-schema.group: "prod-cvast-arches-monitoring"
 
     letsencrypt:
-      name: letsencrypt
-      image: cvast/cvast-letsencrypt:1.0
+      container_name: letsencrypt
+      image: cvast/cvast-letsencrypt:1.1
       volumes:
         - nginx-root:/var/www
         - letsencrypt-config:/etc/letsencrypt
@@ -65,11 +66,11 @@ services:
         - PRODUCTION_MODE=True
         - PERSISTENT_MODE=True
         - TZ=EST
-       labels:
+      labels:
         org.label-schema.group: "prod-cvast-arches-monitoring"
 
     node-exporter:
-      name: node-exporter
+      container_name: node-exporter
       restart: unless-stopped
       image: prom/node-exporter:0.12.0
       command: "-collector.procfs /host/proc -collector.sysfs /host/sys -collector.filesystem.ignored-mount-points '^/(sys|proc|dev|host|etc)($$|/)'"
@@ -85,7 +86,7 @@ services:
         org.label-schema.group: "prod-cvast-arches-monitoring"
 
     cadvisor:
-      name: cvadvisor
+      container_name: cvadvisor
       image: google/cadvisor:v0.24.1
       volumes:
         - /:/rootfs:ro
