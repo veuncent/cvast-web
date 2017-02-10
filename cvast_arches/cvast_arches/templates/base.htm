@@ -60,6 +60,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <link rel="stylesheet" href="{% static 'css/main_cvast.css' %}"> 
         <link rel="stylesheet" href="{% static 'css/arches_cvast.css' %}">
     {% endblock css%}
+
+    
+    <!--=== Google Analytics ===-->
+    {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+        {% include "google_analytics.htm" %}
+    {% endif %}
+    <!--=== End Google Analytics ===-->
+    
 </head>
 
 <body class="scroll-y">
@@ -102,12 +110,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             {% include 'copyright.htm' %}
         {% endblock copyright %}
         <!--=== End Copyright ===-->
-
-        <!--=== Google Analytics ===-->
-        {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
-            {% include "google_analytics.htm" %}
-        {% endif %}
-        <!--=== End Google Analytics ===-->
 
     </div><!--/wrapper-->
 
