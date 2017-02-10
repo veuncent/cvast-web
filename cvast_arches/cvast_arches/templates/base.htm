@@ -103,6 +103,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         {% endblock copyright %}
         <!--=== End Copyright ===-->
 
+        <!--=== Google Analytics ===-->
+        {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
+            {% include "google_analytics.htm" %}
+        {% endif %}
+        <!--=== End Google Analytics ===-->
+
     </div><!--/wrapper-->
 
     {% block javascript %}

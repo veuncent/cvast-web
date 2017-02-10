@@ -80,6 +80,8 @@ MAP_MAX_ZOOM = 19
 MAP_LAYER_FEATURE_LIMIT = 100000
 MAP_EXTENT = ''
 
+GOOGLE_ANALYTICS_TRACKING_ID = 'UA-91758389-1'
+
 def RESOURCE_TYPE_CONFIGS():
     return {
         'HERITAGE_RESOURCE.E18': {
@@ -266,6 +268,7 @@ DATE_PARSING_FORMAT = ['%B %d, %Y', '%Y-%m-%d', '%Y-%m-%d %H:%M:%S']
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'cvast_arches.utils.context_processors.media_settings',
+    'cvast_arches.utils.context_processors.google_analytics',
 ) + TEMPLATE_CONTEXT_PROCESSORS
 
 try:
