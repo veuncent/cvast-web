@@ -64,18 +64,15 @@ services:
         
     nginx:
       container_name: nginx
-      image: cvast/cvast-nginx:$BUILD_NUMBER
+      image: cvast/cvast-nginx:test
       restart: unless-stopped
-      build: 
-        context: .
-        dockerfile: ./Dockerfile-nginx
       ports:
         - '80:80'
         - '443:443'
       volumes:
         - web-static:/www/static
         - web-log:/var/log/nginx
-        - nginx-conf:/etc/nginx/conf.d
+        - nginx-conf:/etc/nginx
         - nginx-root:/var/www
         - letsencrypt-config:/etc/letsencrypt
       depends_on:

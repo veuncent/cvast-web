@@ -3,7 +3,7 @@ services:
     web:
       container_name: web
       restart: always
-      image: cvast/cvast-web:$PROD_VERSION
+      image: cvast/cvast-web:$WEB_VERSION
       command: bash -c  "/install/web_entrypoint.sh"
       volumes:
       - web-uploaded-files:/cvast_web/cvast_arches/cvast_arches/uploadedfiles/files
@@ -29,7 +29,7 @@ services:
     nginx:
       container_name: nginx
       restart: always
-      image: cvast/cvast-nginx:$PROD_VERSION
+      image: cvast/cvast-nginx:$NGINX_VERSION
       ports:
         - '80:80'
         - '443:443'
