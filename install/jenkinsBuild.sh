@@ -5,7 +5,7 @@ set -e
 ### Global variables and Help
 
 APP_OPTIONS=(db web elasticsearch nginx letsencrypt)
-DEFAULT_APPS_DEPLOYED=(web nginx)
+DEFAULT_APPS_DEPLOYED=(web)
 ENVIRONMENT_OPTIONS=(test acc)
 DEPLOY_THESE_APPS=()
 
