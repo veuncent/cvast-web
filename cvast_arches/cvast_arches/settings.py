@@ -228,7 +228,7 @@ BUSISNESS_DATA_FILES = (
 
 ### Media
 
-S3_STATIC_URL = 'https://media.usfcvast.org'
+S3_STATIC_URL = '//media.usfcvast.org'
 S3_STATIC_URL_IMG = os.path.join(S3_STATIC_URL, 'images', 'cvast-arches')
 S3_STATIC_URL_VIDEO = os.path.join(S3_STATIC_URL, 'videos', 'cvast-arches')
 
