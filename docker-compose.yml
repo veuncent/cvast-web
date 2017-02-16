@@ -64,7 +64,7 @@ services:
         
     nginx:
       container_name: nginx
-      image: cvast/cvast-nginx:1.0
+      image: cvast/cvast-nginx:1.1
       restart: unless-stopped
       ports:
         - '80:80'
@@ -74,11 +74,13 @@ services:
         - web-log:/var/log/nginx
         - nginx-conf:/etc/nginx
         - nginx-root:/var/www
+        - nginx-log:/var/log/nginx
         - letsencrypt-config:/etc/letsencrypt
       depends_on:
         - web
       environment:
         - PROXY_CONTAINER=web
+        - PROXY_PORT=8000
         - DOMAIN_NAMES=build.usfcvast.org www.build.usfcvast.org
         - PUBLIC_MODE=False
         - TZ=EST
@@ -113,6 +115,7 @@ volumes:
     elasticsearch-config:
     nginx-conf:
     nginx-root:
+    nginx-log:
     letsencrypt-config:
     letsencrypt-log:
     letsencrypt-workdir:
