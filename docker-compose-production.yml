@@ -35,7 +35,7 @@ services:
         - '443:443'
       volumes:
         - web-static:/www/static
-        - web-log:/var/log/nginx
+        - nginx-log:/var/log/nginx
         - nginx-conf:/etc/nginx/conf.d
         - nginx-root:/var/www
         - letsencrypt-config:/etc/letsencrypt
@@ -43,9 +43,9 @@ services:
         - web
       environment:
         - PROXY_CONTAINER=web
+        - PROXY_PORT=8000
         - DOMAIN_NAMES=cvast.usf.edu
         - PUBLIC_MODE=True
-        - CERTIFICATE_WAIT_TIMEOUT=90
         - TZ=EST
       labels:
         org.label-schema.group: "prod-cvast-arches-monitoring"
@@ -105,6 +105,7 @@ volumes:
     web-static:
     nginx-conf:
     nginx-root:
+    nginx-log:
     letsencrypt-config:
     letsencrypt-log:
     letsencrypt-workdir:
