@@ -64,7 +64,7 @@ services:
         
     nginx:
       container_name: nginx
-      image: cvast/cvast-nginx:1.1
+      image: cvast/cvast-nginx:${NGINX_VERSION}
       restart: unless-stopped
       ports:
         - '80:80'
