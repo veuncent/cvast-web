@@ -29,7 +29,7 @@ services:
     nginx:
       container_name: nginx
       restart: always
-      image: cvast/cvast-nginx:$NGINX_VERSION
+      image: cvast/cvast-nginx:1.1.1
       ports:
         - '80:80'
         - '443:443'
@@ -37,8 +37,8 @@ services:
         - web-static:/www/static
         - nginx-log:/var/log/nginx
         - nginx-conf:/etc/nginx/conf.d
-        - nginx-root:/var/www
-        - letsencrypt-config:/etc/letsencrypt
+        - /cvast-arches/wwwroot:/var/www
+        - /cvast-arches/letsencrypt:/etc/letsencrypt
       depends_on:
         - web
       environment:
@@ -54,8 +54,8 @@ services:
       container_name: letsencrypt
       image: cvast/cvast-letsencrypt:1.1
       volumes:
-        - nginx-root:/var/www
-        - letsencrypt-config:/etc/letsencrypt
+        - /cvast-arches/wwwroot:/var/www
+        - /cvast-arches/letsencrypt:/etc/letsencrypt
         - letsencrypt-log:/var/log/letsencrypt
         - letsencrypt-workdir:/var/lib/letsencrypt
       command: get_certificate
@@ -71,7 +71,7 @@ services:
 
     node-exporter:
       container_name: node-exporter
-      restart: unless-stopped
+      restart: always
       image: prom/node-exporter:0.12.0
       command: "-collector.procfs /host/proc -collector.sysfs /host/sys -collector.filesystem.ignored-mount-points '^/(sys|proc|dev|host|etc)($$|/)'"
       volumes:
@@ -87,6 +87,7 @@ services:
 
     cadvisor:
       container_name: cvadvisor
+      restart: always
       image: google/cadvisor:v0.24.1
       volumes:
         - /:/rootfs:ro
@@ -106,8 +107,7 @@ volumes:
     web-log:
     web-static:
     nginx-conf:
-    nginx-root:
-    nginx-log:
+    nginx-logs:
     letsencrypt-config:
     letsencrypt-log:
     letsencrypt-workdir:
