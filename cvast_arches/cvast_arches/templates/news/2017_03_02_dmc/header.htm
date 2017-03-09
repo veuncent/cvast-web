@@ -1,0 +1,32 @@
+{% load staticfiles %} {% load i18n %}
+
+<div class="cvast-content-block">
+    <a name="2017_03_02_dmc"></a>
+    <div class="container">
+        <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>Digital Media Commons: Digital Scholarship day</h1>
+                <h5><i class="fa fa-calendar"></i>3/2/2017</h5>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                        a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                        typesetting, remaining essentially unchanged.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center" class="cvast-background-image-title" style="margin-bottom: 10px;">
+        <h5>This is what we do at CVAST</h5>
+    </div>
+    <img src="{{ S3_STATIC_URL_IMG }}/news/2017_03_02_dmc/dmc_cvast_cognitio_ex_machina_slide.jpg" style="max-height: 90vh; width: 100%; object-fit: contain;"
+    /> 
+    
+    {% block content %} {% endblock content %}
+
+</div>
