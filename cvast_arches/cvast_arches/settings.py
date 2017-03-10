@@ -232,6 +232,7 @@ BUSISNESS_DATA_FILES = (
 S3_STATIC_URL = '//media.usfcvast.org'
 S3_STATIC_URL_IMG = os.path.join(S3_STATIC_URL, 'images', 'cvast-arches')
 S3_STATIC_URL_VIDEO = os.path.join(S3_STATIC_URL, 'videos', 'cvast-arches')
+S3_STATIC_URL_FILES = os.path.join(S3_STATIC_URL, 'files', 'cvast-web')
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT =  os.path.join(PACKAGE_ROOT, 'uploadedfiles')
