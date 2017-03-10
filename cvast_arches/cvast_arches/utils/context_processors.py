@@ -22,7 +22,8 @@ def media_settings(request):
     return {
         'S3_STATIC_URL': settings.S3_STATIC_URL,
         'S3_STATIC_URL_IMG': settings.S3_STATIC_URL_IMG,
-        'S3_STATIC_URL_VIDEO': settings.S3_STATIC_URL_VIDEO
+        'S3_STATIC_URL_VIDEO': settings.S3_STATIC_URL_VIDEO,
+        'S3_STATIC_URL_FILES': settings.S3_STATIC_URL_FILES
     }
 
 def google_analytics(request):
