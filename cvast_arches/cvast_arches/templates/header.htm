@@ -75,10 +75,10 @@
                             {% trans "About Us" %}
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'mission' %}"><i class="fa fa-eye"></i>Mission</a></li>
-                            <li><a href="{% url 'people' %}"><i class="fa fa-group"></i>People</a></li>
-                            <li><a href="{% url 'technology' %}"><i class="fa fa-camera"></i>Technology</a></li>
-                            <li><a href="{% url 'partners' %}"><i class="fa fa-puzzle-piece"></i>Partners</a></li>
+                            <li><a href="{% url 'about_us_subpage' about_us_name='mission' %}"><i class="fa fa-eye"></i>Mission</a></li>
+                            <li><a href="{% url 'about_us_subpage' about_us_name='people' %}"><i class="fa fa-group"></i>People</a></li>
+                            <li><a href="{% url 'about_us_subpage' about_us_name='technology' %}"><i class="fa fa-camera"></i>Technology</a></li>
+                            <li><a href="{% url 'about_us_subpage' about_us_name='partners' %}"><i class="fa fa-puzzle-piece"></i>Partners</a></li>
                         </ul>
                     </li>
                     <!-- End About Us -->
