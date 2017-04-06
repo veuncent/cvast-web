@@ -48,6 +48,9 @@ RUN apt-get update -y &&\
 # Remove package list to free up space
 RUN rm -rf /var/lib/apt/lists/*
 
+# For debugging with Visual Studio Code
+RUN pip install ptvsd
+
 
 # Root project folder
 RUN mkdir ${WEB_ROOT}
@@ -85,9 +88,6 @@ WORKDIR ${WEB_ROOT}/${WEB_APP_NAME}
 ################################################################
 
 
-
-# For debugging with Visual Studio Code
-RUN pip install ptvsd
 
 # Entrypoint to setup volume mounts
 COPY install/web/web_entrypoint.sh ${INSTALL_DIR}/web_entrypoint.sh
