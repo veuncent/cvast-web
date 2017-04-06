@@ -27,5 +27,6 @@ urlpatterns = patterns('',
     url(r'^projects/(?P<project_name>[-\w]+)/(?P<resource_name>[-\w]+)/$', 'cvast_arches.views.projects.subproject', name='projects_subproject'),
     url(r'^about-us/(?P<about_us_name>[-\w]+)/$', 'cvast_arches.views.about_us.about_us_subpage', name='about_us_subpage'),    
     url(r'^news/$', 'cvast_arches.views.news.index', name='news_index'),
+    url(r'^software/$', 'cvast_arches.views.software.index', name='software_index'),
     url(r'^loaderio-cb219f4f97bd62cb751a2e5bfca5f0a3\.txt/$', 'cvast_arches.views.load_test.load_test', name='load_test')
 )
