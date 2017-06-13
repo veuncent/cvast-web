@@ -22,7 +22,7 @@ services:
         - DJANGO_PASSWORD=TestAdminCVAST
         - DJANGO_MODE=DEV
         - DJANGO_DEBUG=True
-        - DOMAIN_NAMES=build.usfcvast.org www.build.usfcvast.org
+        - DOMAIN_NAMES=localhost
         - IS_CLEAN_ENV=True
         - RUN_TESTS=True
         - TZ=EST
@@ -80,7 +80,7 @@ services:
       environment:
         - PROXY_CONTAINER=web
         - PROXY_PORT=8000
-        - DOMAIN_NAMES=build.usfcvast.org www.build.usfcvast.org
+        - DOMAIN_NAMES=localhost
         - PUBLIC_MODE=False
         - TZ=EST
     
