@@ -177,6 +177,10 @@ blockquote footer {
     margin-bottom: 13px;
 }
 
+.cvast-text-align-left h5 {
+    text-align: left !important;
+}
+
 
 /* CVAST content block */
 .cvast-content-block {

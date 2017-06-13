@@ -22,9 +22,12 @@ from django.conf.urls import patterns, url, include
 urlpatterns = patterns('',
     url(r'', include(arches_hip_urls)),
     url(r'^$', 'arches.app.views.main.index', name='home'),
+
     url(r'^projects/$', 'cvast_arches.views.projects.index', name='projects_index'),
+    url(r'^projects/dycast/$', 'cvast_arches.views.projects.project_index', {'project_name': 'zikast'}, name='projects_dycast'),    
     url(r'^projects/(?P<project_name>[-\w]+)/$', 'cvast_arches.views.projects.project_index', name='projects_project_index'),    
     url(r'^projects/(?P<project_name>[-\w]+)/(?P<resource_name>[-\w]+)/$', 'cvast_arches.views.projects.subproject', name='projects_subproject'),
+    
     url(r'^about-us/(?P<about_us_name>[-\w]+)/$', 'cvast_arches.views.about_us.about_us_subpage', name='about_us_subpage'),    
     url(r'^news/$', 'cvast_arches.views.news.index', name='news_index'),
     url(r'^software/$', 'cvast_arches.views.software.index', name='software_index'),
