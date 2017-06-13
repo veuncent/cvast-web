@@ -78,8 +78,10 @@ services:
       depends_on:
         - web
       environment:
-        - PROXY_CONTAINER=web
-        - PROXY_PORT=8000
+        - NGINX_PROXY_MODE=local
+        - NGINX_PROTOCOL=http
+        - LOCAL_PROXY_HOST=web
+        - LOCAL_PROXY_PORT=8000
         - DOMAIN_NAMES=localhost
         - PUBLIC_MODE=False
         - TZ=EST
