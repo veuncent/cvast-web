@@ -27,11 +27,10 @@
 							Therefore, we are developing an early warning system for Zika virus. A collaboration between <a href="{% url 'about_us_subpage' about_us_name='people' %}#ryan"
 							 target="_blank">Prof. Ryan Carney</a>, Prof. Sean Ahearn (CUNY), and several international institutions, this geospatial
 							model will build upon our team’s previously successful results predicting and controlling epidemics of similar mosquito-borne
-							viruses: dengue and West Nile. This model will be implemented in Florida and Brazil, for the early and
-							accurate identification of areas at high risk for Zika virus transmission. Real-time risk maps will be generated and
-							supplied to local agencies, in order to target mosquito control, surveillance, and public education campaigns. Plans
-							also include developing this predictive model into a free, open-source software solution to fight the spread of Zika
-							virus around the world.
+							viruses: dengue and West Nile. This model will be implemented in Florida and Brazil, for the early and accurate identification
+							of areas at high risk for Zika virus transmission. Real-time risk maps will be generated and supplied to local agencies,
+							in order to target mosquito control, surveillance, and public education campaigns. Plans also include developing this
+							predictive model into a free, open-source software solution to fight the spread of Zika virus around the world.
 						</p>
 					</div>
 				</div>
@@ -41,70 +40,20 @@
 </div>
 
 
-<!-- Newsletter -->
-<div class="container">
-	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
-		<div class="col-sm-4 cvast-paragraph-box-left-container">
-			<h1>Join our DYCAST mailing list</h1>
-			<h5><i class="fa fa-envelope"></i>Never miss an update</h5>
-		</div>
-		<div class="col-sm-8">
-			<div class="cvast-paragraph-box-body">
-				<!-- Screens greater than xs -->
-				<form class="form-inline hidden-xs" role="form">
-					<div class="form-group  hidden-xs" style="width: 100%;">
-
-						<!-- Name -->
-						<input class="form-control arches-form-input hidden-xs" id="subscribe-name" placeholder="Name">
-						<!-- Email -->
-						<input class="form-control arches-form-input hidden-xs" id="subscribe-email" placeholder="Email address">
-
-						<button type="submit" class="save-edits btn btn-success disabled"> 
-					<i class="fa fa-check"></i>&nbsp; {% trans 'Subscribe' %}
-				</button>
-					</div>
-				</form>
-				<!-- End Screens greater than xs -->
-
-				<!-- XS Screens -->
-				<form class="form-inline hidden-sm hidden-md hidden-lg" role="form">
-					<div class="form-group" style="width: 100%;">
-						<input class="form-control arches-form-input" id="subscribe-name" style="width: 100%;" placeholder="Name">
-						<!-- Spacer (for xs screens) -->
-						<div class="margin-top-5"></div>
-						<input class="form-control arches-form-input" id="subscribe-email" style="width: 100%;" placeholder="Email address">
-						<!-- Spacer (for xs screens) -->
-						<div class="margin-top-5"></div>
-
-						<button type="submit" class="save-edits btn btn-success disabled"> 
-					<i class="fa fa-check"></i>&nbsp; {% trans 'Subscribe' %}
-				</button>
-
-					</div>
-				</form>
-				<!-- End XS Screens -->
-			</div>
-		</div>
-	</div>
-</div>
-
-
-
 <!-- images -->
 <div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
-	<h5 style="max-width:60%;">Schematic of the Dynamic Continuous-Area Space-Time (DYCAST) procedure</h5>
+	<h5>Schematic of the Dynamic Continuous-Area Space-Time (DYCAST) procedure</h5>
 	<p>From: <a href="http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article" target="_blank">Carney et al 2011 <i>Emerging Infectious Diseases</i></a></p>
-	<img src="{{ S3_STATIC_URL_IMG }}/projects/zikast/dycast_monte_carlo.png" style="max-height: 90vh; margin-top: 10px; object-fit: contain;"
+	<img src="{{ S3_STATIC_URL_IMG }}/projects/zikast/dycast_monte_carlo.png" style="max-height: 90vh; max-width: 100%; object-fit: contain;"
 	/>
 </div>
 
-
-<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
 	<h5>West Nile virus early warning system (red=high risk, black=human cases).</h5>
 	<p>From: <a href="http://wwwnc.cdc.gov/eid/article/17/8/10-0411_article" target="_blank">Carney et al 2011 <i>Emerging Infectious Diseases</i></a></p>
+	<img src="{{ S3_STATIC_URL_IMG }}/projects/zikast/04_wnv_dycast_epidemic.png" style="max-height: 90vh; max-width: 100%; object-fit: contain;"
+	/>
 </div>
-<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/zikast/04_wnv_dycast_epidemic.png); background-size: auto 100%; background-size: fit;"></div>
-
 
 
 <!-- Videos -->
