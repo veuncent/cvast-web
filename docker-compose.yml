@@ -42,7 +42,7 @@ services:
         - '5432:5432'
       environment:
         - IS_CLEAN_ENV=True
-        - POSTGRES_PASSWORD=TestCVAST
+        - PG_PASSWORD=TestCVAST
         - TZ=EST
         
     elasticsearch:
