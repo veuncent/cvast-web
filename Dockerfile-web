@@ -5,12 +5,10 @@ USER root
 ENV WEB_ROOT=/cvast_web
 ENV WEB_APP_NAME=cvast_arches
 
-ENV IS_CLEAN_ENV=false
 ENV INSTALL_DIR=/install
 
 ENV DJANGO_MODE=PROD
 ENV DJANGO_DEBUG=False
-ENV DJANGO_PASSWORD=admin
 
 # Install dependencies
 RUN apt-get update -y &&\

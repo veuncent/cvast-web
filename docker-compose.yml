@@ -20,11 +20,9 @@ services:
         - PGPORT=5432
         - ESHOST=elasticsearch
         - ESPORT=9200
-        - DJANGO_PASSWORD=TestAdminCVAST
         - DJANGO_MODE=DEV
         - DJANGO_DEBUG=True
         - DOMAIN_NAMES=localhost
-        - IS_CLEAN_ENV=True
         - RUN_TESTS=True
         - TZ=EST
       ports:

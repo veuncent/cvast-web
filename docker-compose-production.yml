@@ -15,11 +15,9 @@ services:
         - PGHOST=
         - PGPORT=5432
         - ESHOST=
-        - DJANGO_PASSWORD=
         - DJANGO_MODE=PROD
         - DJANGO_DEBUG=False
         - DOMAIN_NAMES=cvast.usf.edu
-        - IS_CLEAN_ENV=False
         - TZ=EST
       ports:
         - '8000:8000'
