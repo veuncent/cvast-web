@@ -19,6 +19,7 @@ services:
         - PGHOST=db
         - PGPORT=5432
         - ESHOST=elasticsearch
+        - ESPORT=9200
         - DJANGO_PASSWORD=TestAdminCVAST
         - DJANGO_MODE=DEV
         - DJANGO_DEBUG=True
