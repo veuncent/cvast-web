@@ -6,7 +6,6 @@ services:
       image: cvast/cvast-web:$WEB_VERSION
       command: bash -c  "/install/web_entrypoint.sh"
       volumes:
-      - web-uploaded-files:/cvast_web/cvast_arches/cvast_arches/uploadedfiles/files
       - web-log:/cvast_web/cvast_arches/cvast_arches/logs
       - web-static:/static_root
       environment:
@@ -15,6 +14,7 @@ services:
         - PGHOST=
         - PGPORT=5432
         - ESHOST=
+        - ESPORT=9200
         - DJANGO_MODE=PROD
         - DJANGO_DEBUG=False
         - DOMAIN_NAMES=cvast.usf.edu
@@ -27,21 +27,25 @@ services:
     nginx:
       container_name: nginx
       restart: always
-      image: cvast/cvast-nginx:1.1.1
+      image: cvast/cvast-nginx:1.2b_hotfix
       ports:
         - '80:80'
         - '443:443'
       volumes:
         - web-static:/www/static
         - nginx-log:/var/log/nginx
-        - nginx-conf:/etc/nginx/conf.d
-        - /cvast-arches/wwwroot:/var/www
+        - /cvast-arches/web/wwwroot:/var/www
         - /cvast-arches/letsencrypt:/etc/letsencrypt
       depends_on:
         - web
       environment:
-        - PROXY_CONTAINER=web
-        - PROXY_PORT=8000
+        - NGINX_PROXY_MODE=local
+        - NGINX_PROTOCOL=strict-https
+        - LOCAL_PROXY_HOST=web
+        - LOCAL_PROXY_PORT=8000
+        - REMOTE_PROXY_HOST=test.arches.usfcvast.org
+        - REMOTE_PROXY_PORT=443
+        - REMOTE_PROXY_SUBPATH=/database
         - DOMAIN_NAMES=cvast.usf.edu
         - PUBLIC_MODE=True
         - TZ=EST
@@ -52,14 +56,13 @@ services:
       container_name: letsencrypt
       image: cvast/cvast-letsencrypt:1.1
       volumes:
-        - /cvast-arches/wwwroot:/var/www
+        - /cvast-arches/web/wwwroot:/var/www
         - /cvast-arches/letsencrypt:/etc/letsencrypt
-        - letsencrypt-log:/var/log/letsencrypt
-        - letsencrypt-workdir:/var/lib/letsencrypt
+        - /cvast-arches/web/logs/letsencrypt:/var/log/letsencrypt
       command: get_certificate
       environment:
         - FORCE_NON_ELB=True
-        - LETSENCRYPT_EMAIL=vmeijer@usf.edu
+        - LETSENCRYPT_EMAIL=
         - DOMAIN_NAMES=cvast.usf.edu
         - PRODUCTION_MODE=True
         - PERSISTENT_MODE=True
@@ -100,12 +103,24 @@ services:
       labels:
         org.label-schema.group: "prod-cvast-arches-monitoring"
 
+    db:
+      container_name: db
+      restart: always
+      image: cvast/cvast-db:1.3.1
+      volumes:
+          - postgres-data:/postgres-data
+          - postgres-log:/var/log/postgresql
+          - postgres-config:/postgres-config
+      ports:
+        - '5432:5432'
+      environment:
+        - IS_CLEAN_ENV=False
+        - PG_PASSWORD=
+        - TZ=EST
+
 volumes:
-    web-uploaded-files:
-    web-log:
     web-static:
-    nginx-conf:
-    nginx-logs:
-    letsencrypt-config:
-    letsencrypt-log:
-    letsencrypt-workdir:
+    nginx-log:
+    postgres-data:
+    postgres-log:
+    postgres-config:
