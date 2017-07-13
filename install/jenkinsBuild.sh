@@ -4,8 +4,8 @@ set -e
 
 ### Global variables and Help
 
-APP_OPTIONS=(db web elasticsearch nginx)
-DEFAULT_APPS_DEPLOYED=(web nginx)
+APP_OPTIONS=(db web elasticsearch nginx letsencrypt)
+DEFAULT_APPS_DEPLOYED=(web)
 ENVIRONMENT_OPTIONS=(test acc)
 DEPLOY_THESE_APPS=()
 
@@ -30,22 +30,6 @@ AWS_DEFAULT_REGION=us-east-1
 
 # Parameters: 
 # $1 = app (web, db, elasticsearch, nginx)
-build_image() {
-	local APP_NAME=$1
-	echo "Building Docker image:  $APP_NAME:$BUILD_NUMBER"
-	
-	if [[ ${APP_NAME} == "web" ]] || [[ ${APP_NAME} == "nginx" ]] || [[ ${APP_NAME} == "elasticsearch" ]] || [[ ${APP_NAME} == "db" ]]; then
-		DOCKERFILE="Dockerfile-"${APP_NAME}
-	else
-		DOCKERFILE="Dockerfile"
-	fi
-	
-	docker build -f ${DOCKERFILE} -t cvast/cvast-${APP_NAME}:${BUILD_NUMBER} .
-}
-
-
-# Parameters: 
-# $1 = app (web, db, elasticsearch, nginx)
 # Cleanup old images, keep latest 7
 cleanup_old_image() {
 	local APP_NAME=$1
@@ -53,15 +37,6 @@ cleanup_old_image() {
 		echo "Removing old image:  $APP_NAME:$OLD_IMAGE_BUILD"
 		docker rmi cvast/cvast-$APP_NAME:$OLD_IMAGE_BUILD
 	fi
-}
-
-
-# Parameters: 
-# $1 = app (web, db, elasticsearch, nginx)
-push_to_registry() {
-	local APP_NAME=$1
-	echo "Pushing to Docker registry:  $APP_NAME:$BUILD_NUMBER "
-	docker push cvast/cvast-$APP_NAME:$BUILD_NUMBER
 }
 
 
@@ -89,8 +64,8 @@ array_contains_element() {
 }
 
 kill_all_containers() {
-	echo "Killing all Docker containers..."
-	docker-compose kill
+	echo "Stopping all Docker containers..."
+	docker-compose down
 }
 
 display_help() {
@@ -208,21 +183,8 @@ if [[ -z ${AWS_SECRET_ACCESS_KEY} ]] ; then
 fi
 
 
-# In order to make docker-compose work, we need all docker images to have this latest BUILD_NUMBER, 
-# including images that are not explicitly built with this script (usually db & elasticsearch)
-for app in ${APP_OPTIONS[@]}; do
-	if ! array_contains_element "$app" "${DEPLOY_THESE_APPS[@]}"; then
-		echo "--> $app not set to be deployed, but required for unit testing."
-		echo "--> Tagging latest jenkins build of $app as cvast/cvast-$app:$BUILD_NUMBER"
-		docker tag cvast/cvast-$app:jenkins-latest cvast/cvast-$app:$BUILD_NUMBER
-	fi
-done
-
-
 ### Build all images
-for app in "${DEPLOY_THESE_APPS[@]}"; do
-	build_image $app
-done
+docker-compose build
 
 
 ### Cleanup all old images, keep latest 7
@@ -272,9 +234,7 @@ kill_all_containers
 
 
 ### Push all images to Docker Private Registry
-for app in "${DEPLOY_THESE_APPS[@]}"; do
-	push_to_registry $app
-done
+docker-compose push --ignore-push-failures
 
 
 ### Deploy to AWS

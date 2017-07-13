@@ -1,0 +1,38 @@
+{% load staticfiles %} {% load i18n %}
+
+<div class="cvast-content-block">
+    <a name="2017_03_02_dmc"></a>
+    <div class="container">
+        <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>Digital Scholarship in Action (DSIA)</h1>
+                <h5><i class="fa fa-calendar"></i>3/2/2017</h5>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <p>
+                        On March 2nd in the frame of the 1st edition of the Digital Scholarship in Action (DSIA) promoted by the USF Libraries, faculty
+                        and staff of the Center for Virtualization and Applied Spatial Technologies engaged the audience
+                        presenting with their students on the topic of digital humanities.
+                    </p>
+                    <p><i>Participants: Dr Davide Tanasi, Myriam van Walsum, Michelle Assaad, Christine Bergmann, Jack Geier, Alexandr Saxe.</i></p>
+                    <p><i>Topic: 'Cognitio ex Machina': Digital Archaeology, Edutainment and Virtual Museums.</i></p>
+                    </p>
+                    <p>Download the presentation:
+                        <a href="{{ S3_STATIC_URL_FILES }}/news/2017_03_02_dmc/CVAST_CognitioExMachina.pptx">Powerpoint</a>
+                        <a href="{{ S3_STATIC_URL_FILES }}/news/2017_03_02_dmc/CVAST_CognitioExMachina.pdf">PDF</a>
+                    </p>
+                    {% block read_more %} {% endblock read_more %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center" style="margin-top: 50px;">
+        <img src="{{ S3_STATIC_URL_IMG }}/news/2017_03_02_dmc/dmc_cvast_cognitio_ex_machina_slide.jpg" style="max-height: 80vh; max-width: 100vw;"/>
+    </div>
+
+
+    {% block content %} {% endblock content %}
+
+</div>

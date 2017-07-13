@@ -14,12 +14,21 @@ def get_env_variable(var_name):
         error_msg = msg % var_name
         raise ImproperlyConfigured(error_msg)
 
+def get_optional_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        return None    
+
 MODE = get_env_variable('DJANGO_MODE') #options are either "PROD" or "DEV" (installing with Dev mode set, get's you extra dependencies)
 DEBUG = ast.literal_eval(get_env_variable('DJANGO_DEBUG'))
 TEMPLATE_DEBUG = DEBUG
+REMOTE_DEBUG = get_optional_env_variable('DJANGO_REMOTE_DEBUG')
+
 ALLOWED_HOSTS = get_env_variable('DOMAIN_NAMES').split()
 
-# Fix for AWS ELB returning false bad health: ALLOWS_HOSTS did not allow ELB's private ip
+# Fix for AWS ELB returning false bad health: ELB contacts EC2 instances through their private ip.
+# An AWS service is called to get this private IP of the current EC2 node. Then the IP is added to ALLOWS_HOSTS so that Django answers to it.
 EC2_PRIVATE_IP = None
 try:
     EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
@@ -42,18 +51,18 @@ PACKAGE_NAME = PACKAGE_ROOT.split(os.sep)[-1]
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': get_env_variable('PG_DBNAME'),
+        'NAME': get_env_variable('PGDBNAME'),
         'USER': 'postgres',
-        'PASSWORD': get_env_variable('PG_PASSWORD'),
-        'HOST': get_env_variable('PG_HOST'),
-        'PORT': get_env_variable('PG_PORT'),
+        'PASSWORD': get_env_variable('PGPASSWORD'),
+        'HOST': get_env_variable('PGHOST'),
+        'PORT': get_env_variable('PGPORT'),
         'SCHEMAS': 'public,data,ontology,concepts',
         'POSTGIS_TEMPLATE': 'template_postgis_20',
     }
 }
 
 ELASTICSEARCH_HOSTS = [
-    {'host': get_env_variable('ES_HOST'), 'port': ELASTICSEARCH_HTTP_PORT}
+    {'host': get_env_variable('ESHOST'), 'port': get_env_variable('ESPORT')}
 
 ]
 
@@ -79,6 +88,8 @@ MAP_MIN_ZOOM = 0
 MAP_MAX_ZOOM = 19
 MAP_LAYER_FEATURE_LIMIT = 100000
 MAP_EXTENT = ''
+
+GOOGLE_ANALYTICS_TRACKING_ID = 'UA-91758389-1'
 
 def RESOURCE_TYPE_CONFIGS():
     return {
@@ -226,9 +237,10 @@ BUSISNESS_DATA_FILES = (
 
 ### Media
 
-S3_STATIC_URL = 'https://media.usfcvast.org'
+S3_STATIC_URL = '//media.usfcvast.org'
 S3_STATIC_URL_IMG = os.path.join(S3_STATIC_URL, 'images', 'cvast-arches')
 S3_STATIC_URL_VIDEO = os.path.join(S3_STATIC_URL, 'videos', 'cvast-arches')
+S3_STATIC_URL_FILES = os.path.join(S3_STATIC_URL, 'files', 'cvast-web')
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT =  os.path.join(PACKAGE_ROOT, 'uploadedfiles')
@@ -266,6 +278,7 @@ DATE_PARSING_FORMAT = ['%B %d, %Y', '%Y-%m-%d', '%Y-%m-%d %H:%M:%S']
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'cvast_arches.utils.context_processors.media_settings',
+    'cvast_arches.utils.context_processors.google_analytics',
 ) + TEMPLATE_CONTEXT_PROCESSORS
 
 try:

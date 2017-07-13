@@ -2,26 +2,28 @@ version: '2'
 services:
 
     web:
-      restart: always
+      container_name: web
       image: cvast/cvast-web:$BUILD_NUMBER
+      restart: unless-stopped
       build: 
         context: .
         dockerfile: ./Dockerfile-web
-      command: bash -c  "sleep 15 && /cvast_web/cvast_arches/tests/run_tests.sh && /install/web_entrypoint.sh"
+      command: bash -c  "sleep 15 && /install/web_entrypoint.sh"
       volumes:
       - web-uploaded-files:/cvast_web/cvast_arches/cvast_arches/uploadedfiles/files
       - web-log:/cvast_web/cvast_arches/cvast_arches/logs
       - web-static:/static_root
       environment:
-        - PG_PASSWORD=TestCVAST
-        - PG_HOST=db
-        - PG_PORT=5432
-        - ES_HOST=elasticsearch
-        - DJANGO_PASSWORD=TestAdminCVAST
+        - PGPASSWORD=TestCVAST
+        - PGDBNAME=cvast_arches
+        - PGHOST=db
+        - PGPORT=5432
+        - ESHOST=elasticsearch
+        - ESPORT=9200
         - DJANGO_MODE=DEV
         - DJANGO_DEBUG=True
-        - DOMAIN_NAMES=build.usfcvast.org www.build.usfcvast.org
-        - IS_CLEAN_ENV=True
+        - DOMAIN_NAMES=localhost
+        - RUN_TESTS=True
         - TZ=EST
       ports:
         - '8000:8000'
@@ -30,58 +32,60 @@ services:
         - elasticsearch
         
     db:
-      restart: always
-      image: cvast/cvast-db:$BUILD_NUMBER
+      container_name: db
+      image: cvast/cvast-db:1.3.1
+      restart: unless-stopped
       volumes:
-          - postgres-data:/postgres-data
+          - postgres-data:/var/lib/postgresql/data
           - postgres-log:/var/log/postgresql
-          - postgres-config:/postgres-config
       ports:
         - '5432:5432'
       environment:
-        - PG_PASSWORD=TestCVAST
         - IS_CLEAN_ENV=True
+        - POSTGRES_PASSWORD=TestCVAST
         - TZ=EST
         
     elasticsearch:
-      restart: always
-      image: cvast/cvast-elasticsearch:$BUILD_NUMBER
+      container_name: elasticsearch
+      image: elasticsearch:1.5.2
+      restart: unless-stopped
       volumes:
-        - elasticsearch-data:/elasticsearch-data
-        - elasticsearch-log:/elasticsearch-log
-        - elasticsearch-config:/elasticsearch-config
+        - elasticsearch-data:/var/lib/elasticsearch/data
+        - elasticsearch-log:/var/log/elasticsearch
+        - elasticsearch-config:/etc/elasticsearch
       ports:
         - "9200:9200"
         - "9300:9300"
       environment:
-        - IS_CLEAN_ENV=True
         - TZ=EST
         
     nginx:
-      restart: always
-      image: cvast/cvast-nginx:$BUILD_NUMBER
-      build: 
-        context: .
-        dockerfile: ./Dockerfile-nginx
+      container_name: nginx
+      image: cvast/cvast-nginx:${NGINX_VERSION}
+      restart: unless-stopped
       ports:
         - '80:80'
         - '443:443'
       volumes:
         - web-static:/www/static
-        - web-log:/var/log/nginx
-        - nginx-conf:/etc/nginx/conf.d
+        - nginx-conf:/etc/nginx
         - nginx-root:/var/www
+        - nginx-log:/var/log/nginx
         - letsencrypt-config:/etc/letsencrypt
       depends_on:
         - web
       environment:
-        - PROXY_CONTAINER=web
-        - DOMAIN_NAMES=build.usfcvast.org www.build.usfcvast.org
+        - NGINX_PROXY_MODE=local
+        - NGINX_PROTOCOL=http
+        - LOCAL_PROXY_HOST=web
+        - LOCAL_PROXY_PORT=8000
+        - DOMAIN_NAMES=localhost
         - PUBLIC_MODE=False
         - TZ=EST
     
     letsencrypt:
-      image: cvast/cvast-letsencrypt:dev
+      container_name: letsencrypt
+      image: cvast/cvast-letsencrypt:1.1
       volumes:
         - nginx-root:/var/www
         - letsencrypt-config:/etc/letsencrypt
@@ -89,7 +93,6 @@ services:
         - letsencrypt-workdir:/var/lib/letsencrypt
       command: get_certificate
       environment:
-        - FORCE_NON_ELB=True
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
         - DOMAIN_NAMES=build.usfcvast.org www.build.usfcvast.org
         - PRODUCTION_MODE=False
@@ -104,12 +107,12 @@ volumes:
     web-static:
     postgres-data:
     postgres-log:
-    postgres-config:
     elasticsearch-data:
     elasticsearch-log:
     elasticsearch-config:
     nginx-conf:
     nginx-root:
+    nginx-log:
     letsencrypt-config:
     letsencrypt-log:
     letsencrypt-workdir:

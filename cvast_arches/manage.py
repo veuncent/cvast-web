@@ -20,10 +20,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import os
 import sys
 from django.core.management import execute_from_command_line
+from cvast_arches import settings
 
 if __name__ == "__main__":
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cvast_arches.settings")
+    
+    if settings.REMOTE_DEBUG:
+        import ptvsd
+        debug_secret = settings.get_optional_env_variable("DEBUG_SECRET")
+        ptvsd.enable_attach(debug_secret, address = ('0.0.0.0', 3000))
 
-    execute_from_command_line(sys.argv)
+    execute_from_command_line(sys.argv) 
 

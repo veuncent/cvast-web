@@ -63,6 +63,9 @@ blockquote footer {
     text-align: right;
 }
 
+.purchase {
+    border-top: solid 1px #eee;
+}
 
 /*Header v1
 ------------------------------------*/
@@ -174,6 +177,47 @@ blockquote footer {
     margin-bottom: 13px;
 }
 
+.cvast-text-align-left h5 {
+    text-align: left !important;
+}
+
+
+/* CVAST content block */
+.cvast-content-block {
+    padding-top: 90px;
+    padding-bottom: 90px;
+    border-bottom-style: solid !important;
+    border-bottom: 1px; 
+    border-bottom-color: #eee;
+}
+
+.cvast-project-title + .cvast-content-block {
+    padding-top: 10px;
+}
+
+.cvast-content-block-homepage .content {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.cvast-content-block-custom-padding {
+    padding-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .cvast-content-block {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    
+    .cvast-content-block img {
+        display: block; 
+        margin: 0 auto;
+    }
+}
+
+
+/* CVAST media block */
 .cvast-media-block {
     margin-top: 150px;
     padding: 15px;
@@ -319,7 +363,17 @@ blockquote footer {
 
 }
 
+.cvast-paragraph-box-left-logo {
+    max-width: 95px; 
+    padding-top: 15px; 
+    padding-bottom: 15px;
+}
 
+@media (max-width: 768px) {
+    .cvast-paragraph-box-left-logo {
+        padding-top: 0px; 
+    }
+}
 
 /* Image boxes*/
 .cvast-image-box-with-caption-left {

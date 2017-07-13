@@ -1,0 +1,13 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<div class="block-description cvast-project-title">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{% trans "News" %}</h1>
+    </div>
+</div>
+
+{% include 'news/2017_03_02_dmc/body_partial.htm' %}
+{% include 'news/2017_02_06_prose.htm' %}
+{% include 'news/2017_02_01_nature_publication.htm' %} 
+
+{% endblock content %}
