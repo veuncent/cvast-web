@@ -3,21 +3,20 @@
 <!--=== Content Part ===-->
 <div class="block-description cvast-project-title">
 	<div class="container content padding-top-20">
-		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Picasso at USF: Bust of Woman" %}</h1>
+		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Picasso at USF: Bust of a Woman" %}</h1>
 	</div>
 
 	<div class="block-description">
 		<div class="container">
 			<div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
 				<div class="col-sm-4 cvast-paragraph-box-left-container">
-					<h1>Picasso Project</h1>
+					<h1>Picasso at USF</h1>
 					<h5><i class="fa fa-map-marker"></i>Tampa, Florida, United States</h5>
 				</div>
 				<div class="col-sm-8">
 					<div class="cvast-paragraph-box-body">
-						<p>Introductory text here. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-							been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-							it to make a type specimen book.
+						<p>CVAST archaeologist and art historian Kamila Oles and landscape archaeologist Lukasz Banaszek are realizing Pablo Picasso’s
+							dream of a great monument and the world’s largest concrete sculpture, which -although planned- has never been constructed.
 						</p>
 
 					</div>
@@ -26,15 +25,16 @@
 		</div>
 	</div>
 
+	<!-- Image 1 -->
 	<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
-		<h5>Scanning the Picasso bust</h5>
+		<h5>Newspaper collage from 1974</h5>
 	</div>
-	<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_faro.jpg);  background-position: 60% 40%;"></div>
+	<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/picasso/picasso_newspaper_collage.jpg);  background-position: 50% 0%; height: 750px;"></div>
 </div>
 
 <!-- Paragraph 1 -->
 <div class="container">
-	<div class="row cvast-paragraph-box cvast-media-block">
+	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
 		<div class="col-sm-4 cvast-paragraph-box-left-container">
 			<h1>Picasso and USF</h1>
 		</div>
@@ -58,31 +58,47 @@
 
 
 <!-- Videos -->
-<div class="container padding-top-20">
+<div class="container">
 	<div class="row cvast-paragraph-box-video cvast-media-block">
 		<div class="col-sm-4 cvast-paragraph-box-video-left-container">
 			<h1>Videos</h1>
 		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-video-body">
+				<p>These videos show some of the scanning and photographing sessions of the Bust of a Woman.</p>
+			</div>
+		</div>
 	</div>
 </div>
-<div class="block-description">
-	<div align="center" class="cvast-background-image-title">
+
+<div align="center" class="cvast-background-image-title">
+	<div id="cvast-video-caption">
 		<h5>Scanning the Bust of Woman with an Artec Eva scanner</h5>
-		</p>
-	</div>
-	<div>
-		<video align="center" class="cvast-video-full" style="max-height: 80vh;" controls poster="{{ S3_STATIC_URL_IMG }}/projects/picasso/video_thumbnails/scanning_picasso_bust_usf_streaming.png"
-		 loop="">
-			<source src="{{ S3_STATIC_URL_VIDEO }}/picasso/scanning_picasso_bust_usf_streaming.mp4" type="video/mp4">
-		</video>
 	</div>
 </div>
+<figure id="video-player" class="cvast-video-player-medium">
+	<video controls poster="{{ S3_STATIC_URL_IMG }}/projects/picasso/video_thumbnails/scanning_picasso_bust_usf_streaming.png"
+	 loop="">
+		<source src="{{ S3_STATIC_URL_VIDEO }}/picasso/scanning_picasso_bust_usf_streaming.mp4">
+	</video>
+	<figcaption>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/picasso/scanning_picasso_bust_usf_streaming.mp4" data-caption="<h5>Scanning the Bust of Woman with an Artec Eva scanner</h5>">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/picasso/video_thumbnails/scanning_picasso_bust_usf_streaming.png" alt="">
+		</a>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/picasso/picasso_photogrammetry_streaming.mp4" data-caption="<h5>Digital 3D data acquisitions using 2D images for photogrammetry</h5>">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/picasso/video_thumbnails/picasso_photogrammetry.png" alt="">
+		</a>
+
+	</figcaption>
+</figure>
 <!-- End Videos -->
 
 
 <!-- Paragraph 2 -->
 <div class="container">
-	<div class="row cvast-paragraph-box cvast-media-block">
+	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
 		<div class="col-sm-4 cvast-paragraph-box-left-container">
 			<h1>A change of plans</h1>
 		</div>
@@ -101,29 +117,17 @@
 </div>
 
 
-<!-- Images -->
-<div class="container padding-top-20">
-	<div class="row cvast-paragraph-box cvast-media-block">
-		<div class="col-sm-4 cvast-paragraph-box-left-container">
-			<h1>Scanning the Picasso bust</h1>
-		</div>
-	</div>
+<!-- Image 2 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
+	<h5>Data acquisitions with Faro Edge Arm scanner</h5>
 </div>
-
-<div align="center" class="cvast-background-image-title">
-	<h5>Scanning the Picasso bust</h5>
-</div>
-<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_tls_scanning.jpg); background-position: 55% 15%;"></div>
-
-<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
-	<h5>Scanning the Picasso bust</h5>
-</div>
-<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_photography.jpg); background-position: 50% 50%;"></div>
+<img src="{{ S3_STATIC_URL_IMG }}/projects/picasso/scanning_mila_picasso.jpg" style="max-height: 90vh; width: 100%; object-fit: contain;"
+/>
 
 
 <!-- Paragraph 3 -->
 <div class="container">
-	<div class="row cvast-paragraph-box cvast-media-block">
+	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
 		<div class="col-sm-4 cvast-paragraph-box-left-container">
 			<h1>Campus landscape</h1>
 		</div>
@@ -145,29 +149,16 @@
 </div>
 
 
-<div class="container padding-top-20">
-	<div class="row cvast-paragraph-box cvast-media-block">
-		<div class="col-sm-4 cvast-paragraph-box-left-container">
-			<h1>Scanning the Picasso bust</h1>
-		</div>
-	</div>
+<!-- Image 3 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
+	<h5>An archive photo of Pablo Picasso, Carl Nesjar and Bust of a Woman</h5>
 </div>
-
-<div align="center" class="cvast-background-image-title">
-	<h5>Scanning the Picasso bust</h5>
-</div>
-<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_orthophoto_anatomy.png); background-position: 40% 50%; height: 425px; background-size: auto 100%;"></div>
-
-<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
-	<h5>Scanning the Picasso bust</h5>
-</div>
-<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_orthophoto_paleontology.png); background-position: 50% 50%; height: 425px; background-size: auto 100%;"></div>
-<!-- End Images -->
-
+<img src="{{ S3_STATIC_URL_IMG }}/projects/picasso/picasso_nesjar.png" style="max-height: 90vh; width: 100%; object-fit: contain;"
+/>
 
 <!-- Paragraph 4 -->
 <div class="container">
-	<div class="row cvast-paragraph-box cvast-media-block">
+	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
 		<div class="col-sm-4 cvast-paragraph-box-left-container">
 			<h1>Virtualizing Picasso's ideas</h1>
 		</div>
@@ -190,7 +181,7 @@
 <div class="container">
 	<div class="row cvast-paragraph-box cvast-media-block">
 		<div class="col-sm-4 cvast-paragraph-box-left-container">
-			<h1>We are next...</h1>
+			<h1>The next artisan</h1>
 		</div>
 		<div class="col-sm-8">
 			<div class="cvast-paragraph-box-body">
