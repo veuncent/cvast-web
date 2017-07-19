@@ -11,9 +11,9 @@ services:
       environment:
         - PGPASSWORD=
         - PGDBNAME=cvast_arches
-        - PGHOST=
+        - PGHOST=db
         - PGPORT=5432
-        - ESHOST=
+        - ESHOST=search-test-cvast-arches-es-imev332bwwcgqlqeifarg5bkpm.us-east-1.es.amazonaws.com
         - ESPORT=9200
         - DJANGO_MODE=PROD
         - DJANGO_DEBUG=False
@@ -114,11 +114,12 @@ services:
       ports:
         - '5432:5432'
       environment:
-        - IS_CLEAN_ENV=False
+        - IS_CLEAN_ENV=True
         - PG_PASSWORD=
         - TZ=EST
 
 volumes:
+    web-log:
     web-static:
     nginx-log:
     postgres-data:

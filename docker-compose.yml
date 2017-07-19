@@ -90,7 +90,6 @@ services:
         - nginx-root:/var/www
         - letsencrypt-config:/etc/letsencrypt
         - letsencrypt-log:/var/log/letsencrypt
-        - letsencrypt-workdir:/var/lib/letsencrypt
       command: get_certificate
       environment:
         - LETSENCRYPT_EMAIL=vmeijer@usf.edu
@@ -115,4 +114,3 @@ volumes:
     nginx-log:
     letsencrypt-config:
     letsencrypt-log:
-    letsencrypt-workdir:
