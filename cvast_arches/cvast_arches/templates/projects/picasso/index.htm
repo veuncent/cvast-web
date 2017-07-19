@@ -1,0 +1,230 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description cvast-project-title">
+	<div class="container content padding-top-20">
+		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Picasso at USF: Bust of Woman" %}</h1>
+	</div>
+
+	<div class="block-description">
+		<div class="container">
+			<div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+				<div class="col-sm-4 cvast-paragraph-box-left-container">
+					<h1>Picasso Project</h1>
+					<h5><i class="fa fa-map-marker"></i>Tampa, Florida, United States</h5>
+				</div>
+				<div class="col-sm-8">
+					<div class="cvast-paragraph-box-body">
+						<p>Introductory text here. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+							been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+							it to make a type specimen book.
+						</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+		<h5>Scanning the Picasso bust</h5>
+	</div>
+	<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_faro.jpg);  background-position: 60% 40%;"></div>
+</div>
+
+<!-- Paragraph 1 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Picasso and USF</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>In his last phase, Pablo Picasso, used to create folded sheet-metal sculptures, which he wanted to transpose into gargantuan
+					landscape and urbanistic objects. These attempts would have been unsuccessful, unless Carl Nesjar had developed a dedicated
+					technique of concrete preparation. His ‘intrusion prepack’ method allowed for several realizations of Picasso’s ideas
+					across the world: in the United States, Norway, Spain, Sweden, France, Israel and the Netherlands. Based on these achievements
+					the ‘youngest painter in the world’ decided to create the largest sculpture in his oeuvre. This vision was to be embodied
+					by the ‘Bust of a woman’ that was eventually donated by Picasso to the University of South Florida, Tampa. Established
+					just a few years earlier, USF recognized the spectacular character of a construction that would attract the worldwide
+					attention and promote the growing university. The sculpture was expected to reach 102 feet in height, and with maximum
+					base width of 50 feet it was intended to dominate over the projected campus landscape. It was the last such important
+					project approved by the Spanish artist before he died.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Videos -->
+<div class="container padding-top-20">
+	<div class="row cvast-paragraph-box-video cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-video-left-container">
+			<h1>Videos</h1>
+		</div>
+	</div>
+</div>
+<div class="block-description">
+	<div align="center" class="cvast-background-image-title">
+		<h5>Scanning the Bust of Woman with an Artec Eva scanner</h5>
+		</p>
+	</div>
+	<div>
+		<video align="center" class="cvast-video-full" style="max-height: 80vh;" controls poster="{{ S3_STATIC_URL_IMG }}/projects/picasso/video_thumbnails/scanning_picasso_bust_usf_streaming.png"
+		 loop="">
+			<source src="{{ S3_STATIC_URL_VIDEO }}/picasso/scanning_picasso_bust_usf_streaming.mp4" type="video/mp4">
+		</video>
+	</div>
+</div>
+<!-- End Videos -->
+
+
+<!-- Paragraph 2 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>A change of plans</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>Unfortunately, the lack of funding caused that the concept was put on hold twice. Gigantic dimensions required tremendous
+					financial resources, not to mention the issues regarding the ground stability, and threads caused by the hurricanes.
+					The abandoned colossal ideas left behind only a small-scale bozzetto, as well as visualization projects, correspondence
+					and photographic documentation stored today at the USF library. Although in this case, Picasso’s ideas are represented
+					only by the miniature, his heritage is not yet forgotten, and the modeling techniques available today can be used to
+					place the designed art piece in the virtual campus scenery.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Images -->
+<div class="container padding-top-20">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Scanning the Picasso bust</h1>
+		</div>
+	</div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+	<h5>Scanning the Picasso bust</h5>
+</div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_tls_scanning.jpg); background-position: 55% 15%;"></div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Scanning the Picasso bust</h5>
+</div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_photography.jpg); background-position: 50% 50%;"></div>
+
+
+<!-- Paragraph 3 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Campus landscape</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>The aim of this project is to present the virtual world in which the sculpture was actually constructed and to identify
+					the visual interactions, which the art piece was expected to create. Several techniques were employed to create such
+					a world. First of all, historic records were collected and interpreted. Secondly, image-based modelling of the bozzetto
+					allowed for the creation of 3D model of the projected art piece. Next, airborne laser scanning data were used to generate
+					high quality Digital Surface Models of contemporary campus. Additionally, several sets of historic aerial photography
+					were investigated. These datasets were acquired in different flight campaigns, and thus it was possible to track the
+					landscape changes caused by the USF development. Structure from motion and Multi-view Stereo algorithms were used to
+					reproduce temporarily diverse landscapes: the one before the agreement between Picasso and the university, modelled
+					versions of the historic campus with the implemented sculpture, as well as a present-day USF area.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container padding-top-20">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Scanning the Picasso bust</h1>
+		</div>
+	</div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+	<h5>Scanning the Picasso bust</h5>
+</div>
+<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_orthophoto_anatomy.png); background-position: 40% 50%; height: 425px; background-size: auto 100%;"></div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Scanning the Picasso bust</h5>
+</div>
+<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_orthophoto_paleontology.png); background-position: 50% 50%; height: 425px; background-size: auto 100%;"></div>
+<!-- End Images -->
+
+
+<!-- Paragraph 4 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Virtualizing Picasso's ideas</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>Although the project has never been fully materialized, the proposed digital workflow allowed for a peculiar realization
+					of the artist’s idea. Therefore, his expectations to create a monumental art piece and thus to develop a meaningful
+					landscape were somehow met. Despite the virtual character of the obtained results, the confrontation of different datasets
+					and modelling techniques evokes the intangible cultural heritage of the modern history. Manifested in his art, Picasso’s
+					worldview represented some of the essential concepts of the XX century, and the presented digital approach is going
+					to popularize his ideas in a new, virtual world.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Quote -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>We are next...</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<blockquote style="margin-bottom: 50px;">
+					<p>“In many periods of his life Picasso has had the good fortune to encounter some artist, artisan or technician who, at
+						the right moment, has put the tools of a new medium into his hands or offered to help him realize a half-formed project
+						of his own.”</p>
+					<footer>Douglas Cooper, New Statesman July 6, 1962</footer>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Contact -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>
+					<h3>Contact</h3>
+					<a href="{% url 'about_us_subpage' about_us_name='people' %}#kamila" target="_blank">Kamila Oles</a>: kamilaoles
+					<i class="fa fa-at"></i>usf.edu
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% include 'projects/project_footer.htm' %}
+</div>
+
+{% endblock content %}
