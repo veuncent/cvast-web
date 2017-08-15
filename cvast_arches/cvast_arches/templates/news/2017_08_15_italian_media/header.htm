@@ -1,0 +1,36 @@
+{% load staticfiles %} {% load i18n %}
+
+<div class="cvast-content-block">
+
+    <a name="2017_08_15_italian_media"></a>
+    <div class="container">
+        <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>Virtualization projects of USF CVAST in Sicily on the Italian news</h1>
+                <h5><i class="fa fa-map-marker"></i>Italy</h5>
+                <h5><i class="fa fa-pencil"></i>Isabella Di Bartolo</h5>
+                <h5><i class="fa fa-calendar"></i>8/15/2017</h5>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    <p>
+                        To discover ancient Sicily hidden underground for centuries it requires foreigners: Americans, Germans, French, Polish and
+                        Swiss. A silent army of archaeologists in working in all the provinces of the Island to uncover forgotten
+                        monuments.
+                    </p>
+                    <p>
+                        Moreover, regional and national government have stopped decades ago to budget funds for archaeological research. Italian
+                        universities have always less and less resources to invest, while foreign universities, willing to
+                        investigate such unique world heritage, supply funds and manpower under the initiative of Italian
+                        brain-drain archaeologists who their country.
+                    </p>
+                    {% block read_more %} {% endblock read_more %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% block content %} {% endblock content %}
+
+</div>
