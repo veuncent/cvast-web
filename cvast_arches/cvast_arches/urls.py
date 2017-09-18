@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^$', 'arches.app.views.main.index', name='home'),
 
     url(r'^projects/$', 'cvast_arches.views.projects.index', name='projects_index'),
-    url(r'^projects/dycast/$', 'cvast_arches.views.projects.project_index', {'project_name': 'zikast'}, name='projects_dycast'),    
+    url(r'^projects/zikast/$', 'cvast_arches.views.projects.project_index', {'project_name': 'dycast'}, name='projects_dycast'),    
     url(r'^projects/(?P<project_name>[-\w]+)/$', 'cvast_arches.views.projects.project_index', name='projects_project_index'),    
     url(r'^projects/(?P<project_name>[-\w]+)/(?P<resource_name>[-\w]+)/$', 'cvast_arches.views.projects.subproject', name='projects_subproject'),
     
