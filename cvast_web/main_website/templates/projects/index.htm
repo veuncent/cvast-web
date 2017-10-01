@@ -1,0 +1,270 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<div class="block-description cvast-project-title">
+	<div class="container content padding-top-20">
+		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Projects" %}</h1>
+	</div>
+
+	<div class="block-description">
+		<div class="container">
+			<div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+				<div class="col-sm-4 cvast-paragraph-box-left-container">
+					<h1>Projects</h1>
+					<h5><i class="fa fa-map-marker"></i>Global</h5>
+				</div>
+				<div class="col-sm-8">
+					<div class="cvast-paragraph-box-body">
+						<p>This page provides an overview of some of the projects we are working on. Be sure to check back for updates!
+						</p>
+						<p>An interactive map of our projects in ArcGIS can be found <a href="http://cvast.maps.arcgis.com/apps/webappviewer/index.html?id=668fa8b7d8704498986ad2ee7ea1dc2a"
+							 target="_blank">here</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="background-image cvast-background-image-spacer" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/index/paris_nhm_faro_arm.jpg); background-position: 50% 50%;"></div>
+</div>
+
+
+<div class="block-description cvast-background-image-spacer">
+	<div class="container content padding-top-20 cvast-profile-box-list">
+
+		<!-- La Mancha -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='la-mancha' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/La_Vieja_thumbnail.jpg" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='la-mancha' %}">
+						<h2 class="txt-color-blue">La Mancha Project</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Spain</h4>
+					<p>CVAST is collaborating with the University of Castilla-La Mancha to scan the archaeological heritage of the La Mancha
+						region of Spain.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- La Mancha-->
+
+		<!-- Paris NHM -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='paris-nhm' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/about_us/technology/faro330.jpg" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='paris-nhm' %}">
+						<h2 class="txt-color-blue">French National Museum of Natural History</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Paris, France</h4>
+					<p>In the spring of 2016, CVAST scanned the The Galerie de paléontologie et d’anatomie comparée (Gallery of Palaeontology
+						and Comparative Anatomy) at the Muséum national d'histoire naturelle in Paris (MNHN).
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Paris NHM -->
+
+		<!-- Virtual Osteology of the World -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='virtual-osteology-of-the-world' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/paris_nhm_manatee_vertebra_thumbnail.jpg" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='virtual-osteology-of-the-world' %}">
+						<h2 class="txt-color-blue">Virtual Osteology of the World</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Global</h4>
+					<p>Building on the success of the Virtual Zooarchaeology of the Arctic Project (VZAP), we are expanding the collections
+						on a global scale. Through collaborations we are creating virtual osteological comparative collections from around
+						the world.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Virtual Osteology of the World -->
+
+		<!-- Digital Dinosaurs -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='digital-dinosaurs' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/deinonychus_archaeopteryx_1024x768.jpg" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='digital-dinosaurs' %}">
+						<h2 class="txt-color-blue">Digital Dinosaurs</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Global</h4>
+					<p>3D imaging and computer animation are harnessed to bring fossil dinosaurs “back to life”.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Digital Dinosaurs -->
+
+		<!-- Tampa Museum of Art -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='tampa-museum-art' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/tampa_museum_art.jpg" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='tampa-museum-art' %}">
+						<h2 class="txt-color-blue">Tampa Museum of Art: Virtual Interaction and Classical Antiquity</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Tampa, Florida, United States</h4>
+					<p>The virtualization of the Collection of Antiquities hosted in the Lemonopoulos and MacKechnie Galleries at the Tampa
+						Museum of Art for global public sharing.</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Tampa Museum of Art -->
+
+		<!-- DYCAST -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='dycast' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/wnv_dycast_zikast.png" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='dycast' %}">
+						<h2 class="txt-color-blue">DYCAST: Zika virus early warning system</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Florida and Brazil</h4>
+					<p>A predictive model that generates real-time risk maps for the Zika virus in order to target mosquito control efforts.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End DYCAST -->
+
+		<!-- VASP -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='vasp' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/3d_greek statuary_2.jpg" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='vasp' %}">
+						<h2 class="txt-color-blue">VASP</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Syracuse, Italy</h4>
+					<p>The virtualization of the Greek and Roman collection of the Archaeological Museum of Siracusa and of main urban and
+						suburban archaeological sites representing the archaeological context for artifacts in the collection.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End VASP -->
+
+		<!-- Virtual Karam -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='virtual-karam' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/head_jupiter_serapis.jpg" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='virtual-karam' %}">
+						<h2 class="txt-color-blue">Virtual Karam Collection</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Tampa, Florida, United States</h4>
+					<p>CVAST has undertaken the overall reappraisal of the Karam collection of archaeological artefacts kept in the Special
+						Collection Department of the University of South Florida Libraries, in order to virtualize it and share it digitally
+						with the public.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Virtual Karam -->
+
+		<!-- RAM 3D -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='ram3d' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/bronze_warship_ram_piraeus_archaeological_museum.jpg"
+					/>
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='ram3d' %}">
+						<h2 class="txt-color-blue">RAM<sup>3D</sup></h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Mediterranean region</h4>
+					<p>Ancient Mediterranean warships and their main offensive weapon, large bronze rams mounted on their bows at the waterline.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End RAM 3D -->
+
+		<!-- Bird Skulls -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='bird-skulls' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/vulture.jpg" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='bird-skulls' %}">
+						<h2 class="txt-color-blue">Bird skulls: Morphological and functional evolution</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Global</h4>
+					<p>We are using a combination of surface and microCT scans to understand how the range of diets and behaviours seen in
+						modern birds is linked to beak and skull shape, and their biomechanical performance.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Bird Skulls -->
+
+
+		<!-- Picasso -->
+		<div class="row cvast-profile-box servive-block-default">
+			<div class="col-sm-6 cvast-profile-box-left-container">
+				<a href="{% url 'projects_project_index' project_name='picasso' %}">
+					<img src="{{ S3_STATIC_URL_IMG }}/projects/index/picasso_photogrammetry.png" />
+				</a>
+			</div>
+			<div class="col-sm-6">
+				<div class="cvast-profile-box-body">
+					<a href="{% url 'projects_project_index' project_name='picasso' %}">
+						<h2 class="txt-color-blue">Picasso at USF: Bust of a Woman</h2>
+					</a>
+					<h4 class="cvast-location-title"><i class="fa fa-map-marker"></i>Tampa, Florida, United States</h4>
+					<p>CVAST archaeologist and art historian Kamila Oles and landscape archaeologist Lukasz Banaszek are realizing Pablo Picasso’s
+						dream of a great monument and the world’s largest concrete sculpture, which -although planned- has never been constructed.
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- End Picasso -->
+
+	</div>
+</div>
+
+<!-- End Content Part -->
+{% endblock content %}

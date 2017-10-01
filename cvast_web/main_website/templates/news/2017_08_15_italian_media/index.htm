@@ -1,0 +1,6 @@
+{% extends "news/2017_08_15_italian_media/header.htm" %} 
+{% load staticfiles %} {% load i18n %} 
+
+{% block read_more %}
+    <p style="text-align: right;"><a href="{% url 'news_index' %}">Read more</a></p>
+{% endblock read_more %}

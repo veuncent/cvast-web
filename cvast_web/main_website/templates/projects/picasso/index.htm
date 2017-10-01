@@ -1,0 +1,221 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description cvast-project-title">
+	<div class="container content padding-top-20">
+		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Picasso at USF: Bust of a Woman" %}</h1>
+	</div>
+
+	<div class="block-description">
+		<div class="container">
+			<div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+				<div class="col-sm-4 cvast-paragraph-box-left-container">
+					<h1>Picasso at USF</h1>
+					<h5><i class="fa fa-map-marker"></i>Tampa, Florida, United States</h5>
+				</div>
+				<div class="col-sm-8">
+					<div class="cvast-paragraph-box-body">
+						<p>CVAST archaeologist and art historian Kamila Oles and landscape archaeologist Lukasz Banaszek are realizing Pablo Picasso’s
+							dream of a great monument and the world’s largest concrete sculpture, which -although planned- has never been constructed.
+						</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Image 1 -->
+	<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+		<h5>Newspaper collage from 1974</h5>
+	</div>
+	<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/picasso/picasso_newspaper_collage.jpg);  background-position: 50% 0%; height: 750px;"></div>
+</div>
+
+<!-- Paragraph 1 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Picasso and USF</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>In his last phase, Pablo Picasso created folded sheet-metal sculptures that he wanted to transpose into gargantuan landscape
+					and urbanistic objects. These attempts would have been unsuccessful unless Carl Nesjar had developed a specialized technique
+					of concrete preparation. His ‘intrusion prepack’ method allowed for several realizations of Picasso’s ideas across the
+					world: in the United States, Norway, Spain, Sweden, France, Israel and the Netherlands. Based on these achievements
+					the ‘youngest painter in the world’ decided to create the largest sculpture in his oeuvre. This vision was to be embodied
+					by the ‘Bust of a woman’ that was eventually donated by Picasso to the University of South Florida, Tampa. Established
+					just a few years earlier, USF recognized the spectacular character of a construction that would attract worldwide attention
+					and promote the growing university. The sculpture was expected to reach 102 feet in height, and with maximum base width
+					of 50 feet, it was intended to dominate over the projected campus landscape. It was the last important project approved
+					by the Spanish artist before he died.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Videos -->
+<div class="container">
+	<div class="row cvast-paragraph-box-video cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-video-left-container">
+			<h1>Videos</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-video-body">
+				<p>These videos show some of the scanning and photographing sessions of the Bust of a Woman.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+	<div id="cvast-video-caption">
+		<h5>Scanning the Bust of Woman with an Artec Eva scanner</h5>
+	</div>
+</div>
+<figure id="video-player" class="cvast-video-player-medium">
+	<video controls poster="{{ S3_STATIC_URL_IMG }}/projects/picasso/video_thumbnails/scanning_picasso_bust_usf_streaming.png"
+	 loop="">
+		<source src="{{ S3_STATIC_URL_VIDEO }}/picasso/scanning_picasso_bust_usf_streaming.mp4">
+	</video>
+	<figcaption>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/picasso/scanning_picasso_bust_usf_streaming.mp4" data-caption="<h5>Scanning the Bust of Woman with an Artec Eva scanner</h5>">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/picasso/video_thumbnails/scanning_picasso_bust_usf_streaming.png" alt="">
+		</a>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/picasso/picasso_photogrammetry_streaming.mp4" data-caption="<h5>Digital 3D data acquisitions using 2D images for photogrammetry</h5>">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/picasso/video_thumbnails/picasso_photogrammetry.png" alt="">
+		</a>
+
+	</figcaption>
+</figure>
+<!-- End Videos -->
+
+
+<!-- Paragraph 2 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>A change of plans</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>Unfortunately, the lack of funding caused the concept to be put on hold twice. The gigantic dimensions required tremendous
+					financial resources, not to mention the issues regarding ground stability, and threats caused by hurricanes. The abandoned
+					idea left behind only a small-scale bozzetto, as well as visualization projects, correspondence and photographic documentation
+					stored today at the USF library. Although in this case, Picasso’s ideas are represented only in miniature, and his heritage
+					is not yet forgotten; the modeling techniques available today can be used to place the designed art piece in the virtual
+					campus scenery.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Image 2 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
+	<h5>Data acquisitions with Faro Edge Arm scanner</h5>
+</div>
+<img src="{{ S3_STATIC_URL_IMG }}/projects/picasso/scanning_mila_picasso.jpg" style="max-height: 90vh; width: 100%; object-fit: contain;"
+/>
+
+
+<!-- Paragraph 3 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Campus landscape</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>The aim of this project is to present the virtual world in which the sculpture was actually constructed and to identify
+					the visual interactions, which the art piece was expected to create. Several techniques were employed to create this
+					virtual world. Firstly, historic records were collected and interpreted. Secondly, image-based modelling of the bozzetto
+					allowed for the creation of 3D model of the projected art piece. Next, airborne laser scanning data were used to generate
+					high quality Digital Surface Models of contemporary campus. Additionally, several sets of historic aerial photography
+					were investigated. These datasets were acquired in different flight campaigns, and thus it was possible to track the
+					landscape changes caused by the USF development. Structure-from-motion and Multi-view Stereo algorithms were used to
+					reproduce temporarily diverse landscapes, including the one before the agreement between Picasso and the university,
+					modelled versions of the historic campus with the implemented sculpture, as well as a present-day USF area.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Image 3 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
+	<h5>An archive photo of Pablo Picasso, Carl Nesjar and Bust of a Woman</h5>
+</div>
+<img src="{{ S3_STATIC_URL_IMG }}/projects/picasso/picasso_nesjar.png" style="max-height: 90vh; width: 100%; object-fit: contain;"
+/>
+
+<!-- Paragraph 4 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block cvast-background-image-spacer">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Virtualizing Picasso's ideas</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>Although the project was never fully materialized, the proposed digital workflow allowed for a peculiar realization of
+					the artist’s idea. Therefore, his expectations to create a monumental art piece and thus to develop a meaningful landscape
+					were somehow met. Despite the virtual character of the obtained results, the confrontation of different datasets and
+					modelling techniques evokes the intangible cultural heritage of modern history. Manifested in his art, Picasso’s worldview
+					represented some of the essential concepts of his time, and the presented digital approach is going to popularize his
+					ideas in a new, virtual world.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Quote -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>The next artisan</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<blockquote style="margin-bottom: 50px;">
+					<p>“In many periods of his life Picasso has had the good fortune to encounter some artist, artisan or technician who, at
+						the right moment, has put the tools of a new medium into his hands or offered to help him realize a half-formed project
+						of his own.”</p>
+					<footer>Douglas Cooper, New Statesman July 6, 1962</footer>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Contact -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>
+					<h3>Contact</h3>
+					<a href="{% url 'about_us_subpage' about_us_name='people' %}#kamila" target="_blank">Kamila Oles</a>: kamilaoles
+					<i class="fa fa-at"></i>usf.edu
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% include 'projects/project_footer.htm' %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description cvast-project-title">
+	<div class="container content padding-top-20">
+		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Digital Dinosaurs" %}</h1>
+	</div>
+
+	<div class="block-description">
+		<div class="container">
+			<div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+				<div class="col-sm-4 cvast-paragraph-box-left-container">
+					<h1>From dinosaurs to birds</h1>
+					<h5><i class="fa fa-map-marker"></i>Global</h5>
+				</div>
+				<div class="col-sm-8">
+					<div class="cvast-paragraph-box-body">
+						<p>USF Integrative Biology Professor <a href="{% url 'about_us_subpage' about_us_name='people' %}#ryan" target="_blank">Ryan Carney</a> is leading projects
+							to digitize exceptional dinosaur fossils for research and educational purposes. This includes the 3D Archaeopteryx
+							Project, which harnesses X-ray imaging, photogrammetry, and computer animation to reconstruct the best-preserved specimens
+							of the icon of evolution,
+							<a href="https://en.wikipedia.org/wiki/Archaeopteryx" target="_blank"><i>Archaeopteryx</i></a> (ar-kee-OP-ter-icks).
+							This so-called “missing link” between dinosaurs and birds holds the key to solving the mystery of how flight evolved.
+							But could <i>Archaeopteryx</i> actually fly? And is it truly the first known bird?
+						</p>
+						</br>
+						<p>Funding provided by the National Science Foundation and the National Geographic Society/Waitt Foundation.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- Image 1 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Engineering team with <i>Archaeopteryx</i> and custom X-ray microtomosynthesis instrument</h5>
+</div>
+<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/LLNL_scanning.jpg); background-position: 55% 30%; height: 750px;"></div>
+
+
+<!-- Image 2 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
+	<h5><i>Deinonychus</i> forelimb model in the Maya animation environment</h5>
+</div>
+<img src="{{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/Deinonychus_Maya_original.png" style="max-height: 90vh; width: 100%; object-fit: contain;"
+/>
+
+
+<!-- Videos -->
+<div class="container">
+	<div class="row cvast-paragraph-box-video cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-video-left-container">
+			<h1>Videos</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-video-body">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+	<h5 id="cvast-video-caption">Forelimb predatory strike of <i>Deinonychus</i> (the “velociraptor” from <i>Jurassic Park</i>), 3D laser scanning and Maya
+		computer animation. Credit: Ryan Carney</h5>
+</div>
+<figure id="video-player" class="cvast-video-player-medium">
+	<video controls poster="{{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/video_thumbnails/01_Deinonychus_1280x1024_video.png"
+		loop="">
+		<source src="{{ S3_STATIC_URL_VIDEO }}/digital_dinosaurs/01_Deinonychus_1280x1024_video.webm">
+	</video>
+	<figcaption>
+		<a href="{{ S3_STATIC_URL_VIDEO }}/digital_dinosaurs/01_Deinonychus_1280x1024_video.webm" data-caption="Forelimb predatory strike of <i>Deinonychus</i> (the “velociraptor” from <i>Jurassic Park</i>), 3D laser scanning and Maya computer animation. Credit: Ryan Carney">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/video_thumbnails/01_Deinonychus_1280x1024_video.png" alt="">
+		</a>
+		<a href="{{ S3_STATIC_URL_VIDEO }}/digital_dinosaurs/02_London+Archaeopteryx_photogrammetry_1920x1080.webm" data-caption="London specimen of <i>Archaeopteryx</i>, 3D photogrammetric reconstruction. Credit: Peter Falkingham"><img src="{{ S3_STATIC_URL_IMG }}/projects/digital_dinosaurs/video_thumbnails/02_London Archaeopteryx_photogrammetry_1920x1080.png"
+				alt=""></a>
+	</figcaption>
+</figure>
+<!-- End Videos -->
+
+
+
+
+{% include 'projects/project_footer.htm' %}
+</div>
+
+{% endblock content %}

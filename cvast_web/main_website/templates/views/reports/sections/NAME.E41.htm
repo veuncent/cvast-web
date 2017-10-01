@@ -1,0 +1,24 @@
+{% load i18n %}
+
+{% if 'NAME_E41' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title">{% trans "Names" %}</h5>
+                </dt>
+
+                {% for NAME_E41 in report_info.source.graph.NAME_E41 %}
+                    <dd class="arches-report-subsection-item report-list-item">
+                        {{ NAME_E41.NAME_E41__value }}
+                        <!-- Display only if Name Type (primary, alternative, etc..) is not empty -->
+                        {% if 'NAME_TYPE_E55__value' in NAME_E41 %}
+                            <span class="arches-report-subsection-item-type">({{NAME_E41.NAME_TYPE_E55__value}})</span>
+                        {% endif %}
+                    </dd>
+                {% endfor %}            
+
+            </dl>
+        </div>
+    </div>
+{% endif %}

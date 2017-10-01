@@ -1,0 +1,192 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description cvast-project-title">
+	<div class="container content padding-top-20">
+		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "French National Museum of Natural History Project" %}</h1>
+	</div>
+
+	<div class="block-description">
+		<div class="container">
+			<div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+				<div class="col-sm-4 cvast-paragraph-box-left-container">
+					<h1>Muséum national d'histoire naturelle</h1>
+					<h5><i class="fa fa-map-marker"></i>Paris, France</h5>
+				</div>
+				<div class="col-sm-8">
+					<div class="cvast-paragraph-box-body">
+						<p>In the spring of 2016, CVAST scanned the <a href="https://en.wikipedia.org/wiki/Galerie_de_pal%C3%A9ontologie_et_d%27anatomie_compar%C3%A9e"
+							 target="_blank"> Galerie de paléontologie et d’anatomie comparée</a> (Gallery of Palaeontology and Comparative Anatomy)
+							at the <a href="https://en.wikipedia.org/wiki/National_Museum_of_Natural_History_(France)" target="_blank"> Muséum national d'histoire naturelle</a>							in Paris (MNHN). Co-directed by CVAST Executive Director Herbert Maschner and Pierre-Yves Gagnier, Directeur adjoint
+							des collections MNHN, this project had several goals.
+						</p>
+						<p>The first was to test methods for the virtual documentation of extremely complex and detailed museum exhibits, which
+							was done using both laser scans and photogrammetry. The second was to test methods of segmentation so that individual
+							skeletons and specimens could be separated from the composite gallery reconstructions. Lastly, to provide a plan view
+							and architectural plan for the proposed remodeling of the galleries and building.
+						</p>
+						<p>An interactive map of the Gallery of Paleontology in ArcGIS can be found <a href="https://cvast.maps.arcgis.com/apps/webappviewer/index.html?id=5c940723be214412b0a24f9b4c61d9f9"
+							 target="_blank">here</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+		<h5>Scanning the Gallery of Anatomy</h5>
+	</div>
+	<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_faro.jpg);  background-position: 60% 40%;"></div>
+</div>
+
+
+<!-- ArcGIS map -->
+<!-- <div class="container padding-top-20">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>ArcGis</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-video-body">
+				<p>This map displays the Gallery of Paleontology in ArcGis. Click on the specimens to see more details.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div align="center">
+	<iframe style="width: 100%; height: 85vh;" src="https://cvast.maps.arcgis.com/apps/webappviewer/index.html?id=5c940723be214412b0a24f9b4c61d9f9"></iframe>
+</div> -->
+<!-- End ArcGIS map -->
+
+
+<!-- Sketchfab -->
+<div class="container padding-top-20">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>3D models</h1>
+		</div>
+	</div>
+</div>
+
+<div id="cvast-sketchfab-viewer" align="center" class="sketchfab-embed-wrapper cvast-sketchfab-embeded">
+
+	<iframe src="https://sketchfab.com/playlists/embed?collection=9d218e2f79e0461b9b4e2a048f092cbf" frameborder="0" allowvr allowfullscreen
+	 mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+
+	<p>
+		<a href="https://sketchfab.com/cvast/collections/french-national-museum-of-natural-history-project" target="_blank">French National Museum of Natural History Project</a>		by <a href="https://sketchfab.com/cvast" target="_blank">CVAST</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
+	</p>
+
+</div>
+<!-- End Sketchfab -->
+
+
+<!-- Videos -->
+<div class="container">
+	<div class="row cvast-paragraph-box-video cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-video-left-container">
+			<h1>Videos</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-video-body">
+				<p>These videos show animations of some of the point clouds that resulted from scanning in the Galerie de paléontologie
+					et d’anatomie comparée.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+	<div id="cvast-video-caption">
+		<h5>Gallery of Paleontology</h5>
+		<p>Discover the Galerie de Paléontologie, showcasing all stages in the history of life.</p>
+	</div>
+</div>
+<figure id="video-player" class="cvast-video-player-medium">
+	<video controls poster="{{ S3_STATIC_URL_IMG }}/projects/paris_nhm/video_thumbnails/museum_of_paleontology_full_res.png"
+	 loop="">
+		<source src="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/museum_of_paleontology_full_res-streaming.mp4">
+	</video>
+	<figcaption>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/museum_of_paleontology_full_res-streaming.mp4" data-caption="<h5>Gallery of Paleontology</h5>
+        <p>Discover the Galerie de Paléontologie, showcasing all stages in the history of life.</p>">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/paris_nhm/video_thumbnails/museum_of_paleontology_full_res.png" alt="">
+		</a>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/Level1_Full_Resolution-streaming.mp4" data-caption="<h5>Gallery of Comparative Anatomy</h5><p>Fly through the Galerie d'Anatomie comparée and discover the more than 650 skeletons of fish, amphibians, reptiles, birds and mammals on display.
+		</p>">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/paris_nhm/video_thumbnails/Level1_Full_Resolution.png" alt="">
+		</a>
+
+		<a href="{{ S3_STATIC_URL_VIDEO }}/paris_nhm/MNHN_Baleen_Whale-streaming.mp4" data-caption="<h5>Baleen whale</h5>
+        <p>On display in the Galerie d'Anatomie comparée (Gallery of Comparative Anatomy).</p>">
+			<img src="{{ S3_STATIC_URL_IMG }}/projects/paris_nhm/video_thumbnails/MNHN_Baleen_Whale.png" alt="">
+		</a>
+
+	</figcaption>
+</figure>
+<!-- End Videos -->
+
+
+
+<!-- Images -->
+<div class="container padding-top-20">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Scanning and photographing the collection</h1>
+		</div>
+	</div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+	<h5>Setting up our Faro Focus330 terrestrial laser scanner in the Gallery of Anatomy</h5>
+</div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_tls_scanning.jpg); background-position: 55% 15%;"></div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Photographing the Gallery of Anatomy</h5>
+</div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_photography.jpg); background-position: 50% 50%;"></div>
+
+
+
+<div class="container padding-top-20">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Preliminary results</h1>
+		</div>
+	</div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+	<h5>Orthophoto of the Gallery of Comparative Anatomy</h5>
+</div>
+<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_orthophoto_anatomy.png); background-position: 40% 50%; height: 425px; background-size: auto 100%;"></div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Orthophoto of the Gallery of Paleontology</h5>
+</div>
+<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_orthophoto_paleontology.png); background-position: 50% 50%; height: 425px; background-size: auto 100%;"></div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Point cloud of Steller's sea cow, dorsal view</h5>
+</div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_manatee_dorsal.jpg); background-position: 100% 40%;"></div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Point cloud of Steller's sea cow, right lateral view</h5>
+</div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_manatee_right_lateral.jpg); background-position: 100% 40%;"></div>
+
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Point cloud of a Baleen whale, right lateral view</h5>
+</div>
+<div class="background-image" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/paris_nhm/paris_nhm_baleen_whale_right_lateral.png); background-position: 100% 60%;"></div>
+<!-- End Images -->
+
+{% include 'projects/project_footer.htm' %}
+</div>
+
+{% endblock content %}

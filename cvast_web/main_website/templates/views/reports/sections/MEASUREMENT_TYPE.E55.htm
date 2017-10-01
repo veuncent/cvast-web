@@ -1,0 +1,22 @@
+{% load i18n %}
+
+{% if 'MEASUREMENT_TYPE_E55' in report_info.source.graph %}
+    <div class="row">
+        <div class="col-xs-12">
+            <dl class="report-item-list">
+                <dt>
+                    <h5 id="" class="arches-report-subsection-title hidden">{% trans "Measurements" %}</h5>
+                </dt>
+
+                {% for MEASUREMENT_TYPE_E55 in report_info.source.graph.MEASUREMENT_TYPE_E55 %}
+                    <dd class="arches-report-subsection-item report-list-item">
+                        <span class="arches-report-subsection-item-type">{{ MEASUREMENT_TYPE_E55.MEASUREMENT_TYPE_E55__value }}:</span>
+                        {{ MEASUREMENT_TYPE_E55.VALUE_OF_MEASUREMENT_E60__value }} {{ MEASUREMENT_TYPE_E55.UNIT_OF_MEASUREMENT_E55__value }}
+                    </dd>
+                    {% empty %}
+                {% endfor %}            
+
+            </dl>
+        </div>
+    </div>
+{% endif %}

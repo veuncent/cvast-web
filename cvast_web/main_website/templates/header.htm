@@ -1,0 +1,125 @@
+{% load staticfiles %} {% load i18n %}
+<div class="header">
+
+    <!-- Topbar -->
+    <div class="topbar" style="padding-bottom: 25px;">
+
+    </div>
+    <!-- End Topbar -->
+
+    <!-- Navbar -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                    <span class="fa fa-bars"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img id="logo-header" class="arches-logo-header" src="{{ STATIC_URL }}img/cvast_logo_small.png" alt="Logo">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+
+                    <!-- Home -->
+                    <li class="{% if active_page == 'Home' %}active{% endif %}">
+                        <a href="{% url 'home' %}">
+                            {% trans "Home" %}
+                        </a>
+                    </li>
+                    <!-- End Home -->
+
+                    <!-- News -->
+                    <li class="{% if active_page == 'News' %}active{% endif %}">
+                        <a href="{% url 'news_index' %}">
+                            {% trans "News" %}
+                        </a>
+                    </li>
+                    <!-- End News -->
+
+                    <!-- Projects -->
+                    <li class="{% if active_page == 'Projects' %}active{% endif %}">
+                        <a href="{% url 'projects_index' %}">
+                            {% trans "Projects" %}
+                        </a>
+                    </li>
+                    <!-- End Projects -->
+
+                    <!-- Software -->
+                    <li class="{% if active_page == 'Software' %}active{% endif %}">
+                        <a href="{% url 'software_index' %}">
+                            {% trans "Software" %}
+                        </a>
+                    </li>
+                    <!-- End Software -->
+
+                    <!-- About Us -->
+                    <li class="dropdown {% if active_page == 'About_us' %}active{% endif %}">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            {% trans "About Us" %}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'about_us_subpage' about_us_name='mission' %}"><i class="fa fa-eye"></i>Mission</a></li>
+                            <li><a href="{% url 'about_us_subpage' about_us_name='people' %}"><i class="fa fa-group"></i>People</a></li>
+                            <li><a href="{% url 'about_us_subpage' about_us_name='technology' %}"><i class="fa fa-camera"></i>Technology</a></li>
+                            <li><a href="{% url 'about_us_subpage' about_us_name='partners' %}"><i class="fa fa-puzzle-piece"></i>Partners</a></li>
+                        </ul>
+                    </li>
+                    <!-- End About Us -->
+
+                    {% if 'edit' in user.user_groups %}
+                    <!-- Resource Editor -->
+                    <li class="dropdown {% if active_page == 'ResourceManger' %}active{% endif %}">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                            {% trans "Resource Manager" %}
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for type, type_data in resource_types %}
+                            <li><a href="{% url 'resource_manager' type type_data.default_page '' %}"><i class="{{type_data.icon_class}}"></i>{{type_data.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <!-- End Resource Editor -->
+
+                    <!-- RDM -->
+                    <li class="{% if user.is_anonymous %}{% endif %} {% if active_page == 'RDM' %}active{% endif %}">
+                        <a href="{% url 'rdm' '' %}">
+                            {% trans "RDM" %}
+                        </a>
+                    </li>
+                    <!-- End RDM -->
+
+
+                    <!-- Search Block -->
+                    <li>
+                        <i class="search fa fa-search search-btn"></i>
+                        <div class="search-open arches-search">
+
+                            <div class="input-group animated fadeInDown">
+                                <!-- Project Dropdown -->
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="input-group" id="simple-search">
+                                            <span class="input-group-addon"><i class="fa fa-search text-muted"></i></span>                                            {% include "views/simple-search.htm" %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Project Dropdown -->
+                            </div>
+                        </div>
+                    </li>
+                    <!-- End Search Block -->
+                    {% endif %}
+                </ul>
+            </div>
+            <!--/navbar-collapse-->
+        </div>
+    </div>
+    <!-- End Navbar -->
+
+</div>

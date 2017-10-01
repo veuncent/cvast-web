@@ -1,0 +1,139 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load i18n %} {% block content %}
+
+<!--=== Content Part ===-->
+<div class="block-description cvast-project-title">
+	<div class="container content padding-top-20">
+		<h1 class="arches-breadcrumb-title cvast-page-title">{% trans "Tampa Museum of Art: Virtual Interaction and Classical Antiquity" %}</h1>
+	</div>
+
+	<div class="block-description">
+		<div class="container">
+			<div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+				<div class="col-sm-4 cvast-paragraph-box-left-container">
+					<h1>Tampa Museum of Art</h1>
+					<h5><i class="fa fa-map-marker"></i>Tampa, Florida, United States</h5>
+				</div>
+				<div class="col-sm-8">
+					<div class="cvast-paragraph-box-body">
+						<p><a href="http://tampamuseum.org/" target="_blank">The Tampa Museum of Art</a> has a remarkable collection of antiquities
+							which has never been fully published. The Joseph Veach Noble Collection, acquired by the Museum in 1986, received
+							an exhibition catalogue, but numerically speaking it constitutes only about one-fourth of the entire collection. Some
+							objects have been included in various exhibition catalogues, few are currently on the Tampa Museum of Art website,
+							with others on websites known primarily to scholars (such as the <a href="http://www.cvaonline.org/pottery/" target="_blank">Beazley Archive Pottery Database</a>).
+							But many of them have never been published as part of the Tampa collection.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- Image 1 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Lemonopoulos and MacKechnie Galleries at the Tampa Museum of Art</h5>
+</div>
+<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/tampa_museum_art/lemonopoulos_mackechnie_galleries_tampa_museum_art.jpg); background-position: 50% 70%;"></div>
+
+<!-- Paragraph 1 -->
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>Collection virtualization</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<p>A team of CVAST directed by <a href="{% url 'about_us_subpage' about_us_name='people' %}#davide" target="_blank">Dr Davide Tanasi</a> (CVAST – Department
+					of History, University of South Florida) has undertaken the virtualization of the collection using 3D Scanning and Digital
+					Photogrammetry. The ultimate goal of this research will be to boost the digital accessibility of the Tampa Museum of
+					Art and to share online its remarkable archaeological collection with the global public.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Sketchfab -->
+<div class="container padding-top-20">
+	<div class="row cvast-paragraph-box cvast-media-block">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>3D models</h1>
+		</div>
+	</div>
+</div>
+
+<div id="cvast-sketchfab-viewer" align="center" class="sketchfab-embed-wrapper cvast-sketchfab-embeded">
+
+	<iframe src="https://sketchfab.com/playlists/embed?collection=c9b60f8d93544d56b97dbba6916def50" frameborder="0" allowvr allowfullscreen
+		mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+
+		<p>
+			<a href="https://sketchfab.com/cvast/collections/tampa-museum-of-art" target="_blank">Tampa Museum of Art</a> by
+			<a href="https://sketchfab.com/cvast/"
+				target="_blank">CVAST</a> on <a href="https://sketchfab.com" target="_blank">Sketchfab</a>
+		</p>
+
+</div>
+<!-- End Sketchfab -->
+
+
+<!-- Videos -->
+<div class="container">
+    <div class="row cvast-paragraph-box-video cvast-media-block">
+        <div class="col-sm-4 cvast-paragraph-box-video-left-container">
+            <h1>Videos</h1>
+        </div>
+        <div class="col-sm-8">
+            <div class="cvast-paragraph-box-video-body">
+                <p>These videos show the work in progress and preliminary results of our project at TMA.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div align="center" class="cvast-background-image-title">
+    <div id="cvast-video-caption">
+        <h5>Meshed model of a Red-Figure Volute Krater (mixing vessel)</h5>
+    </div>
+</div>
+<figure id="video-player" class="cvast-video-player-medium">
+    <video controls poster="{{ S3_STATIC_URL_IMG }}/projects/tampa_museum_art/video_thumbnails/tma_red_figure_volute_krater.png"
+        loop="">
+        <source src="{{ S3_STATIC_URL_VIDEO }}/tampa_museum_art/tma_red_figure_volute_krater_streaming.mp4">
+    </video>
+    <figcaption>
+        <a href="{{ S3_STATIC_URL_VIDEO }}/tampa_museum_art/tma_red_figure_volute_krater_streaming.mp4" data-caption="<h5>Meshed model of a Red-Figure Volute Krater (mixing vessel)</h5>">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/tampa_museum_art/video_thumbnails/tma_red_figure_volute_krater.png"
+                alt="">
+        </a>
+
+        <a href="{{ S3_STATIC_URL_VIDEO }}/tampa_museum_art/cvast_artec_eva_tampa_museum_art-streaming.mp4" data-caption="<h5>3D Scanning of an Athenian Red-Figure Kylix with light structured 3D scanner Artec EVA</h5>">
+            <img src="{{ S3_STATIC_URL_IMG }}/projects/tampa_museum_art/video_thumbnails/cvast_artec_eva_tampa_museum_art.png" alt="">
+        </a>
+
+    </figcaption>
+</figure>
+<!-- End Videos -->
+
+
+<!-- Image 2 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer" style="margin-bottom: 10px;">
+	<h5>3D model of Athenian Red-Figure Kylix after the acquisition</h5>
+</div>
+<img src="{{ S3_STATIC_URL_IMG }}/projects/tampa_museum_art/3d_model_athenian_red_figure_kylix.jpg" style="max-height: 90vh; width: 100%; object-fit: contain;"
+/>
+
+<!-- Image 3 -->
+<div align="center" class="cvast-background-image-title cvast-background-image-spacer">
+	<h5>Digital Photogrammetry capturing session of an Apulian trozzella</h5>
+</div>
+<div class="background-image background-image-responsive" style="background-image: url({{ S3_STATIC_URL_IMG }}/projects/tampa_museum_art/digital_photogrammetry_apulian_trozzella.jpg); background-position: 50% 50%; height: 850px;"></div>
+
+
+{% include 'projects/project_footer.htm' %}
+</div>
+
+{% endblock content %}

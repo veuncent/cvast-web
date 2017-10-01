@@ -1,0 +1,22 @@
+{% load staticfiles %} {% load i18n %} {% block content %}
+
+ <div class="cvast-content-block"> 
+    <div class="block-description">
+        <div class="container content">
+
+            <!--Title Box-->
+            <div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
+                <h1>News</h1>
+                <a href="{% url 'news_index' %}">
+                See all News items
+            </a>
+            </div>
+            <!-- End Title Box -->
+
+            {% include 'news/2017_08_15_villa_of_durrueli/index.htm' %}
+
+        </div>
+    </div>
+ </div> 
+
+{% endblock content %}
