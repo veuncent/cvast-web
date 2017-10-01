@@ -1,5 +1,0 @@
-################
-Using Arches-HIP
-################
-
-User Documentation for the Arches web application is coming soon!
