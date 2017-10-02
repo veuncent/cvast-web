@@ -9,10 +9,10 @@ services:
         context: .
         dockerfile: ./Dockerfile
       volumes:
-      - ./cvast_web:/cvast_web
+      - web-log:/cvast_web/cvast_web/logs
       - web-static:/static_root
       environment:
-        - PGPASSWORD=TestCVAST
+        - PGPASSWORD=
         - PGDBNAME=cvast_arches
         - PGHOST=web-db
         - PGPORT=5432
@@ -36,14 +36,11 @@ services:
       ports:
         - '5432:5432'
       environment:
-        - POSTGRES_PASSWORD=TestCVAST
+        - POSTGRES_PASSWORD=
         - TZ=EST
 
 volumes:
     web-log:
-    web-static2:
+    web-static:
     postgres-data:
     postgres-log:
-    elasticsearch-data:
-    elasticsearch-log:
-    elasticsearch-config:

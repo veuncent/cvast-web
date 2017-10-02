@@ -5,7 +5,7 @@ services:
       restart: always
       image: cvast/cvast-web:$WEB_VERSION
       volumes:
-      - web-log:/cvast_web/cvast_arches/cvast_arches/logs
+      - web-log:/cvast_web/cvast_web/logs
       - web-static:/static_root
       environment:
         - PGPASSWORD=
