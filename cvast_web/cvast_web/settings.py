@@ -24,11 +24,13 @@ def get_env_variable(var_name):
         error_msg = msg % var_name
         raise ImproperlyConfigured(error_msg)
 
+
 def get_optional_env_variable(var_name):
     try:
         return os.environ[var_name]
     except KeyError:
         return None
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -49,19 +51,20 @@ GOOGLE_ANALYTICS_TRACKING_ID = 'UA-91758389-1'
 # An AWS service is called to get this private IP of the current EC2 node. Then the IP is added to ALLOWS_HOSTS so that Django answers to it.
 EC2_PRIVATE_IP = None
 try:
-    EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
+    EC2_PRIVATE_IP = requests.get(
+        'http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
 except requests.exceptions.RequestException:
     pass
 if EC2_PRIVATE_IP:
     ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
 EC2_PUBLIC_HOSTNAME = None
 try:
-    EC2_PUBLIC_HOSTNAME = requests.get('http://169.254.169.254/latest/meta-data/public-hostname', timeout=0.01).text
+    EC2_PUBLIC_HOSTNAME = requests.get(
+        'http://169.254.169.254/latest/meta-data/public-hostname', timeout=0.01).text
 except requests.exceptions.RequestException:
     pass
 if EC2_PUBLIC_HOSTNAME:
     ALLOWED_HOSTS.append(EC2_PUBLIC_HOSTNAME)
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -69,7 +72,6 @@ if EC2_PUBLIC_HOSTNAME:
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'f+#2gcw@la-p0ru02==i%)e(*x7b=(c=)&eyc8i24_my_1p(=3'
-
 
 
 # Application definition
