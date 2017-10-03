@@ -11,7 +11,7 @@ ENV INSTALL_DIR=/install
 RUN apt-get update -y &&\
 	apt-get upgrade -y &&\
 	apt-get update -y &&\
-	apt-get install -y dos2unix
+	apt-get install -y dos2unix mysql-client
 
 ADD ./install/requirements.txt ${INSTALL_DIR}/requirements.txt
 RUN pip install -r ${INSTALL_DIR}/requirements.txt
