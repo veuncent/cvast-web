@@ -27,4 +27,4 @@ RUN chmod -R 700 ${DOCKER_DIR} &&\
 	dos2unix ${DOCKER_DIR}/*
 
 
-ENTRYPOINT ${DOCKER_DIR}/entrypoint.sh
+ENTRYPOINT ["/docker/entrypoint.sh"]
