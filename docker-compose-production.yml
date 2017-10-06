@@ -14,6 +14,7 @@ services:
         - PGPORT=5432
         - DJANGO_MODE=PROD
         - DJANGO_DEBUG=False
+        - DJANGO_SECRET_KEY=
         - DOMAIN_NAMES=cvast.usf.edu
         - TZ=EST
       ports:

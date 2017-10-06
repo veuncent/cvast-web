@@ -71,7 +71,7 @@ if EC2_PUBLIC_HOSTNAME:
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f+#2gcw@la-p0ru02==i%)e(*x7b=(c=)&eyc8i24_my_1p(=3'
+SECRET_KEY = get_optional_env_variable('DJANGO_SECRET_KEY')
 
 
 # Application definition

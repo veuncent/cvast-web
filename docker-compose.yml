@@ -18,6 +18,7 @@ services:
         - PGPORT=5432
         - DJANGO_MODE=DEV
         - DJANGO_DEBUG=True
+        - DJANGO_SECRET_KEY=
         - DOMAIN_NAMES=localhost
         - RUN_TESTS=True        
         - TZ=EST
