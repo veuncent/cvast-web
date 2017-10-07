@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 ARCHES - a program developed to inventory and manage immovable cultural heritage.
 Copyright (C) 2013 J. Paul Getty Trust and World Monuments Fund
 
@@ -15,7 +15,9 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
-{% extends "base.htm" %} {% load staticfiles %} {% block css %} {{ block.super }} {% endblock css %} {% block content %}
+{% extends "base.htm" %} {% load staticfiles %} {% load wagtailcore_tags %} 
+{% block css %} {{ block.super }} {% endblock css %} {% block content %}
+
 <!--=== Slider ===-->
 <div class="flexslider">
 	<ul class="slides">
@@ -87,12 +89,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9 animated fadeInLeft">
-				<span>Center for Virtualization and Applied Spatial Technologies</span>
-				<p>The University of South Florida’s CVAST works to document, preserve, and protect the world’s cultural and natural heritage
-					through the use of digital visualization, geospatial technologies, informatics, and 3D virtualization.</p>
+				<span>{{ page.intro_title }}</span>
+				{{ page.intro_text|richtext }}
 			</div>
 			<div class="col-md-3 btn-buy animated fadeInRight">
-				<a href="{% url 'about_us_subpage' about_us_name='mission' %}" class="btn-u btn-u-lg"><i class="fa fa-plus-square"></i> Learn More</a>
+				<a href="{% url 'about_us_subpage' about_us_name='mission' %}" class="btn-u btn-u-lg"><i class="fa fa-plus-square"></i> {{ page.intro_button }}</a>
 			</div>
 		</div>
 	</div>
@@ -102,7 +103,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <!-- News -->
 <div class="cvast-content-block-homepage">
-	{% include 'news/homepage_highlight.htm' %}
+	{% include 'news/news_highlight.htm' %}
 </div>
 <!-- End News -->
 

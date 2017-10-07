@@ -1,4 +1,4 @@
-{% load staticfiles %} {% load i18n %}
+{% load staticfiles %} {% load i18n %} {% load wagtailcore_tags %}
 <div class="header">
 
     <!-- Topbar -->
@@ -17,7 +17,7 @@
                     <span class="sr-only">{% trans "Toggle navigation" %}</span>
                     <span class="fa fa-bars"></span>
                 </button>
-                <a class="navbar-brand" href="{% url 'home' %}">
+                <a class="navbar-brand" href="{% slugurl page.home %}">
                     <img id="logo-header" class="arches-logo-header" src="{{ STATIC_URL }}img/cvast_logo_small.png" alt="Logo">
                 </a>
             </div>
@@ -28,7 +28,7 @@
 
                     <!-- Home -->
                     <li class="{% if active_page == 'Home' %}active{% endif %}">
-                        <a href="{% url 'home' %}">
+                        <a href="{% slugurl page.home %}">
                             {% trans "Home" %}
                         </a>
                     </li>

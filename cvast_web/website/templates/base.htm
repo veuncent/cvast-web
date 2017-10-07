@@ -18,6 +18,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 {% load static %}
 {% load i18n %}
+
+{% load wagtailcore_tags %}
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
@@ -77,18 +80,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         {% endblock header %} 
 
 		{% block breadcrumbs %}
-        <!--=== Breadcrumbs ===-->
-<!--         <div class="breadcrumbs">
-            <div class="container">
-
-                <h1 class="pull-left arches-breadcrumb-title">Reference Data Manager (RDM)</h1>
-                <ul class="pull-right breadcrumb">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="">Reference Data Manager</a></li>
-                </ul>
-            </div>
-        </div> -->
-        <!--=== End Breadcrumbs ===-->
         {% endblock breadcrumbs %}
 
         {% block subheader %}
@@ -162,7 +153,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             define('arches', [], function () {
                 return {
                     urls: {
-                        home: "{% url 'home' %}",
+                        home: "{% slugurl page.home %}",
                         media: "{{ STATIC_URL }}",
                         uploadedfiles: "{{ MEDIA_URL }}"
                     }

@@ -1,5 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
+{% load wagtailcore_tags %}
+
 <div class="copyright">
     <div class="container">
         <div class="row">
@@ -9,7 +11,7 @@
                 </p>
             </div>
             <div class="col-md-6">  
-                <a href="{% url 'home' %}">
+                <a href="{% slugurl page.home %}">
                     <img class="pull-right arches-logo-copyright" id="logo-footer" src="{{ STATIC_URL }}img/cvast_logo2.0_small.png" alt="">
                 </a>
             </div>
