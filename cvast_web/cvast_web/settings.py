@@ -33,9 +33,9 @@ def get_optional_env_variable(var_name):
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_DIR = os.path.join(BASE_DIR, 'cvast_web')
-MAIN_WEBSITE_DIR = os.path.join(BASE_DIR, 'main_website')
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(PROJECT_DIR)
+
 
 MODE = get_env_variable('DJANGO_MODE')
 DEBUG = ast.literal_eval(get_env_variable('DJANGO_DEBUG'))
@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_website',
+    'website',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -121,7 +122,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(MAIN_WEBSITE_DIR, 'templates')
+            os.path.join(PROJECT_DIR, 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -146,8 +147,12 @@ WSGI_APPLICATION = 'cvast_web.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': get_env_variable('DBNAME'),
+        'USER': 'root',
+        'PASSWORD': get_env_variable('DBPASSWORD'),
+        'HOST': get_env_variable('DBHOST'),
+        'PORT': get_env_variable('DBPORT')
     }
 }
 
@@ -188,11 +193,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_ROOT = '/static_root'
-STATICFILES_DIRS = [
-    os.path.join(MAIN_WEBSITE_DIR, 'media'),
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-STATIC_URL = '/media/'
+
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, 'static'),
+]
+STATIC_ROOT = '/static_root'
+STATIC_URL = '/static/'
 
 S3_STATIC_URL = '//media.usfcvast.org'
 S3_STATIC_URL_IMG = os.path.join(S3_STATIC_URL, 'images', 'cvast-arches')
@@ -200,11 +210,11 @@ S3_STATIC_URL_VIDEO = os.path.join(S3_STATIC_URL, 'videos', 'cvast-arches')
 S3_STATIC_URL_FILES = os.path.join(S3_STATIC_URL, 'files', 'cvast-web')
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploadedfiles')
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 
 # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
 # It must end in a slash if set to a non-empty value.
-MEDIA_URL = '/files/'
+MEDIA_URL = '/media/'
 
 
 LOGGING = {
@@ -230,6 +240,14 @@ LOGGING = {
 
 WAGTAIL_SITE_NAME = 'CVAST Website'
 WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = 'cvast-it@usf.edu'
+
+# Base URL to use when referring to full URLs within the Wagtail admin backend -
+# e.g. in notification emails. Don't include '/admin' or a trailing slash
+BASE_URL = 'http://%s', get_env_variable('DOMAIN_NAMES').split()[0]
+
+
+if MODE == 'DEV':
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 try:
     from settings_local import *
