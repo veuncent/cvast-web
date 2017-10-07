@@ -25,8 +25,7 @@ from wagtail.wagtailcore import urls as wagtail_urls
 from main_website.views import about_us, load_test, main, news, projects, software
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', main.index, name='home'),
+    url(r'^django-admin/', admin.site.urls),
 
     url(r'^projects/$', projects.index, name='projects_index'),
     url(r'^projects/zikast/$', projects.project_index, {'project_name': 'dycast'}, name='projects_dycast'),    
@@ -38,12 +37,17 @@ urlpatterns = [
     url(r'^software/$', software.index, name='software_index'),
     url(r'^loaderio-cb219f4f97bd62cb751a2e5bfca5f0a3\.txt/$', load_test.load_test, name='load_test'),
 
-    url(r'^cms/', include(wagtailadmin_urls)),
+    url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'', include(wagtail_urls)),
+
 ]
 
 
 if settings.DEBUG:
     from django.conf.urls.static import static
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+    # Serve static and media files from development server
+    urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
