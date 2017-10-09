@@ -1,7 +1,5 @@
 require([
     'jquery',
-    'arches',
-    'easing',
     'flexslider'
 ], function($, arches) {
     $(document).ready(function() {
