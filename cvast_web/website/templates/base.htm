@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
-{% load static %}
+{% load staticfiles %}
 {% load i18n %}
 
 {% load wagtailcore_tags %}
@@ -144,6 +144,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             }
         });
 
+        {% if main_script %}
+            // main page script require
+            require(["{{ main_script }}"]);
+        {% endif %}
+
         // application wide require calls
         require(["jquery"], function($) {
             var jQuery = $;
@@ -172,11 +177,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         scrollToTop: scrollToTop
                     };
                 });
-
-                {% if main_script %}
-                    // main page script require
-                    require(["{{ main_script }}"]);
-                {% endif %}
 
                 $('[data-toggle="popover"]').popover();
             });

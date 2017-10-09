@@ -27,3 +27,9 @@ class HomePage(Page):
         FieldPanel('news_summary_link', classname="full"),
     ]
 
+
+    def get_context(self, request):
+        context = super(HomePage, self).get_context(request)
+        context['main_script'] = 'index'
+        context['active_page'] = 'Home'
+        return context
