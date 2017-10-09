@@ -64,7 +64,8 @@ run_django_server() {
 	echo ""
 	echo "----- *** RUNNING DJANGO SERVER *** -----"
 	echo ""
-	if [[ ${DJANGO_DEBUG} == "True" ]]; then
+	if [[ ${DJANGO_REMOTE_DEBUG} == "True" ]]; then
+		echo "[Info] Running Django server with --noreload setting"
 		exec python ${WEB_ROOT}/manage.py runserver --noreload --nothreading 0.0.0.0:8000
 	else
 		exec python ${WEB_ROOT}/manage.py runserver 0.0.0.0:8000

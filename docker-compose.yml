@@ -18,14 +18,14 @@ services:
         - DBPORT=3306
         - DJANGO_MODE=DEV
         - DJANGO_DEBUG=True
-        - DJANGO_SECRET_KEY=
+        - DJANGO_REMOTE_DEBUG=False
+        - DEBUG_SECRET=
         - DJANGO_SECRET_KEY=
         - DOMAIN_NAMES=localhost
         - RUN_TESTS=True        
         - TZ=EST
       ports:
         - '8000:8000'
-        - '3001:3000'
 
 
     web-db:
