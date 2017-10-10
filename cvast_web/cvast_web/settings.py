@@ -241,6 +241,7 @@ LOGGING = {
 WAGTAIL_AUTO_UPDATE_PREVIEW = True
 WAGTAIL_SITE_NAME = 'CVAST Website'
 WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = 'cvast-it@usf.edu'
+LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
