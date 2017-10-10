@@ -33,3 +33,22 @@ class HomePage(Page):
         context['main_script'] = 'index'
         context['active_page'] = 'Home'
         return context
+
+
+class NewsIndexPage(Page):
+    template = 'news/news_index.htm'
+
+    intro_title = models.CharField(max_length=100, default="News", blank=True)
+    intro_text = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro_title', classname="full"),
+        FieldPanel('intro_text', classname="full"),
+    ]
+
+    def get_context(self, request):
+        context = super(NewsIndexPage, self).get_context(request)
+        context['main_script'] = 'cvast-main'
+        context['active_page'] = 'News'
+        return context
+
