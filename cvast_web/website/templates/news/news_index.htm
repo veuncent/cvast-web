@@ -28,4 +28,29 @@
 </div>
 
 
+<div class="cvast-content-block">
+    
+{% for article in news_articles %}
+
+    <div class="container">
+        <div class="row cvast-content-block cvast-paragraph-box">
+            <div class="col-sm-4 cvast-paragraph-box-left-container">
+                <h1>{{ article.title }}</h1>
+                <h5><i class="fa fa-calendar"></i>{{ article.date }}</h5>
+            </div>
+            <div class="col-sm-8">
+                <div class="cvast-paragraph-box-body">
+                    {{ article.intro|richtext }}
+                    <p><a href="{% pageurl article %}">Read more</a></p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+{% endfor %}
+
+</div>
+
+
 {% endblock %}
