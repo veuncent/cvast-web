@@ -53,6 +53,7 @@ class NewsIndexPage(Page):
         context = super(NewsIndexPage, self).get_context(request)
         context['main_script'] = 'cvast-main'
         context['active_page'] = 'News'
+        context['news_articles'] = NewsPage.objects.live().order_by('-date').specific
         return context
 
 
