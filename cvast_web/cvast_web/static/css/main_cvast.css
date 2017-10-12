@@ -181,6 +181,21 @@ blockquote footer {
     text-align: left !important;
 }
 
+.cvast-spacer-top {
+    margin-top: 140px;
+}
+
+.cvast-spacer-top-half {
+    margin-top: 70px;
+}
+
+.cvast-spacer-bottom {
+    margin-bottom: 140px;
+}
+
+.cvast-spacer-bottom-half {
+    margin-bottom: 70px;
+}
 
 /* CVAST content block */
 .cvast-content-block {
