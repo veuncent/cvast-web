@@ -1,6 +1,7 @@
 require([
     'jquery',
-    'flexslider'
+    'flexslider',
+    'cvast-main'
 ], function($, arches) {
     $(document).ready(function() {
         $('.flexslider').flexslider({
