@@ -1,0 +1,18 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load wagtailcore_tags %} 
+{% block css %} {{ block.super }} {% endblock css %} 
+
+
+{% block content %}
+
+<div class="block-description cvast-project-title">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{{ page.get_parent.title }}</h1>
+    </div>
+</div>
+
+{% include "news/news_title_intro.htm" with title=page.title location=page.location date=page.date intro=page.intro %}
+
+{% include "news/news_body.htm" with subtitle=page.subtitle body=page.body %}
+
+
+{% endblock %}

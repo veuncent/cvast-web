@@ -1,0 +1,15 @@
+{% load staticfiles %} {% load wagtailcore_tags %} 
+
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-spacer-bottom">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>{{ subtitle }}</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+                {{ body|richtext }}
+			</div>
+		</div>
+		<p><a href="{{ page.get_parent.url }}"><< Return to News overview</a></p>
+	</div>
+</div>

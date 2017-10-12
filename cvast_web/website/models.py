@@ -7,6 +7,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
+from wagtail.wagtailsearch import index
 
 
 class HomePage(Page):
@@ -48,6 +49,38 @@ class NewsIndexPage(Page):
 
     def get_context(self, request):
         context = super(NewsIndexPage, self).get_context(request)
+        context['main_script'] = 'cvast-main'
+        context['active_page'] = 'News'
+        return context
+
+
+class NewsPage(Page):
+    template = 'news/news_page.htm'
+
+    subtitle = models.CharField(max_length=40, blank=True)
+    location = models.CharField(max_length=40, blank=True)
+    date = models.DateField("Post date")
+    intro = RichTextField(max_length=1000)
+    body = RichTextField()
+
+    search_fields = Page.search_fields + [
+        index.SearchField('title'),
+        index.SearchField('subtitle'),
+        index.SearchField('location'),
+        index.SearchField('intro'),
+        index.SearchField('body'),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('location'),
+        FieldPanel('date'),
+        FieldPanel('intro'),
+        FieldPanel('subtitle'),
+        FieldPanel('body', classname="full"),
+    ]
+
+    def get_context(self, request):
+        context = super(NewsPage, self).get_context(request)
         context['main_script'] = 'cvast-main'
         context['active_page'] = 'News'
         return context
