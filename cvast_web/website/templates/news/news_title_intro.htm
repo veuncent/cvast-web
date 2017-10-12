@@ -1,15 +1,26 @@
-{% load staticfiles %} {% load wagtailcore_tags %} 
+{% load staticfiles %} {% load wagtailcore_tags %}
+
 
 <div class="container">
-    <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+    <div class="row cvast-paragraph-box">
         <div class="col-sm-4 cvast-paragraph-box-left-container">
-            <h1>{{ title }}</h1>
-            <h5><i class="fa fa-map-marker"></i>{{ location }}</h5>            
-            <h5><i class="fa fa-calendar"></i>{{ date }}</h5>
+            {% if add_link %}
+                <h1><a href="{% pageurl article %}">{{ article.title }}</a></h1>
+            {% else %}
+                <h1>{{ article.title }}</h1>
+            {% endif %}
+                        
+            {% if article.location %}
+                <h5><i class="fa fa-map-marker"></i>{{ article.location }}</h5>
+            {% endif %}
+            <h5><i class="fa fa-calendar"></i>{{ article.date }}</h5>
         </div>
         <div class="col-sm-8">
             <div class="cvast-paragraph-box-body">
-                {{ intro|richtext }}
+                {{ article.intro|richtext }} 
+                {% if add_link %}
+                    <p><a href="{% pageurl article %}">Read more</a></p>
+                {% endif %}
             </div>
         </div>
     </div>

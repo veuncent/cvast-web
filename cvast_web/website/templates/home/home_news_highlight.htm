@@ -18,29 +18,10 @@
 
 
             <!-- News item previews -->
-            {% for post in news_articles %}
-
-                <div class="container">
-                    <div class="row cvast-paragraph-box">
-                        <div class="col-sm-4 cvast-paragraph-box-left-container">
-                            <h1>{{ post.title }}</h1>
-                            <h5>
-                                <i class="fa fa-calendar"></i>{{ post.date }}</h5>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="cvast-paragraph-box-body">
-                                {{ post.intro|richtext }}
-                                <p>
-                                    <a href="{% pageurl post %}">Read more</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+            {% for article in news_articles %}
+                {% include "news/news_title_intro.htm" with article=article add_link=True %}
             {% endfor %}
-        <!-- End News item previews -->
+            <!-- End News item previews -->
 
 
         </div>

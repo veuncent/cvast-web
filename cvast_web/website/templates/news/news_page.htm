@@ -10,9 +10,17 @@
     </div>
 </div>
 
-{% include "news/news_title_intro.htm" with title=page.title location=page.location date=page.date intro=page.intro %}
+{% include "news/news_title_intro.htm" with article=page %}
 
 {% include "news/news_body.htm" with subtitle=page.subtitle body=page.body %}
 
+{% if page.tags.all.count %}
+    <div class="tags">
+        <h3>Tags</h3>
+        {% for tag in page.tags.all %}
+            <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+        {% endfor %}
+    </div>
+{% endif %}
 
 {% endblock %}
