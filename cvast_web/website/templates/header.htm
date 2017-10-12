@@ -28,7 +28,7 @@
 
                     <!-- Home -->
                     <li class="{% if active_page == 'Home' %}active{% endif %}">
-                        <a href="{% slugurl page.home %}">
+                        <a href="/">
                             {% trans "Home" %}
                         </a>
                     </li>
@@ -36,7 +36,7 @@
 
                     <!-- News -->
                     <li class="{% if active_page == 'News' %}active{% endif %}">
-                        <a href="{% url 'news_index' %}">
+                        <a href="/news">
                             {% trans "News" %}
                         </a>
                     </li>
