@@ -33,6 +33,8 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
         context['main_script'] = 'index'
         context['active_page'] = 'Home'
+        context['news_articles'] = NewsPage.objects.live().order_by('-date')[:1]
+        context['news_index'] = NewsIndexPage.objects.first()
         return context
 
 

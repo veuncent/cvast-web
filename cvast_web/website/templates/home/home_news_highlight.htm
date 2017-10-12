@@ -1,0 +1,50 @@
+{% load staticfiles %} {% load i18n %} {% load wagtailcore_tags %} 
+
+
+{% block content %}
+
+<div class="cvast-content-block">
+    <div class="block-description">
+        <div class="container content">
+
+            <!--Title Box-->
+            <div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
+                <h1>{{ page.news_summary_title }}</h1>
+                <a href="{% pageurl news_index %}">
+                    {{ page.news_summary_link }}
+                </a>
+            </div>
+            <!-- End Title Box -->
+
+
+            <!-- News item previews -->
+            {% for post in news_articles %}
+
+                <div class="container">
+                    <div class="row cvast-paragraph-box">
+                        <div class="col-sm-4 cvast-paragraph-box-left-container">
+                            <h1>{{ post.title }}</h1>
+                            <h5>
+                                <i class="fa fa-calendar"></i>{{ post.date }}</h5>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="cvast-paragraph-box-body">
+                                {{ post.intro|richtext }}
+                                <p>
+                                    <a href="{% pageurl post %}">Read more</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+        <!-- End News item previews -->
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
