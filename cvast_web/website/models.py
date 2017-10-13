@@ -4,14 +4,23 @@ from __future__ import unicode_literals
 from django.db import models
 
 from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.wagtailcore.fields import RichTextField, StreamField
+from wagtail.wagtailcore.blocks import CharBlock, StructBlock, RichTextBlock
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 
 from wagtail.wagtailsearch import index
 
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import Tag, TaggedItemBase
+
+
+class ParagraphBlock(StructBlock):
+    title = CharBlock(max_length=100)
+    body = RichTextBlock()
+
+    class Meta:
+        template = "blocks/paragraph_block.htm"
 
 
 class HomePage(Page):
@@ -68,16 +77,16 @@ class NewsPageTag(TaggedItemBase):
 class NewsPage(Page):
     template = 'news/news_page.htm'
 
-    subtitle = models.CharField(max_length=40, blank=True)
     location = models.CharField(max_length=40, blank=True)
     date = models.DateField("Post date")
     intro = RichTextField(max_length=1000)
-    body = RichTextField()
+    body = StreamField([
+        ('paragraph', ParagraphBlock()),
+    ])
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('title'),
-        index.SearchField('subtitle'),
         index.SearchField('location'),
         index.SearchField('intro'),
         index.SearchField('body'),
@@ -90,8 +99,9 @@ class NewsPage(Page):
             FieldPanel('tags'),
         ], heading="News article metadata"),
         FieldPanel('intro'),
-        FieldPanel('subtitle'),
-        FieldPanel('body', classname="full"),
+        MultiFieldPanel([
+            StreamFieldPanel('body'),
+        ]),
     ]
 
     def get_context(self, request):
