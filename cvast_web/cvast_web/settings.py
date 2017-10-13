@@ -226,15 +226,23 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': os.path.join(PROJECT_DIR, 'logs', 'application.txt'),
         },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
     },
     'loggers': {
-        'arches': {
+        'django': {
             'handlers': ['file'],
             'level': 'DEBUG',
             'propagate': True,
         }
     }
 }
+
+if DEBUG:
+    for logger in LOGGING['loggers']:
+        LOGGING['loggers'][logger]['handlers'] += ['console']
 
 
 
