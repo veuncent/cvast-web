@@ -102,7 +102,7 @@ class NewsPage(Page):
 
 
 class NewsTagIndexPage(Page):
-    template = 'news/news_tag_index.htm'
+    template = 'tags/news_tag_index.htm'
 
     def get_context(self, request):
 
