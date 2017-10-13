@@ -14,4 +14,10 @@
 
 {% include "news/news_body.htm" with subtitle=page.subtitle body=page.body %}
 
+<div class="container">
+    <div class="container cvast-spacer-bottom-half">
+        <a href="{{ page.get_parent.url }}" class="btn-u btn-u-md rounded">Go Back</a>
+    </div>
+</div>
+
 {% endblock %}
