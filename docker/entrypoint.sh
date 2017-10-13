@@ -94,11 +94,12 @@ setup_db() {
 
 
 run_migrations() {
+	local arguments="$@"
 	echo ""
 	echo ""
 	echo "----- RUNNING DATABASE MIGRATIONS -----"
 	echo ""
-	python ${WEB_ROOT}/manage.py migrate
+	python ${WEB_ROOT}/manage.py migrate ${arguments}
 	handle_exit_code $?	
 }
 
@@ -157,7 +158,7 @@ case ${command} in
 	;;
 	run_migrations)
 		wait_for_db
-		run_migrations
+		run_migrations ${arguments}
 	;;
 	create_superuser)
 		wait_for_db
