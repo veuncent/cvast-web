@@ -14,6 +14,9 @@
                 <h5><i class="fa fa-map-marker"></i>{{ article.location }}</h5>
             {% endif %}
             <h5><i class="fa fa-calendar"></i>{{ article.date }}</h5>
+            {% for tag in article.tags.all %}
+                <a href="{% slugurl 'tags' %}?tag={{ tag }}" class="btn-u btn-u-sm rounded cvast-tag">{{ tag }}</a>
+            {% endfor %}
         </div>
         <div class="col-sm-8">
             <div class="cvast-paragraph-box-body">

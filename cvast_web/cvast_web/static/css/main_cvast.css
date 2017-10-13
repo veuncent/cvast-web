@@ -687,3 +687,9 @@ cvast-paragraph-box-video-left-container {
   max-width: 100%;
   margin: auto;
 }
+
+
+/* Tags */
+.cvast-tag {
+    margin-top: 5px;
+}

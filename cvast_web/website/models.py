@@ -5,9 +5,13 @@ from django.db import models
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel
 
 from wagtail.wagtailsearch import index
+
+from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import Tag, TaggedItemBase
 
 
 class HomePage(Page):
@@ -57,6 +61,10 @@ class NewsIndexPage(Page):
         return context
 
 
+class NewsPageTag(TaggedItemBase):
+    content_object = ParentalKey('NewsPage', related_name='tagged_items')
+
+
 class NewsPage(Page):
     template = 'news/news_page.htm'
 
@@ -65,6 +73,7 @@ class NewsPage(Page):
     date = models.DateField("Post date")
     intro = RichTextField(max_length=1000)
     body = RichTextField()
+    tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('title'),
@@ -75,8 +84,11 @@ class NewsPage(Page):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('location'),
-        FieldPanel('date'),
+        MultiFieldPanel([
+            FieldPanel('location'),
+            FieldPanel('date'),
+            FieldPanel('tags'),
+        ], heading="News article metadata"),
         FieldPanel('intro'),
         FieldPanel('subtitle'),
         FieldPanel('body', classname="full"),
@@ -87,4 +99,25 @@ class NewsPage(Page):
         context['main_script'] = 'cvast-main'
         context['active_page'] = 'News'
         return context
+
+
+class NewsTagIndexPage(Page):
+    template = 'news/news_tag_index.htm'
+
+    def get_context(self, request):
+
+        # Filter by tag
+        tag = request.GET.get('tag')
+        news_articles = NewsPage.objects.filter(tags__name=tag)
+
+        # Update template context
+        context = super(NewsTagIndexPage, self).get_context(request)
+        context['news_articles'] = news_articles
+
+        context['all_tags'] = Tag.objects.all()
+
+        return context
+
+
+
 

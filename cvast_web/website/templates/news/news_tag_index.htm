@@ -1,0 +1,48 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load wagtailcore_tags %} 
+{% block css %} {{ block.super }} {% endblock css %} 
+
+
+{% block content %}
+
+    <div class="block-description cvast-project-title">
+        <div class="container content padding-top-20">
+            <h1 class="arches-breadcrumb-title cvast-page-title">Tags</h1>
+            {% if not news_articles %}
+                <h4>No pages found with tag "{{ request.GET.tag }}".</h4>
+            {% elif request.GET.tag|length %}
+                <h4>Showing pages tagged "{{ request.GET.tag }}"</h4>
+            {% else %}
+                {% if all_tags %}
+                <div class="container">
+                    {% for tag in all_tags %}
+                        <a href="{% slugurl 'tags' %}?tag={{ tag }}" class="btn-u btn-u-sm rounded cvast-tag">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    <h4>No tags recorded yet.</h4>
+                {% endif %}    
+            {% endif %}
+        </div>
+    </div>
+
+    {% if request.GET.tag|length %}
+        {% for article in news_articles %} 
+
+            {% if forloop.last %}
+                <div class="cvast-spacer-top-half cvast-spacer-bottom-half">
+                    {% include "news/news_title_intro.htm" with article=article add_link=True %}
+                </div>
+                {% else %}
+                <div class="cvast-content-block">
+                    {% include "news/news_title_intro.htm" with article=article add_link=True %}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+        <div class="container cvast-spacer-bottom-half">
+            <a href="/tags" class="btn-u btn-u-md rounded cvast-tag">Go Back</a>
+        </div>
+    {% endif %}
+
+{% endblock %}
