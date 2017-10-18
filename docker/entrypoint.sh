@@ -114,6 +114,16 @@ create_superuser() {
 }
 
 
+init_pages() {
+	echo ""
+	echo ""
+	echo "----- CREATING DUMMY PAGES -----"
+	echo ""
+	python ${WEB_ROOT}/manage.py init_pages
+	handle_exit_code $?	
+}
+
+
 init_environment() {
 	echo ""
 	echo ""
@@ -121,6 +131,7 @@ init_environment() {
 	setup_db
 	run_migrations
 	create_superuser
+	init_pages
 	collect_static
 }
 
@@ -163,6 +174,10 @@ case ${command} in
 	create_superuser)
 		wait_for_db
 		create_superuser
+	;;
+	init_pages)
+		wait_for_db
+		init_pages
 	;;
 	setup_db)
 		wait_for_db
