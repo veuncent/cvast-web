@@ -117,20 +117,24 @@ class NewsPage(Page):
 class NewsTagIndexPage(Page):
     template = 'tags/news_tag_index.htm'
 
-    back_button = models.CharField(max_length=40, default="Back to Tag Overview")
+    available_tags = models.CharField(max_length=40, default="Available Tags:")
+    no_available_tags = models.CharField(max_length=40, default="No tags recorded yet.")
+    tag_not_found = models.CharField(max_length=40, default="No pages found with tag ")
+    tag_found = models.CharField(max_length=40, default="Showing pages tagged ")
 
     content_panels = Page.content_panels + [
-        FieldPanel('back_button'),
+        FieldPanel('available_tags'),
+        FieldPanel('no_available_tags'),
+        FieldPanel('tag_not_found'),
+        FieldPanel('tag_found'),
     ]
 
     def get_context(self, request):
+        context = super(NewsTagIndexPage, self).get_context(request)
 
         # Filter by tag
         tag = request.GET.get('tag')
         news_articles = NewsPage.objects.filter(tags__name=tag)
-
-        # Update template context
-        context = super(NewsTagIndexPage, self).get_context(request)
         context['news_articles'] = news_articles
 
         context['all_tags'] = Tag.objects.all()

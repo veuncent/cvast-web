@@ -6,21 +6,26 @@
 
     <div class="block-description cvast-project-title">
         <div class="container content padding-top-20">
-            <h1 class="arches-breadcrumb-title cvast-page-title">Tags</h1>
-            {% if not news_articles %}
-                <h4>No pages found with tag "{{ request.GET.tag }}".</h4>
-            {% elif request.GET.tag|length %}
-                <h4>Showing pages tagged "{{ request.GET.tag }}"</h4>
-            {% else %}
-                {% if all_tags %}
+            <h1 class="arches-breadcrumb-title cvast-page-title">{{ page.title }}</h1>
+            {% if all_tags %}
                 <div class="container">
+                    <h4>{{ page.available_tags}}</h4>
                     {% for tag in all_tags %}
                         <a href="{% slugurl 'tags' %}?tag={{ tag }}" class="btn-u btn-u-sm rounded cvast-tag">{{ tag }}</a>
                     {% endfor %}
                 </div>
+            {% else %}
+                <h4>{{ page.no_available_tags }}</h4>
+            {% endif %}
+
+            {% if request.GET.tag|length %}
+                <div class="container cvast-spacer-top">
+                {% if not news_articles %}
+                    <h4>{{ page.tag_not_found}} "{{ request.GET.tag }}".</h4>
                 {% else %}
-                    <h4>No tags recorded yet.</h4>
-                {% endif %}    
+                    <h4>{{ page.tag_found}} "{{ request.GET.tag }}"</h4>
+                {% endif %}
+                </div>
             {% endif %}
         </div>
     </div>
@@ -29,7 +34,7 @@
         {% for article in news_articles %} 
 
             {% if forloop.last %}
-                <div class="cvast-spacer-top-half cvast-spacer-bottom-half">
+                <div class="container cvast-spacer-top-half cvast-spacer-bottom-half">
                     {% include "news/news_title_intro.htm" with article=article add_link=True %}
                 </div>
                 {% else %}
@@ -39,10 +44,6 @@
             {% endif %}
 
         {% endfor %}
-
-        <div class="container cvast-spacer-bottom-half">
-            <a href="/tags" class="btn-u btn-u-md rounded">{{ page.back_button }}</a>
-        </div>
     {% endif %}
 
 {% endblock %}
