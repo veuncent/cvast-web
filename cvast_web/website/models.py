@@ -57,9 +57,12 @@ class NewsIndexPage(Page):
     intro_title = models.CharField(max_length=100, default="News", blank=True)
     intro_text = RichTextField(blank=True)
 
+    back_button = models.CharField(max_length=40, default="Back to News Overview")
+
     content_panels = Page.content_panels + [
         FieldPanel('intro_title', classname="full"),
         FieldPanel('intro_text', classname="full"),
+        FieldPanel('back_button'),
     ]
 
     def get_context(self, request):
@@ -113,6 +116,12 @@ class NewsPage(Page):
 
 class NewsTagIndexPage(Page):
     template = 'tags/news_tag_index.htm'
+
+    back_button = models.CharField(max_length=40, default="Back to Tag Overview")
+
+    content_panels = Page.content_panels + [
+        FieldPanel('back_button'),
+    ]
 
     def get_context(self, request):
 
