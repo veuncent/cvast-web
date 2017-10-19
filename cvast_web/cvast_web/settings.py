@@ -240,7 +240,7 @@ LOGGING = {
     }
 }
 
-if DEBUG:
+if get_env_variable('CONSOLE_LOGGING'):
     for logger in LOGGING['loggers']:
         LOGGING['loggers'][logger]['handlers'] += ['console']
 
