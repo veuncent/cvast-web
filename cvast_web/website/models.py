@@ -6,6 +6,7 @@ from django.db import models
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.blocks import CharBlock, StructBlock, RichTextBlock
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 
 from wagtail.wagtailsearch import index
@@ -21,6 +22,14 @@ class ParagraphBlock(StructBlock):
 
     class Meta:
         template = "blocks/paragraph_block.htm"
+
+class ImageBlockHeaderLeft(StructBlock):
+    title = CharBlock(max_length=300)
+    image = ImageChooserBlock(required=True)
+
+    class Meta:
+        template = "blocks/image_block_header_left.htm"
+
 
 
 class HomePage(Page):
@@ -85,6 +94,7 @@ class NewsPage(Page):
     intro = RichTextField(max_length=1000)
     body = StreamField([
         ('paragraph', ParagraphBlock()),
+        ('image_header_left', ImageBlockHeaderLeft())
     ])
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
