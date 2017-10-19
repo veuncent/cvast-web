@@ -1,4 +1,4 @@
-/* Overwrite existing Arches css */
+/* Overwrite existing css */
 
 body {
    color: #333;
@@ -233,7 +233,6 @@ blockquote footer {
 /* CVAST media block */
 .cvast-media-block {
     margin-top: 150px;
-    padding: 15px;
 }
 
 
@@ -346,7 +345,7 @@ blockquote footer {
 
 @media (max-width: 767px) {
     .cvast-paragraph-box {
-        text-align: center;        
+        text-align: center;
         padding-bottom: 10px;
     }
 
