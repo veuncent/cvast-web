@@ -1,9 +1,7 @@
 # encoding=utf8
 import logging
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.contrib.auth.models import User
 from wagtail.wagtailcore.models import Page, Site
 
 from website.models import HomePage, NewsIndexPage, NewsPage, NewsTagIndexPage
@@ -17,11 +15,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             default_home = Page.objects.filter(title="Welcome to your new Wagtail site!")[0]
-            if default_home:
-                logging.info("Moving default home page slug")
-                default_home.slug = "home-old"
-                default_home.save_revision().publish()
-                default_home.save()
+            logging.info("Moving default home page slug")
+            default_home.slug = "home-old"
+            default_home.save_revision().publish()
+            default_home.save()
         except:
             pass
 
@@ -54,15 +51,25 @@ class Command(BaseCommand):
         )
 
 
-        logging.info("Add new Home page as child to site root")
-        site = Page.objects.get(id=1).specific
-        site.add_child(instance=home_page)
+        news_tag_index_page = NewsTagIndexPage(
+            title="Tags",
+            slug="tags"
+        )
 
+
+        logging.info("Add new Home page as child to Site root")
+        root = Page.objects.get(id=1).specific
+        root.add_child(instance=home_page)
 
         logging.info("Adding Home")
         revision = home_page.save_revision()
         revision.publish()
         home_page.save()
+
+        logging.info("Setting Home as new Site root page")
+        site = Site.objects.get(id=1)
+        site.root_page = home_page
+        site.save()
 
 
         logging.info("Adding News Index")
@@ -77,15 +84,15 @@ class Command(BaseCommand):
         news_page.save()
 
 
-        logging.info("Setting Home as new Site root page")
-        site = Site.objects.get(id=1)
-        site.root_page = home_page
-        site.save()
+        logging.info("Adding Tag Index")
+        home_page.add_child(instance=news_tag_index_page)
+        news_tag_index_page.save_revision().publish()
+        news_tag_index_page.save()
 
 
         logging.info("Deleting default home page...")
         try:
-            default_home = Page.objects.filter(title="Welcome to your new Wagtail site!")
+            default_home = Page.objects.filter(title="Welcome to your new Wagtail site!")[0]
             default_home.delete()
         except:
             pass
