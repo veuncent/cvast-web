@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import requests
 import ast
+import requests
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -240,7 +240,7 @@ LOGGING = {
     }
 }
 
-if get_optional_env_variable('CONSOLE_LOGGING'):
+if ast.literal_eval(get_optional_env_variable('CONSOLE_LOGGING')):
     for logger in LOGGING['loggers']:
         LOGGING['loggers'][logger]['handlers'] += ['console']
 
