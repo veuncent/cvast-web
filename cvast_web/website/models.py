@@ -31,6 +31,13 @@ class ImageBlockHeaderLeft(StructBlock):
     class Meta:
         template = "blocks/image_block_header_left.htm"
 
+class BackgroundImageBlock(StructBlock):
+    title = CharBlock(max_length=300)
+    image = ImageChooserBlock(required=True)
+
+    class Meta:
+        template = "blocks/background_image_block.htm"
+
 class EmbedVideoBlock(StructBlock):
     title = CharBlock(max_length=300)
     embed = EmbedBlock()
@@ -104,6 +111,7 @@ class NewsPage(Page):
     body = StreamField([
         ('paragraph', ParagraphBlock()),
         ('image_header_left', ImageBlockHeaderLeft()),
+        ('page_wide_image', BackgroundImageBlock()),
         ('embed_video', EmbedVideoBlock())
     ])
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
