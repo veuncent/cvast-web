@@ -1,16 +1,23 @@
 {% load wagtailcore_tags %}
+{% load wagtailembeds_tags %}
 {% load custom_template_filters %}
 
 
-{% with value.embed.url|get_embed_url_with_parameters as url %}
+{% with value.embed.url as regular_url %}
+	{% with regular_url|get_embed_url_with_parameters as embed_url %}
 
-	<div class="container">
-		<div class="block-description cvast-embed cvast-spacer-top">
-			<div align="center">
-				<h5>{{ value.title }}</h5>
-				<iframe src="{{ url }}" frameborder="0" allowfullscreen></iframe>
+		<div class="container">
+			<div class="block-description cvast-embed cvast-spacer-top">
+				<div align="center">
+					<h5>{{ value.title }}</h5>
+					{% if embed_url is None %}
+						{% embed regular_url %}
+					{% else %}
+						<iframe src="{{ embed_url }}" frameborder="0" allowfullscreen></iframe>
+					{% endif %}
+				</div>
 			</div>
 		</div>
-	</div>
 
+	{% endwith %}
 {% endwith %}

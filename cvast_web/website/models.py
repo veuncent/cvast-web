@@ -40,7 +40,7 @@ class BackgroundImageBlock(StructBlock):
 
 class EmbedVideoBlock(StructBlock):
     title = CharBlock(max_length=300)
-    embed = EmbedBlock(help_text="This URL must be an embed URL, e.g. https://www.youtube.com/embed/6wr0PWi9LXQ")
+    embed = EmbedBlock()
 
     class Meta:
         template = "blocks/embed_video_block.htm"
