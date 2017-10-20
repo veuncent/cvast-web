@@ -376,11 +376,6 @@ blockquote footer {
     margin-top: 10px;
 }
 
-/* To be used when neccessary */
-.cvast-paragraph-box-left-container {
-    padding-bottom: 15px;
-}
-
 .cvast-paragraph-box-left-logo {
     max-width: 95px; 
     padding-top: 15px; 
