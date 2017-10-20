@@ -150,8 +150,16 @@ blockquote footer {
 }
 
 
+/* Container */
+.container {
+    max-width: 70vw;
+}
 
-
+@media (max-width: 836px) { 
+    .container {
+        max-width: 95vw;
+    }
+}
 /* CVAST general */
 
 .cvast-page-title {
