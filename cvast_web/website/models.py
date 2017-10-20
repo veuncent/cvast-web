@@ -7,6 +7,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailcore.blocks import CharBlock, StructBlock, RichTextBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 
 from wagtail.wagtailsearch import index
@@ -29,6 +30,14 @@ class ImageBlockHeaderLeft(StructBlock):
 
     class Meta:
         template = "blocks/image_block_header_left.htm"
+
+class EmbedVideoBlock(StructBlock):
+    title = CharBlock(max_length=300)
+    embed = EmbedBlock()
+
+    class Meta:
+        template = "blocks/embed_video_block.htm"
+
 
 
 
@@ -94,7 +103,8 @@ class NewsPage(Page):
     intro = RichTextField(max_length=1000)
     body = StreamField([
         ('paragraph', ParagraphBlock()),
-        ('image_header_left', ImageBlockHeaderLeft())
+        ('image_header_left', ImageBlockHeaderLeft()),
+        ('embed', EmbedVideoBlock())
     ])
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 

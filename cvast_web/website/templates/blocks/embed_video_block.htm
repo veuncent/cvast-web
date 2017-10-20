@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+
+<div class="container">
+	<div class="block-description cvast-embed cvast-spacer-top">
+		<div align="center">
+			<h5>{{ value.title }}</h5>
+			<iframe style="height: 60vh; width: 60vw;" src="{{ value.embed.url }}?rel=0" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</div>
+</div>
