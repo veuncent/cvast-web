@@ -107,7 +107,7 @@ class NewsPage(Page):
 
     location = models.CharField(max_length=40, blank=True)
     date = models.DateField("Post date")
-    intro = RichTextField(max_length=1000)
+    intro = RichTextField(max_length=3000)
     body = StreamField([
         ('paragraph', ParagraphBlock()),
         ('image_header_left', ImageBlockHeaderLeft()),
