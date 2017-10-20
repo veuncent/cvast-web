@@ -57,6 +57,7 @@ p a {
 
 blockquote p {
     font-weight: bold;
+    text-align: justify;
 }
 
 blockquote footer {
