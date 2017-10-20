@@ -104,7 +104,7 @@ class NewsPage(Page):
     body = StreamField([
         ('paragraph', ParagraphBlock()),
         ('image_header_left', ImageBlockHeaderLeft()),
-        ('embed', EmbedVideoBlock())
+        ('embed_video', EmbedVideoBlock())
     ])
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
