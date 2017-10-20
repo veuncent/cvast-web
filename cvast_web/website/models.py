@@ -5,11 +5,12 @@ from django.db import models
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailcore.blocks import CharBlock, StructBlock, RichTextBlock
+from wagtail.wagtailcore.blocks import CharBlock, StructBlock, RichTextBlock, StreamBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
+from wagtailmedia.blocks import AbstractMediaChooserBlock
 
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.wagtailsearch import index
 
 from modelcluster.fields import ParentalKey
@@ -52,6 +53,10 @@ class EmbedVideoBlock(StructBlock):
     class Meta:
         template = "blocks/embed_video_block.htm"
 
+class VideoBlock(AbstractMediaChooserBlock):
+
+    class Meta:
+        template = "blocks/single_video_block.htm"
 
 
 
@@ -116,11 +121,12 @@ class NewsPage(Page):
     date = models.DateField("Post date")
     intro = RichTextField(max_length=3000)
     body = StreamField([
-        ('paragraph', ParagraphBlock()),
+        ('paragraph', ParagraphBlock(icon='pilcrow')),
         ('image_centered', ImageBlockCentered()),
         ('image_header_left', ImageBlockHeaderLeft()),
         ('page_wide_image', BackgroundImageBlock()),
-        ('embed_video', EmbedVideoBlock())
+        ('uploaded_video', VideoBlock(icon='media')),
+        ('embed_video', EmbedVideoBlock(icon='media')),
     ])
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 

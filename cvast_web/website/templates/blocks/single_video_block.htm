@@ -1,0 +1,8 @@
+{% load wagtailcore_tags %}
+
+<div class="block-description cvast-spacer-top" align="center">
+    <h5>{{ value.title }}</h5>
+    <video class="cvast-video-full" controls poster="" loop="">
+        <source src="{{ value.file.url }}" type="video/mp4"> Your browser does not support the video tag.</source>
+    </video>
+</div
