@@ -24,6 +24,13 @@ class ParagraphBlock(StructBlock):
     class Meta:
         template = "blocks/paragraph_block.htm"
 
+class ImageBlockCentered(StructBlock):
+    title = CharBlock(max_length=300)
+    image = ImageChooserBlock(required=True)
+
+    class Meta:
+        template = "blocks/image_block_centered.htm"
+
 class ImageBlockHeaderLeft(StructBlock):
     title = CharBlock(max_length=300)
     image = ImageChooserBlock(required=True)
@@ -110,6 +117,7 @@ class NewsPage(Page):
     intro = RichTextField(max_length=3000)
     body = StreamField([
         ('paragraph', ParagraphBlock()),
+        ('image_centered', ImageBlockCentered()),
         ('image_header_left', ImageBlockHeaderLeft()),
         ('page_wide_image', BackgroundImageBlock()),
         ('embed_video', EmbedVideoBlock())

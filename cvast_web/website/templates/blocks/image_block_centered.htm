@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+
+{% image value.image max-1000x1000 as image %}
+
+    <div align="center" class="cvast-spacer-top">
+            <h5>{{ value.title }}</h5>
+            <img src="{{ image.url }}" style="max-height: 80vh; max-width: 100vw;" alt="{{ image.alt }}" />
+    </div>
