@@ -1,0 +1,100 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load wagtailcore_tags %} 
+{% block css %} {{ block.super }} {% endblock css %} {% block content %}
+
+<!--=== Slider ===-->
+<div class="flexslider">
+	<ul class="slides">
+
+		<!-- 3D Global Heritage -->
+		<li onclick="location.href='{% url 'projects_subproject' project_name='la-mancha' resource_name='la-puerta-de-toledo-ciudad-real' %}'"
+		 id="cvast-slideshow-image-3d-global-heritage" style="background-image: url({{ S3_STATIC_URL_IMG }}/home/la_puarta_de_toledo_ciudad_real.jpg); background-position: 70% 50%; ">
+			<div class="cvast-slideshow-caption-container">
+				<p class="cvast-slideshow-subtitle">3D Global Heritage</p>
+				<p class="cvast-slideshow-title">La Puerta de Toledo</p>
+			</div>
+		</li>
+		<!-- 3D Global Heritage -->
+
+		<!-- Paris Slide -->
+		<li onclick="location.href='{% url 'projects_project_index' project_name='paris-nhm' %}'" style="background-image: url({{ S3_STATIC_URL_IMG }}/home/paris_nhm_faro.jpg); background-position: 50% 40%;">
+			<div class="cvast-slideshow-caption-container">
+				<p class="cvast-slideshow-subtitle">Digitizing world leading museums</p>
+				<p class="cvast-slideshow-title">Muséum National d'Histoire Naturelle</br>Paris, France</p>
+			</div>
+		</li>
+		<!-- End Paris Slide -->
+
+		<!-- Motilla del Azuer Slide -->
+		<li onclick="location.href='{% url 'projects_subproject' project_name='la-mancha' resource_name='la-motilla-del-azuer' %}'"
+		 style="background-image: url({{ S3_STATIC_URL_IMG }}/home/MotillaDelAzuer.jpg);">
+			<div class="cvast-slideshow-caption-container">
+				<p class="cvast-slideshow-subtitle">Prehistoric archaeology</p>
+				<p class="cvast-slideshow-title">Motilla del Azuer, Spain</p>
+			</div>
+		</li>
+		<!-- End Motilla del Azuer Slide -->
+
+		<!-- Bird evolution Slide -->
+		<li onclick="location.href='{% url 'projects_project_index' project_name='bird-skulls' %}'" style="background-image: url({{ S3_STATIC_URL_IMG }}/home/bird_functional_evolution.jpg);">
+			<div class="cvast-slideshow-caption-container">
+				<p class="cvast-slideshow-subtitle">Crowdsourcing Science</p>
+				<p class="cvast-slideshow-title">Bird functional evolution</p>
+			</div>
+		</li>
+		<!-- End Bird evolution Slide -->
+
+		<!-- Ciudad bull ring Slide -->
+		<li onclick="location.href='{% url 'projects_subproject' project_name='la-mancha' resource_name='plaza-de-toros-de-ciudad-real' %}'"
+		 style="background-image: url({{ S3_STATIC_URL_IMG }}/home/plaza_de_toros_ciudad_real_3.jpg);">
+			<div class="cvast-slideshow-caption-container">
+				<p class="cvast-slideshow-subtitle">Archaeology of public space</p>
+				<p class="cvast-slideshow-title">Ciudad Real, Spain</p>
+			</div>
+		</li>
+		<!-- Ciudad bull ring Slide -->
+
+		<!-- Digital Dinosaurs Slide -->
+		<li onclick="location.href='{% url 'projects_project_index' project_name='digital-dinosaurs' %}'" style="background-image: url({{ S3_STATIC_URL_IMG }}/home/digital_dinosaurs_class_faro_edge_arm.jpg); background-position: 50% 30%;">
+			<div class="cvast-slideshow-caption-container">
+				<p class="cvast-slideshow-subtitle">Science and education</p>
+				<p class="cvast-slideshow-title">Digital Dinosaurs</p>
+			</div>
+		</li>
+		<!-- Digital Dinosaurs Slide -->
+
+	</ul>
+</div>
+<!--=== End Slider ===-->
+
+
+<!--=== CVAST Title Block ===-->
+<div class="purchase">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 animated fadeInLeft">
+				<span>{{ page.intro_title }}</span>
+				{{ page.intro_text|richtext }}
+			</div>
+			<div class="col-md-3 btn-buy animated fadeInRight">
+				<a href="{% url 'about_us_subpage' about_us_name='mission' %}" class="btn-u btn-u-lg"><i class="fa fa-plus-square"></i> {{ page.intro_button }}</a>
+			</div>
+		</div>
+	</div>
+</div>
+<!--/row-->
+<!-- End CVAST Title Block -->
+
+<!-- News -->
+<div class="cvast-content-block-homepage">
+	{% include 'home/home_news_highlight.htm' %}
+</div>
+<!-- End News -->
+
+<!-- Project footer -->
+<div class="cvast-content-block-homepage">
+	{% include 'projects/project_footer.htm' %}
+</div>
+<!-- End Project footer -->
+
+<!-- End Content Part -->
+{% endblock %}

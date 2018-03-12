@@ -1,0 +1,51 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load wagtailcore_tags %} 
+{% block css %} {{ block.super }} {% endblock css %} 
+
+
+{% block content %}
+
+<div class="block-description cvast-project-title">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{{ page.title }}</h1>
+    </div>
+
+    {% if page.intro_title != "" or page.intro_text != "" %}
+        <div class="container">
+            <div class="row cvast-paragraph-box cvast-paragraph-box-after-title">
+                <div class="col-sm-4 cvast-paragraph-box-left-container">
+                    <h1>{{ page.intro_title }}</h1>
+                </div>
+                <div class="col-sm-8">
+                    <div class="cvast-paragraph-box-body">
+                            {{ page.intro_text|richtext }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    {% endif %}
+    
+    <div class="background-image cvast-spacer-top-half" style="background-image: url({{ S3_STATIC_URL_IMG }}/about_us/mission/press_conference.jpg); background-position: 50% 50%;"></div>    
+</div>
+
+
+<div class="cvast-content-block">
+    
+{% for article in news_articles %}
+
+    {% if forloop.last %}
+        <div class="cvast-spacer-top-half">
+            {% include "news/news_title_intro.htm" with article=article add_link=True %}
+        </div>
+    {% else %}
+        <div class="cvast-content-block">
+            {% include "news/news_title_intro.htm" with article=article add_link=True %}
+        </div>
+    {% endif %}
+    
+{% endfor %}
+
+</div>
+
+
+{% endblock %}

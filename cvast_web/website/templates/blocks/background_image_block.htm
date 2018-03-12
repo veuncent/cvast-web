@@ -1,0 +1,12 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+
+{% image value.image max-1920x1080 as image %}
+
+<div class="cvast-spacer-top">
+    <div align="center" class="cvast-background-image-title">
+        <h5>{{ value.title }}</h5>
+    </div>
+    <div class="background-image" style="background-image: url({{ image.url }});"></div>
+</div>

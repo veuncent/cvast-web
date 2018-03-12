@@ -1,0 +1,17 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+{% image value.image max-1000x1000 as image %}
+
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-spacer-top">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h5>{{ value.title }}</h5>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				<img src="{{ image.url }}" style="max-height: 80vh; max-width: 100%;" alt="{{ image.alt }}"/>
+			</div>
+		</div>
+	</div>
+</div>

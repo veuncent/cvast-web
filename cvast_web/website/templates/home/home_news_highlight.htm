@@ -1,0 +1,31 @@
+{% load staticfiles %} {% load i18n %} {% load wagtailcore_tags %} 
+
+
+{% block content %}
+
+<div class="cvast-content-block">
+    <div class="block-description">
+        <div class="container content">
+
+            <!--Title Box-->
+            <div class="title-box no-border margin-top-minus-10" style="border-bottom-color: #dcdcdc;">
+                <h1>{{ page.news_summary_title }}</h1>
+                <a href="{% pageurl news_index %}">
+                    {{ page.news_summary_link }}
+                </a>
+            </div>
+            <!-- End Title Box -->
+
+
+            <!-- News item previews -->
+            {% for article in news_articles %}
+                {% include "news/news_title_intro.htm" with article=article add_link=True %}
+            {% endfor %}
+            <!-- End News item previews -->
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

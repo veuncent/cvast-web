@@ -12,35 +12,116 @@ services:
       - web-log:/cvast_web/cvast_web/logs
       - web-static:/static_root
       environment:
-        - PGPASSWORD=
-        - PGDBNAME=cvast_arches
-        - PGHOST=web-db
-        - PGPORT=5432
+        - DBPASSWORD=
+        - DBNAME=cvast_web
+        - DBHOST=web-db
+        - DBPORT=3306
         - DJANGO_MODE=DEV
         - DJANGO_DEBUG=True
+        - DJANGO_REMOTE_DEBUG=False
+        - DEBUG_SECRET=
+        - DJANGO_SECRET_KEY=
         - DOMAIN_NAMES=localhost
         - RUN_TESTS=True        
         - TZ=EST
       ports:
-        # - '81:8000'
         - '8000:8000'
-        - '3001:3000'
-        
+
+
     web-db:
-      container_name: web-db2
-      image: postgres:9.6.5
+      container_name: web-db
+      image: mysql:5.7.19
       restart: unless-stopped
       volumes:
-          - postgres-data:/var/lib/postgresql/data
-          - postgres-log:/var/log/postgresql
+          - mysql-data:/var/lib/mysql
+          - mysql-log:/var/log/mysql
       ports:
-        - '5432:5432'
+        - '3306:3306'
       environment:
-        - POSTGRES_PASSWORD=
+        - MYSQL_ROOT_PASSWORD=
         - TZ=EST
+
+
+    nginx:
+      container_name: nginx
+      restart: always
+      image: cvast/cvast-nginx:1.2b_hotfix
+      ports:
+        - '80:80'
+        - '443:443'
+      volumes:
+        - web-static:/www/static
+        - letsencrypt_acme_challenge:/var/www
+        - letsencrypt:/etc/letsencrypt
+      depends_on:
+        - web
+      environment:
+        - NGINX_PROXY_MODE=local
+        - NGINX_PROTOCOL=strict-https
+        - LOCAL_PROXY_HOST=web
+        - LOCAL_PROXY_PORT=8000
+        - REMOTE_PROXY_HOST=test.arches.usfcvast.org
+        - REMOTE_PROXY_PORT=443
+        - REMOTE_PROXY_SUBPATH=/database
+        - DOMAIN_NAMES=cvast.usf.edu
+        - PUBLIC_MODE=True
+        - TZ=EST
+      labels:
+        org.label-schema.group: "prod-cvast-arches-monitoring"
+
+
+    letsencrypt:
+      container_name: letsencrypt
+      image: cvast/cvast-letsencrypt:1.1
+      volumes:
+        - letsencrypt_acme_challenge:/var/www
+        - letsencrypt:/etc/letsencrypt
+      command: get_certificate
+      environment:
+        - LETSENCRYPT_EMAIL=
+        - DOMAIN_NAMES=localhost
+        - PRODUCTION_MODE=False
+
+
+    node-exporter:
+      container_name: node-exporter
+      restart: always
+      image: prom/node-exporter:0.12.0
+      command: "-collector.procfs /host/proc -collector.sysfs /host/sys -collector.filesystem.ignored-mount-points '^/(sys|proc|dev|host|etc)($$|/)'"
+      volumes:
+        - /proc:/host/proc:ro
+        - /sys:/host/sys:ro
+        - /:/rootfs:ro
+      ports:
+        - 9100:9100
+      environment:
+        - TZ=EST
+      labels:
+        org.label-schema.group: "prod-cvast-arches-monitoring"
+
+
+    cadvisor:
+      container_name: cvadvisor
+      restart: always
+      image: google/cadvisor:v0.24.1
+      volumes:
+        - /:/rootfs:ro
+        - /var/run:/var/run:rw
+        - /sys:/sys:ro
+        - /var/lib/docker/:/var/lib/docker:ro
+      restart: unless-stopped
+      ports:
+        - 8080:8080
+      environment:
+        - TZ=EST
+      labels:
+        org.label-schema.group: "prod-cvast-arches-monitoring"
+
 
 volumes:
     web-log:
     web-static:
-    postgres-data:
-    postgres-log:
+    mysql-data:
+    mysql-log:
+    letsencrypt:
+    letsencrypt_acme_challenge:

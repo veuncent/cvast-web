@@ -1,0 +1,23 @@
+{% extends "base.htm" %} {% load staticfiles %} {% load wagtailcore_tags %} 
+{% block css %} {{ block.super }} {% endblock css %} 
+
+
+{% block content %}
+
+<div class="block-description cvast-project-title">
+    <div class="container content padding-top-20">
+        <h1 class="arches-breadcrumb-title cvast-page-title">{{ page.get_parent.title }}</h1>
+    </div>
+</div>
+
+{% include "news/news_title_intro.htm" with article=page %}
+
+{% include "news/news_body.htm" %}
+
+<div class="container">
+    <div class="container cvast-spacer-top cvast-spacer-bottom-half">
+        <a href="{{ page.get_parent.url }}" class="btn-u btn-u-md rounded">{{ page.get_parent.specific.back_button }}</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% load wagtailcore_tags %}
+
+<div class="container">
+	<div class="row cvast-paragraph-box cvast-spacer-top">
+		<div class="col-sm-4 cvast-paragraph-box-left-container">
+			<h1>{{ value.title }}</h1>
+		</div>
+		<div class="col-sm-8">
+			<div class="cvast-paragraph-box-body">
+				{{ value.body|richtext }}
+			</div>
+		</div>
+	</div>
+</div>
